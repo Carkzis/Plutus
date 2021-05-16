@@ -11,7 +11,6 @@ import com.example.android.plutus.databinding.FragmentContentsBinding
 
 class ContentsFragment : Fragment() {
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
