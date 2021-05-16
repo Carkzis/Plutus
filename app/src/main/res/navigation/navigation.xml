@@ -9,5 +9,15 @@
         android:id="@+id/contentsFragment"
         android:name="com.example.android.plutus.ContentsFragment"
         android:label="ContentsFragment"
-        tools:layout="@layout/fragment_contents"/>
+        tools:layout="@layout/fragment_contents">
+        <action
+            android:id="@+id/action_contentsFragment_to_pclsFragment"
+            app:destination="@id/pclsFragment"
+            app:popUpTo="@id/contentsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pclsFragment"
+        android:name="com.example.android.plutus.PclsFragment"
+        android:label="PclsFragment"
+        tools:layout="@layout/fragment_pcls"/>
 </navigation>
