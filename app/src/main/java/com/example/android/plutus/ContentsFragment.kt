@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.android.plutus.databinding.FragmentContentsBinding
 
 
@@ -26,6 +27,10 @@ class ContentsFragment : Fragment() {
         viewDataBinding =
             FragmentContentsBinding.inflate(inflater, container, false).apply {
             viewmodel = viewModel
+        }
+
+        viewDataBinding.pclsButton.setOnClickListener {
+            findNavController().navigate(ContentsFragmentDirections.actionContentsFragmentToPclsFragment())
         }
 
         return viewDataBinding.root
