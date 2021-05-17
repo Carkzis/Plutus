@@ -24,7 +24,7 @@ class PclsFragment : Fragment() {
     ): View? {
 
         viewDataBinding = FragmentPclsBinding.inflate(inflater, container, false).apply {
-            viewmodel = viewModel
+            pclsViewModel = viewModel
         }
 
         return viewDataBinding.root
