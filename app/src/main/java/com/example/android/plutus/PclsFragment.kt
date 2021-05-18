@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.android.plutus.databinding.FragmentPclsBinding
 
 class PclsFragment : Fragment() {
@@ -28,6 +29,15 @@ class PclsFragment : Fragment() {
         }
 
         return viewDataBinding.root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        viewDataBinding.calculatePclsButton.setOnClickListener {
+            viewModel.calculate()
+        }
+
     }
 
 }

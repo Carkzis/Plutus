@@ -74,7 +74,8 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/pension_hint"
                     android:importantForAutofill="no"
-                    android:inputType="numberDecimal" />
+                    android:inputType="numberDecimal"
+                    android:text="@={pclsViewModel.fullPension}" />
 
                 <EditText
                     android:id="@+id/commutation_factor_edittext"
@@ -82,7 +83,8 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/commutation_factor_hint"
                     android:importantForAutofill="no"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:text="@={pclsViewModel.commutationFactor}"/>
 
                 <EditText
                     android:id="@+id/dc_edittext"
@@ -90,7 +92,8 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/dc_fund_hint"
                     android:importantForAutofill="no"
-                    android:inputType="numberDecimal" />
+                    android:inputType="numberDecimal"
+                    android:text="@={pclsViewModel.dcFund}"/>
 
             </LinearLayout>
 

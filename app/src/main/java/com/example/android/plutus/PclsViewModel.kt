@@ -11,7 +11,14 @@ private const val STANDARD_LTA = 1073100
 
 class PclsViewModel : ViewModel() {
 
-    // Setting up LiveData variables.
+    // LiveData variable inputs.
+    var fullPension = MutableLiveData<String>()
+
+    var commutationFactor = MutableLiveData<String>()
+
+    var dcFund = MutableLiveData<String>()
+
+    // LiveData variable outputs.
     private var _dbPcls = MutableLiveData<Double>()
     val dbPcls: LiveData<Double>
         get() = _dbPcls
@@ -40,6 +47,10 @@ class PclsViewModel : ViewModel() {
     val combinedLifetimeAllowance: LiveData<Double>
         get() = _combinedLifetimeAllowance
 
+    private var fp: Double = 0.0
+    private var cf: Int = 0
+    private var dc: Double = 0.0
+
     private var pcls: Double = 0.0
     private var commutedPension: Double = 0.0
     private var residual: Double = 0.0
@@ -58,8 +69,26 @@ class PclsViewModel : ViewModel() {
         val lta: String,
         val dcFund: Double)
 
+    private lateinit var dbBenefits : Benefits
+    private lateinit var cmbBenefits : Benefits
+
+    fun calculate() {
+        // Validate the EditText fields
+        fp = fullPension.value?.toDouble() ?: 0.0
+        cf = commutationFactor.value?.toInt() ?: 0
+        dc = dcFund.value?.toDouble() ?: 0.0
+
+        val dbBenefits = dbPclsCalculation(fp, cf, dc)
+
+        // Only call the combined pcls function if there is any money purchase fund value.
+        if (dc > 0.0) {
+            cmbPclsCalculation(fp, cf, dc)
+        }
+
+    }
+
     fun dbPclsCalculation(
-        fullPension: Double, commutationFactor: Int, dcFund: Double = 0.0): Benefits {
+        fullPension: Double, commutationFactor: Int, dcFund: Double = 0.0): PclsViewModel.Benefits {
         // Calculate the pcls and the residual pension
         pcls = (fullPension * commutationFactor * 20) / ((commutationFactor * 3) + 20)
         commutedPension = pcls / commutationFactor
@@ -81,7 +110,7 @@ class PclsViewModel : ViewModel() {
         return Benefits(pcls, residual, lta, dcFund)
     }
 
-    fun ltaCalculation(pcls: Double, residual: Double, dcFund: Double) : String {
+    private fun ltaCalculation(pcls: Double, residual: Double, dcFund: Double) : String {
 
         // Variable to format lifetime allowance to 2 decimal places (rounded down).
         decimalFormat = DecimalFormat("#.##")

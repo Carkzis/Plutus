@@ -29,11 +29,20 @@ class ContentsFragment : Fragment() {
             viewmodel = viewModel
         }
 
+        return viewDataBinding.root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        setupNavigation()
+
+    }
+
+    private fun setupNavigation() {
         viewDataBinding.pclsButton.setOnClickListener {
             findNavController().navigate(ContentsFragmentDirections.actionContentsFragmentToPclsFragment())
         }
-
-        return viewDataBinding.root
     }
 
 }
