@@ -13,9 +13,7 @@ class PclsViewModel : ViewModel() {
 
     // LiveData variable inputs.
     var fullPension = MutableLiveData<String>()
-
     var commutationFactor = MutableLiveData<String>()
-
     var dcFund = MutableLiveData<String>()
 
     // LiveData variable outputs.
@@ -47,21 +45,10 @@ class PclsViewModel : ViewModel() {
     val combinedLifetimeAllowance: LiveData<Double>
         get() = _combinedLifetimeAllowance
 
-    private var fp: Double = 0.0
-    private var cf: Int = 0
-    private var dc: Double = 0.0
-
-    private var pcls: Double = 0.0
-    private var commutedPension: Double = 0.0
-    private var residual: Double = 0.0
-
-    private var pclsLta: Double = 0.0
-    private var residualLta: Double = 0.0
-    private var dcFundLta: Double = 0.0
-
-    private lateinit var lta: String
-
-    private lateinit var decimalFormat: DecimalFormat
+    // LiveData feedback e.g. Toast
+    private var _toastText = MutableLiveData<String>()
+    val toastText: LiveData<String>
+        get() = _toastText
 
     data class Benefits(
         val pcls: Double,
@@ -73,22 +60,51 @@ class PclsViewModel : ViewModel() {
     private lateinit var cmbBenefits : Benefits
 
     fun calculate() {
-        // Validate the EditText fields
-        fp = fullPension.value?.toDouble() ?: 0.0
-        cf = commutationFactor.value?.toInt() ?: 0
-        dc = dcFund.value?.toDouble() ?: 0.0
 
-        val dbBenefits = dbPclsCalculation(fp, cf, dc)
+        // Return if any of these values have not been entered.
+        fullPension.value ?: return showToastMessage("You need to enter a pension!")
+        commutationFactor.value ?: return showToastMessage("You need to enter a commutation factor!")
+
+        // Show a toast if any of the values have been cleared, giving empty strings (not null).
+        if (fullPension.value.equals("") || fullPension.value.equals("."))
+            return showToastMessage("You need to enter a pension!")
+        if (commutationFactor.value.equals(""))
+            return showToastMessage("You need to enter a commutation factor!")
+
+        // Convert String values to Doubles.
+        val fp = fullPension.value?.toDouble()!!
+        val cf = commutationFactor.value?.toDouble()!!
+        // If the fund value is null or empty, this becomes 0.0
+        val dc = if (dcFund.value.equals("")) 0.0 else dcFund.value?.toDouble() ?: 0.0
+
+        if (fp <= 0 || cf <= 0) {
+            return showToastMessage("The pension and commutation factors can't be 0!")
+        }
+
+        dbBenefits = dbPclsCalculation(fp, cf, dc)
 
         // Only call the combined pcls function if there is any money purchase fund value.
         if (dc > 0.0) {
-            cmbPclsCalculation(fp, cf, dc)
+            cmbBenefits = cmbPclsCalculation(fp, cf, dc)
         }
+
+        // TODO: Update the results, remember to ensure that relevant fields are visible.
 
     }
 
+    private var pcls: Double = 0.0
+    private var commutedPension: Double = 0.0
+    private var residual: Double = 0.0
+
+    private var pclsLta: Double = 0.0
+    private var residualLta: Double = 0.0
+    private var dcFundLta: Double = 0.0
+
+    private lateinit var lta: String
+    private lateinit var decimalFormat: DecimalFormat
+
     fun dbPclsCalculation(
-        fullPension: Double, commutationFactor: Int, dcFund: Double = 0.0): PclsViewModel.Benefits {
+        fullPension: Double, commutationFactor: Double, dcFund: Double = 0.0): Benefits {
         // Calculate the pcls and the residual pension
         pcls = (fullPension * commutationFactor * 20) / ((commutationFactor * 3) + 20)
         commutedPension = pcls / commutationFactor
@@ -99,7 +115,7 @@ class PclsViewModel : ViewModel() {
     }
 
     fun cmbPclsCalculation(
-        fullPension: Double, commutationFactor: Int, dcFund: Double = 0.0): Benefits {
+        fullPension: Double, commutationFactor: Double, dcFund: Double = 0.0): Benefits {
         // Calculate the pcls and residual when combined with the dc fund
         pcls = dcFund + (commutationFactor * ((fullPension * 20) - (dcFund * 3)) /
                 ((commutationFactor * 3) + 20))
@@ -127,6 +143,10 @@ class PclsViewModel : ViewModel() {
         // Then add them together to give the total LTA (and convert back to a string).
         return "${(pclsLta + residualLta + dcFundLta)}%"
 
+    }
+
+    private fun showToastMessage(message: String) {
+        _toastText.value = message
     }
 
 }

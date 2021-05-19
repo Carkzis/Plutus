@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.android.plutus.databinding.FragmentPclsBinding
 
@@ -34,10 +35,21 @@ class PclsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        setUpButton()
+        setUpToast()
+
+    }
+
+    private fun setUpButton() {
         viewDataBinding.calculatePclsButton.setOnClickListener {
             viewModel.calculate()
         }
+    }
 
+    private fun setUpToast() {
+        viewModel.toastText.observe(viewLifecycleOwner, {
+            context?.showToast(it)
+        })
     }
 
 }
