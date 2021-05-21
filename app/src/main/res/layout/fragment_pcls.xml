@@ -83,7 +83,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/commutation_factor_hint"
                     android:importantForAutofill="no"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:text="@={pclsViewModel.commutationFactor}"/>
 
                 <EditText

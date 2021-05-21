@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.android.plutus.databinding.FragmentPclsBinding
+import timber.log.Timber
 
 class PclsFragment : Fragment() {
 
@@ -42,7 +43,7 @@ class PclsFragment : Fragment() {
 
     private fun setUpButton() {
         viewDataBinding.calculatePclsButton.setOnClickListener {
-            viewModel.calculate()
+            viewModel.validateBeforeCalculation()
         }
     }
 
