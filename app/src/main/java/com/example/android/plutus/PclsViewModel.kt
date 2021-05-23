@@ -43,8 +43,8 @@ class PclsViewModel : ViewModel() {
         get() = _combinedLifetimeAllowance
 
     // LiveData feedback e.g. Toast
-    private var _toastText = MutableLiveData<String>()
-    val toastText: LiveData<String>
+    private var _toastText = MutableLiveData<Event<String>>()
+    val toastText: LiveData<Event<String>>
         get() = _toastText
 
     private lateinit var dbBenefits : Benefits
@@ -90,7 +90,7 @@ class PclsViewModel : ViewModel() {
     }
 
     private fun showToastMessage(message: String) {
-        _toastText.value = message
+        _toastText.value = Event(message)
     }
 
 }

@@ -49,7 +49,9 @@ class PclsFragment : Fragment() {
 
     private fun setUpToast() {
         viewModel.toastText.observe(viewLifecycleOwner, {
-            context?.showToast(it)
+            it.getContextIfNotHandled()?.let { message ->
+                context?.showToast(message)
+            }
         })
     }
 
