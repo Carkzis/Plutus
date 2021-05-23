@@ -116,12 +116,14 @@
             android:id="@+id/db_only_linear_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:orientation="horizontal"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/or_text">
+            app:layout_constraintTop_toBottomOf="@+id/or_text"
+            tools:visibility="visible">
 
             <LinearLayout
                 android:id="@+id/db_ll_column_1"
@@ -177,7 +179,7 @@
                     android:layout_gravity="end"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="@{String.valueOf(pclsViewModel.dbPcls)}"
+                    android:text="@{String.valueOf(pclsViewModel.dbBenOutput.pcls)}"
                     tools:text="£10,000.00" />
 
                 <TextView
@@ -187,7 +189,7 @@
                     android:layout_gravity="end"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="@{String.valueOf(pclsViewModel.dbResidual)}"
+                    android:text="@{String.valueOf(pclsViewModel.dbBenOutput.residualPension)}"
                     tools:text="£2,000.00" />
 
                 <TextView
@@ -197,7 +199,7 @@
                     android:layout_gravity="end"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="@{String.valueOf(pclsViewModel.dbMoneyPurchaseFund)}"
+                    android:text="@{String.valueOf(pclsViewModel.dbBenOutput.dcFund)}"
                     android:visibility="gone"
                     tools:text="£15,000.00" />
 
@@ -207,8 +209,8 @@
                     android:layout_height="0dp"
                     android:layout_gravity="end"
                     android:layout_weight="1"
-                    android:text="@{String.valueOf(pclsViewModel.dbLifetimeAllowance)}"
                     android:gravity="center_vertical"
+                    android:text="@{String.valueOf(pclsViewModel.dbBenOutput.lta)}"
                     tools:text="10.00%" />
 
             </LinearLayout>
@@ -222,6 +224,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:visibility="gone"
+            tools:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/or_text"
             app:layout_constraintEnd_toEndOf="@+id/or_text"
             app:layout_constraintStart_toStartOf="@+id/or_text"
@@ -271,7 +274,7 @@
                     android:layout_height="0dp"
                     android:layout_gravity="end"
                     android:layout_weight="1"
-                    android:text="@{String.valueOf(pclsViewModel.combinedPcls)}"
+                    android:text="@{String.valueOf(pclsViewModel.cmbBenOutput.pcls)}"
                     android:gravity="center_vertical"
                     tools:text="£10,000.00" />
 
@@ -282,7 +285,7 @@
                     android:layout_gravity="end"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="@{String.valueOf(pclsViewModel.combinedResidual)}"
+                    android:text="@{String.valueOf(pclsViewModel.cmbBenOutput.residualPension)}"
                     tools:text="£2,000.00" />
 
                 <TextView
@@ -291,7 +294,7 @@
                     android:layout_height="0dp"
                     android:layout_gravity="end"
                     android:layout_weight="1"
-                    android:text="@{String.valueOf(pclsViewModel.combinedLifetimeAllowance)}"
+                    android:text="@{String.valueOf(pclsViewModel.cmbBenOutput.Lta)}"
                     android:gravity="center_vertical"
                     tools:text="10.00%" />
 

@@ -28,17 +28,44 @@ class PclsFragment : Fragment() {
 
         viewDataBinding = FragmentPclsBinding.inflate(inflater, container, false).apply {
             pclsViewModel = viewModel
+            lifecycleOwner = viewLifecycleOwner
         }
 
         return viewDataBinding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         setUpButton()
         setUpToast()
+        setUpBenefitResultsListeners()
 
+    }
+
+    private fun setUpBenefitResultsListeners() {
+        // Listener for the results of the DB benefits
+        viewModel.dbBenOutput.observe(viewLifecycleOwner, {
+            viewDataBinding.dbOnlyLinearLayout.visibility = View.VISIBLE
+            if (it.dcFund != "£0.00") {
+                viewDataBinding.dbDcText.visibility = View.VISIBLE
+                viewDataBinding.dbDcResultText.visibility = View.VISIBLE
+            } else {
+                viewDataBinding.dbDcText.visibility = View.GONE
+                viewDataBinding.dbDcResultText.visibility = View.GONE
+            }
+        })
+
+        // Listener for the results of the combined benefits (if applicable)
+        viewModel.cmbBenOutput.observe(viewLifecycleOwner, {
+            it?.let {
+                if (it.pcls != "£0.00") {
+                    viewDataBinding.combinedLinearLayout.visibility = View.VISIBLE
+                } else {
+                    viewDataBinding.combinedLinearLayout.visibility = View.GONE
+                }
+            }
+        })
     }
 
     private fun setUpButton() {

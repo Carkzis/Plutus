@@ -62,7 +62,7 @@ internal fun formatAsCurrency(value: BigDecimal) : String {
 }
 
 data class Benefits(
-    val pcls: String,
-    val residualPension: String,
-    val lta: String,
-    val dcFund: String)
+    val pcls: String = "£0.00",
+    val residualPension: String = "£0.00",
+    val lta: String = "£0.00",
+    val dcFund: String = "£0.00")

@@ -14,33 +14,13 @@ class PclsViewModel : ViewModel() {
     var dcFund = MutableLiveData<String>()
 
     // LiveData variable outputs.
-    private var _dbPcls = MutableLiveData<Double>()
-    val dbPcls: LiveData<Double>
-        get() = _dbPcls
+    private val _dbBenOutput = MutableLiveData<Benefits>()
+    val dbBenOutput: LiveData<Benefits>
+        get() = _dbBenOutput
 
-    private var _dbResidualPension = MutableLiveData<Double>()
-    val dbResidual: LiveData<Double>
-        get() = _dbResidualPension
-
-    private var _dbMoneyPurchaseFund = MutableLiveData<Double>()
-    val dbMoneyPurchaseFund: LiveData<Double>
-        get() = _dbMoneyPurchaseFund
-
-    private var _dbLifetimeAllowance = MutableLiveData<Double>()
-    val dbLifetimeAllowance: LiveData<Double>
-        get() = _dbLifetimeAllowance
-
-    private var _combinedPcls = MutableLiveData<Double>()
-    val combinedPcls: LiveData<Double>
-        get() = _combinedPcls
-
-    private var _combinedResidualPension = MutableLiveData<Double>()
-    val combinedResidual: LiveData<Double>
-        get() = _combinedResidualPension
-
-    private var _combinedLifetimeAllowance = MutableLiveData<Double>()
-    val combinedLifetimeAllowance: LiveData<Double>
-        get() = _combinedLifetimeAllowance
+    private val _cmbBenOutput = MutableLiveData<Benefits>()
+    val cmbBenOutput: LiveData<Benefits>
+        get() = _cmbBenOutput
 
     // LiveData feedback e.g. Toast
     private var _toastText = MutableLiveData<Event<String>>()
@@ -48,7 +28,7 @@ class PclsViewModel : ViewModel() {
         get() = _toastText
 
     private lateinit var dbBenefits : Benefits
-    private lateinit var cmbBenefits : Benefits
+    private var cmbBenefits : Benefits? = null
 
     fun validateBeforeCalculation() {
         // Return if any of these values have not been entered.
@@ -78,15 +58,20 @@ class PclsViewModel : ViewModel() {
     private fun calculationWrapper(fp: Double, cf: Double, dc: Double) {
         // Call function to calculate db benefits, and return a data object with the results
         dbBenefits = dbPclsCalculation(fp, cf, dc)
-        // Only call the combined pcls function if there is any money purchase fund value.
-        if (dc > 0.0) {
-            cmbBenefits = cmbPclsCalculation(fp, cf, dc)
-        }
-        updateWithResults()
+        // Only enter arguments into the combined
+        // pcls function if there is any money purchase fund value, otherwise get the default
+        // using £0.00 figures
+        cmbBenefits = if (dc > 0.0) cmbPclsCalculation(fp, cf, dc) else Benefits("£0.00")
+
+        updateWithResults(dbBenefits, cmbBenefits)
     }
 
-    private fun updateWithResults() {
+    private fun updateWithResults(dbBenefits: Benefits, cmbBenefits: Benefits?) {
         Timber.w("Checking that update with results works!")
+        _dbBenOutput.value = dbBenefits
+        cmbBenefits?.let {
+            _cmbBenOutput.value = it
+        }
     }
 
     private fun showToastMessage(message: String) {
