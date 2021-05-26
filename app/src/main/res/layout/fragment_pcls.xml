@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <EditText
+                <com.cottacush.android.currencyedittext.CurrencyEditText
                     android:id="@+id/pension_edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
                     android:inputType="numberDecimal"
                     android:text="@={pclsViewModel.commutationFactor}"/>
 
-                <EditText
+                <com.cottacush.android.currencyedittext.CurrencyEditText
                     android:id="@+id/dc_edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -43,10 +43,12 @@ class PclsViewModel : ViewModel() {
             return showToastMessage("You need to enter a commutation factor!")
 
         // Convert String values to Doubles.
-        val fp = fullPension.value?.toDouble()!!
+        val fp = fullPension.value?.replace(",", "")?.toDouble()!!
         val cf = commutationFactor.value?.toDouble()!!
         // If the fund value is null or empty, this becomes 0.0
-        val dc = if (dcFund.value.equals("")) 0.0 else dcFund.value?.toDouble() ?: 0.0
+        val dc = if (dcFund.value.equals("")) 0.0 else dcFund.value
+            ?.replace(",", "")
+            ?.toDouble() ?: 0.0
 
         if (fp <= 0 || cf <= 0) {
             return showToastMessage("The pension and commutation factors can't be 0!")
