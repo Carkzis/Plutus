@@ -2,7 +2,7 @@
     <string name="app_name">Plutus</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="pcls_residual">PCLS and Residual Pension</string>
+    <string name="pcls_residual">PCLS Calculator</string>
     <string name="pension">Pension:</string>
     <string name="commutation_factor">Commutation Factor:</string>
     <string name="money_purchase_fund">Money Purchase Fund:</string>
@@ -17,4 +17,5 @@
     <string name="plutus_icon">Plutus icon</string>
     <string name="or">OR</string>
     <string name="combined_pcls">Combined PCLS:</string>
+    <string name="date_calculator">Date Calculator</string>
 </resources>

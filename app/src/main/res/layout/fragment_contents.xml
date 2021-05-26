@@ -12,21 +12,32 @@
             type="com.example.android.plutus.ContentsViewModel" />
     </data>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/pcls_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/pcls_residual"
-        app:backgroundTint="?colorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/pcls_button"
+            android:layout_width="411dp"
+            android:layout_height="wrap_content"
+            android:text="@string/pcls_residual"
+            app:backgroundTint="?colorPrimary"
+            app:layout_constraintBottom_toTopOf="@+id/data_calc_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/data_calc_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/date_calculator"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pcls_button" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
