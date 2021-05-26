@@ -24,6 +24,7 @@
             app:backgroundTint="?colorPrimary"
             app:layout_constraintBottom_toTopOf="@+id/data_calc_button"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
 

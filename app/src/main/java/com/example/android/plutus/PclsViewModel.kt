@@ -76,7 +76,7 @@ class PclsViewModel : ViewModel() {
         }
     }
 
-    private fun showToastMessage(message: String) {
+    fun showToastMessage(message: String) {
         _toastText.value = Event(message)
     }
 

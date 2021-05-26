@@ -45,7 +45,7 @@ class CalcUtilsTest {
     }
 
     @Test
-    fun cmbPclsCalculation() {
+    fun cmbPclsCalculation_inputPensioWithDcFund_returnsExpectedCombinedPclsResidualLta() {
         // Create variables to enter into calculation
         val pension = 28420.71
         val cf = 27.83
