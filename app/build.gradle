@@ -50,6 +50,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
     implementation 'com.jakewharton.timber:timber:4.7.1'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1"
     kapt 'androidx.databinding:databinding-compiler-common:4.2.1'
 
     // Other dependencies
@@ -65,5 +66,10 @@ dependencies {
 
     // Third party dependencies
     implementation 'com.cottacush:CurrencyEditText:0.0.7'
+
+    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.1") {
+        // conflicts with mockito due to direct inclusion of byte buddy
+        exclude group: "org.jetbrains.kotlinx", module: "kotlinx-coroutines-debug"
+    }
 
 }
