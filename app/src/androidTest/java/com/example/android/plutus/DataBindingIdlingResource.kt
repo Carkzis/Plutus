@@ -24,13 +24,11 @@ package com.example.android.plutus
 
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.children
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.testing.FragmentScenario
-
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.IdlingResource
 import java.util.UUID
@@ -80,20 +78,18 @@ class DataBindingIdlingResource : IdlingResource {
             ?.supportFragmentManager
             ?.fragments
 
-        val bindings = fragments?.mapNotNull {
-            it.view?.flattenHierarchy()?.mapNotNull { view ->
-                DataBindingUtil.getBinding<ViewDataBinding>(view)
-            }
-        }?.flatten()
-        return bindings ?: emptyList()
-    }
+        val bindings =
+            fragments?.mapNotNull {
+                it.view?.getBinding()
+            } ?: emptyList()
+        val childrenBindings = fragments?.flatMap { it.childFragmentManager.fragments }
+            ?.mapNotNull { it.view?.getBinding() } ?: emptyList()
 
-    private fun View.flattenHierarchy(): List<View> = if (this is ViewGroup) {
-        listOf(this) + children.map { it.flattenHierarchy() }.flatten()
-    } else {
-        listOf(this)
+        return bindings + childrenBindings
     }
 }
+
+private fun View.getBinding(): ViewDataBinding? = DataBindingUtil.getBinding(this)
 
 /**
  * Sets the activity from an [ActivityScenario] to be used from [DataBindingIdlingResource].
@@ -109,8 +105,8 @@ fun DataBindingIdlingResource.monitorActivity(
 /**
  * Sets the fragment from a [FragmentScenario] to be used from [DataBindingIdlingResource].
  */
-fun DataBindingIdlingResource.monitorFragment(fragmentScenario: FragmentScenario<Fragment>) {
-    fragmentScenario.onFragment {
-        this.activity = it.requireActivity()
-    }
-}
+//fun DataBindingIdlingResource.monitorFragment(fragmentScenario: FragmentScenario<out Fragment>) {
+//    fragmentScenario.onFragment() {
+//        this.activity = it.requireActivity()
+//    }
+//}
