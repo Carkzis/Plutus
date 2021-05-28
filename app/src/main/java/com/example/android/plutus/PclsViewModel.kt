@@ -23,8 +23,8 @@ class PclsViewModel : ViewModel() {
         get() = _cmbBenOutput
 
     // LiveData feedback e.g. Toast
-    private var _toastText = MutableLiveData<Event<String>>()
-    val toastText: LiveData<Event<String>>
+    private var _toastText = MutableLiveData<Event<Int>>()
+    val toastText: LiveData<Event<Int>>
         get() = _toastText
 
     private lateinit var dbBenefits : Benefits
@@ -32,15 +32,14 @@ class PclsViewModel : ViewModel() {
 
     fun validateBeforeCalculation() {
         // Return if any of these values have not been entered.
-        fullPension.value ?: return showToastMessage("You need to enter a pension!")
-        commutationFactor.value ?: return showToastMessage(
-            "You need to enter a commutation factor!")
+        fullPension.value ?: return showToastMessage(R.string.no_pension_toast)
+        commutationFactor.value ?: return showToastMessage(R.string.no_cf_toast)
 
         // Show a toast if any of the values have been cleared, giving empty strings (not null).
         if (fullPension.value.equals("") || fullPension.value.equals("."))
-            return showToastMessage("You need to enter a pension!")
+            return showToastMessage(R.string.no_pension_toast)
         if (commutationFactor.value.equals(""))
-            return showToastMessage("You need to enter a commutation factor!")
+            return showToastMessage(R.string.no_cf_toast)
 
         // Convert String values to Doubles.
         val fp = fullPension.value?.replace(",", "")?.toDouble()!!
@@ -51,7 +50,7 @@ class PclsViewModel : ViewModel() {
             ?.toDouble() ?: 0.0
 
         if (fp <= 0 || cf <= 0) {
-            return showToastMessage("The pension and commutation factors can't be 0!")
+            return showToastMessage(R.string.pension_cf_zero_toast)
         }
 
         calculationWrapper(fp, cf, dc)
@@ -76,7 +75,7 @@ class PclsViewModel : ViewModel() {
         }
     }
 
-    fun showToastMessage(message: String) {
+    fun showToastMessage(message: Int) {
         _toastText.value = Event(message)
     }
 

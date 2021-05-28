@@ -18,4 +18,7 @@
     <string name="or">OR</string>
     <string name="combined_pcls">Combined PCLS:</string>
     <string name="date_calculator">Date Calculator</string>
+    <string name="no_pension_toast">You need to enter a pension!</string>
+    <string name="no_cf_toast">You need to enter a commutation factor!</string>
+    <string name="pension_cf_zero_toast">The pension and commutation factors can\'t be 0!</string>
 </resources>
