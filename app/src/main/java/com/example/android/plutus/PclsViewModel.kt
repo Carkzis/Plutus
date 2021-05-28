@@ -38,7 +38,7 @@ class PclsViewModel : ViewModel() {
         // Show a toast if any of the values have been cleared, giving empty strings (not null).
         if (fullPension.value.equals("") || fullPension.value.equals("."))
             return showToastMessage(R.string.no_pension_toast)
-        if (commutationFactor.value.equals(""))
+        if (commutationFactor.value.equals("") || commutationFactor.value.equals("."))
             return showToastMessage(R.string.no_cf_toast)
 
         // Convert String values to Doubles.

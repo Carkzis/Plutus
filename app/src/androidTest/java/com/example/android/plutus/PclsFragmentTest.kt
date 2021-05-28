@@ -1,5 +1,6 @@
 package com.example.android.plutus
 
+import android.app.PendingIntent.getActivity
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso
@@ -8,11 +9,16 @@ import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.RootMatchers.withDecorView
 import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
+import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.not
 import org.junit.Assert.*
 import org.junit.Rule
@@ -93,12 +99,5 @@ class PclsFragmentTest {
         onView(ViewMatchers.withId(R.id.combined_linear_layout))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
-
-//    @Test
-//    fun calculationTest_invalidPension_toastDisplay() = runBlockingTest {
-//
-//        onView(withText(R.string.))
-//
-//    }
 
 }

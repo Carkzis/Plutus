@@ -6,8 +6,10 @@ import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import com.example.android.plutus.getOrAwaitValue
+import org.hamcrest.CoreMatchers.not
 import org.junit.Rule
 import java.lang.NullPointerException
+import java.util.concurrent.TimeoutException
 
 @Suppress("DEPRECATION")
 class PclsViewModelTest {
@@ -65,6 +67,69 @@ class PclsViewModelTest {
         assertThat(pclsViewModel.cmbBenOutput.getOrAwaitValue().residualPension, `is`("£438.46"))
         assertThat(pclsViewModel.cmbBenOutput.getOrAwaitValue().dcFund, `is`("£0.00"))
         assertThat(pclsViewModel.cmbBenOutput.getOrAwaitValue().lta, `is`("1.08%"))
+    }
+
+    @Test
+    fun testLiveData_noPensionInput_postResultsToToastLiveData() {
+        // Do not set any values
+        // Call function
+        pclsViewModel.validateBeforeCalculation()
+
+        // This will throw a TimeoutError if Toast value is added to the LiveData,
+        // meaning that the validation was pass (and so fail this JUnit test!)
+        assertThat(pclsViewModel.toastText.getOrAwaitValue(), `is`(not("null")))
+    }
+
+    @Test
+    fun testLiveData_noCommutationFactorInput_postResultsToToastLiveData() {
+        // Just set full pension value, no commutation factor
+        pclsViewModel.fullPension.value = "500"
+        // Call function
+        pclsViewModel.validateBeforeCalculation()
+
+        // This will throw a TimeoutError if Toast value is added to the LiveData,
+        // meaning that the validation was pass (and so fail this JUnit test!)
+        assertThat(pclsViewModel.toastText.getOrAwaitValue(), `is`(not("null")))
+    }
+
+    @Test
+    fun testLiveData_pensionAndCommutationFactorEmpty_postResultsToToastLiveData() {
+        // Pension value and commutation factor is not null, but is empty
+        // (so the user typed, but pressed back space)
+        pclsViewModel.fullPension.value = ""
+        pclsViewModel.commutationFactor.value = ""
+        // Call function
+        pclsViewModel.validateBeforeCalculation()
+
+        // This will throw a TimeoutError if Toast value is added to the LiveData,
+        // meaning that the validation was pass (and so fail this JUnit test!)
+        assertThat(pclsViewModel.toastText.getOrAwaitValue(), `is`(not("null")))
+    }
+
+    @Test
+    fun testLiveData_pensionAndCommutationFactorZero_postResultsToToastLiveData() {
+        // Pension value and commutation factor set to zero
+        pclsViewModel.fullPension.value = "0"
+        pclsViewModel.commutationFactor.value = "0"
+        // Call function
+        pclsViewModel.validateBeforeCalculation()
+
+        // This will throw a TimeoutError if Toast value is added to the LiveData,
+        // meaning that the validation was pass (and so fail this JUnit test!)
+        assertThat(pclsViewModel.toastText.getOrAwaitValue(), `is`(not("null")))
+    }
+
+    @Test
+    fun testLiveData_pensionAndCommutationFactorFullStops_postResultsToToastLiveData() {
+        // Pension value and commutation factor set to zero
+        pclsViewModel.fullPension.value = "."
+        pclsViewModel.commutationFactor.value = "."
+        // Call function
+        pclsViewModel.validateBeforeCalculation()
+
+        // This will throw a TimeoutError if Toast value is added to the LiveData,
+        // meaning that the validation was pass (and so fail this JUnit test!)
+        assertThat(pclsViewModel.toastText.getOrAwaitValue(), `is`(not("null")))
     }
 
 }
