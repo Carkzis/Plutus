@@ -14,10 +14,18 @@
             android:id="@+id/action_contentsFragment_to_pclsFragment"
             app:destination="@id/pclsFragment"
             app:popUpTo="@id/contentsFragment" />
+        <action
+            android:id="@+id/action_contentsFragment_to_dateCalcFragment"
+            app:destination="@id/dateCalcFragment" />
     </fragment>
     <fragment
         android:id="@+id/pclsFragment"
-        android:name="com.example.android.plutus.PclsFragment"
+        android:name="com.example.android.plutus.PclsCalcFragment"
         android:label="PclsFragment"
-        tools:layout="@layout/fragment_pcls"/>
+        tools:layout="@layout/fragment_pcls_calc"/>
+    <fragment
+        android:id="@+id/dateCalcFragment"
+        android:name="com.example.android.plutus.DateCalcFragment"
+        android:label="fragment_date_calc"
+        tools:layout="@layout/fragment_date_calc" />
 </navigation>

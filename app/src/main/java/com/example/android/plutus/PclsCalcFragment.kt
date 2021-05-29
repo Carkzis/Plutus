@@ -5,29 +5,24 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
-import com.example.android.plutus.databinding.FragmentPclsBinding
-import timber.log.Timber
+import com.example.android.plutus.databinding.FragmentPclsCalcBinding
 
-class PclsFragment : Fragment() {
+class PclsCalcFragment : Fragment() {
 
-    private val viewModel by viewModels<PclsViewModel> {
-        PclsViewModelFactory()
+    private val viewModel by viewModels<PclsCalcViewModel> {
+        PclsCalcViewModelFactory()
     }
 
-    private lateinit var viewDataBinding: FragmentPclsBinding
+    private lateinit var viewDataBinding: FragmentPclsCalcBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        viewDataBinding = FragmentPclsBinding.inflate(inflater, container, false).apply {
-            pclsViewModel = viewModel
+        viewDataBinding = FragmentPclsCalcBinding.inflate(inflater, container, false).apply {
+            pclsCalcViewModel = viewModel
             lifecycleOwner = viewLifecycleOwner
         }
 

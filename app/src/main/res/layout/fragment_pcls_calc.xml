@@ -11,14 +11,14 @@
         <import type="androidx.core.content.ContextCompat" />
 
         <variable
-            name="pclsViewModel"
-            type="com.example.android.plutus.PclsViewModel" />
+            name="pclsCalcViewModel"
+            type="com.example.android.plutus.PclsCalcViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".PclsFragment">
+        tools:context=".PclsCalcFragment">
 
         <LinearLayout
             android:id="@+id/pcls_input_linear_layout"
@@ -75,7 +75,7 @@
                     android:hint="@string/pension_hint"
                     android:importantForAutofill="no"
                     android:inputType="numberDecimal"
-                    android:text="@={pclsViewModel.fullPension}" />
+                    android:text="@={pclsCalcViewModel.fullPension}" />
 
                 <EditText
                     android:id="@+id/commutation_factor_edittext"
@@ -84,7 +84,7 @@
                     android:hint="@string/commutation_factor_hint"
                     android:importantForAutofill="no"
                     android:inputType="numberDecimal"
-                    android:text="@={pclsViewModel.commutationFactor}"/>
+                    android:text="@={pclsCalcViewModel.commutationFactor}"/>
 
                 <com.cottacush.android.currencyedittext.CurrencyEditText
                     android:id="@+id/dc_edittext"
@@ -93,7 +93,7 @@
                     android:hint="@string/dc_fund_hint"
                     android:importantForAutofill="no"
                     android:inputType="numberDecimal"
-                    android:text="@={pclsViewModel.dcFund}"/>
+                    android:text="@={pclsCalcViewModel.dcFund}"/>
 
             </LinearLayout>
 
@@ -179,7 +179,7 @@
                     android:layout_gravity="end"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="@{String.valueOf(pclsViewModel.dbBenOutput.pcls)}"
+                    android:text="@{String.valueOf(pclsCalcViewModel.dbBenOutput.pcls)}"
                     tools:text="£10,000.00" />
 
                 <TextView
@@ -189,7 +189,7 @@
                     android:layout_gravity="end"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="@{String.valueOf(pclsViewModel.dbBenOutput.residualPension)}"
+                    android:text="@{String.valueOf(pclsCalcViewModel.dbBenOutput.residualPension)}"
                     tools:text="£2,000.00" />
 
                 <TextView
@@ -199,7 +199,7 @@
                     android:layout_gravity="end"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="@{String.valueOf(pclsViewModel.dbBenOutput.dcFund)}"
+                    android:text="@{String.valueOf(pclsCalcViewModel.dbBenOutput.dcFund)}"
                     android:visibility="gone"
                     tools:text="£15,000.00" />
 
@@ -210,7 +210,7 @@
                     android:layout_gravity="end"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="@{String.valueOf(pclsViewModel.dbBenOutput.lta)}"
+                    android:text="@{String.valueOf(pclsCalcViewModel.dbBenOutput.lta)}"
                     tools:text="10.00%" />
 
             </LinearLayout>
@@ -274,7 +274,7 @@
                     android:layout_height="0dp"
                     android:layout_gravity="end"
                     android:layout_weight="1"
-                    android:text="@{String.valueOf(pclsViewModel.cmbBenOutput.pcls)}"
+                    android:text="@{String.valueOf(pclsCalcViewModel.cmbBenOutput.pcls)}"
                     android:gravity="center_vertical"
                     tools:text="£10,000.00" />
 
@@ -285,7 +285,7 @@
                     android:layout_gravity="end"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="@{String.valueOf(pclsViewModel.cmbBenOutput.residualPension)}"
+                    android:text="@{String.valueOf(pclsCalcViewModel.cmbBenOutput.residualPension)}"
                     tools:text="£2,000.00" />
 
                 <TextView
@@ -294,7 +294,7 @@
                     android:layout_height="0dp"
                     android:layout_gravity="end"
                     android:layout_weight="1"
-                    android:text="@{String.valueOf(pclsViewModel.cmbBenOutput.Lta)}"
+                    android:text="@{String.valueOf(pclsCalcViewModel.cmbBenOutput.Lta)}"
                     android:gravity="center_vertical"
                     tools:text="10.00%" />
 

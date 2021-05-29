@@ -6,6 +6,8 @@ import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.*
 
+// Note: this is not actually a constant, but for initial purposes it is.
+// In the future it can be changed to match the current UK amount.
 private const val STANDARD_LTA = 1073100
 
 internal fun dbPclsCalculation(

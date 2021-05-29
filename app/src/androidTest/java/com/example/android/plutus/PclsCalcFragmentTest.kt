@@ -29,7 +29,7 @@ import java.lang.NullPointerException
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
 @MediumTest
-class PclsFragmentTest {
+class PclsCalcFragmentTest {
 
     private val dataBindingIdlingResource = DataBindingIdlingResource()
 

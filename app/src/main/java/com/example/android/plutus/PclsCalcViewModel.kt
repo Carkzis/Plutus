@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import timber.log.Timber
 
-class PclsViewModel : ViewModel() {
+class PclsCalcViewModel : ViewModel() {
 
     // LiveData variable inputs.
     var fullPension = MutableLiveData<String>()
@@ -82,7 +82,7 @@ class PclsViewModel : ViewModel() {
 }
 
 @Suppress("UNCHECKED_CAST")
-class PclsViewModelFactory : ViewModelProvider.NewInstanceFactory() {
+class PclsCalcViewModelFactory : ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel> create(modelClass: Class<T>) =
-        (PclsViewModel() as T)
+        (PclsCalcViewModel() as T)
 }
