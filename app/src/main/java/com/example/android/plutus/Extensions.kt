@@ -23,3 +23,9 @@ fun Context.showToast(message: String) {
         show()
     }
 }
+
+fun Context.showCalendar(message: String) {
+    Toast.makeText(this, message, Toast.LENGTH_SHORT).run {
+        show()
+    }
+}

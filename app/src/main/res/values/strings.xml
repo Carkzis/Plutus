@@ -21,4 +21,6 @@
     <string name="no_pension_toast">You need to enter a pension!</string>
     <string name="no_cf_toast">You need to enter a commutation factor!</string>
     <string name="pension_cf_zero_toast">The pension and commutation factors can\'t be 0!</string>
+    <string name="start_date_hint">Please enter start date</string>
+    <string name="end_date_hint">Please enter end date</string>
 </resources>

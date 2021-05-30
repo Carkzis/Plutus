@@ -18,26 +18,40 @@
         android:layout_height="match_parent"
         tools:context=".DateCalcFragment">
 
-        <DatePicker
-            android:layout_width="352dp"
-            android:layout_height="527dp"
-            android:datePickerMode="spinner"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <EditText
+            android:id="@+id/start_date_edittext"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:hint="@string/start_date_hint"
+            android:importantForAutofill="no"
+            android:inputType="date"
+            android:text="@{String.valueOf(dateCalcViewModel.startDateInfo)}"
+            app:layout_constraintBottom_toTopOf="@+id/end_date_edittext"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.728"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/editTextDate"
+            android:id="@+id/end_date_edittext"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:hint="@string/end_date_hint"
             android:inputType="date"
+            android:text="@{String.valueOf(dateCalcViewModel.endDateInfo)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/start_date_edittext"
+            android:importantForAutofill="no" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
