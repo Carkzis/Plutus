@@ -42,9 +42,9 @@ class ContentsFragment : Fragment() {
     private fun setupNavigation() {
         viewDataBinding.pclsButton.setOnClickListener {
             findNavController().navigate(ContentsFragmentDirections
-                .actionContentsFragmentToPclsFragment())
+                .actionContentsFragmentToPclsCalcFragment())
         }
-        viewDataBinding.dataCalcButton.setOnClickListener {
+        viewDataBinding.dateButton.setOnClickListener {
             findNavController().navigate(ContentsFragmentDirections
                 .actionContentsFragmentToDateCalcFragment())
         }

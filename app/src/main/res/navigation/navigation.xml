@@ -11,7 +11,7 @@
         android:label="ContentsFragment"
         tools:layout="@layout/fragment_contents">
         <action
-            android:id="@+id/action_contentsFragment_to_pclsFragment"
+            android:id="@+id/action_contentsFragment_to_pclsCalcFragment"
             app:destination="@id/pclsFragment"
             app:popUpTo="@id/contentsFragment" />
         <action
