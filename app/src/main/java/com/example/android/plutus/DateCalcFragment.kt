@@ -41,28 +41,32 @@ class DateCalcFragment : Fragment() {
 
     private fun setUpStartDateDialog() {
         viewDataBinding.startDateEdittext.setOnClickListener {
-            val calendar: Calendar = Calendar.getInstance()
-            val year = calendar.get(Calendar.YEAR)
-            val month = calendar.get(Calendar.MONTH)
-            val day = calendar.get(Calendar.DAY_OF_MONTH)
+            val calendar = setUpCalendar()
             DatePickerDialog(requireContext(), {
                 view, y, m, d ->
                     viewModel.setStartDate(y, m, d)
-            }, year, month, day).show()
+            }, calendar.year, calendar.month, calendar.day).show()
         }
     }
 
     private fun setUpEndDateDialog() {
         viewDataBinding.endDateEdittext.setOnClickListener {
-            val calendar: Calendar = Calendar.getInstance()
-            val year = calendar.get(Calendar.YEAR)
-            val month = calendar.get(Calendar.MONTH)
-            val day = calendar.get(Calendar.DAY_OF_MONTH)
+            val calendar = setUpCalendar()
             DatePickerDialog(requireContext(), {
                     view, y, m, d ->
                 viewModel.setEndDate(y, m, d)
-            }, year, month, day).show()
+            }, calendar.year, calendar.month, calendar.day).show()
         }
+    }
+
+    data class CalendarInfo(val year: Int, val month: Int, val day: Int)
+
+    private fun setUpCalendar(): CalendarInfo {
+        val calendar: Calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        return CalendarInfo(year, month, day)
     }
 
 }
