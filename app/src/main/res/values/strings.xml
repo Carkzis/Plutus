@@ -35,4 +35,13 @@
     <string name="complete_tax_years">Complete Tax Years:</string>
     <string name="_6th_aprils_passed">6th Aprils Passed:</string>
     <string name="calculate_button">Calculate!</string>
+
+    <string name="years_results">0 years</string>
+    <string name="months_results">0 months</string>
+    <string name="weeks_results">0 weeks</string>
+    <string name="days_results">0 days</string>
+    <string name="years_months_results">0 years and 0 months</string>
+    <string name="years_days_results">0 years and 0 days</string>
+    <string name="tax_years_results">0 tax years</string>
+    <string name="sixth_aprils_results">0 6th Aprils passed</string>
 </resources>

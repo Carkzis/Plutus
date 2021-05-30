@@ -68,3 +68,13 @@ data class Benefits(
     val residualPension: String = "£0.00",
     val lta: String = "£0.00",
     val dcFund: String = "£0.00")
+
+data class DateCalcResults(
+    val years: String,
+    val months: String,
+    val weeks: String,
+    val days: String,
+    val yearsMonths: String,
+    val yearsDays: String,
+    val taxYears: String,
+    val sixthAprils: String)

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.example.android.plutus.databinding.FragmentDateCalcBinding
+import timber.log.Timber
 import java.util.*
 
 class DateCalcFragment : Fragment() {
@@ -17,6 +18,7 @@ class DateCalcFragment : Fragment() {
     }
 
     private lateinit var viewDataBinding: FragmentDateCalcBinding
+    private lateinit var defaultResults: DateCalcResults
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +38,8 @@ class DateCalcFragment : Fragment() {
 
         setUpStartDateDialog()
         setUpEndDateDialog()
+        setUpButton()
+        addDefaultResults()
 
     }
 
@@ -64,9 +68,29 @@ class DateCalcFragment : Fragment() {
     private fun setUpCalendar(): CalendarInfo {
         val calendar: Calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
+        val month = calendar.get(Calendar.MONTH) + 1
+        Timber.w("Month is $month")
         val day = calendar.get(Calendar.DAY_OF_MONTH)
         return CalendarInfo(year, month, day)
+    }
+
+    private fun setUpButton() {
+        viewDataBinding.dateCalcButton.setOnClickListener {
+            viewModel.calculateDateDifferences()
+        }
+    }
+
+    private fun addDefaultResults() {
+        defaultResults = DateCalcResults(
+            getString(R.string.years_results),
+            getString(R.string.months_results),
+            getString(R.string.weeks_results),
+            getString(R.string.days_results),
+            getString(R.string.years_months_results),
+            getString(R.string.years_days_results),
+            getString(R.string.tax_years_results),
+            getString(R.string.sixth_aprils_results))
+        viewModel.addDefaultResultsVM(defaultResults)
     }
 
 }

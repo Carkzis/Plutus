@@ -252,6 +252,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/normal_text_size"
+                    android:text="@{dateCalcViewModel.dateCalcResults.years}"
                     tools:layout_editor_absoluteX="60dp"
                     tools:layout_editor_absoluteY="278dp"
                     tools:text="10 years" />
@@ -261,6 +262,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/normal_text_size"
+                    android:text="@{dateCalcViewModel.dateCalcResults.months}"
                     tools:layout_editor_absoluteX="51dp"
                     tools:layout_editor_absoluteY="329dp"
                     tools:text="120 months" />
@@ -270,6 +272,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/normal_text_size"
+                    android:text="@{dateCalcViewModel.dateCalcResults.weeks}"
                     tools:layout_editor_absoluteX="57dp"
                     tools:layout_editor_absoluteY="383dp"
                     tools:text="521 weeks" />
@@ -279,6 +282,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/normal_text_size"
+                    android:text="@{dateCalcViewModel.dateCalcResults.days}"
                     tools:layout_editor_absoluteX="57dp"
                     tools:layout_editor_absoluteY="434dp"
                     tools:text="3650 days" />
@@ -288,6 +292,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/normal_text_size"
+                    android:text="@{dateCalcViewModel.dateCalcResults.yearsMonths}"
                     tools:layout_editor_absoluteX="67dp"
                     tools:layout_editor_absoluteY="484dp"
                     tools:text="10 years and 0 months" />
@@ -297,6 +302,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/normal_text_size"
+                    android:text="@{dateCalcViewModel.dateCalcResults.yearsDays}"
                     tools:layout_editor_absoluteX="69dp"
                     tools:layout_editor_absoluteY="539dp"
                     tools:text="10 years and 0 days" />
@@ -306,6 +312,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/normal_text_size"
+                    android:text="@{dateCalcViewModel.dateCalcResults.taxYears}"
                     tools:layout_editor_absoluteX="69dp"
                     tools:layout_editor_absoluteY="590dp"
                     tools:text="10 tax years" />
@@ -315,6 +322,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/normal_text_size"
+                    android:text="@{dateCalcViewModel.dateCalcResults.sixthAprils}"
                     tools:layout_editor_absoluteX="75dp"
                     tools:layout_editor_absoluteY="645dp"
                     tools:text="10 6th Aprils passed" />
