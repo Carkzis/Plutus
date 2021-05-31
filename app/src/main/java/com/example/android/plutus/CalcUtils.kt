@@ -1,5 +1,6 @@
 package com.example.android.plutus
 
+import timber.log.Timber
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.DecimalFormat
@@ -7,6 +8,7 @@ import java.text.NumberFormat
 import java.time.LocalDate
 import java.time.Period
 import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 import java.util.*
 
 // Note: this is not actually a constant, but for initial purposes it is.
@@ -85,10 +87,12 @@ data class DateCalcResults(
 /**
  * Gets the number of days between start and end date, to ensure it is over or equal to 0.
  */
-internal fun daysCalculation(startDate: String, endDate: String) : Int {
+internal fun daysCalculation(startDate: String, endDate: String) : Long {
     val startDateObj = LocalDate.parse(startDate,
         DateTimeFormatter.ofPattern("dd/MM/yyyy"))
     val endDateObj = LocalDate.parse(endDate,
         DateTimeFormatter.ofPattern("dd/MM/yyyy"))
-    return Period.between(startDateObj, endDateObj).getDays()
+    Timber.e(startDateObj.toString())
+    Timber.e(endDateObj.toString())
+    return ChronoUnit.DAYS.between(startDateObj, endDateObj)
 }

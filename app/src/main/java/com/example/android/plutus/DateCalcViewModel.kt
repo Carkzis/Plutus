@@ -16,13 +16,8 @@ import java.util.*
 
 class DateCalcViewModel : ViewModel() {
 
-    private val _startDateInfo = MutableLiveData("")
-    val startDateInfo: LiveData<String>
-        get() = _startDateInfo
-
-    private val _endDateInfo = MutableLiveData("")
-    val endDateInfo: LiveData<String>
-        get() = _endDateInfo
+    var startDateInfo = MutableLiveData("")
+    var endDateInfo = MutableLiveData("")
 
     private val _dateCalcResults = MutableLiveData<DateCalcResults>()
     val dateCalcResults: LiveData<DateCalcResults>
@@ -37,13 +32,13 @@ class DateCalcViewModel : ViewModel() {
     fun setStartDate(year: Int, month: Int, day: Int) {
         val formattedMonth = if (month < 10) "0$month" else month
         val formattedDay = if (day < 10) "0$day" else day
-        _startDateInfo.value = "$formattedDay/$formattedMonth/$year"
+        startDateInfo.value = "$formattedDay/$formattedMonth/$year"
     }
 
     fun setEndDate(year: Int, month: Int, day: Int) {
         val formattedMonth = if (month < 10) "0$month" else month
         val formattedDay = if (day < 10) "0$day" else day
-        _endDateInfo.value = "$formattedDay/$formattedMonth/$year"
+        endDateInfo.value = "$formattedDay/$formattedMonth/$year"
     }
 
     fun validateBeforeCalculation() {
@@ -53,6 +48,7 @@ class DateCalcViewModel : ViewModel() {
 
         val periodDays = daysCalculation(startDateInfo.value!!, endDateInfo.value!!)
 
+        Timber.e(periodDays.toString())
         // If the difference is negative, return a toast message
         if (periodDays < 0) return showToastMessage(R.string.end_date_after_start_date)
 

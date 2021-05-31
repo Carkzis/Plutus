@@ -73,4 +73,40 @@ class CalcUtilsTest {
 
         assertThat(result, `is`("1.85%"))
     }
+
+    @Test
+    fun daysCalculation_sameDateUsed_returnsZero() {
+        // Create variables to enter into calculation
+        val startDate = "31/05/2021"
+        val endDate = "31/05/2021"
+
+        // Call the function
+        val result = daysCalculation(startDate, endDate)
+
+        assertThat(result, `is`(0))
+    }
+
+    @Test
+    fun daysCalculation_endDateBeforeStartDate_returnsNegativeNumber() {
+        // Create variables to enter into calculation
+        val startDate = "31/05/2021"
+        val endDate = "31/05/2020"
+
+        // Call the function
+        val result = daysCalculation(startDate, endDate)
+
+        assertThat(result, `is`(-365))
+    }
+
+    @Test
+    fun daysCalculation_startDateAfterEndDate_returnsPositiveNumber() {
+        // Create variables to enter into calculation
+        val startDate = "31/05/2021"
+        val endDate = "31/05/2022"
+
+        // Call the function
+        val result = daysCalculation(startDate, endDate)
+
+        assertThat(result, `is`(365))
+    }
 }
