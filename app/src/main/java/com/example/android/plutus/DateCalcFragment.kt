@@ -39,6 +39,7 @@ class DateCalcFragment : Fragment() {
         setUpStartDateDialog()
         setUpEndDateDialog()
         setUpButton()
+        setUpToast()
         addDefaultResults()
 
     }
@@ -48,7 +49,9 @@ class DateCalcFragment : Fragment() {
             val calendar = setUpCalendar()
             DatePickerDialog(requireContext(), {
                 view, y, m, d ->
-                    viewModel.setStartDate(y, m, d)
+                // need to add 1 to month as it is indexed at 0 for some bizarre reason
+                // (as years and days are not?)
+                    viewModel.setStartDate(y, m + 1, d)
             }, calendar.year, calendar.month, calendar.day).show()
         }
     }
@@ -58,7 +61,7 @@ class DateCalcFragment : Fragment() {
             val calendar = setUpCalendar()
             DatePickerDialog(requireContext(), {
                     view, y, m, d ->
-                viewModel.setEndDate(y, m, d)
+                viewModel.setEndDate(y, m + 1, d)
             }, calendar.year, calendar.month, calendar.day).show()
         }
     }
@@ -68,7 +71,7 @@ class DateCalcFragment : Fragment() {
     private fun setUpCalendar(): CalendarInfo {
         val calendar: Calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH) + 1
+        val month = calendar.get(Calendar.MONTH)
         Timber.w("Month is $month")
         val day = calendar.get(Calendar.DAY_OF_MONTH)
         return CalendarInfo(year, month, day)
@@ -76,7 +79,7 @@ class DateCalcFragment : Fragment() {
 
     private fun setUpButton() {
         viewDataBinding.dateCalcButton.setOnClickListener {
-            viewModel.calculateDateDifferences()
+            viewModel.validateBeforeCalculation()
         }
     }
 
@@ -91,6 +94,14 @@ class DateCalcFragment : Fragment() {
             getString(R.string.tax_years_results),
             getString(R.string.sixth_aprils_results))
         viewModel.addDefaultResultsVM(defaultResults)
+    }
+
+    private fun setUpToast() {
+        viewModel.toastText.observe(viewLifecycleOwner, {
+            it.getContextIfNotHandled()?.let { message ->
+                context?.showToast(requireContext().getString(message))
+            }
+        })
     }
 
 }

@@ -74,7 +74,7 @@ class PclsCalcViewModelTest {
         pclsCalcViewModel.validateBeforeCalculation()
 
         // This will throw a TimeoutError if Toast value is added to the LiveData,
-        // meaning that the validation was pass (and so fail this JUnit test!)
+        // meaning that the validation was passed (and so fail this JUnit test!)
         assertThat(pclsCalcViewModel.toastText.getOrAwaitValue(), `is`(not("null")))
     }
 

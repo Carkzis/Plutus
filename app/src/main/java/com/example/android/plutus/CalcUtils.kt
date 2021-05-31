@@ -4,6 +4,9 @@ import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.DecimalFormat
 import java.text.NumberFormat
+import java.time.LocalDate
+import java.time.Period
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 // Note: this is not actually a constant, but for initial purposes it is.
@@ -78,3 +81,14 @@ data class DateCalcResults(
     val yearsDays: String,
     val taxYears: String,
     val sixthAprils: String)
+
+/**
+ * Gets the number of days between start and end date, to ensure it is over or equal to 0.
+ */
+internal fun dateValidation(startDate: String, endDate: String) : Int {
+    val startDateObj = LocalDate.parse(startDate,
+        DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+    val endDateObj = LocalDate.parse(endDate,
+        DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+    return Period.between(startDateObj, endDateObj).getDays()
+}
