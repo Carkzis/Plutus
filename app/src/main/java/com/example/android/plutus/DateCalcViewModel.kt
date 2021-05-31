@@ -50,7 +50,7 @@ class DateCalcViewModel : ViewModel() {
 
         Timber.e(periodDays.toString())
         // If the difference is negative, return a toast message
-        if (periodDays < 0) return showToastMessage(R.string.end_date_after_start_date)
+        if (periodDays < 1) return showToastMessage(R.string.end_date_after_start_date)
 
     }
 

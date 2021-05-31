@@ -46,5 +46,5 @@
     <string name="sixth_aprils_results">%1$d 6th Aprils passed</string>
     <string name="no_start_date_entered">You need to enter a start date!</string>
     <string name="no_end_date_entered">You need to enter an end date!</string>
-    <string name="end_date_after_start_date">The end date must be after the start date!</string>
+    <string name="end_date_after_start_date">The end date cannot be before the start date!</string>
 </resources>

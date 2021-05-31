@@ -88,7 +88,8 @@ internal fun daysCalculation(startDate: String, endDate: String) : Long {
     val startDateObj = LocalDate.parse(startDate,
         DateTimeFormatter.ofPattern("dd/MM/yyyy"))
     val endDateObj = LocalDate.parse(endDate,
-        DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+        DateTimeFormatter.ofPattern("dd/MM/yyyy")).plusDays(1)
+    // Last day is included in days calculation.
     return ChronoUnit.DAYS.between(startDateObj, endDateObj)
 }
 
@@ -96,7 +97,7 @@ internal fun yearsCalculation(startDate: String, endDate: String) : Long {
     val startDateObj = LocalDate.parse(startDate,
         DateTimeFormatter.ofPattern("dd/MM/yyyy"))
     val endDateObj = LocalDate.parse(endDate,
-        DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+        DateTimeFormatter.ofPattern("dd/MM/yyyy")).plusDays(1)
     return ChronoUnit.YEARS.between(startDateObj, endDateObj)
 }
 
@@ -104,7 +105,7 @@ internal fun monthsCalculation(startDate: String, endDate: String) : Long {
     val startDateObj = LocalDate.parse(startDate,
         DateTimeFormatter.ofPattern("dd/MM/yyyy"))
     val endDateObj = LocalDate.parse(endDate,
-        DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+        DateTimeFormatter.ofPattern("dd/MM/yyyy")).plusDays(1)
     return ChronoUnit.MONTHS.between(startDateObj, endDateObj)
 }
 
@@ -112,7 +113,7 @@ internal fun weeksCalculation(startDate: String, endDate: String) : Long {
     val startDateObj = LocalDate.parse(startDate,
         DateTimeFormatter.ofPattern("dd/MM/yyyy"))
     val endDateObj = LocalDate.parse(endDate,
-        DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+        DateTimeFormatter.ofPattern("dd/MM/yyyy")).plusDays(1)
     return ChronoUnit.WEEKS.between(startDateObj, endDateObj)
 }
 
@@ -128,9 +129,22 @@ internal fun yearsAndDaysCalculation(startDate: String, endDate: String) : Pair<
     if (completeYears == 0L) return Pair(0, daysCalculation(startDate, endDate))
     // This will account for leap years.
     val startDateForDays = LocalDate.parse(startDate,
-        DateTimeFormatter.ofPattern("dd/MM/yyyy")).plusYears(1)
+        DateTimeFormatter.ofPattern("dd/MM/yyyy")).plusYears(completeYears)
     val endDateObj = LocalDate.parse(endDate,
         DateTimeFormatter.ofPattern("dd/MM/yyyy"))
-    val days = ChronoUnit.DAYS.between(startDateForDays, endDateObj)
+    // Last day is included in days calculation.
+    val days = ChronoUnit.DAYS.between(startDateForDays, endDateObj) + 1
     return Pair(completeYears, days)
+}
+
+internal fun taxYearsCalculation(startDate: String, endDate: String) : Long {
+    // TODO: Check if start date is before 06/04/XXXX, if so just change day and month to
+    // 06 and 04, otherwise change it to 06/04/XXXX+1
+    // Do reverse for end date
+    return 0
+}
+
+internal fun sixthAprilsPassCalculation(startDate: String, endDate: String) : Long {
+    // TODO: This is just taxYearsCalculation + 1!
+    return 0
 }

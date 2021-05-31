@@ -3,6 +3,7 @@
 package com.example.android.plutus
 
 import org.hamcrest.CoreMatchers.`is`
+import org.hamcrest.number.OrderingComparison.lessThan
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -75,7 +76,7 @@ class CalcUtilsTest {
     }
 
     @Test
-    fun daysCalculation_sameDateUsed_returnsZero() {
+    fun daysCalculation_sameDateUsed_returnsOne() {
         // Create variables to enter into calculation
         val startDate = "31/05/2021"
         val endDate = "31/05/2021"
@@ -83,7 +84,7 @@ class CalcUtilsTest {
         // Call the function
         val result = daysCalculation(startDate, endDate)
 
-        assertThat(result, `is`(0))
+        assertThat(result, `is`(1))
     }
 
     @Test
@@ -95,18 +96,238 @@ class CalcUtilsTest {
         // Call the function
         val result = daysCalculation(startDate, endDate)
 
-        assertThat(result, `is`(-365))
+        assertThat(result, `is`(lessThan(0)))
     }
 
     @Test
     fun daysCalculation_startDateAfterEndDate_returnsPositiveNumber() {
         // Create variables to enter into calculation
         val startDate = "31/05/2021"
-        val endDate = "31/05/2022"
+        val endDate = "30/05/2022"
 
         // Call the function
         val result = daysCalculation(startDate, endDate)
 
         assertThat(result, `is`(365))
     }
+
+    @Test
+    fun daysCalculation_periodOfOneMonth_returnsAllDaysInMonth() {
+        // Create variables to enter into calculation
+        val startDate = "01/05/2021"
+        val endDate = "31/05/2021"
+
+        // Call the function
+        val result = daysCalculation(startDate, endDate)
+
+        assertThat(result, `is`(31))
+    }
+
+    @Test
+    fun yearsCalculation_periodOfOneYear_returnsOneYear() {
+        // Create variables to enter into calculation
+        val startDate = "01/05/2021"
+        val endDate = "30/04/2022"
+
+        // Call the function
+        val result = yearsCalculation(startDate, endDate)
+
+        assertThat(result, `is`(1))
+    }
+
+    @Test
+    fun yearsCalculation_periodOfMultipleYears_returnsSeven() {
+        val startDate = "15/09/1993"
+        val endDate = "04/05/2001"
+
+        // Call the function
+        val result = yearsCalculation(startDate, endDate)
+
+        assertThat(result, `is`(7))
+    }
+
+    @Test
+    fun yearsCalculation_periodLessThanOneYear_returnsZero() {
+        val startDate = "15/03/2011"
+        val endDate = "13/03/2012"
+
+        // Call the function
+        val result = yearsCalculation(startDate, endDate)
+
+        assertThat(result, `is`(0))
+    }
+
+    @Test
+    fun yearsCalculation_periodLessThanOneYearLeapYear_returnsZero() {
+        val startDate = "01/03/2019"
+        val endDate = "28/02/2020" // Last day is 29/02/2020.
+
+        // Call the function
+        val result = yearsCalculation(startDate, endDate)
+
+        assertThat(result, `is`(0))
+    }
+
+    @Test
+    fun monthsCalculation_periodOfOneMonth_returnsOne() {
+        val startDate = "01/04/2014"
+        val endDate = "30/04/2014"
+
+        // Call the function
+        val result = monthsCalculation(startDate, endDate)
+
+        assertThat(result, `is`(1))
+    }
+
+    @Test
+    fun monthsCalculation_periodOfManyMonths_returnsSeven() {
+        val startDate = "13/07/2016"
+        val endDate = "02/03/2017"
+
+        // Call the function
+        val result = monthsCalculation(startDate, endDate)
+
+        assertThat(result, `is`(7))
+    }
+
+    @Test
+    fun monthsCalculation_periodLessThanOneMonth_returnsZero() {
+        val startDate = "25/12/2012"
+        val endDate = "23/01/2013"
+
+        // Call the function
+        val result = monthsCalculation(startDate, endDate)
+
+        assertThat(result, `is`(0))
+    }
+
+    @Test
+    fun weeksCalculation_periodOfWeekMonth_returnsOne() {
+        val startDate = "17/11/2014"
+        val endDate = "25/11/2014"
+
+        // Call the function
+        val result = weeksCalculation(startDate, endDate)
+
+        assertThat(result, `is`(1))
+    }
+
+    @Test
+    fun weeksCalculation_periodOfManyWeeks_returnsSeven() {
+        val startDate = "18/08/1993"
+        val endDate = "09/10/1993"
+
+        // Call the function
+        val result = weeksCalculation(startDate, endDate)
+
+        assertThat(result, `is`(7))
+    }
+
+    @Test
+    fun weeksCalculation_periodLessThanOneWeek_returnsZero() {
+        val startDate = "18/03/2000"
+        val endDate = "22/03/2000"
+
+        // Call the function
+        val result = weeksCalculation(startDate, endDate)
+
+        assertThat(result, `is`(0))
+    }
+
+    @Test
+    fun yearsAndMonthsCalculation_periodLessThanOneYear_returnsZeroYearsSevenMonths() {
+        val startDate = "13/07/2016"
+        val endDate = "02/03/2017"
+
+        // Call the function
+        val (years, months) = yearsAndMonthsCalculation(startDate, endDate)
+
+        assertThat(years, `is`(0))
+        assertThat(months, `is`(7))
+    }
+
+    @Test
+    fun yearsAndMonthsCalculation_periodExactlyOneYearNoMonths_returnsOneYearZeroMonths() {
+        val startDate = "12/12/2012"
+        val endDate = "11/12/2013"
+
+        // Call the function
+        val (years, months) = yearsAndMonthsCalculation(startDate, endDate)
+
+        assertThat(years, `is`(1))
+        assertThat(months, `is`(0))
+    }
+
+    @Test
+    fun yearsAndMonthsCalculation_periodOneYearExactlyOneMonth_returnsOneYearOneMonths() {
+        val startDate = "12/12/2012"
+        val endDate = "11/01/2014"
+
+        // Call the function
+        val (years, months) = yearsAndMonthsCalculation(startDate, endDate)
+
+        assertThat(years, `is`(1))
+        assertThat(months, `is`(1))
+    }
+
+    @Test
+    fun yearsAndMonthsCalculation_periodManysYearsManyMonths_returnsFortyTwoYearsSevenMonths() {
+        val startDate = "04/02/1942"
+        val endDate = "17/09/1984"
+
+        // Call the function
+        val (years, months) = yearsAndMonthsCalculation(startDate, endDate)
+
+        assertThat(years, `is`(42))
+        assertThat(months, `is`(7))
+    }
+
+    @Test
+    fun yearsAndDaysCalculation_periodLessThanOneYears_returnsZeroYearsManyDays() {
+        val startDate = "20/06/1983"
+        val endDate = "04/12/1983"
+
+        // Call the function
+        val (years, days) = yearsAndDaysCalculation(startDate, endDate)
+
+        assertThat(years, `is`(0))
+        assertThat(days, `is`(168))
+    }
+
+    @Test
+    fun yearsAndDaysCalculation_periodExactlyOneYear_returnsOneYearZeroDays() {
+        val startDate = "15/08/2007"
+        val endDate = "14/08/2008"
+
+        // Call the function
+        val (years, days) = yearsAndDaysCalculation(startDate, endDate)
+
+        assertThat(years, `is`(1))
+        assertThat(days, `is`(0))
+    }
+
+    @Test
+    fun yearsAndDaysCalculation_periodExactlyOneYearOneDay_returnsOneYearOneDay() {
+        val startDate = "15/08/2007"
+        val endDate = "15/08/2008"
+
+        // Call the function
+        val (years, days) = yearsAndDaysCalculation(startDate, endDate)
+
+        assertThat(years, `is`(1))
+        assertThat(days, `is`(1))
+    }
+
+    @Test
+    fun yearsAndDaysCalculation_periodManyYearsManyDays_returnsSevenYearsSeventySevenDays() {
+        val startDate = "19/04/2014"
+        val endDate = "04/07/2021"
+
+        // Call the function
+        val (years, days) = yearsAndDaysCalculation(startDate, endDate)
+
+        assertThat(years, `is`(7))
+        assertThat(days, `is`(77))
+    }
+
 }
