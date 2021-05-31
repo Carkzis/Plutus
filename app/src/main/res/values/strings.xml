@@ -36,14 +36,14 @@
     <string name="_6th_aprils_passed">6th Aprils Passed:</string>
     <string name="calculate_button">Calculate!</string>
 
-    <string name="years_results">0 years</string>
-    <string name="months_results">0 months</string>
-    <string name="weeks_results">0 weeks</string>
-    <string name="days_results">0 days</string>
-    <string name="years_months_results">0 years and 0 months</string>
-    <string name="years_days_results">0 years and 0 days</string>
-    <string name="tax_years_results">0 tax years</string>
-    <string name="sixth_aprils_results">0 6th Aprils passed</string>
+    <string name="years_results">%1$d years</string>
+    <string name="months_results">%1$d months</string>
+    <string name="weeks_results">%1$d weeks</string>
+    <string name="days_results">%1$d days</string>
+    <string name="years_months_results">%1$d years and %2$d months</string>
+    <string name="years_days_results">%1$d years and %2$d days</string>
+    <string name="tax_years_results">%1$d tax years</string>
+    <string name="sixth_aprils_results">%1$d 6th Aprils passed</string>
     <string name="no_start_date_entered">You need to enter a start date!</string>
     <string name="no_end_date_entered">You need to enter an end date!</string>
     <string name="end_date_after_start_date">The end date must be after the start date!</string>

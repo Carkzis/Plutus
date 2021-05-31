@@ -85,14 +85,14 @@ class DateCalcFragment : Fragment() {
 
     private fun addDefaultResults() {
         defaultResults = DateCalcResults(
-            getString(R.string.years_results),
-            getString(R.string.months_results),
-            getString(R.string.weeks_results),
-            getString(R.string.days_results),
-            getString(R.string.years_months_results),
-            getString(R.string.years_days_results),
-            getString(R.string.tax_years_results),
-            getString(R.string.sixth_aprils_results))
+            getString(R.string.years_results, 0),
+            getString(R.string.months_results, 0),
+            getString(R.string.weeks_results, 0),
+            getString(R.string.days_results, 0),
+            getString(R.string.years_months_results, 0, 0),
+            getString(R.string.years_days_results, 0, 0),
+            getString(R.string.tax_years_results, 0),
+            getString(R.string.sixth_aprils_results, 0))
         viewModel.addDefaultResultsVM(defaultResults)
     }
 

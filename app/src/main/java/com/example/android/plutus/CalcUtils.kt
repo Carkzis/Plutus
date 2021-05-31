@@ -85,7 +85,7 @@ data class DateCalcResults(
 /**
  * Gets the number of days between start and end date, to ensure it is over or equal to 0.
  */
-internal fun dateValidation(startDate: String, endDate: String) : Int {
+internal fun daysCalculation(startDate: String, endDate: String) : Int {
     val startDateObj = LocalDate.parse(startDate,
         DateTimeFormatter.ofPattern("dd/MM/yyyy"))
     val endDateObj = LocalDate.parse(endDate,

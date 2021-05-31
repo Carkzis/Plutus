@@ -51,11 +51,7 @@ class DateCalcViewModel : ViewModel() {
         if (startDateInfo.value == "") return showToastMessage(R.string.no_start_date_entered)
         if (endDateInfo.value == "") return showToastMessage(R.string.no_end_date_entered)
 
-        val startDateObj = LocalDate.parse(startDateInfo.value,
-            DateTimeFormatter.ofPattern("dd/MM/yyyy"))
-        val endDateObj = LocalDate.parse(endDateInfo.value,
-            DateTimeFormatter.ofPattern("dd/MM/yyyy"))
-        val periodDays = Period.between(startDateObj, endDateObj).getDays()
+        val periodDays = daysCalculation(startDateInfo.value!!, endDateInfo.value!!)
 
         // If the difference is negative, return a toast message
         if (periodDays < 0) return showToastMessage(R.string.end_date_after_start_date)
