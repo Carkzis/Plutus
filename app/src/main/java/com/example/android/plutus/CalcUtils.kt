@@ -141,10 +141,36 @@ internal fun taxYearsCalculation(startDate: String, endDate: String) : Long {
     // TODO: Check if start date is before 06/04/XXXX, if so just change day and month to
     // 06 and 04, otherwise change it to 06/04/XXXX+1
     // Do reverse for end date
-    return 0
+    val startDateObj = LocalDate.parse(startDate,
+        DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+    val endDateObj = LocalDate.parse(endDate,
+        DateTimeFormatter.ofPattern("dd/MM/yyyy")).plusDays(1)
+    val startDateYearsTaxYearStart = LocalDate.parse("06/04/${startDateObj.year}",
+        DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+    val endDateYearsTaxYearEnd = LocalDate.parse("05/04/${endDateObj.year}",
+        DateTimeFormatter.ofPattern("dd/MM/yyyy")).plusDays(1)
+
+    val taxYearStartDate =
+        if (ChronoUnit.DAYS.between(startDateObj, startDateYearsTaxYearStart) >= 0)  {
+            startDateYearsTaxYearStart
+        } else {
+            LocalDate.parse("06/04/${startDateObj.year + 1}",
+                DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+        }
+
+    val taxYearEndDate =
+        if (ChronoUnit.DAYS.between(endDateObj, endDateYearsTaxYearEnd) <= 0) {
+            endDateYearsTaxYearEnd
+        } else {
+            LocalDate.parse("06/04/${endDateObj.year - 1}",
+                DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+        }
+
+    return ChronoUnit.YEARS.between(taxYearStartDate, taxYearEndDate)
 }
 
 internal fun sixthAprilsPassCalculation(startDate: String, endDate: String) : Long {
-    // TODO: This is just taxYearsCalculation + 1!
+    // TODO: This is just taxYearsCalculation + 1 if 1 or more tax years, otherwise test start is
+    // before 06/04/XXXX, and end is after
     return 0
 }

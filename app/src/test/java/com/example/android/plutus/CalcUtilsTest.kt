@@ -330,4 +330,38 @@ class CalcUtilsTest {
         assertThat(days, `is`(77))
     }
 
+    @Test
+    fun taxYearsCalculation_periodExactlyOneTaxYear_returnsOneTaxYear() {
+        val startDate = "06/04/2021"
+        val endDate = "05/04/2022"
+
+        // Call the function
+        val taxYears = taxYearsCalculation(startDate, endDate)
+
+        assertThat(taxYears, `is`(1))
+    }
+
+    @Test
+    fun taxYearsCalculation_periodManyYears_returnsSevenTaxYears() {
+        val startDate = "27/01/2013"
+        val endDate = "19/09/2020"
+
+        // Call the function
+        val taxYears = taxYearsCalculation(startDate, endDate)
+
+        assertThat(taxYears, `is`(7))
+    }
+
+    @Test
+    fun taxYearsCalculation_oneYearAfterOneYearBeforeTaxYearEnd_returnsTen() {
+        val startDate = "03/11/1994"
+        val endDate = "11/03/2006"
+
+        // Call the function
+        val taxYears = taxYearsCalculation(startDate, endDate)
+
+        assertThat(taxYears, `is`(10))
+    }
+
+
 }
