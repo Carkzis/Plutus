@@ -363,5 +363,38 @@ class CalcUtilsTest {
         assertThat(taxYears, `is`(10))
     }
 
+    @Test
+    fun sixthAprilsPassCalculation_lessThanOneTaxYearPassSixthApril_returnsOne() {
+        val startDate = "03/11/1994"
+        val endDate = "11/04/1995"
+
+        // Call the function
+        val aprilsPassed = sixthAprilsPassCalculation(startDate, endDate)
+
+        assertThat(aprilsPassed, `is`(1))
+    }
+
+    @Test
+    fun sixthAprilsPassCalculation_periodExactlyOneDaySixthApril_returnsOne() {
+        val startDate = "06/04/1994"
+        val endDate = "06/04/1994"
+
+        // Call the function
+        val aprilsPassed = sixthAprilsPassCalculation(startDate, endDate)
+
+        assertThat(aprilsPassed, `is`(1))
+    }
+
+    @Test
+    fun sixthAprilsPassCalculation_periodExactlyOneTaxYear_returnsOne() {
+        val startDate = "06/04/1994"
+        val endDate = "05/04/1995"
+
+        // Call the function
+        val aprilsPassed = sixthAprilsPassCalculation(startDate, endDate)
+
+        assertThat(aprilsPassed, `is`(1))
+    }
+
 
 }
