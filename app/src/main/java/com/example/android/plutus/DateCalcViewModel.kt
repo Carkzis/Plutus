@@ -1,18 +1,9 @@
 package com.example.android.plutus
 
-import android.icu.util.LocaleData
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import timber.log.Timber
-import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.Period
-import java.time.format.DateTimeFormatter
-import java.time.temporal.ChronoUnit
-import java.util.*
 
 class DateCalcViewModel : ViewModel() {
 
@@ -54,7 +45,7 @@ class DateCalcViewModel : ViewModel() {
         calculateDateDifferences()
     }
 
-    fun calculateDateDifferences() {
+    private fun calculateDateDifferences() {
 
         results = DateCalcResults(
             yearsCalculation(startDateInfo.value!!, endDateInfo.value!!),
@@ -73,7 +64,7 @@ class DateCalcViewModel : ViewModel() {
         _dateCalcResults.value = _dateCalcResults.value ?: defaults
     }
 
-    fun showToastMessage(message: Int) {
+    private fun showToastMessage(message: Int) {
         _toastText.value = Event(message)
     }
 
