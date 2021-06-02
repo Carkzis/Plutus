@@ -77,14 +77,14 @@ data class Benefits(
     val dcFund: String = "£0.00")
 
 data class DateCalcResults(
-    val years: String,
-    val months: String,
-    val weeks: String,
-    val days: String,
-    val yearsMonths: String,
-    val yearsDays: String,
-    val taxYears: String,
-    val sixthAprils: String)
+    val years: Long,
+    val months: Long,
+    val weeks: Long,
+    val days: Long,
+    val yearsMonths: Pair<Long, Long>,
+    val yearsDays: Pair<Long, Long>,
+    val taxYears: Long,
+    val sixthAprils: Long)
 
 internal fun daysCalculation(startDate: String, endDate: String) : Long {
     val startDateObj = LocalDate.parse(startDate,

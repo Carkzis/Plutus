@@ -48,18 +48,23 @@ class DateCalcViewModel : ViewModel() {
 
         val periodDays = daysCalculation(startDateInfo.value!!, endDateInfo.value!!)
 
-        Timber.e(periodDays.toString())
         // If the difference is negative, return a toast message
         if (periodDays < 1) return showToastMessage(R.string.end_date_after_start_date)
 
+        calculateDateDifferences()
     }
 
     fun calculateDateDifferences() {
 
-        // TODO: Change this to actually calculate the results, this is just for testing purposes.
-        results = DateCalcResults("10 years", "120 months", "521 weeks",
-            "3650 days", "10 years and 0 months", "10 years and 0 days",
-            "10 tax years", "10 6th Aprils passed")
+        results = DateCalcResults(
+            yearsCalculation(startDateInfo.value!!, endDateInfo.value!!),
+            monthsCalculation(startDateInfo.value!!, endDateInfo.value!!),
+            weeksCalculation(startDateInfo.value!!, endDateInfo.value!!),
+            daysCalculation(startDateInfo.value!!, endDateInfo.value!!),
+            yearsAndMonthsCalculation(startDateInfo.value!!, endDateInfo.value!!),
+            yearsAndDaysCalculation(startDateInfo.value!!, endDateInfo.value!!),
+            taxYearsCalculation(startDateInfo.value!!, endDateInfo.value!!),
+            sixthAprilsPassCalculation(startDateInfo.value!!, endDateInfo.value!!))
         _dateCalcResults.value = results
     }
 
