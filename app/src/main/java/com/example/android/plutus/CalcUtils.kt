@@ -184,7 +184,7 @@ internal fun sixthAprilsPassCalculation(startDate: String, endDate: String) : Lo
     var currentDateObj = startDateObj
     var sixthAprils = 0
 
-    (0..numberOfDays).forEach { day ->
+    (0 until numberOfDays).forEach { day ->
         if (currentDateObj.monthValue == 4 && currentDateObj.dayOfMonth == 6) {
             sixthAprils += 1
         }

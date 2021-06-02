@@ -396,5 +396,27 @@ class CalcUtilsTest {
         assertThat(aprilsPassed, `is`(1))
     }
 
+    @Test
+    fun sixthAprilsPassCalculation_periodOneTaxYearOneDay_returnsTwo() {
+        val startDate = "06/04/1994"
+        val endDate = "06/04/1995"
+
+        // Call the function
+        val aprilsPassed = sixthAprilsPassCalculation(startDate, endDate)
+
+        assertThat(aprilsPassed, `is`(2))
+    }
+
+    @Test
+    fun sixthAprilsPassCalculation_periodManyYears_returnsSeven() {
+        val startDate = "05/04/1994"
+        val endDate = "09/09/2000"
+
+        // Call the function
+        val aprilsPassed = sixthAprilsPassCalculation(startDate, endDate)
+
+        assertThat(aprilsPassed, `is`(7))
+    }
+
 
 }
