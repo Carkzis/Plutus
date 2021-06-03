@@ -171,7 +171,9 @@ internal fun taxYearsCalculation(startDate: String, endDate: String) : Long {
                 DateTimeFormatter.ofPattern("dd/MM/yyyy")).plusDays(1)
         }
 
-    return ChronoUnit.YEARS.between(taxYearStartDate, taxYearEndDate)
+    // Cannot be less than 0, which will occur if the start date is after 6 April in one
+    // year, and the end date is before 5 April in the following year
+    return maxOf(ChronoUnit.YEARS.between(taxYearStartDate, taxYearEndDate), 0)
 }
 
 internal fun sixthAprilsPassCalculation(startDate: String, endDate: String) : Long {

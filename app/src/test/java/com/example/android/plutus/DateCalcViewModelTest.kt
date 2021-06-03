@@ -27,9 +27,9 @@ class DateCalcViewModelTest {
     @Test
     fun testLiveData_defaultValuesSetIfNoValues_postResultsToLiveData() {
         // Set values
-        val defaultResults = DateCalcResults("PLACEHOLDER", "PLACEHOLDER",
-            "PLACEHOLDER", "PLACEHOLDER", "PLACEHOLDER",
-            "PLACEHOLDER", "PLACEHOLDER", "PLACEHOLDER")
+        val defaultResults = DateCalcResults(10, 10,
+            10, 10, Pair(10, 10),
+            Pair(10, 10), 10, 10)
 
         // Call function
         dateCalcViewModel.addDefaultResultsVM(defaultResults)

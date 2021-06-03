@@ -342,6 +342,17 @@ class CalcUtilsTest {
     }
 
     @Test
+    fun taxYearsCalculation_periodLessThanOneTaxYear_returnsZeroTaxYears() {
+        val startDate = "06/06/2021"
+        val endDate = "03/03/2022"
+
+        // Call the function
+        val taxYears = taxYearsCalculation(startDate, endDate)
+
+        assertThat(taxYears, `is`(0))
+    }
+
+    @Test
     fun taxYearsCalculation_periodManyYears_returnsSevenTaxYears() {
         val startDate = "27/01/2013"
         val endDate = "19/09/2020"
