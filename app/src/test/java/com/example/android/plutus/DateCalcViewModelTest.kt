@@ -37,13 +37,29 @@ class DateCalcViewModelTest {
         // This will throw a TimeoutError if Toast value is not added to the LiveData,
         // meaning that the validation was passed (and so fail this JUnit test!)
         assertThat(dateCalcViewModel.dateCalcResults.getOrAwaitValue().days,
-            `is`("PLACEHOLDER")
+            `is`(10)
         )
     }
 
     @Test
     fun testLiveData_defaultValuesNotSetIfNoValues_postResultsToLiveData() {
-        // TODO: Once we are able to insert values, we can test this.
+        // Set values
+        val defaultResults = DateCalcResults(10, 10,
+            10, 10, Pair(10, 10),
+            Pair(10, 10), 10, 10)
+        val calculatedResults = DateCalcResults(7, 7, 7, 7, Pair(7, 7),
+            Pair(7, 7), 7, 7)
+
+        // Call function
+        // Hijacking the "addDefaultResultsVM" as it can set values to the results LiveData
+        dateCalcViewModel.addDefaultResultsVM(calculatedResults)
+        dateCalcViewModel.addDefaultResultsVM(defaultResults) // This should have no effect
+
+        // This will throw a TimeoutError if Toast value is not added to the LiveData,
+        // meaning that the validation was passed (and so fail this JUnit test!)
+        assertThat(dateCalcViewModel.dateCalcResults.getOrAwaitValue().days,
+            `is`(7)
+        )
     }
 
     @Test
