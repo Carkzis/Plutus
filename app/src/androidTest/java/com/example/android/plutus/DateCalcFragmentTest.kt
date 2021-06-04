@@ -1,20 +1,26 @@
 package com.example.android.plutus
 
+import android.app.Activity
+import android.provider.Settings.Global.getString
+import android.widget.DatePicker
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.ViewAssertion
 import androidx.test.espresso.action.ViewActions
-import androidx.test.espresso.assertion.ViewAssertions
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.contrib.PickerActions
 import androidx.test.espresso.matcher.ViewMatchers
-import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
-import androidx.test.espresso.matcher.ViewMatchers.withSubstring
-import org.junit.Assert.*
+import org.hamcrest.CoreMatchers.not
+import org.hamcrest.Matchers
+import org.junit.After
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -24,42 +30,124 @@ import org.junit.runner.RunWith
 class DateCalcFragmentTest {
 
     private val dataBindingIdlingResource = DataBindingIdlingResource()
+    private lateinit var activityScenario: ActivityScenario<MainActivity>
+
+    @After
+    fun closeActivityScenerio() = runBlockingTest {
+        activityScenario.close()
+    }
 
     @Test
     fun defaultDateResults_showInUi() = runBlockingTest {
         // Start on contents screen, as DataBindingIdlingResource.monitorFragment
         // currently not functioning correctly
-        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
+        activityScenario = ActivityScenario.launch(MainActivity::class.java)
         dataBindingIdlingResource.monitorActivity(activityScenario)
 
         // Click on the date calculator button to go to date calculator
-        Espresso.onView(ViewMatchers.withId(R.id.date_button))
-            .perform(ViewActions.click())
+        onView(withId(R.id.date_button))
+            .perform(click())
 
-        onView(ViewMatchers.withId(R.id.years_result_text))
-            .check(ViewAssertions.matches(withSubstring("0 ")))
-        onView(ViewMatchers.withId(R.id.months_result_text))
-            .check(ViewAssertions.matches(withSubstring("0 ")))
-        onView(ViewMatchers.withId(R.id.weeks_result_text))
-            .check(ViewAssertions.matches(withSubstring("0 ")))
-        onView(ViewMatchers.withId(R.id.days_result_text))
-            .check(ViewAssertions.matches(withSubstring("0 ")))
-        onView(ViewMatchers.withId(R.id.years_months_result_text))
-            .check(ViewAssertions.matches(withSubstring("0 ")))
-        onView(ViewMatchers.withId(R.id.years_months_result_text))
-            .check(ViewAssertions.matches(withSubstring(" 0 ")))
-        onView(ViewMatchers.withId(R.id.years_days_result_text))
-            .check(ViewAssertions.matches(withSubstring("0 ")))
-        onView(ViewMatchers.withId(R.id.years_days_result_text))
-            .check(ViewAssertions.matches(withSubstring(" 0 ")))
-        onView(ViewMatchers.withId(R.id.tax_years_result_text))
-            .check(ViewAssertions.matches(withSubstring("0 ")))
-        onView(ViewMatchers.withId(R.id.sixth_aprils_result_text))
-            .check(ViewAssertions.matches(withSubstring("0 ")))
+        onView(withId(R.id.years_result_text))
+            .check(matches(withSubstring("0 ")))
+        onView(withId(R.id.months_result_text))
+            .check(matches(withSubstring("0 ")))
+        onView(withId(R.id.weeks_result_text))
+            .check(matches(withSubstring("0 ")))
+        onView(withId(R.id.days_result_text))
+            .check(matches(withSubstring("0 ")))
+        onView(withId(R.id.years_months_result_text))
+            .check(matches(withSubstring("0 ")))
+        onView(withId(R.id.years_months_result_text))
+            .check(matches(withSubstring(" 0 ")))
+        onView(withId(R.id.years_days_result_text))
+            .check(matches(withSubstring("0 ")))
+        onView(withId(R.id.years_days_result_text))
+            .check(matches(withSubstring(" 0 ")))
+        onView(withId(R.id.tax_years_result_text))
+            .check(matches(withSubstring("0 ")))
+        onView(withId(R.id.sixth_aprils_result_text))
+            .check(matches(withSubstring("0 ")))
+
     }
 
-    // TODO: Can add inputs and get results
+    @Test
+    fun dateCalcResults_inputStartAndEndDate_showInUi() = runBlockingTest {
 
-    // TODO: Can try to add inputs but then cancel
+        // Start on contents screen, as DataBindingIdlingResource.monitorFragment
+        // currently not functioning correctly
+        activityScenario = ActivityScenario.launch(MainActivity::class.java)
+        dataBindingIdlingResource.monitorActivity(activityScenario)
+
+        // Click on the date calculator button to go to date calculator
+        onView(withId(R.id.date_button))
+            .perform(click())
+
+        // Click on the start date edit text to open calendar.
+        onView(withId(R.id.start_date_edittext))
+            .perform(click())
+        // Open date picker for start date and input date
+        onView(withClassName(Matchers.equalTo(DatePicker::class.java.name)))
+            .perform(PickerActions.setDate(2000, 2, 22))
+        onView(withText(R.string.ok)).perform(click())
+
+        // Click on the end date edit text to open calendar.
+        onView(withId(R.id.end_date_edittext))
+            .perform(click())
+        // Open date picker for start date and input date
+        onView(withClassName(Matchers.equalTo(DatePicker::class.java.name)))
+            .perform(PickerActions.setDate(2021, 5, 1))
+        onView(withText(R.string.ok)).perform(click())
+
+        // Click calculate button
+        onView(withId(R.id.date_calc_button))
+            .perform(click())
+
+        onView(withId(R.id.years_result_text))
+            .check(matches(withSubstring("21 ")))
+        onView(withId(R.id.months_result_text))
+            .check(matches(withSubstring("254 ")))
+        onView(withId(R.id.weeks_result_text))
+            .check(matches(withSubstring("1105 ")))
+        onView(withId(R.id.days_result_text))
+            .check(matches(withSubstring("7740 ")))
+        onView(withId(R.id.years_months_result_text))
+            .check(matches(withSubstring("21 ")))
+        onView(withId(R.id.years_months_result_text))
+            .check(matches(withSubstring(" 2 ")))
+        onView(withId(R.id.years_days_result_text))
+            .check(matches(withSubstring("21 ")))
+        onView(withId(R.id.years_days_result_text))
+            .check(matches(withSubstring(" 69 ")))
+        onView(withId(R.id.tax_years_result_text))
+            .check(matches(withSubstring("21 ")))
+        onView(withId(R.id.sixth_aprils_result_text))
+            .check(matches(withSubstring("22 ")))
+
+    }
+
+    @Test
+    fun dateCalcResults_openDialogAndPressBack_dialogDisappears() = runBlockingTest {
+
+        // Start on contents screen, as DataBindingIdlingResource.monitorFragment
+        // currently not functioning correctly
+        activityScenario = ActivityScenario.launch(MainActivity::class.java)
+        dataBindingIdlingResource.monitorActivity(activityScenario)
+
+        // Click on the date calculator button to go to date calculator
+        onView(withId(R.id.date_button))
+            .perform(click())
+
+        // Click on the start date edit text to open calendar.
+        onView(withId(R.id.start_date_edittext))
+            .perform(click())
+
+        onView(withText(R.string.ok)).check(matches(isDisplayed()))
+
+        Espresso.pressBack()
+
+        onView(withText(R.string.ok)).check(doesNotExist())
+
+    }
 
 }
