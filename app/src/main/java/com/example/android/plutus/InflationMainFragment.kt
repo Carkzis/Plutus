@@ -9,7 +9,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.android.plutus.databinding.FragmentInflationMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class InflationMainFragment : Fragment() {
 
     private val viewModel by viewModels<InflationMainViewModel> {

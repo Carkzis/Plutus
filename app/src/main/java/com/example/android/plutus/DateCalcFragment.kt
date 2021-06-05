@@ -8,11 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.example.android.plutus.databinding.FragmentDateCalcBinding
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
 
+@AndroidEntryPoint
 class DateCalcFragment : Fragment() {
 
     private val viewModel by viewModels<DateCalcViewModel> {

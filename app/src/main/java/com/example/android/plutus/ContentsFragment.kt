@@ -5,19 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.android.plutus.databinding.FragmentContentsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class ContentsFragment : Fragment() {
 
-    private val viewModel by viewModels<ContentsViewModel> {
-        ContentsViewModelFactory()
-    }
+    private val viewModel by viewModels<ContentsViewModel>()
 
-    private lateinit var viewDataBinding: FragmentContentsBinding
+    lateinit var viewDataBinding: FragmentContentsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,16 +39,13 @@ class ContentsFragment : Fragment() {
 
     private fun setupNavigation() {
         viewDataBinding.pclsButton.setOnClickListener {
-            findNavController().navigate(ContentsFragmentDirections
-                .actionContentsFragmentToPclsCalcFragment())
+            findNavController().navigate(com.example.android.plutus.ContentsFragmentDirections.actionContentsFragmentToPclsCalcFragment())
         }
         viewDataBinding.dateButton.setOnClickListener {
-            findNavController().navigate(ContentsFragmentDirections
-                .actionContentsFragmentToDateCalcFragment())
+            findNavController().navigate(com.example.android.plutus.ContentsFragmentDirections.actionContentsFragmentToDateCalcFragment())
         }
         viewDataBinding.inflationButton.setOnClickListener {
-            findNavController().navigate(ContentsFragmentDirections
-                .actionContentsFragmentToInflationMainFragment())
+            findNavController().navigate(com.example.android.plutus.ContentsFragmentDirections.actionContentsFragmentToInflationMainFragment())
         }
     }
 

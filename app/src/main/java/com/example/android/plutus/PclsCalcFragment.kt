@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.example.android.plutus.databinding.FragmentPclsCalcBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PclsCalcFragment : Fragment() {
 
     private val viewModel by viewModels<PclsCalcViewModel> {
