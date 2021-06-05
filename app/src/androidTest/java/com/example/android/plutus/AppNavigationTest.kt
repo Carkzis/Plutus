@@ -138,4 +138,45 @@ class AppNavigationTest {
         // Confirm we end up at the contents screen
         onView(withId(R.id.inflation_button)).check(matches(isDisplayed()))
     }
+
+    @Test
+    fun inflationScreen_clickOnCpiButton_navigateToCpiInflationFragment() {
+        // On the contents screen
+        val scenario = launchFragmentInContainer<InflationMainFragment>(Bundle())
+        val navController = mock(NavController::class.java)
+
+        scenario.onFragment {
+            Navigation.setViewNavController(it.view!!, navController)
+        }
+
+        // Click the date calculator button
+        onView(withId(R.id.cpi_button))
+            .perform(click())
+
+        // Verify that we navigate to the pcls calculator screen
+        verify(navController).navigate(
+            InflationMainFragmentDirections.actionInflationMainFragmentToCpiInflationFragment()
+        )
+    }
+
+    @Test
+    fun cpiInflationScreen_backButton() = runBlockingTest {
+        // On the contents screen
+        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
+        dataBindingIdlingResource.monitorActivity(activityScenario)
+
+        // Click on the pcls calculator button
+        onView(withId(R.id.inflation_button))
+            .perform(click())
+
+        // Click on cpi button
+        onView(withId(R.id.cpi_button))
+            .perform(click())
+
+        // Click the back button
+        pressBack()
+
+        // Confirm we end up at the contents screen
+        onView(withId(R.id.cpi_button)).check(matches(isDisplayed()))
+    }
 }

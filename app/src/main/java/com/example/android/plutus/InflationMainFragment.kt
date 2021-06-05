@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.android.plutus.databinding.FragmentInflationMainBinding
 
 class InflationMainFragment : Fragment() {
@@ -27,6 +29,20 @@ class InflationMainFragment : Fragment() {
             }
 
         return viewDataBinding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setupNavigation()
+
+    }
+
+    private fun setupNavigation() {
+        viewDataBinding.cpiButton.setOnClickListener {
+            findNavController().navigate(InflationMainFragmentDirections
+                .actionInflationMainFragmentToCpiInflationFragment())
+        }
     }
 
 }

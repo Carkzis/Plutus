@@ -35,5 +35,14 @@
       android:id="@+id/inflationMainFragment"
       android:name="com.example.android.plutus.InflationMainFragment"
       android:label="fragment_inflation_main"
-      tools:layout="@layout/fragment_inflation_main" />
+      tools:layout="@layout/fragment_inflation_main" >
+        <action
+          android:id="@+id/action_inflationMainFragment_to_cpiInflationFragment"
+          app:destination="@id/cpiInflationFragment" />
+    </fragment>
+    <fragment
+      android:id="@+id/cpiInflationFragment"
+      android:name="com.example.android.plutus.CpiInflationFragment"
+      android:label="fragment_cpi_inflation"
+      tools:layout="@layout/fragment_cpi_inflation" />
 </navigation>
