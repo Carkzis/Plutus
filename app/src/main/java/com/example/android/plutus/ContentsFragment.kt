@@ -22,7 +22,7 @@ class ContentsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         viewDataBinding =
             FragmentContentsBinding.inflate(inflater, container, false).apply {
@@ -47,6 +47,10 @@ class ContentsFragment : Fragment() {
         viewDataBinding.dateButton.setOnClickListener {
             findNavController().navigate(ContentsFragmentDirections
                 .actionContentsFragmentToDateCalcFragment())
+        }
+        viewDataBinding.inflationButton.setOnClickListener {
+            findNavController().navigate(ContentsFragmentDirections
+                .actionContentsFragmentToInflationMainFragment())
         }
     }
 

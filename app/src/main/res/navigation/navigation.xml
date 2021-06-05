@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_contentsFragment_to_dateCalcFragment"
             app:destination="@id/dateCalcFragment" />
+        <action
+          android:id="@+id/action_contentsFragment_to_inflationMainFragment"
+          app:destination="@id/inflationMainFragment" />
     </fragment>
     <fragment
         android:id="@+id/pclsFragment"
@@ -28,4 +31,9 @@
         android:name="com.example.android.plutus.DateCalcFragment"
         android:label="fragment_date_calc"
         tools:layout="@layout/fragment_date_calc" />
+    <fragment
+      android:id="@+id/inflationMainFragment"
+      android:name="com.example.android.plutus.InflationMainFragment"
+      android:label="fragment_inflation_main"
+      tools:layout="@layout/fragment_inflation_main" />
 </navigation>

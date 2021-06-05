@@ -49,7 +49,7 @@ class AppNavigationTest {
     }
 
     @Test
-    fun contentsScreen_clickOnDateButton_navigateToDateCalcFragement() {
+    fun contentsScreen_clickOnDateButton_navigateToDateCalcFragment() {
         // On the contents screen
         val scenario = launchFragmentInContainer<ContentsFragment>(Bundle())
         val navController = mock(NavController::class.java)
@@ -62,9 +62,29 @@ class AppNavigationTest {
         onView(withId(R.id.date_button))
             .perform(click())
 
-        // Verify that we nabigate to the pcls calculator screen
+        // Verify that we navigate to the pcls calculator screen
         verify(navController).navigate(
             ContentsFragmentDirections.actionContentsFragmentToDateCalcFragment()
+        )
+    }
+
+    @Test
+    fun contentsScreen_clickOnInflationButton_navigateToInflationMainFragment() {
+        // On the contents screen
+        val scenario = launchFragmentInContainer<ContentsFragment>(Bundle())
+        val navController = mock(NavController::class.java)
+
+        scenario.onFragment {
+            Navigation.setViewNavController(it.view!!, navController)
+        }
+
+        // Click the date calculator button
+        onView(withId(R.id.inflation_button))
+            .perform(click())
+
+        // Verify that we navigate to the pcls calculator screen
+        verify(navController).navigate(
+            ContentsFragmentDirections.actionContentsFragmentToInflationMainFragment()
         )
     }
 
@@ -100,5 +120,22 @@ class AppNavigationTest {
 
         // Confirm we end up at the contents screen
         onView(withId(R.id.date_button)).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun inflationScreen_backButton() = runBlockingTest {
+        // On the contents screen
+        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
+        dataBindingIdlingResource.monitorActivity(activityScenario)
+
+        // Click on the pcls calculator button
+        onView(withId(R.id.inflation_button))
+            .perform(click())
+
+        // Click the back button
+        pressBack()
+
+        // Confirm we end up at the contents screen
+        onView(withId(R.id.inflation_button)).check(matches(isDisplayed()))
     }
 }
