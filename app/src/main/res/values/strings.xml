@@ -10,7 +10,7 @@
     <string name="commutation_factor_hint">e.g. 20</string>
     <string name="dc_fund_hint">e.g. £5,000 or leave blank</string>
     <string name="calculate">Calculate</string>
-    <string name="db_pcls">DB PCLS:</string>
+    <string name="db_pcls">Defined Benefit PCLS:</string>
     <string name="residual_pension">Residual Pension:</string>
     <string name="lta_used">Lifetime Allowance Used:</string>
     <string name="standard_pcls_title">Standard PCLS Calculator</string>
@@ -50,4 +50,5 @@
   <string name="revaluation_calculator">Revaluation Calculator</string>
     <string name="inflation_information">Inflation Information</string>
     <string name="ok">OK</string>
+    <string name="full_pension">Full Pension</string>
 </resources>

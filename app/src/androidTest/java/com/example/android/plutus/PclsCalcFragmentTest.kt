@@ -42,12 +42,18 @@ class PclsCalcFragmentTest {
         onView(ViewMatchers.withId(R.id.calculate_pcls_button))
             .perform(ViewActions.click())
 
-        // Confirm we end up with the pcls calculation being displayed
+        // Confirm we end up with the pcls+residual and full pensions calculations being displayed
         onView(ViewMatchers.withId(R.id.db_only_linear_layout))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        // Ensure DC fund is not displaying
+        onView(ViewMatchers.withId(R.id.no_pcls_linear_layout))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+
+        // Ensure DC funds are not displaying
         onView(ViewMatchers.withId(R.id.db_dc_result_text))
             .check(ViewAssertions.matches(not(ViewMatchers.isDisplayed())))
+        onView(ViewMatchers.withId(R.id.np_dc_result_text))
+            .check(ViewAssertions.matches(not(ViewMatchers.isDisplayed())))
+
         // Confirm the combined pcls linear layout is not there
         onView(ViewMatchers.withId(R.id.combined_linear_layout))
             .check(ViewAssertions.matches(not(ViewMatchers.isDisplayed())))
@@ -80,9 +86,15 @@ class PclsCalcFragmentTest {
         // Confirm we end up with the pcls calculation results being displayed
         onView(ViewMatchers.withId(R.id.db_only_linear_layout))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        // Ensure DC fund is displayed in the DB linear layout
+        onView(ViewMatchers.withId(R.id.no_pcls_linear_layout))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+
+        // Ensure DC funds are displayed in the DB and full pension linear layouts
         onView(ViewMatchers.withId(R.id.db_dc_result_text))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        onView(ViewMatchers.withId(R.id.np_dc_result_text))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+
         // Confirm we end up with the combined pcls calculation results being displayed
         onView(ViewMatchers.withId(R.id.combined_linear_layout))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))

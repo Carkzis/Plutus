@@ -61,6 +61,17 @@ class PclsCalcFragment : Fragment() {
                 }
             }
         })
+
+        viewModel.noPclsBenOutput.observe(viewLifecycleOwner, {
+            viewDataBinding.noPclsLinearLayout.visibility = View.VISIBLE
+            if (it.dcFund != "£0.00") {
+                viewDataBinding.npDcText.visibility = View.VISIBLE
+                viewDataBinding.npDcResultText.visibility = View.VISIBLE
+            } else {
+                viewDataBinding.npDcText.visibility = View.GONE
+                viewDataBinding.npDcResultText.visibility = View.GONE
+            }
+        })
     }
 
     private fun setUpButton() {

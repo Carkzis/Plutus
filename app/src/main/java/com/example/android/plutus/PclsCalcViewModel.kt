@@ -22,12 +22,17 @@ class PclsCalcViewModel : ViewModel() {
     val cmbBenOutput: LiveData<Benefits>
         get() = _cmbBenOutput
 
+    private val _noPclsBenOutput = MutableLiveData<Benefits>()
+    val noPclsBenOutput: LiveData<Benefits>
+        get() = _noPclsBenOutput
+
     // LiveData feedback e.g. Toast
     private var _toastText = MutableLiveData<Event<Int>>()
     val toastText: LiveData<Event<Int>>
         get() = _toastText
 
     private lateinit var dbBenefits : Benefits
+    private lateinit var noPclsBenefits : Benefits
     private var cmbBenefits : Benefits? = null
 
     fun validateBeforeCalculation() {
@@ -59,20 +64,28 @@ class PclsCalcViewModel : ViewModel() {
     private fun calculationWrapper(fp: Double, cf: Double, dc: Double) {
         // Call function to calculate db benefits, and return a data object with the results
         dbBenefits = dbPclsCalculation(fp, cf, dc)
+        // The benefits where no pcls is calculated only need access to the Lta calculation.
+        noPclsBenefits = Benefits(
+            "£0.00",
+            formatAsCurrency(fp.toBigDecimal()),
+            ltaCalculation(0.0, fp, dc),
+            formatAsCurrency(dc.toBigDecimal()))
         // Only enter arguments into the combined
         // pcls function if there is any money purchase fund value, otherwise get the default
         // using £0.00 figures
         cmbBenefits = if (dc > 0.0) cmbPclsCalculation(fp, cf, dc) else Benefits("£0.00")
 
-        updateWithResults(dbBenefits, cmbBenefits)
+        updateWithResults(dbBenefits, cmbBenefits, noPclsBenefits)
     }
 
-    private fun updateWithResults(dbBenefits: Benefits, cmbBenefits: Benefits?) {
+    private fun updateWithResults(dbBenefits: Benefits, cmbBenefits: Benefits?,
+                                  noPclsBenefits: Benefits) {
         Timber.w("Checking that update with results works!")
         _dbBenOutput.value = dbBenefits
         cmbBenefits?.let {
             _cmbBenOutput.value = it
         }
+        _noPclsBenOutput.value = noPclsBenefits
     }
 
     fun showToastMessage(message: Int) {

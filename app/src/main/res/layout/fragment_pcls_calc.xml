@@ -119,7 +119,7 @@
       android:layout_marginTop="16dp"
       android:orientation="horizontal"
       android:visibility="gone"
-      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintBottom_toTopOf="@+id/no_pcls_linear_layout"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/or_text"
@@ -300,6 +300,93 @@
 
       </LinearLayout>
 
+
+    </LinearLayout>
+
+    <LinearLayout
+      android:id="@+id/no_pcls_linear_layout"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:orientation="horizontal"
+      android:visibility="gone"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/db_only_linear_layout"
+      tools:visibility="visible">
+
+      <LinearLayout
+        android:id="@+id/np_ll_column_1"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+          android:id="@+id/np_full_pension_text"
+          android:layout_width="wrap_content"
+          android:layout_height="0dp"
+          android:layout_weight="1"
+          android:gravity="center_vertical"
+          android:text="@string/full_pension" />
+
+        <TextView
+          android:id="@+id/np_dc_text"
+          android:layout_width="wrap_content"
+          android:layout_height="0dp"
+          android:layout_weight="1"
+          android:gravity="center_vertical"
+          android:text="@string/money_purchase_fund"
+          android:visibility="gone" />
+
+        <TextView
+          android:id="@+id/np_lta_text"
+          android:layout_width="wrap_content"
+          android:layout_height="0dp"
+          android:layout_weight="1"
+          android:gravity="center_vertical"
+          android:text="@string/lta_used" />
+
+      </LinearLayout>
+
+      <LinearLayout
+        android:id="@+id/np_ll_column_2"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+          android:id="@+id/np_full_pension_result_text"
+          android:layout_width="wrap_content"
+          android:layout_height="0dp"
+          android:layout_gravity="end"
+          android:layout_weight="1"
+          android:gravity="center_vertical"
+          android:text="@{String.valueOf(pclsCalcViewModel.noPclsBenOutput.residualPension)}"
+          tools:text="£2,000.00" />
+
+        <TextView
+          android:id="@+id/np_dc_result_text"
+          android:layout_width="wrap_content"
+          android:layout_height="0dp"
+          android:layout_gravity="end"
+          android:layout_weight="1"
+          android:gravity="center_vertical"
+          android:text="@{String.valueOf(pclsCalcViewModel.noPclsBenOutput.dcFund)}"
+          android:visibility="gone"
+          tools:text="£15,000.00" />
+
+        <TextView
+          android:id="@+id/np_lta_result_text"
+          android:layout_width="wrap_content"
+          android:layout_height="0dp"
+          android:layout_gravity="end"
+          android:layout_weight="1"
+          android:gravity="center_vertical"
+          android:text="@{String.valueOf(pclsCalcViewModel.noPclsBenOutput.lta)}"
+          tools:text="10.00%" />
+
+      </LinearLayout>
 
     </LinearLayout>
 

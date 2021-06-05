@@ -76,6 +76,17 @@ class CalcUtilsTest {
     }
 
     @Test
+    fun ltaCalculation_noPcls_returnsExpectedLta() {
+        // Create variables to enter into calculation
+        val fullPension = 1000.00
+
+        // Call the function
+        val result = ltaCalculation(0.0, fullPension, 0.00)
+
+        assertThat(result, `is`("1.86%"))
+    }
+
+    @Test
     fun daysCalculation_sameDateUsed_returnsOne() {
         // Create variables to enter into calculation
         val startDate = "31/05/2021"

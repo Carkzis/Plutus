@@ -1,17 +1,12 @@
 package com.example.android.plutus
 
-import timber.log.Timber
 import java.math.BigDecimal
 import java.math.RoundingMode
-import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.time.LocalDate
-import java.time.Period
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 import java.util.*
-import java.util.stream.LongStream
-import java.util.stream.Stream
 
 // Note: this is not actually a constant, but for initial purposes it is.
 // In the future it can be changed to match the current UK amount.
@@ -50,18 +45,18 @@ internal fun cmbPclsCalculation(
         BigDecimal.ZERO))
 }
 
-internal fun ltaCalculation(pcls: Double, residual: Double, dcFund: Double = 0.0) : String {
+internal fun ltaCalculation(pcls: Double, pension: Double, dcFund: Double = 0.0) : String {
 
     // Calculate the individual LTAs, rounding them (down) to 2 dp
     val pclsLta =
         BigDecimal((pcls / STANDARD_LTA) * 100).setScale(2, RoundingMode.DOWN)
-    val residualLta =
-        BigDecimal((residual * 20) / STANDARD_LTA * 100).setScale(2, RoundingMode.DOWN)
+    val pensionLta =
+        BigDecimal((pension * 20) / STANDARD_LTA * 100).setScale(2, RoundingMode.DOWN)
     val dcFundLta =
         BigDecimal((dcFund / STANDARD_LTA) * 100).setScale(2, RoundingMode.DOWN)
 
     // Then add them together to give the total LTA (and convert back to a string).
-    return "${(pclsLta + residualLta + dcFundLta)}%"
+    return "${(pclsLta + pensionLta + dcFundLta)}%"
 
 }
 
