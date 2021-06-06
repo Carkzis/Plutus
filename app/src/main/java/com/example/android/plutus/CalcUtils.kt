@@ -1,5 +1,6 @@
 package com.example.android.plutus
 
+import dagger.hilt.EntryPoint
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.NumberFormat
@@ -7,6 +8,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 import java.util.*
+import javax.inject.Inject
 
 // Note: this is not actually a constant, but for initial purposes it is.
 // In the future it can be changed to match the current UK amount.
@@ -64,22 +66,6 @@ internal fun formatAsCurrency(value: BigDecimal) : String {
     val currencyFormat: NumberFormat = NumberFormat.getCurrencyInstance(Locale.UK)
     return currencyFormat.format(value.toDouble())
 }
-
-data class Benefits(
-    val pcls: String = "£0.00",
-    val residualPension: String = "£0.00",
-    val lta: String = "£0.00",
-    val dcFund: String = "£0.00")
-
-data class DateCalcResults(
-    val years: Long,
-    val months: Long,
-    val weeks: Long,
-    val days: Long,
-    val yearsMonths: Pair<Long, Long>,
-    val yearsDays: Pair<Long, Long>,
-    val taxYears: Long,
-    val sixthAprils: Long)
 
 internal fun daysCalculation(startDate: String, endDate: String) : Long {
     val startDateObj = LocalDate.parse(startDate,

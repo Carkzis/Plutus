@@ -2,15 +2,12 @@ package com.example.android.plutus
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class CpiInflationViewModel : ViewModel() {
+@HiltViewModel
+class CpiInflationViewModel @Inject constructor() : ViewModel() {
 
     // Currently unused.
 
-}
-
-@Suppress("UNCHECKED_CAST")
-class CpiInflationViewModelFactory : ViewModelProvider.NewInstanceFactory() {
-    override fun <T : ViewModel> create(modelClass: Class<T>) =
-        (CpiInflationViewModel() as T)
 }

@@ -8,13 +8,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.example.android.plutus.databinding.FragmentCpiInflationBinding
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
 
 @AndroidEntryPoint
 class CpiInflationFragment : Fragment() {
 
-    private val viewModel by viewModels<CpiInflationViewModel> {
-        CpiInflationViewModelFactory()
-    }
+    private val viewModel by viewModels<CpiInflationViewModel>()
 
     private lateinit var viewDataBinding: FragmentCpiInflationBinding
 

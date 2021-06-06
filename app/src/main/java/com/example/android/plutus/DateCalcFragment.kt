@@ -17,9 +17,7 @@ import java.util.*
 @AndroidEntryPoint
 class DateCalcFragment : Fragment() {
 
-    private val viewModel by viewModels<DateCalcViewModel> {
-        DateCalcViewModelFactory()
-    }
+    private val viewModel by viewModels<DateCalcViewModel>()
 
     private lateinit var viewDataBinding: FragmentDateCalcBinding
     private lateinit var defaultResults: DateCalcResults

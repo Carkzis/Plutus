@@ -14,9 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class InflationMainFragment : Fragment() {
 
-    private val viewModel by viewModels<InflationMainViewModel> {
-        InflationMainViewModelFactory()
-    }
+    private val viewModel by viewModels<InflationMainViewModel>()
 
     private lateinit var viewDataBinding: FragmentInflationMainBinding
 

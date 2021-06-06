@@ -4,8 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class DateCalcViewModel : ViewModel() {
+@HiltViewModel
+class DateCalcViewModel @Inject constructor() : ViewModel() {
 
     var startDateInfo = MutableLiveData("")
     var endDateInfo = MutableLiveData("")
@@ -68,10 +71,4 @@ class DateCalcViewModel : ViewModel() {
         _toastText.value = Event(message)
     }
 
-}
-
-@Suppress("UNCHECKED_CAST")
-class DateCalcViewModelFactory : ViewModelProvider.NewInstanceFactory() {
-    override fun <T : ViewModel> create(modelClass: Class<T>) =
-        (DateCalcViewModel() as T)
 }

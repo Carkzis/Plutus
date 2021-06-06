@@ -3,10 +3,12 @@ package com.example.android.plutus
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import dagger.hilt.android.lifecycle.HiltViewModel
 import timber.log.Timber
+import javax.inject.Inject
 
-class PclsCalcViewModel : ViewModel() {
+@HiltViewModel
+class PclsCalcViewModel @Inject constructor() : ViewModel() {
 
     // LiveData variable inputs.
     var fullPension = MutableLiveData<String>()
@@ -73,7 +75,8 @@ class PclsCalcViewModel : ViewModel() {
         // Only enter arguments into the combined
         // pcls function if there is any money purchase fund value, otherwise get the default
         // using £0.00 figures
-        cmbBenefits = if (dc > 0.0) cmbPclsCalculation(fp, cf, dc) else Benefits("£0.00")
+        cmbBenefits = if (dc > 0.0) cmbPclsCalculation(fp, cf, dc) else Benefits("£0.00",
+            "£0.00", "£0.00", "£0.00")
 
         updateWithResults(dbBenefits, cmbBenefits, noPclsBenefits)
     }
@@ -92,10 +95,4 @@ class PclsCalcViewModel : ViewModel() {
         _toastText.value = Event(message)
     }
 
-}
-
-@Suppress("UNCHECKED_CAST")
-class PclsCalcViewModelFactory : ViewModelProvider.NewInstanceFactory() {
-    override fun <T : ViewModel> create(modelClass: Class<T>) =
-        (PclsCalcViewModel() as T)
 }

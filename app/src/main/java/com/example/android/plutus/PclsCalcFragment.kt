@@ -12,9 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class PclsCalcFragment : Fragment() {
 
-    private val viewModel by viewModels<PclsCalcViewModel> {
-        PclsCalcViewModelFactory()
-    }
+    private val viewModel by viewModels<PclsCalcViewModel>()
 
     private lateinit var viewDataBinding: FragmentPclsCalcBinding
 
