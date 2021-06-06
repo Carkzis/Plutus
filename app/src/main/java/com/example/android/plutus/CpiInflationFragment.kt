@@ -27,6 +27,23 @@ class CpiInflationFragment : Fragment() {
                     viewmodel = viewModel
                 }
 
+
+        val adapter = CpiAdapter()
+        viewDataBinding.cpiRecyclerview.adapter = adapter
+
+        // TODO: Remove, this is a placeholder for the RecyclerView.
+        adapter.data = listOf(CpiInflationRate(), CpiInflationRate(),
+            CpiInflationRate(), CpiInflationRate(), CpiInflationRate(), CpiInflationRate(),
+            CpiInflationRate(), CpiInflationRate(), CpiInflationRate(), CpiInflationRate(),
+            CpiInflationRate(), CpiInflationRate(), CpiInflationRate(), CpiInflationRate(),
+            CpiInflationRate(), CpiInflationRate(), CpiInflationRate(), CpiInflationRate(),
+            CpiInflationRate(), CpiInflationRate(), CpiInflationRate(), CpiInflationRate(),
+            CpiInflationRate(), CpiInflationRate(), CpiInflationRate(), CpiInflationRate(),
+            CpiInflationRate(), CpiInflationRate(), CpiInflationRate(), CpiInflationRate(),
+            CpiInflationRate(), CpiInflationRate(), CpiInflationRate(), CpiInflationRate(),
+            CpiInflationRate(), CpiInflationRate(), CpiInflationRate(), CpiInflationRate(),
+            CpiInflationRate(), CpiInflationRate(), CpiInflationRate(), CpiInflationRate())
+
         return viewDataBinding.root
     }
 
