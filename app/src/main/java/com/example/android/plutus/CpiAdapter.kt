@@ -2,22 +2,15 @@ package com.example.android.plutus
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ListAdapter
+import androidx.recyclerview.widget.ListAdapter
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
-class CpiAdapter : RecyclerView.Adapter<ViewHolder>() {
-
-    var data = listOf<InflationRate>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
-
-    override fun getItemCount(): Int = data.size
+class CpiAdapter : ListAdapter<InflationRate, ViewHolder>(CpiDiffCallBack()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = data[position]
+        val item = getItem(position)
         holder.textView.text = item.value
     }
 
@@ -28,8 +21,16 @@ class CpiAdapter : RecyclerView.Adapter<ViewHolder>() {
         return ViewHolder(view)
     }
 
-
-
 }
 
 class ViewHolder constructor(val textView: TextView): RecyclerView.ViewHolder(textView)
+
+class CpiDiffCallBack : DiffUtil.ItemCallback<InflationRate>() {
+    override fun areItemsTheSame(oldItem: InflationRate, newItem: InflationRate): Boolean {
+        return oldItem.updateDate == newItem.updateDate
+    }
+
+    override fun areContentsTheSame(oldItem: InflationRate, newItem: InflationRate): Boolean {
+        return oldItem == newItem
+    }
+}

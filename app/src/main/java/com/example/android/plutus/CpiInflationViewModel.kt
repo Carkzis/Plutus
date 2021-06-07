@@ -3,6 +3,7 @@ package com.example.android.plutus
 import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.lang.Exception
 import javax.inject.Inject
 
@@ -31,9 +32,11 @@ class CpiInflationViewModel @Inject constructor() : ViewModel() {
                 // TODO: Need to ensure only the "months" section is returned.
                 _inflationRates.value = InflationRateApi.retrofitService.getCpiInformation().asDomainModel()
                 _loadingStatus.value = CpiApiLoadingStatus.DONE
+                Timber.e("It worked!")
             } catch (e: Exception) {
                 _loadingStatus.value = CpiApiLoadingStatus.ERROR
                 _inflationRates.value = listOf()
+                Timber.e("Failure!")
             }
         }
     }

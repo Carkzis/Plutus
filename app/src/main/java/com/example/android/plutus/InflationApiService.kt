@@ -8,10 +8,10 @@ import retrofit2.http.GET
 interface InflationApiService {
 
     // TODO: May need adjusting, as the required information is nested.
-    @GET("d7g7/mm23/data.json")
+    @GET("d7g7/mm23/data")
     suspend fun getCpiInformation() : NetworkInflationRateContainer
 
-    @GET("czbh/mm23/data.json")
+    @GET("czbh/mm23/data")
     suspend fun getRpiInformation() : NetworkInflationRateContainer
 
 }

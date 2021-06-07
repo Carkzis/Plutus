@@ -2,11 +2,7 @@ package com.example.android.plutus
 
 import android.net.Network
 import com.squareup.moshi.JsonClass
-
-@JsonClass(generateAdapter = true)
-data class InflationNetworkResponse(
-    val months: List<NetworkInflationRate>
-)
+import timber.log.Timber
 
 @JsonClass(generateAdapter = true)
 data class NetworkInflationRate(
@@ -20,10 +16,11 @@ data class NetworkInflationRate(
     val updateDate: String)
 
 @JsonClass(generateAdapter = true)
-data class NetworkInflationRateContainer(val inflationRates: InflationNetworkResponse)
+data class NetworkInflationRateContainer(val months: List<NetworkInflationRate>)
 
 fun NetworkInflationRateContainer.asDomainModel(): List<InflationRate> {
-    return inflationRates.months.map {
+
+    return months.map {
         InflationRate(
             date = it.date,
             value = it.value,
