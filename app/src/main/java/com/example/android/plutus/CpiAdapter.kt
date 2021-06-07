@@ -6,24 +6,28 @@ import androidx.recyclerview.widget.ListAdapter
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.android.plutus.databinding.InflationRateItemBinding
 
-class CpiAdapter : ListAdapter<InflationRate, ViewHolder>(CpiDiffCallBack()) {
+class CpiAdapter : ListAdapter<InflationRate, CpiAdapter.CpiViewHolder>(CpiDiffCallBack()) {
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = getItem(position)
-        holder.textView.text = item.value
+    override fun onBindViewHolder(holder: CpiViewHolder, position: Int) {
+        val cpiItem = getItem(position)
+        holder.bind(cpiItem)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val view = layoutInflater.inflate(
-            R.layout.inflation_rate_item, parent, false) as TextView
-        return ViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CpiViewHolder {
+        return CpiViewHolder(InflationRateItemBinding.inflate(LayoutInflater.from(parent.context)))
+    }
+
+    class CpiViewHolder constructor(private var binding: InflationRateItemBinding):
+        RecyclerView.ViewHolder(binding.root) {
+            fun bind(inflationRate: InflationRate) {
+                binding.cpiRate = inflationRate
+                binding.executePendingBindings()
+            }
     }
 
 }
-
-class ViewHolder constructor(val textView: TextView): RecyclerView.ViewHolder(textView)
 
 class CpiDiffCallBack : DiffUtil.ItemCallback<InflationRate>() {
     override fun areItemsTheSame(oldItem: InflationRate, newItem: InflationRate): Boolean {

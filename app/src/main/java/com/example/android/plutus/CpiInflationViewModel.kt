@@ -29,10 +29,9 @@ class CpiInflationViewModel @Inject constructor() : ViewModel() {
         viewModelScope.launch {
             _loadingStatus.value = CpiApiLoadingStatus.LOADING
             try {
-                // TODO: Need to ensure only the "months" section is returned.
                 _inflationRates.value = InflationRateApi.retrofitService.getCpiInformation().asDomainModel()
                 _loadingStatus.value = CpiApiLoadingStatus.DONE
-                Timber.e("It worked!")
+                Timber.e("It worked! ${_inflationRates.value}")
             } catch (e: Exception) {
                 _loadingStatus.value = CpiApiLoadingStatus.ERROR
                 _inflationRates.value = listOf()
