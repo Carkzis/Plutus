@@ -105,4 +105,15 @@ dependencies {
     // Make Hilt generate code in the androidTest folder
     kaptAndroidTest "com.google.dagger:hilt-android-compiler:$hilt_version"
 
+    // Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
+    implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
+
+    // Moshi converter
+    def moshi_version = "1.12.0"
+    implementation "com.squareup.moshi:moshi:$moshi_version"
+    implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshi_version"
+
 }

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class CpiAdapter : RecyclerView.Adapter<ViewHolder>() {
 
-    var data = listOf<CpiInflationRate>()
+    var data = listOf<InflationRate>()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -18,7 +18,7 @@ class CpiAdapter : RecyclerView.Adapter<ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = data[position]
-        holder.textView.text = item.placeholder
+        holder.textView.text = item.value
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

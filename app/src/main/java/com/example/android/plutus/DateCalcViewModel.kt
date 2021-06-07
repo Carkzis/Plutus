@@ -13,7 +13,7 @@ class DateCalcViewModel @Inject constructor() : ViewModel() {
     var startDateInfo = MutableLiveData("")
     var endDateInfo = MutableLiveData("")
 
-    private val _dateCalcResults = MutableLiveData<DateCalcResults>()
+    private var _dateCalcResults = MutableLiveData<DateCalcResults>()
     val dateCalcResults: LiveData<DateCalcResults>
         get() = _dateCalcResults
 
