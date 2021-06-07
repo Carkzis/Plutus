@@ -16,15 +16,25 @@ class CpiAdapter : ListAdapter<InflationRate, CpiAdapter.CpiViewHolder>(CpiDiffC
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CpiViewHolder {
-        return CpiViewHolder(InflationRateItemBinding.inflate(LayoutInflater.from(parent.context)))
+        return CpiViewHolder.from(parent)
     }
 
     class CpiViewHolder constructor(private var binding: InflationRateItemBinding):
         RecyclerView.ViewHolder(binding.root) {
-            fun bind(inflationRate: InflationRate) {
-                binding.cpiRate = inflationRate
-                binding.executePendingBindings()
+        fun bind(inflationRate: InflationRate) {
+            binding.cpiRate = inflationRate
+            binding.executePendingBindings()
+        }
+
+        companion object {
+            fun from(parent: ViewGroup): CpiViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = InflationRateItemBinding.inflate(
+                    layoutInflater, parent, false
+                )
+                return CpiViewHolder(binding)
             }
+        }
     }
 
 }

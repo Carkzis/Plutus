@@ -20,7 +20,6 @@ class CpiInflationViewModel @Inject constructor() : ViewModel() {
     val inflationRates: LiveData<List<InflationRate>>
         get() = _inflationRates
 
-    // Currently unused.
     init {
         getCpiInflationRates()
     }
@@ -31,7 +30,7 @@ class CpiInflationViewModel @Inject constructor() : ViewModel() {
             try {
                 _inflationRates.value = InflationRateApi.retrofitService.getCpiInformation().asDomainModel()
                 _loadingStatus.value = CpiApiLoadingStatus.DONE
-                Timber.e("It worked! ${_inflationRates.value}")
+                Timber.e("It worked!")
             } catch (e: Exception) {
                 _loadingStatus.value = CpiApiLoadingStatus.ERROR
                 _inflationRates.value = listOf()
