@@ -31,6 +31,31 @@
       app:layout_constraintTop_toTopOf="parent"
       app:listData="@{viewmodel.inflationRates}" />
 
+    <ProgressBar
+      android:id="@+id/cpi_progress_bar"
+      style="?android:attr/progressBarStyle"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="@+id/cpi_recyclerview"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/cpi_recyclerview"
+      app:loadingStatus="@{viewmodel.loadingStatus}" />
+
+    <TextView
+      android:id="@+id/cpi_error"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:text="@string/cpi_error"
+      android:textSize="16sp"
+      android:visibility="gone"
+      app:errorMessage="@{viewmodel.loadingStatus}"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
   </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

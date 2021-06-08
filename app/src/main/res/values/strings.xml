@@ -54,4 +54,5 @@
   <string name="rpi_contents_text">Retail Price Index (RPI)</string>
   <string name="cpi_contents_text">Consumer Price Index (CPI)</string>
   <string name="gmp_contents_text">GMP Fixed Revaluation Rates</string>
+  <string name="cpi_error">There was an error retrieving CPI data...</string>
 </resources>

@@ -32,8 +32,12 @@ class CpiInflationViewModel @Inject constructor() : ViewModel() {
                 _loadingStatus.value = CpiApiLoadingStatus.DONE
                 Timber.e("It worked!")
             } catch (e: Exception) {
-                _loadingStatus.value = CpiApiLoadingStatus.ERROR
-                _inflationRates.value = listOf()
+                if (_inflationRates.value.isNullOrEmpty()) {
+                    _loadingStatus.value = CpiApiLoadingStatus.ERROR
+                    _inflationRates.value = listOf()
+                } else {
+                    _loadingStatus.value = CpiApiLoadingStatus.DONE
+                }
                 Timber.e("Failure!")
             }
         }

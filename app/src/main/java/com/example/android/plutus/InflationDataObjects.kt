@@ -23,7 +23,7 @@ fun NetworkInflationRateContainer.asDomainModel(): List<InflationRate> {
     return months.map {
         InflationRate(
             date = it.date,
-            value = it.value,
+            value = it.value + "%",
             label = it.label,
             year = it.year,
             month = it.month,
