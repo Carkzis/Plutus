@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/contentsFragment"
-        android:name="com.example.android.plutus.ContentsFragment"
+        android:name="com.example.android.plutus.contents.ContentsFragment"
         android:label="ContentsFragment"
         tools:layout="@layout/fragment_contents">
         <action
@@ -23,17 +23,17 @@
     </fragment>
     <fragment
         android:id="@+id/pclsFragment"
-        android:name="com.example.android.plutus.PclsCalcFragment"
+        android:name="com.example.android.plutus.pcls.PclsCalcFragment"
         android:label="PclsFragment"
         tools:layout="@layout/fragment_pcls_calc"/>
     <fragment
         android:id="@+id/dateCalcFragment"
-        android:name="com.example.android.plutus.DateCalcFragment"
+        android:name="com.example.android.plutus.dates.DateCalcFragment"
         android:label="fragment_date_calc"
         tools:layout="@layout/fragment_date_calc" />
     <fragment
       android:id="@+id/inflationMainFragment"
-      android:name="com.example.android.plutus.InflationMainFragment"
+      android:name="com.example.android.plutus.inflation.InflationMainFragment"
       android:label="fragment_inflation_main"
       tools:layout="@layout/fragment_inflation_main" >
         <action
@@ -42,7 +42,7 @@
     </fragment>
     <fragment
       android:id="@+id/cpiInflationFragment"
-      android:name="com.example.android.plutus.CpiInflationFragment"
+      android:name="com.example.android.plutus.inflation.CpiInflationFragment"
       android:label="fragment_cpi_inflation"
       tools:layout="@layout/fragment_cpi_inflation" />
 </navigation>

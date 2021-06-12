@@ -1,16 +1,16 @@
 package com.example.android.plutus
 
 import androidx.lifecycle.*
+import com.example.android.plutus.data.InflationRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import javax.inject.Inject
 
-enum class CpiApiLoadingStatus { LOADING, ERROR, DONE }
-
 @HiltViewModel
 class CpiInflationViewModel @Inject constructor(
-    private val repository: InflationRepository) : ViewModel() {
+    private val repository: InflationRepository
+) : ViewModel() {
 
     val inflationRates = repository.cpiInflationRates
 
@@ -48,3 +48,5 @@ class CpiInflationViewModel @Inject constructor(
     }
 
 }
+
+enum class CpiApiLoadingStatus { LOADING, ERROR, DONE }

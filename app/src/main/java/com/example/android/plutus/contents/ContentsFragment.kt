@@ -1,4 +1,4 @@
-package com.example.android.plutus
+package com.example.android.plutus.contents
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -39,13 +39,13 @@ class ContentsFragment : Fragment() {
 
     private fun setupNavigation() {
         viewDataBinding.pclsButton.setOnClickListener {
-            findNavController().navigate(com.example.android.plutus.ContentsFragmentDirections.actionContentsFragmentToPclsCalcFragment())
+            findNavController().navigate(ContentsFragmentDirections.actionContentsFragmentToPclsCalcFragment())
         }
         viewDataBinding.dateButton.setOnClickListener {
-            findNavController().navigate(com.example.android.plutus.ContentsFragmentDirections.actionContentsFragmentToDateCalcFragment())
+            findNavController().navigate(ContentsFragmentDirections.actionContentsFragmentToDateCalcFragment())
         }
         viewDataBinding.inflationButton.setOnClickListener {
-            findNavController().navigate(com.example.android.plutus.ContentsFragmentDirections.actionContentsFragmentToInflationMainFragment())
+            findNavController().navigate(ContentsFragmentDirections.actionContentsFragmentToInflationMainFragment())
         }
     }
 

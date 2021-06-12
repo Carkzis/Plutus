@@ -1,7 +1,8 @@
-package com.example.android.plutus
+package com.example.android.plutus.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.android.plutus.InflationRate
 
 @Entity
 data class DatabaseCpiInflationRate(

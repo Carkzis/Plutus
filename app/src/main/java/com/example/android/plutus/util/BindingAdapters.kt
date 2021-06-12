@@ -1,10 +1,13 @@
-package com.example.android.plutus
+package com.example.android.plutus.util
 
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.android.plutus.inflation.CpiAdapter
+import com.example.android.plutus.CpiApiLoadingStatus
+import com.example.android.plutus.InflationRate
 
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<InflationRate>?) {
@@ -27,7 +30,7 @@ fun bindErrorMessage(errorMessage: TextView, loadingStatus: CpiApiLoadingStatus)
     when (loadingStatus) {
         CpiApiLoadingStatus.LOADING, CpiApiLoadingStatus.DONE ->
             errorMessage.visibility = View.GONE
-        CpiApiLoadingStatus.ERROR, CpiApiLoadingStatus.DONE ->
+        CpiApiLoadingStatus.ERROR ->
             errorMessage.visibility = View.VISIBLE
     }
 }

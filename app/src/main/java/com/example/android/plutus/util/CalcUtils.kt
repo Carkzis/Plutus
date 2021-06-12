@@ -1,6 +1,5 @@
-package com.example.android.plutus
+package com.example.android.plutus.util
 
-import dagger.hilt.EntryPoint
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.NumberFormat
@@ -8,7 +7,6 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 import java.util.*
-import javax.inject.Inject
 
 // Note: this is not actually a constant, but for initial purposes it is.
 // In the future it can be changed to match the current UK amount.
@@ -43,8 +41,10 @@ internal fun cmbPclsCalculation(
         .setScale(2, RoundingMode.HALF_EVEN)
     val lta = ltaCalculation(pcls.toDouble(), residual.toDouble(), 0.0)
 
-    return Benefits(formatAsCurrency(pcls), formatAsCurrency(residual), lta, formatAsCurrency(
-        BigDecimal.ZERO))
+    return Benefits(
+        formatAsCurrency(pcls), formatAsCurrency(residual), lta, formatAsCurrency(
+        BigDecimal.ZERO)
+    )
 }
 
 internal fun ltaCalculation(pcls: Double, pension: Double, dcFund: Double = 0.0) : String {

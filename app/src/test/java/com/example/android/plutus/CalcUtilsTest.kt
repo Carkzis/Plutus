@@ -2,6 +2,7 @@
 
 package com.example.android.plutus
 
+import com.example.android.plutus.util.*
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.number.OrderingComparison.lessThan
 import org.junit.Test

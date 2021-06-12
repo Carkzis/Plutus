@@ -1,9 +1,8 @@
-package com.example.android.plutus
+package com.example.android.plutus.data
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.android.plutus.data.DatabaseCpiInflationRate
 
 @Database(entities = [DatabaseCpiInflationRate::class], version = 2, exportSchema = false)
 abstract class PlutusDatabase : RoomDatabase() {

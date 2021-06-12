@@ -1,6 +1,7 @@
 package com.example.android.plutus
 
 import android.net.Network
+import com.example.android.plutus.data.DatabaseCpiInflationRate
 import com.squareup.moshi.JsonClass
 import timber.log.Timber
 

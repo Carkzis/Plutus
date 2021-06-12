@@ -1,4 +1,4 @@
-package com.example.android.plutus
+package com.example.android.plutus.di
 
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint

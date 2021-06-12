@@ -1,11 +1,11 @@
-package com.example.android.plutus
+package com.example.android.plutus.inflation
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.android.plutus.InflationRate
 import com.example.android.plutus.databinding.InflationRateItemBinding
 
 class CpiAdapter : ListAdapter<InflationRate, CpiAdapter.CpiViewHolder>(CpiDiffCallBack()) {

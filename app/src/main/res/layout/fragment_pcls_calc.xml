@@ -12,13 +12,13 @@
 
     <variable
       name="pclsCalcViewModel"
-      type="com.example.android.plutus.PclsCalcViewModel" />
+      type="com.example.android.plutus.pcls.PclsCalcViewModel" />
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PclsCalcFragment">
+    tools:context=".pcls.PclsCalcFragment">
 
     <LinearLayout
       android:id="@+id/pcls_input_linear_layout"

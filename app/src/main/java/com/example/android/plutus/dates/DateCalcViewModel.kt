@@ -1,9 +1,18 @@
-package com.example.android.plutus
+package com.example.android.plutus.dates
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import com.example.android.plutus.*
+import com.example.android.plutus.util.daysCalculation
+import com.example.android.plutus.util.monthsCalculation
+import com.example.android.plutus.util.sixthAprilsPassCalculation
+import com.example.android.plutus.util.taxYearsCalculation
+import com.example.android.plutus.util.DateCalcResults
+import com.example.android.plutus.util.weeksCalculation
+import com.example.android.plutus.util.yearsAndDaysCalculation
+import com.example.android.plutus.util.yearsAndMonthsCalculation
+import com.example.android.plutus.util.yearsCalculation
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -58,7 +67,8 @@ class DateCalcViewModel @Inject constructor() : ViewModel() {
             yearsAndMonthsCalculation(startDateInfo.value!!, endDateInfo.value!!),
             yearsAndDaysCalculation(startDateInfo.value!!, endDateInfo.value!!),
             taxYearsCalculation(startDateInfo.value!!, endDateInfo.value!!),
-            sixthAprilsPassCalculation(startDateInfo.value!!, endDateInfo.value!!))
+            sixthAprilsPassCalculation(startDateInfo.value!!, endDateInfo.value!!)
+        )
         _dateCalcResults.value = results
     }
 

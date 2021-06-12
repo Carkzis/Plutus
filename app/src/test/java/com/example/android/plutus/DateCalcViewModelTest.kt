@@ -1,7 +1,8 @@
 package com.example.android.plutus
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import org.hamcrest.CoreMatchers
+import com.example.android.plutus.dates.DateCalcViewModel
+import com.example.android.plutus.util.DateCalcResults
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.not
 import org.junit.Assert.*

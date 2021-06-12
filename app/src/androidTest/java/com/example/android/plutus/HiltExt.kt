@@ -24,7 +24,7 @@ import androidx.core.util.Preconditions
 import androidx.fragment.app.Fragment
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
-import com.example.android.plutus.HiltTestActivity
+import com.example.android.plutus.di.HiltTestActivity
 import com.example.android.plutus.R
 
 /**

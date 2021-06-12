@@ -1,7 +1,6 @@
 package com.example.android.plutus
 
 import android.os.Bundle
-import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.test.core.app.ActivityScenario
@@ -11,8 +10,9 @@ import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.filters.MediumTest
 import com.example.android.architecture.blueprints.todoapp.launchFragmentInHiltContainer
+import com.example.android.plutus.contents.ContentsFragment
+import com.example.android.plutus.inflation.InflationMainFragment
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi

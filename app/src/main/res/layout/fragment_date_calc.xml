@@ -11,13 +11,13 @@
 
     <variable
       name="dateCalcViewModel"
-      type="com.example.android.plutus.DateCalcViewModel" />
+      type="com.example.android.plutus.dates.DateCalcViewModel" />
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DateCalcFragment">
+    tools:context=".dates.DateCalcFragment">
 
     <LinearLayout
       android:id="@+id/date_title_linear_layout"

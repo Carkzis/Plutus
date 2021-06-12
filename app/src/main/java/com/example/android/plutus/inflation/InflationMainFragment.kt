@@ -1,4 +1,4 @@
-package com.example.android.plutus
+package com.example.android.plutus.inflation
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.android.plutus.databinding.FragmentInflationMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,8 +39,7 @@ class InflationMainFragment : Fragment() {
 
     private fun setupNavigation() {
         viewDataBinding.cpiButton.setOnClickListener {
-            findNavController().navigate(InflationMainFragmentDirections
-                .actionInflationMainFragmentToCpiInflationFragment())
+            findNavController().navigate(InflationMainFragmentDirections.actionInflationMainFragmentToCpiInflationFragment())
         }
     }
 

@@ -1,4 +1,4 @@
-package com.example.android.plutus
+package com.example.android.plutus.util
 
 data class Benefits (
     val pcls: String,

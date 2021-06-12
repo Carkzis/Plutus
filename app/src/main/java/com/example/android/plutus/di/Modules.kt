@@ -1,8 +1,10 @@
 package com.example.android.plutus
 
 import android.content.Context
-import androidx.room.Database
 import androidx.room.Room
+import com.example.android.plutus.data.CpiDao
+import com.example.android.plutus.data.InflationRepository
+import com.example.android.plutus.data.PlutusDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,11 +1,8 @@
-package com.example.android.plutus
+package com.example.android.plutus.util
 
 import android.content.Context
 import android.view.View
 import android.widget.Toast
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
 
 /**

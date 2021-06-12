@@ -1,8 +1,14 @@
-package com.example.android.plutus
+package com.example.android.plutus.pcls
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.android.plutus.*
+import com.example.android.plutus.util.cmbPclsCalculation
+import com.example.android.plutus.util.dbPclsCalculation
+import com.example.android.plutus.util.formatAsCurrency
+import com.example.android.plutus.util.ltaCalculation
+import com.example.android.plutus.util.Benefits
 import dagger.hilt.android.lifecycle.HiltViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -71,7 +77,8 @@ class PclsCalcViewModel @Inject constructor() : ViewModel() {
             "£0.00",
             formatAsCurrency(fp.toBigDecimal()),
             ltaCalculation(0.0, fp, dc),
-            formatAsCurrency(dc.toBigDecimal()))
+            formatAsCurrency(dc.toBigDecimal())
+        )
         // Only enter arguments into the combined
         // pcls function if there is any money purchase fund value, otherwise get the default
         // using £0.00 figures
@@ -82,7 +89,8 @@ class PclsCalcViewModel @Inject constructor() : ViewModel() {
     }
 
     private fun updateWithResults(dbBenefits: Benefits, cmbBenefits: Benefits?,
-                                  noPclsBenefits: Benefits) {
+                                  noPclsBenefits: Benefits
+    ) {
         Timber.w("Checking that update with results works!")
         _dbBenOutput.value = dbBenefits
         cmbBenefits?.let {
