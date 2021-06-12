@@ -3,7 +3,6 @@ package com.example.android.plutus
 import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import java.lang.Exception
 import javax.inject.Inject
 
@@ -19,9 +18,9 @@ class CpiInflationViewModel @Inject constructor(
     val loadingStatus: LiveData<CpiApiLoadingStatus>
         get() = _loadingStatus
 
-//    private var _inflationRates = MutableLiveData<List<InflationRate>>()
-//    val inflationRates: LiveData<List<InflationRate>>
-//        get() = _inflationRates
+    private var _toastText = MutableLiveData<Event<Int>>()
+    val toastText: LiveData<Event<Int>>
+        get() = _toastText
 
     init {
         refreshCpiInflationRates()
@@ -33,16 +32,19 @@ class CpiInflationViewModel @Inject constructor(
             try {
                 repository.refreshInflation()
                 _loadingStatus.value = CpiApiLoadingStatus.DONE
-                Timber.e("It worked!")
             } catch (e: Exception) {
                 if (inflationRates.value.isNullOrEmpty()) {
                     _loadingStatus.value = CpiApiLoadingStatus.ERROR
                 } else {
                     _loadingStatus.value = CpiApiLoadingStatus.DONE
                 }
-                Timber.e("Failure!")
+                R.string.connection_error.showToastMessage()
             }
         }
+    }
+
+    private fun Int.showToastMessage() {
+        _toastText.value = Event(this)
     }
 
 }

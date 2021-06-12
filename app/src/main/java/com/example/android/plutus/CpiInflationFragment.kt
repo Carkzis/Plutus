@@ -34,4 +34,17 @@ class CpiInflationFragment : Fragment() {
         return viewDataBinding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setUpToast()
+    }
+
+    private fun setUpToast() {
+        viewModel.toastText.observe(viewLifecycleOwner, {
+            it.getContextIfNotHandled()?.let { message ->
+                context?.showToast(requireContext().getString(message))
+            }
+        })
+    }
+
 }
