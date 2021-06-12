@@ -33,3 +33,20 @@ fun NetworkInflationRateContainer.asDomainModel(): List<InflationRate> {
         )
     }
 }
+
+fun NetworkInflationRateContainer.asDatabaseModel(): List<DatabaseCpiInflationRate> {
+
+    return months.map {
+        DatabaseCpiInflationRate(
+            date = it.date,
+            value = it.value,
+            label = it.label,
+            year = it.year,
+            month = it.month,
+            quarter = it.quarter,
+            sourceDataset = it.sourceDataset,
+            updateDate = it.updateDate,
+            pk = it.year + it.month
+        )
+    }
+}

@@ -10,31 +10,33 @@ import javax.inject.Inject
 enum class CpiApiLoadingStatus { LOADING, ERROR, DONE }
 
 @HiltViewModel
-class CpiInflationViewModel @Inject constructor() : ViewModel() {
+class CpiInflationViewModel @Inject constructor(
+    private val repository: InflationRepository) : ViewModel() {
+
+    val inflationRates = repository.cpiInflationRates
 
     private var _loadingStatus = MutableLiveData<CpiApiLoadingStatus>()
     val loadingStatus: LiveData<CpiApiLoadingStatus>
         get() = _loadingStatus
 
-    private var _inflationRates = MutableLiveData<List<InflationRate>>()
-    val inflationRates: LiveData<List<InflationRate>>
-        get() = _inflationRates
+//    private var _inflationRates = MutableLiveData<List<InflationRate>>()
+//    val inflationRates: LiveData<List<InflationRate>>
+//        get() = _inflationRates
 
     init {
-        getCpiInflationRates()
+        refreshCpiInflationRates()
     }
 
-    private fun getCpiInflationRates() {
+    private fun refreshCpiInflationRates() {
         viewModelScope.launch {
             _loadingStatus.value = CpiApiLoadingStatus.LOADING
             try {
-                _inflationRates.value = InflationRateApi.retrofitService.getCpiInformation().asDomainModel()
+                repository.refreshInflation()
                 _loadingStatus.value = CpiApiLoadingStatus.DONE
                 Timber.e("It worked!")
             } catch (e: Exception) {
-                if (_inflationRates.value.isNullOrEmpty()) {
+                if (inflationRates.value.isNullOrEmpty()) {
                     _loadingStatus.value = CpiApiLoadingStatus.ERROR
-                    _inflationRates.value = listOf()
                 } else {
                     _loadingStatus.value = CpiApiLoadingStatus.DONE
                 }

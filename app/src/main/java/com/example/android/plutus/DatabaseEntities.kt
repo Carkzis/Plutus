@@ -12,8 +12,9 @@ data class DatabaseCpiInflationRate(
     val month: String,
     val quarter: String,
     val sourceDataset: String,
+    val updateDate: String,
     @PrimaryKey
-    val updateDate: String)
+    val pk: String)
 
 fun List<DatabaseCpiInflationRate>.asDomainModel(): List<InflationRate> {
     return map {
