@@ -9,12 +9,12 @@ import com.example.android.plutus.asDomainModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class InflationRepository(private val database: PlutusDatabase) {
+class InflationRepository(private val database: PlutusDatabase) : Repository {
 
     /**
      * This will obtain data from the ONS website and insert it into the database.
      */
-    suspend fun refreshInflation() {
+    override suspend fun refreshInflation() {
         withContext(Dispatchers.IO) {
             val inflationList = InflationRateApi.retrofitService.getCpiInformation()
             database.cpiDao().insertAll(inflationList.asDatabaseModel())
