@@ -1,6 +1,6 @@
 @file:Suppress("DEPRECATION")
 
-package com.example.android.plutus
+package com.example.android.plutus.util
 
 import com.example.android.plutus.util.*
 import org.hamcrest.CoreMatchers.`is`

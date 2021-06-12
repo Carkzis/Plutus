@@ -1,4 +1,4 @@
-package com.example.android.plutus
+package com.example.android.plutus.pcls
 
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
@@ -7,7 +7,10 @@ import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.filters.MediumTest
+import com.example.android.plutus.DataBindingIdlingResource
+import com.example.android.plutus.MainActivity
+import com.example.android.plutus.R
+import com.example.android.plutus.monitorActivity
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
