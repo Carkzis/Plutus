@@ -4,15 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.example.android.plutus.InflationRate
-import com.example.android.plutus.NetworkInflationRate
-import com.example.android.plutus.util.Benefits
-import org.junit.Assert.*
 import javax.inject.Inject
 
 class FakeRepository @Inject constructor() : Repository {
 
     // This is so that the mapping is tested for.
-    private var cpiNetworkRates = MutableLiveData<List<DatabaseCpiInflationRate>>().apply {
+    var cpiDatabaseRates = MutableLiveData<List<DatabaseCpiInflationRate>>().apply {
         value = MutableList(5) {
             DatabaseCpiInflationRate("01/01/1900",
                 "5.0",
@@ -27,11 +24,11 @@ class FakeRepository @Inject constructor() : Repository {
         }
     }
 
-    var cpiInflationRates: LiveData<List<InflationRate>> = Transformations.map(cpiNetworkRates) {
+    var cpiInflationRates: LiveData<List<InflationRate>> = Transformations.map(cpiDatabaseRates) {
         it.asDomainModel()
     }
 
-    private var returnError = true
+    private var returnError = false
 
     fun setReturnError(isError: Boolean) {
         returnError = isError
@@ -44,22 +41,23 @@ class FakeRepository @Inject constructor() : Repository {
         }
 
         // Return a new list of fake values, one size larger to imitate returning updated data.
-        cpiNetworkRates.value = MutableList(6) {
+        cpiDatabaseRates.value = MutableList(6) {
             DatabaseCpiInflationRate(
-                "01/01/1900",
-                "5.0",
+                "12/12/2000",
+                "1.0",
                 "N/A",
-                "1900",
-                "January",
-                "Q1",
+                "2000",
+                "December",
+                "Q4",
                 "N/A",
                 "N/A",
                 "1"
             )
         }
 
-        cpiInflationRates = Transformations.map(cpiNetworkRates) {
+        cpiInflationRates = Transformations.map(cpiDatabaseRates) {
             it.asDomainModel()
         }
+
     }
 }
