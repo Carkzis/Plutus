@@ -12,7 +12,9 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.android.architecture.blueprints.todoapp.launchFragmentInHiltContainer
 import com.example.android.plutus.contents.ContentsFragment
+import com.example.android.plutus.contents.ContentsFragmentDirections
 import com.example.android.plutus.inflation.InflationMainFragment
+import com.example.android.plutus.inflation.InflationMainFragmentDirections
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi

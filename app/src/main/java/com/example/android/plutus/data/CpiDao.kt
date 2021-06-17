@@ -13,6 +13,9 @@ interface CpiDao {
     @Query("SELECT * FROM DatabaseCpiInflationRate")
     fun getCpiRates(): LiveData<List<DatabaseCpiInflationRate>>
 
+    @Query("SELECT * FROM DatabaseCpiInflationRate")
+    fun getCpiRateList(): List<DatabaseCpiInflationRate>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(cpiRates: List<DatabaseCpiInflationRate>)
 
