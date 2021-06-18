@@ -5,6 +5,7 @@ import com.example.android.plutus.getOrAwaitValue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.CoreMatchers.`is`
+import org.hamcrest.CoreMatchers.instanceOf
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
 import org.junit.Rule
@@ -55,6 +56,16 @@ class InflationRepositoryTest {
 
         // The size should not change, as the error should prevent the refresh function progressing.
         assertThat(inflationRepository.cpiDatabaseRates.getOrAwaitValue().size, `is`(6))
+    }
+
+    @Test
+    fun getRates_convertDatabaseCpiInflationRateToInflationRate_returnsLiveDataListOfSameSize()
+            = runBlockingTest {
+        assertThat(inflationRepository.cpiDatabaseRates.getOrAwaitValue().size, `is`(5))
+
+        val convertedLiveData = inflationRepository.getRates("cpi")
+
+        assertThat(convertedLiveData.getOrAwaitValue().size, `is`(5))
     }
 
 }

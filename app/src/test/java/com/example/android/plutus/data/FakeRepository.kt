@@ -24,9 +24,15 @@ class FakeRepository @Inject constructor() : Repository {
         }
     }
 
-    var cpiInflationRates: LiveData<List<InflationRate>> = Transformations.map(cpiDatabaseRates) {
-        it.asDomainModel()
+    override fun getRates(inflationType: String): LiveData<List<InflationRate>> {
+        // For now, we will just return the cpi rates.
+        return Transformations.map(cpiDatabaseRates) {
+            it.asDomainModel()
+        }
     }
+
+    // We will set this variable here, for when we are testing the repository.
+    var cpiInflationRates = getRates("cpi")
 
     private var returnError = false
 
@@ -55,9 +61,7 @@ class FakeRepository @Inject constructor() : Repository {
             )
         }
 
-        cpiInflationRates = Transformations.map(cpiDatabaseRates) {
-            it.asDomainModel()
-        }
+        cpiInflationRates = getRates("cpi")
 
     }
 }

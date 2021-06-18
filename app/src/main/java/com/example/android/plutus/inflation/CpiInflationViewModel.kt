@@ -2,17 +2,20 @@ package com.example.android.plutus
 
 import androidx.lifecycle.*
 import com.example.android.plutus.data.InflationRepository
+import com.example.android.plutus.data.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
 class CpiInflationViewModel @Inject constructor(
-    private val repository: InflationRepository
+    private val repository: Repository
 ) : ViewModel() {
 
-    val inflationRates = repository.cpiInflationRates
+    val inflationRates = repository.getRates("cpi")
 
     private var _loadingStatus = MutableLiveData<CpiApiLoadingStatus>()
     val loadingStatus: LiveData<CpiApiLoadingStatus>
@@ -29,6 +32,8 @@ class CpiInflationViewModel @Inject constructor(
     private fun refreshCpiInflationRates() {
         viewModelScope.launch {
             _loadingStatus.value = CpiApiLoadingStatus.LOADING
+            // A delay is added to show the loading sign for longer.
+            delay(1000)
             try {
                 repository.refreshInflation()
                 _loadingStatus.value = CpiApiLoadingStatus.DONE

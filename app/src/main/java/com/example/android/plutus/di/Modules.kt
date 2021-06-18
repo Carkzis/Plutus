@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.example.android.plutus.data.CpiDao
 import com.example.android.plutus.data.InflationRepository
 import com.example.android.plutus.data.PlutusDatabase
+import com.example.android.plutus.data.Repository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -33,7 +34,7 @@ object DatabaseModule {
 
     @Singleton
     @Provides
-    fun provideRepository(database: PlutusDatabase): InflationRepository {
+    fun provideRepository(database: PlutusDatabase): Repository {
         return InflationRepository(database)
     }
 }

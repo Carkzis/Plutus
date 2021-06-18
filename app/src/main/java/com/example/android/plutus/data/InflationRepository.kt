@@ -8,6 +8,7 @@ import com.example.android.plutus.asDatabaseModel
 import com.example.android.plutus.asDomainModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.lang.Exception
 
 class InflationRepository(private val database: PlutusDatabase) : Repository {
 
@@ -21,9 +22,15 @@ class InflationRepository(private val database: PlutusDatabase) : Repository {
         }
     }
 
-    val cpiInflationRates: LiveData<List<InflationRate>> = Transformations.map(database
-        .cpiDao().getCpiRates()) {
-        it.asDomainModel()
+    override fun getRates(inflationType: String): LiveData<List<InflationRate>> {
+        // Different queries are run depending on which information we require.
+        val inflationQuery = when(inflationType) {
+            "cpi" -> database.cpiDao().getCpiRates()
+            else -> throw Exception("Inflation type not recognised!")
+        }
+        return Transformations.map(inflationQuery) {
+            it.asDomainModel()
+        }
     }
 
 }
