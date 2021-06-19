@@ -1,5 +1,6 @@
 package com.example.android.plutus.data
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -11,7 +12,8 @@ class FakeRepository @Inject constructor() : Repository {
     // This is so that the mapping is tested for.
     var cpiDatabaseRates = MutableLiveData<List<DatabaseCpiInflationRate>>().apply {
         value = MutableList(5) {
-            DatabaseCpiInflationRate("01/01/1900",
+            DatabaseCpiInflationRate(
+                "01/01/1900",
                 "5.0",
                 "N/A",
                 "1900",
@@ -35,9 +37,25 @@ class FakeRepository @Inject constructor() : Repository {
     var cpiInflationRates = getRates("cpi")
 
     private var returnError = false
+    private var returnEmpty = false
+    private var returnNull = false
 
     fun setReturnError(isError: Boolean) {
         returnError = isError
+    }
+
+    fun setEmpty(isEmpty: Boolean) {
+        returnEmpty = isEmpty
+    }
+
+    fun setNull(isNull: Boolean) {
+        returnNull = isNull
+    }
+
+    fun setRatesToEmpty() {
+        cpiDatabaseRates = MutableLiveData<List<DatabaseCpiInflationRate>>().apply {
+            value = mutableListOf()
+        }
     }
 
     override suspend fun refreshInflation() {
@@ -46,19 +64,27 @@ class FakeRepository @Inject constructor() : Repository {
             return
         }
 
-        // Return a new list of fake values, one size larger to imitate returning updated data.
-        cpiDatabaseRates.value = MutableList(6) {
-            DatabaseCpiInflationRate(
-                "12/12/2000",
-                "1.0",
-                "N/A",
-                "2000",
-                "December",
-                "Q4",
-                "N/A",
-                "N/A",
-                "1"
-            )
+        if (!returnEmpty && !returnNull) {
+            // Return a new list of fake values, one size larger to imitate returning updated data.
+            cpiDatabaseRates.value = MutableList(6) {
+                DatabaseCpiInflationRate(
+                    "12/12/2000",
+                    "1.0",
+                    "N/A",
+                    "2000",
+                    "December",
+                    "Q4",
+                    "N/A",
+                    "N/A",
+                    "1"
+                )
+            }
+        } else if (returnEmpty) {
+            // Set the results to empty.
+            setRatesToEmpty()
+        } else if (returnNull) {
+            // Set the results to null (error).
+            throw Exception("Time to go...")
         }
 
         cpiInflationRates = getRates("cpi")

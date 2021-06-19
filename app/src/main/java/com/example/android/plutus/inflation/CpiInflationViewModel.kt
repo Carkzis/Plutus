@@ -15,7 +15,7 @@ class CpiInflationViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 
-    val inflationRates = repository.getRates("cpi")
+    var inflationRates = repository.getRates("cpi")
 
     private var _loadingStatus = MutableLiveData<CpiApiLoadingStatus>()
     val loadingStatus: LiveData<CpiApiLoadingStatus>
@@ -29,11 +29,13 @@ class CpiInflationViewModel @Inject constructor(
         refreshCpiInflationRates()
     }
 
+    fun testRefresh() {
+        refreshCpiInflationRates()
+    }
+
     private fun refreshCpiInflationRates() {
         viewModelScope.launch {
             _loadingStatus.value = CpiApiLoadingStatus.LOADING
-            // A delay is added to show the loading sign for longer.
-            delay(1000)
             try {
                 repository.refreshInflation()
                 _loadingStatus.value = CpiApiLoadingStatus.DONE
