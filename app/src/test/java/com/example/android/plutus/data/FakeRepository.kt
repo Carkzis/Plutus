@@ -33,29 +33,32 @@ class FakeRepository @Inject constructor() : Repository {
         }
     }
 
+    // These appear very similar, but return error is just for the repository tests and it
+    // less catastrophic, and the return null is for the ViewModel tests as it involves a
+    // try catch statement
     private var returnError = false
-    private var returnException = false
     private var returnNull = false
 
     fun setReturnError(isError: Boolean) {
         returnError = isError
     }
 
-    fun setException(isException: Boolean) {
-        returnException = isException
-    }
-
     fun setNull(isNull: Boolean) {
         returnNull = isNull
     }
 
+    fun setToEmpty() {
+        cpiDatabaseRates = MutableLiveData<List<DatabaseCpiInflationRate>>().apply {
+            value = mutableListOf()
+        }
+    }
+
     override suspend fun refreshInflation() {
+
         // Test if there is an error.
         if (returnError) {
             return
-        }
-
-        if (!returnException && !returnNull) {
+        } else if (!returnNull) {
             // Return a new list of fake values, one size larger to imitate returning updated data.
             cpiDatabaseRates.value = MutableList(6) {
                 DatabaseCpiInflationRate(

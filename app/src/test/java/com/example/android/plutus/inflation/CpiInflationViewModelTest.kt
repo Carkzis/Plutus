@@ -3,11 +3,9 @@ package com.example.android.plutus.inflation
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.android.plutus.CpiInflationViewModel
-import com.example.android.plutus.InflationRate
+import com.example.android.plutus.*
 import com.example.android.plutus.data.DatabaseCpiInflationRate
 import com.example.android.plutus.data.FakeRepository
-import com.example.android.plutus.getOrAwaitValue
 import kotlinx.coroutines.*
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
@@ -48,7 +46,7 @@ class CpiInflationViewModelTest() {
     }
 
     @Test
-    fun refreshCpiInflationRates_noErrorNonEmpty_getSuccess() = runBlocking {
+    fun refreshCpiInflationRates_noErrorNonEmpty_getSuccess() {
 
         cpiInflationViewModel.testRefresh()
         // Make sure we then get six items are emitting.
@@ -56,22 +54,48 @@ class CpiInflationViewModelTest() {
 
         // Check that the status is now done.
         assertThat(cpiInflationViewModel.loadingStatus.getOrAwaitValue().name, `is`("DONE"))
+
     }
 
     @Test
-    fun refreshCpiInflationRates_errorAndNullResults_getLoadingStatusIsError() = runBlocking {
+    fun refreshCpiInflationRates_errorAndNullResults_getLoadingStatusIsError() {
 
         inflationRepository.setNull(true)
-        cpiInflationViewModel.testRefresh()
+        inflationRepository.setToEmpty()
         // This will set this to the value of the repository.
         cpiInflationViewModel.inflationRates = inflationRepository.getRates("cpi")
 
-        // Check that the status is now done.
-        assertThat(cpiInflationViewModel.loadingStatus.getOrAwaitValue().name, `is`("ERROR"))
+        cpiInflationViewModel.inflationRates.observeForTesting {
 
-        assertThat(cpiInflationViewModel.toastText.getOrAwaitValue(),
-            `is`(not("null"))
-        )
+            cpiInflationViewModel.testRefresh()
+
+            assertThat(cpiInflationViewModel.loadingStatus.getOrAwaitValue().name, `is`("ERROR"))
+
+            // This checks that a Toast was displayed
+            assertThat(cpiInflationViewModel.toastText.getOrAwaitValue(),
+                `is`(not("null"))
+            )
+        }
+    }
+
+    @Test
+    fun refreshCpiInflationRates_errorButCacheNotEmpty_getLoadingStatusIsHas() {
+
+        inflationRepository.setNull(true)
+        // This will set this to the value of the repository.
+        cpiInflationViewModel.inflationRates = inflationRepository.getRates("cpi")
+
+        cpiInflationViewModel.inflationRates.observeForTesting {
+
+            cpiInflationViewModel.testRefresh()
+
+            assertThat(cpiInflationViewModel.loadingStatus.getOrAwaitValue().name, `is`("DONE"))
+
+            // This checks that a Toast was displayed
+            assertThat(cpiInflationViewModel.toastText.getOrAwaitValue(),
+                `is`(not("null"))
+            )
+        }
     }
 
 }
