@@ -30,7 +30,7 @@ class InflationRepositoryTest {
     fun refreshInflation_error_dataNotRefreshed() = runBlockingTest {
         // The initial size should be 5
 
-        assertThat(inflationRepository.cpiDatabaseRates.getOrAwaitValue().size, `is`(0))
+        assertThat(inflationRepository.cpiDatabaseRates.getOrAwaitValue().size, `is`(5))
 
         // Replicate an error occuring
         inflationRepository.setReturnError(true)
@@ -39,14 +39,14 @@ class InflationRepositoryTest {
         inflationRepository.refreshInflation()
 
         // The size should not change, as the error should prevent the refresh function progressing.
-        assertThat(inflationRepository.cpiDatabaseRates.getOrAwaitValue().size, `is`(0))
+        assertThat(inflationRepository.cpiDatabaseRates.getOrAwaitValue().size, `is`(5))
     }
 
     @Test
     fun refreshInflation_noError_refreshedWithNewData() = runBlockingTest {
         // The initial size should be 5
 
-        assertThat(inflationRepository.cpiDatabaseRates.getOrAwaitValue().size, `is`(0))
+        assertThat(inflationRepository.cpiDatabaseRates.getOrAwaitValue().size, `is`(5))
 
         // Replicate an error occuring
         inflationRepository.setReturnError(false)

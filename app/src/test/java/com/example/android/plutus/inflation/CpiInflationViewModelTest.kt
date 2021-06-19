@@ -50,6 +50,7 @@ class CpiInflationViewModelTest() {
     @Test
     fun refreshCpiInflationRates_noErrorNonEmpty_getSuccess() = runBlocking {
 
+        cpiInflationViewModel.testRefresh()
         // Make sure we then get six items are emitting.
         assertThat(cpiInflationViewModel.inflationRates.getOrAwaitValue().size, `is`(6))
 
@@ -58,10 +59,11 @@ class CpiInflationViewModelTest() {
     }
 
     @Test
-    fun refreshCpiInflationRates_emptyResults_getLoadingStatusIsDone() = runBlocking {
+    fun refreshCpiInflationRates_errorAndNullResults_getLoadingStatusIsError() = runBlocking {
 
         inflationRepository.setNull(true)
         cpiInflationViewModel.testRefresh()
+        // This will set this to the value of the repository.
         cpiInflationViewModel.inflationRates = inflationRepository.getRates("cpi")
 
         // Check that the status is now done.

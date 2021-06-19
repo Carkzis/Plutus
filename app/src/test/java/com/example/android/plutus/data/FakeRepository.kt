@@ -33,29 +33,20 @@ class FakeRepository @Inject constructor() : Repository {
         }
     }
 
-    // We will set this variable here, for when we are testing the repository.
-    var cpiInflationRates = getRates("cpi")
-
     private var returnError = false
-    private var returnEmpty = false
+    private var returnException = false
     private var returnNull = false
 
     fun setReturnError(isError: Boolean) {
         returnError = isError
     }
 
-    fun setEmpty(isEmpty: Boolean) {
-        returnEmpty = isEmpty
+    fun setException(isException: Boolean) {
+        returnException = isException
     }
 
     fun setNull(isNull: Boolean) {
         returnNull = isNull
-    }
-
-    fun setRatesToEmpty() {
-        cpiDatabaseRates = MutableLiveData<List<DatabaseCpiInflationRate>>().apply {
-            value = mutableListOf()
-        }
     }
 
     override suspend fun refreshInflation() {
@@ -64,7 +55,7 @@ class FakeRepository @Inject constructor() : Repository {
             return
         }
 
-        if (!returnEmpty && !returnNull) {
+        if (!returnException && !returnNull) {
             // Return a new list of fake values, one size larger to imitate returning updated data.
             cpiDatabaseRates.value = MutableList(6) {
                 DatabaseCpiInflationRate(
@@ -79,15 +70,8 @@ class FakeRepository @Inject constructor() : Repository {
                     "1"
                 )
             }
-        } else if (returnEmpty) {
-            // Set the results to empty.
-            setRatesToEmpty()
         } else if (returnNull) {
-            // Set the results to null (error).
-            throw Exception("Time to go...")
+            throw Exception("NPE!!!")
         }
-
-        cpiInflationRates = getRates("cpi")
-
     }
 }
