@@ -5,32 +5,40 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.android.inflation.plutus.RpiAdapter
 import com.example.android.plutus.inflation.CpiAdapter
-import com.example.android.plutus.CpiApiLoadingStatus
-import com.example.android.plutus.InflationRate
+import com.example.android.plutus.inflation.ApiLoadingStatus
+import com.example.android.plutus.CpiInflationRate
+import com.example.android.plutus.RpiInflationRate
 
 @BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<InflationRate>?) {
+fun bindRecyclerView(recyclerView: RecyclerView, data: List<CpiInflationRate>?) {
     val adapter = recyclerView.adapter as CpiAdapter
     adapter.submitList(data)
 }
 
+@BindingAdapter("rpiListData")
+fun bindRpiRecyclerView(recyclerView: RecyclerView, data: List<RpiInflationRate>?) {
+    val adapter = recyclerView.adapter as RpiAdapter
+    adapter.submitList(data)
+}
+
 @BindingAdapter("loadingStatus")
-fun bindLoadingStatus(statusProgressBar: ProgressBar, loadingStatus: CpiApiLoadingStatus) {
+fun bindLoadingStatus(statusProgressBar: ProgressBar, loadingStatus: ApiLoadingStatus) {
     when (loadingStatus) {
-        CpiApiLoadingStatus.LOADING ->
+        ApiLoadingStatus.LOADING ->
             statusProgressBar.visibility = View.VISIBLE
-        CpiApiLoadingStatus.ERROR, CpiApiLoadingStatus.DONE ->
+        ApiLoadingStatus.ERROR, ApiLoadingStatus.DONE ->
             statusProgressBar.visibility = View.GONE
     }
 }
 
 @BindingAdapter("errorMessage")
-fun bindErrorMessage(errorMessage: TextView, loadingStatus: CpiApiLoadingStatus) {
+fun bindErrorMessage(errorMessage: TextView, loadingStatus: ApiLoadingStatus) {
     when (loadingStatus) {
-        CpiApiLoadingStatus.LOADING, CpiApiLoadingStatus.DONE ->
+        ApiLoadingStatus.LOADING, ApiLoadingStatus.DONE ->
             errorMessage.visibility = View.GONE
-        CpiApiLoadingStatus.ERROR ->
+        ApiLoadingStatus.ERROR ->
             errorMessage.visibility = View.VISIBLE
     }
 }

@@ -5,12 +5,12 @@
 
   <data>
 
-  <import type="android.view.View" />
+    <import type="android.view.View" />
 
-  <import type="androidx.core.content.ContextCompat" />
-  <variable
-    name="cpiRate"
-    type="com.example.android.plutus.InflationRate" />
+    <import type="androidx.core.content.ContextCompat" />
+    <variable
+      name="rpiRate"
+      type="com.example.android.plutus.RpiInflationRate" />
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,11 +18,11 @@
     android:layout_height="wrap_content">
 
     <TextView
-      android:id="@+id/textView3"
+      android:id="@+id/rpi_year"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:padding="16dp"
-      android:text="@{cpiRate.year}"
+      android:text="@{rpiRate.year}"
       android:textSize="24sp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
@@ -30,26 +30,26 @@
       tools:text="2021" />
 
     <TextView
-      android:id="@+id/textView"
+      android:id="@+id/rpi_month"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:gravity="center"
       android:padding="16dp"
-      android:text="@{cpiRate.month}"
+      android:text="@{rpiRate.month}"
       android:textSize="24sp"
       app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toStartOf="@+id/textView2"
+      app:layout_constraintEnd_toStartOf="@+id/rpi_value"
       app:layout_constraintHorizontal_bias="0.5"
-      app:layout_constraintStart_toEndOf="@+id/textView3"
+      app:layout_constraintStart_toEndOf="@+id/rpi_year"
       app:layout_constraintTop_toTopOf="parent"
       tools:text="January" />
 
     <TextView
-      android:id="@+id/textView2"
+      android:id="@+id/rpi_value"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:padding="16dp"
-      android:text="@{cpiRate.value}"
+      android:text="@{rpiRate.value}"
       android:textSize="24sp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"

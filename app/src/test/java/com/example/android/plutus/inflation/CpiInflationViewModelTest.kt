@@ -1,15 +1,11 @@
 package com.example.android.plutus.inflation
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.example.android.plutus.*
-import com.example.android.plutus.data.DatabaseCpiInflationRate
 import com.example.android.plutus.data.FakeRepository
 import kotlinx.coroutines.*
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.setMain
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.not
@@ -63,7 +59,7 @@ class CpiInflationViewModelTest() {
         inflationRepository.setNull(true)
         inflationRepository.setToEmpty()
         // This will set this to the value of the repository.
-        cpiInflationViewModel.inflationRates = inflationRepository.getRates("cpi")
+        cpiInflationViewModel.inflationRates = inflationRepository.getCpiRates("cpi")
 
         cpiInflationViewModel.inflationRates.observeForTesting {
 
@@ -83,7 +79,7 @@ class CpiInflationViewModelTest() {
 
         inflationRepository.setNull(true)
         // This will set this to the value of the repository.
-        cpiInflationViewModel.inflationRates = inflationRepository.getRates("cpi")
+        cpiInflationViewModel.inflationRates = inflationRepository.getCpiRates("cpi")
 
         cpiInflationViewModel.inflationRates.observeForTesting {
 

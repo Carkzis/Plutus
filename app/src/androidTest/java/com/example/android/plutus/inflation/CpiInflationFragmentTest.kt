@@ -6,22 +6,22 @@ import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
 import com.example.android.plutus.DataBindingIdlingResource
 import com.example.android.plutus.MainActivity
 import com.example.android.plutus.R
 import com.example.android.plutus.data.Repository
 import com.example.android.plutus.monitorActivity
 import com.schibsted.spain.barista.assertion.BaristaVisibilityAssertions.assertNotDisplayed
-import com.schibsted.spain.barista.assertion.BaristaVisibilityAssertions.assertNotExist
 import com.schibsted.spain.barista.interaction.BaristaSleepInteractions.sleep
 import com.schibsted.spain.barista.rule.cleardata.ClearDatabaseRule
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
-import org.hamcrest.CoreMatchers.not
-import org.junit.*
+import org.junit.After
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
 import org.junit.runner.RunWith
 import javax.inject.Inject
 

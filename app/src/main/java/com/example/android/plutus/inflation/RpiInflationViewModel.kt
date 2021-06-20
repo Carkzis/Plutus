@@ -1,6 +1,11 @@
-package com.example.android.plutus
+package com.example.android.plutus.inflation
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.android.plutus.Event
+import com.example.android.plutus.R
 import com.example.android.plutus.data.Repository
 import com.example.android.plutus.inflation.ApiLoadingStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -9,11 +14,11 @@ import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
-class CpiInflationViewModel @Inject constructor(
+class RpiInflationViewModel @Inject constructor(
     private val repository: Repository
-) : ViewModel() {
+    ) : ViewModel() {
 
-    var inflationRates = repository.getCpiRates("cpi")
+    var inflationRates = repository.getRpiRates()
 
     private var _loadingStatus = MutableLiveData<ApiLoadingStatus>()
     val loadingStatus: LiveData<ApiLoadingStatus>
@@ -24,19 +29,14 @@ class CpiInflationViewModel @Inject constructor(
         get() = _toastText
 
     init {
-        refreshCpiInflationRates()
+        refreshRpiInflationRates()
     }
 
-    // TODO: Remove when no further testing required.
-    fun testRefresh() {
-        refreshCpiInflationRates()
-    }
-
-    private fun refreshCpiInflationRates() {
+    private fun refreshRpiInflationRates() {
         viewModelScope.launch {
             _loadingStatus.value = ApiLoadingStatus.LOADING
             try {
-                repository.refreshCpiInflation()
+                repository.refreshRpiInflation()
                 _loadingStatus.value = ApiLoadingStatus.DONE
             } catch (e: Exception) {
                 if (inflationRates.value.isNullOrEmpty()) {
@@ -54,4 +54,3 @@ class CpiInflationViewModel @Inject constructor(
     }
 
 }
-

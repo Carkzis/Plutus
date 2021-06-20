@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.android.plutus.InflationRate
-import com.example.android.plutus.databinding.InflationRateItemBinding
+import com.example.android.plutus.CpiInflationRate
+import com.example.android.plutus.databinding.CpiInflationRateItemBinding
 
-class CpiAdapter : ListAdapter<InflationRate, CpiAdapter.CpiViewHolder>(CpiDiffCallBack()) {
+class CpiAdapter : ListAdapter<CpiInflationRate, CpiAdapter.CpiViewHolder>(CpiDiffCallBack()) {
 
     override fun onBindViewHolder(holder: CpiViewHolder, position: Int) {
         val cpiItem = getItem(position)
@@ -19,17 +19,17 @@ class CpiAdapter : ListAdapter<InflationRate, CpiAdapter.CpiViewHolder>(CpiDiffC
         return CpiViewHolder.from(parent)
     }
 
-    class CpiViewHolder constructor(private var binding: InflationRateItemBinding):
+    class CpiViewHolder constructor(private var binding: CpiInflationRateItemBinding):
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(inflationRate: InflationRate) {
-            binding.cpiRate = inflationRate
+        fun bind(cpiInflationRate: CpiInflationRate) {
+            binding.cpiRate = cpiInflationRate
             binding.executePendingBindings()
         }
 
         companion object {
             fun from(parent: ViewGroup): CpiViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = InflationRateItemBinding.inflate(
+                val binding = CpiInflationRateItemBinding.inflate(
                     layoutInflater, parent, false
                 )
                 return CpiViewHolder(binding)
@@ -39,12 +39,12 @@ class CpiAdapter : ListAdapter<InflationRate, CpiAdapter.CpiViewHolder>(CpiDiffC
 
 }
 
-class CpiDiffCallBack : DiffUtil.ItemCallback<InflationRate>() {
-    override fun areItemsTheSame(oldItem: InflationRate, newItem: InflationRate): Boolean {
+class CpiDiffCallBack : DiffUtil.ItemCallback<CpiInflationRate>() {
+    override fun areItemsTheSame(oldItem: CpiInflationRate, newItem: CpiInflationRate): Boolean {
         return oldItem.updateDate == newItem.updateDate
     }
 
-    override fun areContentsTheSame(oldItem: InflationRate, newItem: InflationRate): Boolean {
+    override fun areContentsTheSame(oldItem: CpiInflationRate, newItem: CpiInflationRate): Boolean {
         return oldItem == newItem
     }
 }

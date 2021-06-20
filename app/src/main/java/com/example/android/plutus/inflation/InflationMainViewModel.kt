@@ -12,3 +12,5 @@ class InflationMainViewModel @Inject constructor() : ViewModel() {
     // Currently unused.
 
 }
+
+enum class ApiLoadingStatus { LOADING, ERROR, DONE }

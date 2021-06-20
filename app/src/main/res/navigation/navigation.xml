@@ -39,10 +39,18 @@
         <action
           android:id="@+id/action_inflationMainFragment_to_cpiInflationFragment"
           app:destination="@id/cpiInflationFragment" />
+        <action
+          android:id="@+id/action_inflationMainFragment_to_rpiInflationFragment"
+          app:destination="@id/rpiInflationFragment" />
     </fragment>
     <fragment
       android:id="@+id/cpiInflationFragment"
       android:name="com.example.android.plutus.inflation.CpiInflationFragment"
       android:label="fragment_cpi_inflation"
       tools:layout="@layout/fragment_cpi_inflation" />
+    <fragment
+      android:id="@+id/rpiInflationFragment"
+      android:name="com.example.android.plutus.inflation.RpiInflationFragment"
+      android:label="fragment_rpi_inflation"
+      tools:layout="@layout/fragment_rpi_inflation" />
 </navigation>

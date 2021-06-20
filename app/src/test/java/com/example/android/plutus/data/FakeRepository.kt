@@ -1,10 +1,10 @@
 package com.example.android.plutus.data
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import com.example.android.plutus.InflationRate
+import com.example.android.plutus.CpiInflationRate
+import com.example.android.plutus.RpiInflationRate
 import javax.inject.Inject
 
 class FakeRepository @Inject constructor() : Repository {
@@ -26,11 +26,19 @@ class FakeRepository @Inject constructor() : Repository {
         }
     }
 
-    override fun getRates(inflationType: String): LiveData<List<InflationRate>> {
+    override fun getCpiRates(inflationType: String): LiveData<List<CpiInflationRate>> {
         // For now, we will just return the cpi rates.
         return Transformations.map(cpiDatabaseRates) {
-            it.asDomainModel()
+            it.asCpiDomainModel()
         }
+    }
+
+    override suspend fun refreshRpiInflation() {
+        TODO("Not yet implemented")
+    }
+
+    override fun getRpiRates(): LiveData<List<RpiInflationRate>> {
+        TODO("Not yet implemented")
     }
 
     // These appear very similar, but return error is just for the repository tests and it
@@ -53,8 +61,7 @@ class FakeRepository @Inject constructor() : Repository {
         }
     }
 
-    override suspend fun refreshInflation() {
-
+    override suspend fun refreshCpiInflation() {
         // Test if there is an error.
         if (returnError) {
             return

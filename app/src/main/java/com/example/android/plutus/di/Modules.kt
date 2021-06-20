@@ -2,10 +2,7 @@ package com.example.android.plutus
 
 import android.content.Context
 import androidx.room.Room
-import com.example.android.plutus.data.CpiDao
-import com.example.android.plutus.data.InflationRepository
-import com.example.android.plutus.data.PlutusDatabase
-import com.example.android.plutus.data.Repository
+import com.example.android.plutus.data.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,6 +19,11 @@ object DatabaseModule {
         return database.cpiDao()
     }
 
+    @Provides
+    fun provideRpiDao(database: PlutusDatabase): RpiDao {
+        return database.rpiDao()
+    }
+
     @Singleton
     @Provides
     fun provideDatabase(@ApplicationContext context: Context): PlutusDatabase {
@@ -29,7 +31,7 @@ object DatabaseModule {
             context,
             PlutusDatabase::class.java,
             "inflation"
-        ).build()
+        ).fallbackToDestructiveMigration().build()
     }
 
     @Singleton

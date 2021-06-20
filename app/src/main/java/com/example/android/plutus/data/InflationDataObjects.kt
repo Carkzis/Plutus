@@ -2,6 +2,7 @@ package com.example.android.plutus
 
 import android.net.Network
 import com.example.android.plutus.data.DatabaseCpiInflationRate
+import com.example.android.plutus.data.DatabaseRpiInflationRate
 import com.squareup.moshi.JsonClass
 import timber.log.Timber
 
@@ -19,26 +20,27 @@ data class NetworkInflationRate(
 @JsonClass(generateAdapter = true)
 data class NetworkInflationRateContainer(val months: List<NetworkInflationRate>)
 
-fun NetworkInflationRateContainer.asDomainModel(): List<InflationRate> {
+fun NetworkInflationRateContainer.asCpiDatabaseModel(): List<DatabaseCpiInflationRate> {
 
     return months.map {
-        InflationRate(
+        DatabaseCpiInflationRate(
             date = it.date,
-            value = it.value + "%",
+            value = it.value,
             label = it.label,
             year = it.year,
             month = it.month,
             quarter = it.quarter,
             sourceDataset = it.sourceDataset,
-            updateDate = it.updateDate
+            updateDate = it.updateDate,
+            pk = it.year + it.month
         )
     }
 }
 
-fun NetworkInflationRateContainer.asDatabaseModel(): List<DatabaseCpiInflationRate> {
+fun NetworkInflationRateContainer.asRpiDatabaseModel(): List<DatabaseRpiInflationRate> {
 
     return months.map {
-        DatabaseCpiInflationRate(
+        DatabaseRpiInflationRate(
             date = it.date,
             value = it.value,
             label = it.label,
