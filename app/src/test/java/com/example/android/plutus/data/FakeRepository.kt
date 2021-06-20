@@ -3,16 +3,16 @@ package com.example.android.plutus.data
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import com.example.android.plutus.CpiInflationRate
-import com.example.android.plutus.RpiInflationRate
+import com.example.android.plutus.CpiPercentage
+import com.example.android.plutus.RpiPercentage
 import javax.inject.Inject
 
 class FakeRepository @Inject constructor() : Repository {
 
     // This is so that the mapping is tested for.
-    var cpiDatabaseRates = MutableLiveData<List<DatabaseCpiInflationRate>>().apply {
+    var cpiDatabaseRates = MutableLiveData<List<DatabaseCpiPct>>().apply {
         value = MutableList(5) {
-            DatabaseCpiInflationRate(
+            DatabaseCpiPct(
                 "01/01/1900",
                 "5.0",
                 "N/A",
@@ -26,18 +26,18 @@ class FakeRepository @Inject constructor() : Repository {
         }
     }
 
-    override fun getCpiRates(inflationType: String): LiveData<List<CpiInflationRate>> {
+    override fun getCpiPercentages(): LiveData<List<CpiPercentage>> {
         // For now, we will just return the cpi rates.
         return Transformations.map(cpiDatabaseRates) {
             it.asCpiDomainModel()
         }
     }
 
-    override suspend fun refreshRpiInflation() {
+    override suspend fun refreshRpiPercentages() {
         TODO("Not yet implemented")
     }
 
-    override fun getRpiRates(): LiveData<List<RpiInflationRate>> {
+    override fun getRpiPercentages(): LiveData<List<RpiPercentage>> {
         TODO("Not yet implemented")
     }
 
@@ -56,19 +56,19 @@ class FakeRepository @Inject constructor() : Repository {
     }
 
     fun setToEmpty() {
-        cpiDatabaseRates = MutableLiveData<List<DatabaseCpiInflationRate>>().apply {
+        cpiDatabaseRates = MutableLiveData<List<DatabaseCpiPct>>().apply {
             value = mutableListOf()
         }
     }
 
-    override suspend fun refreshCpiInflation() {
+    override suspend fun refreshCpiPercentages() {
         // Test if there is an error.
         if (returnError) {
             return
         } else if (!returnNull) {
             // Return a new list of fake values, one size larger to imitate returning updated data.
             cpiDatabaseRates.value = MutableList(6) {
-                DatabaseCpiInflationRate(
+                DatabaseCpiPct(
                     "12/12/2000",
                     "1.0",
                     "N/A",

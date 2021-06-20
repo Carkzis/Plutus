@@ -8,7 +8,7 @@ import com.example.android.plutus.util.daysCalculation
 import com.example.android.plutus.util.monthsCalculation
 import com.example.android.plutus.util.sixthAprilsPassCalculation
 import com.example.android.plutus.util.taxYearsCalculation
-import com.example.android.plutus.util.DateCalcResults
+import com.example.android.plutus.DateCalcResults
 import com.example.android.plutus.util.weeksCalculation
 import com.example.android.plutus.util.yearsAndDaysCalculation
 import com.example.android.plutus.util.yearsAndMonthsCalculation

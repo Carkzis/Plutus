@@ -17,7 +17,7 @@ import org.junit.runner.RunWith
 
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
-class CpiDaoTest {
+class CpiPctDaoTest {
 
     private lateinit var database: PlutusDatabase
 
@@ -39,7 +39,7 @@ class CpiDaoTest {
     fun insertAllAndGetCpiRates() = runBlockingTest {
         // Insert a task
         val cpiList = MutableList(1) {
-            DatabaseCpiInflationRate(
+            DatabaseCpiPct(
                 "01/01/1900",
                 "5.0",
                 "N/A",
@@ -64,7 +64,7 @@ class CpiDaoTest {
     fun insertAllAddsNewCpiRecord() = runBlockingTest {
         // Insert a task
         val cpiList = MutableList(1) {
-            DatabaseCpiInflationRate(
+            DatabaseCpiPct(
                 "01/01/1900",
                 "5.0",
                 "N/A",
@@ -80,7 +80,7 @@ class CpiDaoTest {
 
         // Insert a task with the same primary key, but a separate value
         val newCpiList = MutableList(1) {
-            DatabaseCpiInflationRate(
+            DatabaseCpiPct(
                 "01/01/1900",
                 "1.0",
                 "N/A",
@@ -105,7 +105,7 @@ class CpiDaoTest {
     fun insertAllOverwritesOnConflict() = runBlockingTest {
         // Insert a task
         val cpiList = MutableList(1) {
-            DatabaseCpiInflationRate(
+            DatabaseCpiPct(
                 "01/01/1900",
                 "5.0",
                 "N/A",
@@ -121,7 +121,7 @@ class CpiDaoTest {
 
         // Insert a task with the same primary key, but a separate value
         val newCpiList = MutableList(1) {
-            DatabaseCpiInflationRate(
+            DatabaseCpiPct(
                 "01/01/1900",
                 "1.0",
                 "N/A",

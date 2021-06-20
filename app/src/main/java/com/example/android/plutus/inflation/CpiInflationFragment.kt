@@ -25,7 +25,7 @@ class CpiInflationFragment : Fragment() {
 
         viewDataBinding =
                 FragmentCpiInflationBinding.inflate(inflater, container, false).apply {
-                    viewmodel = viewModel
+                    cpiInflationViewModel = viewModel
                 }
 
         viewDataBinding.lifecycleOwner = this.viewLifecycleOwner

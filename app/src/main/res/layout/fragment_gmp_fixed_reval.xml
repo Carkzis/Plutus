@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  tools:context=".inflation.GmpFixedRevalFragment">
+
+  <data>
+    <import type="android.view.View" />
+    <import type="androidx.core.content.ContextCompat" />
+    <variable
+      name="gmpFixedRevalViewModel"
+      type="com.example.android.plutus.inflation.GmpFixedRevalViewModel" />
+  </data>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+      android:id="@+id/gmp_title_linear_layout"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_chainStyle="packed"
+      tools:ignore="UseCompoundDrawables">
+
+      <ImageView
+        android:id="@+id/icon_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/plutus_icon"
+        app:srcCompat="@drawable/ic_launcher_foreground"
+        tools:ignore="VectorDrawableCompat"
+        tools:layout_editor_absoluteX="152dp" />
+
+      <TextView
+        android:id="@+id/gmp_fixed_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/gmp_fixed_revaluation_rates"
+        android:textSize="24sp"
+        tools:layout_editor_absoluteX="68dp"
+        tools:layout_editor_absoluteY="147dp" />
+
+    </LinearLayout>
+
+
+    <TableLayout
+      android:id="@+id/gmp_fixed_table_layout"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
+
+      <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:padding="8dp"
+          android:text="@string/start_date"
+          android:textSize="@dimen/normal_text_size"
+          android:gravity="center"
+          android:textStyle="bold" />
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:padding="8dp"
+          android:text="@string/gmp_end_date"
+          android:textSize="@dimen/normal_text_size"
+          android:gravity="center"
+          android:textStyle="bold" />
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:padding="8dp"
+          android:text="@string/fixed_rate"
+          android:textSize="@dimen/normal_text_size"
+          android:gravity="center"
+          android:textStyle="bold" />
+
+      </TableRow>
+
+      <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:padding="8dp"
+          android:text="@{gmpFixedRevalViewModel.gmpRevaluationRates[0].dateBegins}"
+          android:gravity="center"
+          android:textSize="@dimen/normal_text_size" />
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:padding="8dp"
+          android:text="@{gmpFixedRevalViewModel.gmpRevaluationRates[0].dateEnds}"
+          android:gravity="center"
+          android:textSize="@dimen/normal_text_size" />
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:padding="8dp"
+          android:text="@{gmpFixedRevalViewModel.gmpRevaluationRates[0].value}"
+          android:gravity="center"
+          android:textSize="@dimen/normal_text_size" />
+
+      </TableRow>
+
+      <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:padding="8dp"
+          android:text="@{gmpFixedRevalViewModel.gmpRevaluationRates[1].dateBegins}"
+          android:gravity="center"
+          android:textSize="@dimen/normal_text_size" />
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:padding="8dp"
+          android:text="@{gmpFixedRevalViewModel.gmpRevaluationRates[1].dateEnds}"
+          android:gravity="center"
+          android:textSize="@dimen/normal_text_size" />
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:padding="8dp"
+          android:text="@{gmpFixedRevalViewModel.gmpRevaluationRates[1].value}"
+          android:gravity="center"
+          android:textSize="@dimen/normal_text_size" />
+
+      </TableRow>
+
+      <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:padding="8dp"
+          android:text="@{gmpFixedRevalViewModel.gmpRevaluationRates[2].dateBegins}"
+          android:gravity="center"
+          android:textSize="@dimen/normal_text_size" />
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:padding="8dp"
+          android:text="@{gmpFixedRevalViewModel.gmpRevaluationRates[2].dateEnds}"
+          android:gravity="center"
+          android:textSize="@dimen/normal_text_size" />
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:padding="8dp"
+          android:text="@{gmpFixedRevalViewModel.gmpRevaluationRates[2].value}"
+          android:gravity="center"
+          android:textSize="@dimen/normal_text_size" />
+
+      </TableRow>
+
+      <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:padding="8dp"
+          android:text="@{gmpFixedRevalViewModel.gmpRevaluationRates[3].dateBegins}"
+          android:gravity="center"
+          android:textSize="@dimen/normal_text_size" />
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:padding="8dp"
+          android:text="@{gmpFixedRevalViewModel.gmpRevaluationRates[3].dateEnds}"
+          android:gravity="center"
+          android:textSize="@dimen/normal_text_size" />
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:padding="8dp"
+          android:text="@{gmpFixedRevalViewModel.gmpRevaluationRates[3].value}"
+          android:gravity="center"
+          android:textSize="@dimen/normal_text_size" />
+
+      </TableRow>
+
+      <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:padding="8dp"
+          android:text="@{gmpFixedRevalViewModel.gmpRevaluationRates[4].dateBegins}"
+          android:gravity="center"
+          android:textSize="@dimen/normal_text_size" />
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:padding="8dp"
+          android:text="@{gmpFixedRevalViewModel.gmpRevaluationRates[4].dateEnds}"
+          android:gravity="center"
+          android:textSize="@dimen/normal_text_size" />
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:padding="8dp"
+          android:text="@{gmpFixedRevalViewModel.gmpRevaluationRates[4].value}"
+          android:gravity="center"
+          android:textSize="@dimen/normal_text_size" />
+
+      </TableRow>
+
+      <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:padding="8dp"
+          android:text="@{gmpFixedRevalViewModel.gmpRevaluationRates[5].dateBegins}"
+          android:gravity="center"
+          android:textSize="@dimen/normal_text_size" />
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:padding="8dp"
+          android:text="@{gmpFixedRevalViewModel.gmpRevaluationRates[5].dateEnds}"
+          android:gravity="center"
+          android:textSize="@dimen/normal_text_size" />
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:padding="8dp"
+          android:text="@{gmpFixedRevalViewModel.gmpRevaluationRates[5].value}"
+          android:gravity="center"
+          android:textSize="@dimen/normal_text_size" />
+
+      </TableRow>
+
+      <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:padding="8dp"
+          android:text="@{gmpFixedRevalViewModel.gmpRevaluationRates[6].dateBegins}"
+          android:gravity="center"
+          android:textSize="@dimen/normal_text_size" />
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:padding="8dp"
+          android:text="@{gmpFixedRevalViewModel.gmpRevaluationRates[6].dateEnds}"
+          android:gravity="center"
+          android:textSize="@dimen/normal_text_size" />
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:padding="8dp"
+          android:text="@{gmpFixedRevalViewModel.gmpRevaluationRates[6].value}"
+          android:gravity="center"
+          android:textSize="@dimen/normal_text_size" />
+
+      </TableRow>
+
+      <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:padding="8dp"
+          android:text="@{gmpFixedRevalViewModel.gmpRevaluationRates[7].dateBegins}"
+          android:gravity="center"
+          android:textSize="@dimen/normal_text_size" />
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:padding="8dp"
+          android:text="@{gmpFixedRevalViewModel.gmpRevaluationRates[7].dateEnds}"
+          android:gravity="center"
+          android:textSize="@dimen/normal_text_size" />
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:padding="8dp"
+          android:text="@{gmpFixedRevalViewModel.gmpRevaluationRates[7].value}"
+          android:gravity="center"
+          android:textSize="@dimen/normal_text_size" />
+
+      </TableRow>
+
+    </TableLayout>
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

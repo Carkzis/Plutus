@@ -35,7 +35,7 @@ class InflationRepositoryTest {
         inflationRepository.setReturnError(true)
 
         // Call the refresh method
-        inflationRepository.refreshCpiInflation()
+        inflationRepository.refreshCpiPercentages()
 
         // The size should not change, as the error should prevent the refresh function progressing.
         assertThat(inflationRepository.cpiDatabaseRates.getOrAwaitValue().size, `is`(5))
@@ -51,7 +51,7 @@ class InflationRepositoryTest {
         inflationRepository.setReturnError(false)
 
         // Call the refresh method
-        inflationRepository.refreshCpiInflation()
+        inflationRepository.refreshCpiPercentages()
 
         // The size should not change, as the error should prevent the refresh function progressing.
         assertThat(inflationRepository.cpiDatabaseRates.getOrAwaitValue().size, `is`(6))
@@ -62,11 +62,11 @@ class InflationRepositoryTest {
             = runBlockingTest {
 
         // Call the refresh method
-        inflationRepository.refreshCpiInflation()
+        inflationRepository.refreshCpiPercentages()
 
         assertThat(inflationRepository.cpiDatabaseRates.getOrAwaitValue().size, `is`(6))
 
-        val convertedLiveData = inflationRepository.getCpiRates("cpi")
+        val convertedLiveData = inflationRepository.getCpiPercentages()
 
         assertThat(convertedLiveData.getOrAwaitValue().size, `is`(6))
     }

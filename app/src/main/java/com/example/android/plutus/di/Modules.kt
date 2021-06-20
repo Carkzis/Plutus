@@ -15,7 +15,7 @@ import javax.inject.Singleton
 object DatabaseModule {
 
     @Provides
-    fun provideCpiDao(database: PlutusDatabase): CpiDao {
+    fun provideCpiDao(database: PlutusDatabase): CpiPctDao {
         return database.cpiDao()
     }
 

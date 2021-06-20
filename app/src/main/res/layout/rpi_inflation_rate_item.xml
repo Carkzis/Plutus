@@ -10,7 +10,7 @@
     <import type="androidx.core.content.ContextCompat" />
     <variable
       name="rpiRate"
-      type="com.example.android.plutus.RpiInflationRate" />
+      type="com.example.android.plutus.RpiPercentage" />
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout

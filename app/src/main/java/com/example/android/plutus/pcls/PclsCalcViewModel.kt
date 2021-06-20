@@ -8,7 +8,7 @@ import com.example.android.plutus.util.cmbPclsCalculation
 import com.example.android.plutus.util.dbPclsCalculation
 import com.example.android.plutus.util.formatAsCurrency
 import com.example.android.plutus.util.ltaCalculation
-import com.example.android.plutus.util.Benefits
+import com.example.android.plutus.Benefits
 import dagger.hilt.android.lifecycle.HiltViewModel
 import timber.log.Timber
 import javax.inject.Inject

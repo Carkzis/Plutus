@@ -11,7 +11,7 @@
     <import type="androidx.core.content.ContextCompat" />
 
     <variable
-      name="viewmodel"
+      name="cpiInflationViewModel"
       type="com.example.android.plutus.CpiInflationViewModel" />
 
   </data>
@@ -29,7 +29,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:listData="@{viewmodel.inflationRates}" />
+      app:cpiListData="@{cpiInflationViewModel.inflationRates}" />
 
     <ProgressBar
       android:id="@+id/cpi_progress_bar"
@@ -40,7 +40,7 @@
       app:layout_constraintEnd_toEndOf="@+id/cpi_recyclerview"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="@+id/cpi_recyclerview"
-      app:loadingStatus="@{viewmodel.loadingStatus}" />
+      app:loadingStatus="@{cpiInflationViewModel.loadingStatus}" />
 
     <TextView
       android:id="@+id/cpi_error"
@@ -50,7 +50,7 @@
       android:text="@string/cpi_error"
       android:textSize="16sp"
       android:visibility="gone"
-      app:errorMessage="@{viewmodel.loadingStatus}"
+      app:errorMessage="@{cpiInflationViewModel.loadingStatus}"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"

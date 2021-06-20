@@ -1,13 +1,11 @@
 package com.example.android.plutus
 
-import android.net.Network
-import com.example.android.plutus.data.DatabaseCpiInflationRate
-import com.example.android.plutus.data.DatabaseRpiInflationRate
+import com.example.android.plutus.data.DatabaseCpiPct
+import com.example.android.plutus.data.DatabaseRpiPct
 import com.squareup.moshi.JsonClass
-import timber.log.Timber
 
 @JsonClass(generateAdapter = true)
-data class NetworkInflationRate(
+data class NetworkInflationItem(
     val date: String,
     val value: String,
     val label: String,
@@ -18,12 +16,12 @@ data class NetworkInflationRate(
     val updateDate: String)
 
 @JsonClass(generateAdapter = true)
-data class NetworkInflationRateContainer(val months: List<NetworkInflationRate>)
+data class NetworkInflationItemContainer(val months: List<NetworkInflationItem>)
 
-fun NetworkInflationRateContainer.asCpiDatabaseModel(): List<DatabaseCpiInflationRate> {
+fun NetworkInflationItemContainer.asCpiDatabaseModel(): List<DatabaseCpiPct> {
 
     return months.map {
-        DatabaseCpiInflationRate(
+        DatabaseCpiPct(
             date = it.date,
             value = it.value,
             label = it.label,
@@ -37,10 +35,10 @@ fun NetworkInflationRateContainer.asCpiDatabaseModel(): List<DatabaseCpiInflatio
     }
 }
 
-fun NetworkInflationRateContainer.asRpiDatabaseModel(): List<DatabaseRpiInflationRate> {
+fun NetworkInflationItemContainer.asRpiDatabaseModel(): List<DatabaseRpiPct> {
 
     return months.map {
-        DatabaseRpiInflationRate(
+        DatabaseRpiPct(
             date = it.date,
             value = it.value,
             label = it.label,

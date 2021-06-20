@@ -1,14 +1,14 @@
-package com.example.android.inflation.plutus
+package com.example.android.plutus.inflation
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.android.plutus.RpiInflationRate
+import com.example.android.plutus.RpiPercentage
 import com.example.android.plutus.databinding.RpiInflationRateItemBinding
 
-class RpiAdapter : ListAdapter<RpiInflationRate, RpiAdapter.RpiViewHolder>(RpiDiffCallBack()) {
+class RpiAdapter : ListAdapter<RpiPercentage, RpiAdapter.RpiViewHolder>(RpiDiffCallBack()) {
 
     override fun onBindViewHolder(holder: RpiViewHolder, position: Int) {
         val rpiItem = getItem(position)
@@ -21,8 +21,8 @@ class RpiAdapter : ListAdapter<RpiInflationRate, RpiAdapter.RpiViewHolder>(RpiDi
 
     class RpiViewHolder constructor(private var binding: RpiInflationRateItemBinding):
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(inflationRate: RpiInflationRate) {
-            binding.rpiRate = inflationRate
+        fun bind(percentage: RpiPercentage) {
+            binding.rpiRate = percentage
             binding.executePendingBindings()
         }
 
@@ -32,19 +32,19 @@ class RpiAdapter : ListAdapter<RpiInflationRate, RpiAdapter.RpiViewHolder>(RpiDi
                 val binding = RpiInflationRateItemBinding.inflate(
                     layoutInflater, parent, false
                 )
-                return RpiAdapter.RpiViewHolder(binding)
+                return RpiViewHolder(binding)
             }
         }
     }
 
 }
 
-class RpiDiffCallBack : DiffUtil.ItemCallback<RpiInflationRate>() {
-    override fun areItemsTheSame(oldItem: RpiInflationRate, newItem: RpiInflationRate): Boolean {
+class RpiDiffCallBack : DiffUtil.ItemCallback<RpiPercentage>() {
+    override fun areItemsTheSame(oldItem: RpiPercentage, newItem: RpiPercentage): Boolean {
         return oldItem.updateDate == newItem.updateDate
     }
 
-    override fun areContentsTheSame(oldItem: RpiInflationRate, newItem: RpiInflationRate): Boolean {
+    override fun areContentsTheSame(oldItem: RpiPercentage, newItem: RpiPercentage): Boolean {
         return oldItem == newItem
     }
 }

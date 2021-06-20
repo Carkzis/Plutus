@@ -13,7 +13,7 @@ class CpiInflationViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 
-    var inflationRates = repository.getCpiRates("cpi")
+    var inflationRates = repository.getCpiPercentages()
 
     private var _loadingStatus = MutableLiveData<ApiLoadingStatus>()
     val loadingStatus: LiveData<ApiLoadingStatus>
@@ -36,7 +36,7 @@ class CpiInflationViewModel @Inject constructor(
         viewModelScope.launch {
             _loadingStatus.value = ApiLoadingStatus.LOADING
             try {
-                repository.refreshCpiInflation()
+                repository.refreshCpiPercentages()
                 _loadingStatus.value = ApiLoadingStatus.DONE
             } catch (e: Exception) {
                 if (inflationRates.value.isNullOrEmpty()) {

@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.android.plutus.CpiInflationRate
+import com.example.android.plutus.CpiPercentage
 import com.example.android.plutus.databinding.CpiInflationRateItemBinding
 
-class CpiAdapter : ListAdapter<CpiInflationRate, CpiAdapter.CpiViewHolder>(CpiDiffCallBack()) {
+class CpiAdapter : ListAdapter<CpiPercentage, CpiAdapter.CpiViewHolder>(CpiDiffCallBack()) {
 
     override fun onBindViewHolder(holder: CpiViewHolder, position: Int) {
         val cpiItem = getItem(position)
@@ -21,8 +21,8 @@ class CpiAdapter : ListAdapter<CpiInflationRate, CpiAdapter.CpiViewHolder>(CpiDi
 
     class CpiViewHolder constructor(private var binding: CpiInflationRateItemBinding):
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(cpiInflationRate: CpiInflationRate) {
-            binding.cpiRate = cpiInflationRate
+        fun bind(cpiPercentage: CpiPercentage) {
+            binding.cpiRate = cpiPercentage
             binding.executePendingBindings()
         }
 
@@ -39,12 +39,12 @@ class CpiAdapter : ListAdapter<CpiInflationRate, CpiAdapter.CpiViewHolder>(CpiDi
 
 }
 
-class CpiDiffCallBack : DiffUtil.ItemCallback<CpiInflationRate>() {
-    override fun areItemsTheSame(oldItem: CpiInflationRate, newItem: CpiInflationRate): Boolean {
+class CpiDiffCallBack : DiffUtil.ItemCallback<CpiPercentage>() {
+    override fun areItemsTheSame(oldItem: CpiPercentage, newItem: CpiPercentage): Boolean {
         return oldItem.updateDate == newItem.updateDate
     }
 
-    override fun areContentsTheSame(oldItem: CpiInflationRate, newItem: CpiInflationRate): Boolean {
+    override fun areContentsTheSame(oldItem: CpiPercentage, newItem: CpiPercentage): Boolean {
         return oldItem == newItem
     }
 }

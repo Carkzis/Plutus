@@ -11,27 +11,27 @@ class InflationRepository(private val database: PlutusDatabase) : Repository {
     /**
      * This will obtain data from the ONS website and insert it into the database.
      */
-    override suspend fun refreshCpiInflation() {
+    override suspend fun refreshCpiPercentages() {
         withContext(Dispatchers.IO) {
-            val cpiInflationList = InflationRateApi.retrofitService.getCpiInformation()
+            val cpiInflationList = InflationRateApi.retrofitService.getCpiPctInformation()
             database.cpiDao().insertAll(cpiInflationList.asCpiDatabaseModel())
         }
     }
 
-    override suspend fun refreshRpiInflation() {
+    override suspend fun refreshRpiPercentages() {
         withContext(Dispatchers.IO) {
-            val rpiInflationList = InflationRateApi.retrofitService.getRpiInformation()
+            val rpiInflationList = InflationRateApi.retrofitService.getRpiPctInformation()
             database.rpiDao().insertAll(rpiInflationList.asRpiDatabaseModel())
         }
     }
 
-    override fun getCpiRates(inflationType: String): LiveData<List<CpiInflationRate>> {
+    override fun getCpiPercentages(): LiveData<List<CpiPercentage>> {
         return Transformations.map(database.cpiDao().getCpiRates()) {
             it.asCpiDomainModel()
         }
     }
 
-    override fun getRpiRates(): LiveData<List<RpiInflationRate>> {
+    override fun getRpiPercentages(): LiveData<List<RpiPercentage>> {
         return Transformations.map(database.rpiDao().getRpiRates()) {
             it.asRpiDomainModel()
         }

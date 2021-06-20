@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.android.plutus.Event
 import com.example.android.plutus.R
 import com.example.android.plutus.data.Repository
-import com.example.android.plutus.inflation.ApiLoadingStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -18,7 +17,7 @@ class RpiInflationViewModel @Inject constructor(
     private val repository: Repository
     ) : ViewModel() {
 
-    var inflationRates = repository.getRpiRates()
+    var inflationRates = repository.getRpiPercentages()
 
     private var _loadingStatus = MutableLiveData<ApiLoadingStatus>()
     val loadingStatus: LiveData<ApiLoadingStatus>
@@ -36,7 +35,7 @@ class RpiInflationViewModel @Inject constructor(
         viewModelScope.launch {
             _loadingStatus.value = ApiLoadingStatus.LOADING
             try {
-                repository.refreshRpiInflation()
+                repository.refreshRpiPercentages()
                 _loadingStatus.value = ApiLoadingStatus.DONE
             } catch (e: Exception) {
                 if (inflationRates.value.isNullOrEmpty()) {

@@ -7,15 +7,15 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
 @Dao
-interface RpiDao {
+interface CpiPctDao {
 
-    @Query("SELECT * FROM DatabaseRpiPct")
-    fun getRpiRates(): LiveData<List<DatabaseRpiPct>>
+    @Query("SELECT * FROM DatabaseCpiPct")
+    fun getCpiRates(): LiveData<List<DatabaseCpiPct>>
 
-    @Query("SELECT * FROM DatabaseRpiPct")
-    fun getRpiRateList(): List<DatabaseRpiPct>
+    @Query("SELECT * FROM DatabaseCpiPct")
+    fun getCpiRateList(): List<DatabaseCpiPct>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(cpiRates: List<DatabaseRpiPct>)
+    fun insertAll(cpiRates: List<DatabaseCpiPct>)
 
 }

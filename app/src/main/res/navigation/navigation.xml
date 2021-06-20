@@ -42,6 +42,9 @@
         <action
           android:id="@+id/action_inflationMainFragment_to_rpiInflationFragment"
           app:destination="@id/rpiInflationFragment" />
+        <action
+          android:id="@+id/action_inflationMainFragment_to_gmpFixedRevalFragment"
+          app:destination="@id/gmpFixedRevalFragment" />
     </fragment>
     <fragment
       android:id="@+id/cpiInflationFragment"
@@ -53,4 +56,9 @@
       android:name="com.example.android.plutus.inflation.RpiInflationFragment"
       android:label="fragment_rpi_inflation"
       tools:layout="@layout/fragment_rpi_inflation" />
+    <fragment
+      android:id="@+id/gmpFixedRevalFragment"
+      android:name="com.example.android.plutus.inflation.GmpFixedRevalFragment"
+      android:label="fragment_gmp_fixed_reval"
+      tools:layout="@layout/fragment_gmp_fixed_reval" />
 </navigation>

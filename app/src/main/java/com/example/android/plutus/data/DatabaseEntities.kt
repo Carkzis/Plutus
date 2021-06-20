@@ -2,11 +2,11 @@ package com.example.android.plutus.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.android.plutus.CpiInflationRate
-import com.example.android.plutus.RpiInflationRate
+import com.example.android.plutus.CpiPercentage
+import com.example.android.plutus.RpiPercentage
 
 @Entity
-data class DatabaseCpiInflationRate(
+data class DatabaseCpiPct(
     val date: String,
     val value: String,
     val label: String,
@@ -19,7 +19,7 @@ data class DatabaseCpiInflationRate(
     val pk: String)
 
 @Entity
-data class DatabaseRpiInflationRate(
+data class DatabaseRpiPct(
     val date: String,
     val value: String,
     val label: String,
@@ -31,9 +31,9 @@ data class DatabaseRpiInflationRate(
     @PrimaryKey
     val pk: String)
 
-fun List<DatabaseCpiInflationRate>.asCpiDomainModel(): List<CpiInflationRate> {
+fun List<DatabaseCpiPct>.asCpiDomainModel(): List<CpiPercentage> {
     return map {
-        CpiInflationRate(
+        CpiPercentage(
             date = it.date,
             value = it.value + "%",
             label = it.label,
@@ -46,9 +46,9 @@ fun List<DatabaseCpiInflationRate>.asCpiDomainModel(): List<CpiInflationRate> {
     }
 }
 
-fun List<DatabaseRpiInflationRate>.asRpiDomainModel(): List<RpiInflationRate> {
+fun List<DatabaseRpiPct>.asRpiDomainModel(): List<RpiPercentage> {
     return map {
-        RpiInflationRate(
+        RpiPercentage(
             date = it.date,
             value = it.value + "%",
             label = it.label,

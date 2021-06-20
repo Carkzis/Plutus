@@ -44,6 +44,9 @@ class InflationMainFragment : Fragment() {
         viewDataBinding.rpiButton.setOnClickListener {
             findNavController().navigate(InflationMainFragmentDirections.actionInflationMainFragmentToRpiInflationFragment())
         }
+        viewDataBinding.gmpFixedButton.setOnClickListener {
+            findNavController().navigate(InflationMainFragmentDirections.actionInflationMainFragmentToGmpFixedRevalFragment())
+        }
     }
 
 }
