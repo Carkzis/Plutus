@@ -20,8 +20,13 @@ object DatabaseModule {
     }
 
     @Provides
-    fun provideRpiDao(database: PlutusDatabase): RpiDao {
+    fun provideRpiDao(database: PlutusDatabase): RpiPctDao {
         return database.rpiDao()
+    }
+
+    @Provides
+    fun provideRpiItemDao(database: PlutusDatabase): RpiItemDao {
+        return database.rpiItemDao()
     }
 
     @Singleton

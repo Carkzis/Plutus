@@ -45,15 +45,18 @@
         <action
           android:id="@+id/action_inflationMainFragment_to_gmpFixedRevalFragment"
           app:destination="@id/gmpFixedRevalFragment" />
+        <action
+          android:id="@+id/action_inflationMainFragment_to_rpiItemsFragment"
+          app:destination="@id/rpiItemsFragment" />
     </fragment>
     <fragment
       android:id="@+id/cpiInflationFragment"
-      android:name="com.example.android.plutus.inflation.CpiInflationFragment"
+      android:name="com.example.android.plutus.inflation.CpiPctFragment"
       android:label="fragment_cpi_inflation"
       tools:layout="@layout/fragment_cpi_inflation" />
     <fragment
       android:id="@+id/rpiInflationFragment"
-      android:name="com.example.android.plutus.inflation.RpiInflationFragment"
+      android:name="com.example.android.plutus.inflation.RpiPctFragment"
       android:label="fragment_rpi_inflation"
       tools:layout="@layout/fragment_rpi_inflation" />
     <fragment
@@ -61,4 +64,9 @@
       android:name="com.example.android.plutus.inflation.GmpFixedRevalFragment"
       android:label="fragment_gmp_fixed_reval"
       tools:layout="@layout/fragment_gmp_fixed_reval" />
+    <fragment
+      android:id="@+id/rpiItemsFragment"
+      android:name="com.example.android.plutus.inflation.RpiItemsFragment"
+      android:label="fragment_rpi_items"
+      tools:layout="@layout/fragment_rpi_items" />
 </navigation>

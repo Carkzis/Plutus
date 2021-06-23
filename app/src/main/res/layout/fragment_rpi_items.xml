@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
-  tools:context=".inflation.CpiPctFragment">
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  tools:context=".inflation.RpiItemsFragment">
 
   <data>
 
@@ -11,17 +11,17 @@
     <import type="androidx.core.content.ContextCompat" />
 
     <variable
-      name="cpiInflationViewModel"
-      type="com.example.android.plutus.CpiPctViewModel" />
+      name="rpiItemsViewModel"
+      type="com.example.android.plutus.inflation.RpiItemsViewModel" />
 
   </data>
+
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent" >
 
     <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/cpi_recyclerview"
+      android:id="@+id/rpi_items_recyclerview"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -29,33 +29,34 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:cpiListData="@{cpiInflationViewModel.inflationRates}" />
+      app:rpiItemListData="@{rpiItemsViewModel.inflationRates}" />
 
     <ProgressBar
-      android:id="@+id/cpi_progress_bar"
+      android:id="@+id/rpi_items_progress_bar"
       style="?android:attr/progressBarStyle"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="@+id/cpi_recyclerview"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="@+id/cpi_recyclerview"
-      app:loadingStatus="@{cpiInflationViewModel.loadingStatus}" />
+      app:layout_constraintTop_toTopOf="parent"
+      app:loadingStatus="@{rpiItemsViewModel.loadingStatus}" />
 
     <TextView
-      android:id="@+id/cpi_error"
+      android:id="@+id/rpi_items_error"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:gravity="center"
-      android:text="@string/cpi_error"
+      android:text="@string/rpi_error"
       android:textSize="16sp"
       android:visibility="gone"
-      app:errorMessage="@{cpiInflationViewModel.loadingStatus}"
+      app:errorMessage="@{rpiItemsViewModel.loadingStatus}"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </layout>

@@ -16,9 +16,9 @@ import org.junit.Rule
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
-class CpiInflationViewModelTest() {
+class CpiPctViewModelTest() {
 
-    private lateinit var cpiInflationViewModel: CpiInflationViewModel
+    private lateinit var cpiPctViewModel: CpiPctViewModel
 
     private lateinit var inflationRepository: FakeRepository
 
@@ -33,7 +33,7 @@ class CpiInflationViewModelTest() {
     fun setUp() {
         Dispatchers.setMain(dispatcher)
         inflationRepository = FakeRepository()
-        cpiInflationViewModel = CpiInflationViewModel(inflationRepository)
+        cpiPctViewModel = CpiPctViewModel(inflationRepository)
     }
 
     @After
@@ -44,12 +44,12 @@ class CpiInflationViewModelTest() {
     @Test
     fun refreshCpiInflationRates_noErrorNonEmpty_getSuccess() {
 
-        cpiInflationViewModel.testRefresh()
+        cpiPctViewModel.testRefresh()
         // Make sure we then get six items are emitting.
-        assertThat(cpiInflationViewModel.inflationRates.getOrAwaitValue().size, `is`(6))
+        assertThat(cpiPctViewModel.inflationRates.getOrAwaitValue().size, `is`(6))
 
         // Check that the status is now done.
-        assertThat(cpiInflationViewModel.loadingStatus.getOrAwaitValue().name, `is`("DONE"))
+        assertThat(cpiPctViewModel.loadingStatus.getOrAwaitValue().name, `is`("DONE"))
 
     }
 
@@ -59,16 +59,16 @@ class CpiInflationViewModelTest() {
         inflationRepository.setNull(true)
         inflationRepository.setToEmpty()
         // This will set this to the value of the repository.
-        cpiInflationViewModel.inflationRates = inflationRepository.getCpiPercentages("cpi")
+        cpiPctViewModel.inflationRates = inflationRepository.getCpiPercentages("cpi")
 
-        cpiInflationViewModel.inflationRates.observeForTesting {
+        cpiPctViewModel.inflationRates.observeForTesting {
 
-            cpiInflationViewModel.testRefresh()
+            cpiPctViewModel.testRefresh()
 
-            assertThat(cpiInflationViewModel.loadingStatus.getOrAwaitValue().name, `is`("ERROR"))
+            assertThat(cpiPctViewModel.loadingStatus.getOrAwaitValue().name, `is`("ERROR"))
 
             // This checks that a Toast was displayed
-            assertThat(cpiInflationViewModel.toastText.getOrAwaitValue(),
+            assertThat(cpiPctViewModel.toastText.getOrAwaitValue(),
                 `is`(not("null"))
             )
         }
@@ -79,16 +79,16 @@ class CpiInflationViewModelTest() {
 
         inflationRepository.setNull(true)
         // This will set this to the value of the repository.
-        cpiInflationViewModel.inflationRates = inflationRepository.getCpiPercentages("cpi")
+        cpiPctViewModel.inflationRates = inflationRepository.getCpiPercentages("cpi")
 
-        cpiInflationViewModel.inflationRates.observeForTesting {
+        cpiPctViewModel.inflationRates.observeForTesting {
 
-            cpiInflationViewModel.testRefresh()
+            cpiPctViewModel.testRefresh()
 
-            assertThat(cpiInflationViewModel.loadingStatus.getOrAwaitValue().name, `is`("DONE"))
+            assertThat(cpiPctViewModel.loadingStatus.getOrAwaitValue().name, `is`("DONE"))
 
             // This checks that a Toast was displayed
-            assertThat(cpiInflationViewModel.toastText.getOrAwaitValue(),
+            assertThat(cpiPctViewModel.toastText.getOrAwaitValue(),
                 `is`(not("null"))
             )
         }

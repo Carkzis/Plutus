@@ -29,7 +29,7 @@ import javax.inject.Inject
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
 @HiltAndroidTest
-class CpiInflationFragmentTest {
+class CpiPctFragmentTest {
 
     @get:Rule
     var hiltRule = HiltAndroidRule(this)

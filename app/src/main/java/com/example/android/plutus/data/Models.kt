@@ -24,6 +24,16 @@ data class RpiPercentage(
     val sourceDataset: String,
     val updateDate: String)
 
+data class RpiItem(
+    val date: String,
+    val value: String,
+    val label: String,
+    val year: String,
+    val month: String,
+    val quarter: String,
+    val sourceDataset: String,
+    val updateDate: String)
+
 data class GmpFixedRevaluation(
     val dateBegins: String,
     val dateEnds: String,

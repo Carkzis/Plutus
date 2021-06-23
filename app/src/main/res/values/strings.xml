@@ -61,4 +61,6 @@
   <string name="gmp_end_date">End Date</string>
   <string name="fixed_rate">Fixed Rate</string>
   <string name="gmp_fixed_revaluation_rates">GMP Fixed Revaluation Rates</string>
+  <string name="rpi_12_month_percentages">RPI 12-Month Percentages</string>
+  <string name="cpi_12_month_percentages">CPI 12-Month Percentages</string>
 </resources>

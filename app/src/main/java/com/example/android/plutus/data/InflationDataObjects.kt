@@ -1,6 +1,7 @@
 package com.example.android.plutus
 
 import com.example.android.plutus.data.DatabaseCpiPct
+import com.example.android.plutus.data.DatabaseRpiItem
 import com.example.android.plutus.data.DatabaseRpiPct
 import com.squareup.moshi.JsonClass
 
@@ -18,7 +19,7 @@ data class NetworkInflationItem(
 @JsonClass(generateAdapter = true)
 data class NetworkInflationItemContainer(val months: List<NetworkInflationItem>)
 
-fun NetworkInflationItemContainer.asCpiDatabaseModel(): List<DatabaseCpiPct> {
+fun NetworkInflationItemContainer.asCpiPctDatabaseModel(): List<DatabaseCpiPct> {
 
     return months.map {
         DatabaseCpiPct(
@@ -35,10 +36,27 @@ fun NetworkInflationItemContainer.asCpiDatabaseModel(): List<DatabaseCpiPct> {
     }
 }
 
-fun NetworkInflationItemContainer.asRpiDatabaseModel(): List<DatabaseRpiPct> {
+fun NetworkInflationItemContainer.asRpiPctDatabaseModel(): List<DatabaseRpiPct> {
 
     return months.map {
         DatabaseRpiPct(
+            date = it.date,
+            value = it.value,
+            label = it.label,
+            year = it.year,
+            month = it.month,
+            quarter = it.quarter,
+            sourceDataset = it.sourceDataset,
+            updateDate = it.updateDate,
+            pk = it.year + it.month
+        )
+    }
+}
+
+fun NetworkInflationItemContainer.asRpiItemDatabaseModel(): List<DatabaseRpiItem> {
+
+    return months.map {
+        DatabaseRpiItem(
             date = it.date,
             value = it.value,
             label = it.label,

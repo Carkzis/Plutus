@@ -29,7 +29,7 @@ class FakeRepository @Inject constructor() : Repository {
     override fun getCpiPercentages(): LiveData<List<CpiPercentage>> {
         // For now, we will just return the cpi rates.
         return Transformations.map(cpiDatabaseRates) {
-            it.asCpiDomainModel()
+            it.asCpiPctDomainModel()
         }
     }
 

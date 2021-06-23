@@ -6,17 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import com.example.android.plutus.CpiInflationViewModel
-import com.example.android.plutus.databinding.FragmentCpiInflationBinding
+import com.example.android.plutus.databinding.FragmentRpiInflationBinding
 import com.example.android.plutus.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CpiInflationFragment : Fragment() {
+class RpiPctFragment : Fragment() {
 
-    private val viewModel by viewModels<CpiInflationViewModel>()
+    private val viewModel by viewModels<RpiPctViewModel>()
 
-    private lateinit var viewDataBinding: FragmentCpiInflationBinding
+    private lateinit var viewDataBinding: FragmentRpiInflationBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,13 +23,13 @@ class CpiInflationFragment : Fragment() {
     ): View {
 
         viewDataBinding =
-                FragmentCpiInflationBinding.inflate(inflater, container, false).apply {
-                    cpiInflationViewModel = viewModel
-                }
+            FragmentRpiInflationBinding.inflate(inflater, container, false).apply {
+                rpiInflationViewModel = viewModel
+            }
 
         viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
 
-        viewDataBinding.cpiRecyclerview.adapter = CpiAdapter()
+        viewDataBinding.rpiRecyclerview.adapter = RpiAdapter()
 
         return viewDataBinding.root
     }

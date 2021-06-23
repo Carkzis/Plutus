@@ -13,11 +13,11 @@ import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
-class RpiInflationViewModel @Inject constructor(
+class RpiItemsViewModel @Inject constructor(
     private val repository: Repository
     ) : ViewModel() {
 
-    var inflationRates = repository.getRpiPercentages()
+    var inflationRates = repository.getRpiItems()
 
     private var _loadingStatus = MutableLiveData<ApiLoadingStatus>()
     val loadingStatus: LiveData<ApiLoadingStatus>
@@ -28,14 +28,14 @@ class RpiInflationViewModel @Inject constructor(
         get() = _toastText
 
     init {
-        refreshRpiInflationRates()
+        refreshRpiItems()
     }
 
-    private fun refreshRpiInflationRates() {
+    private fun refreshRpiItems() {
         viewModelScope.launch {
             _loadingStatus.value = ApiLoadingStatus.LOADING
             try {
-                repository.refreshRpiPercentages()
+                repository.refreshRpiItems()
                 _loadingStatus.value = ApiLoadingStatus.DONE
             } catch (e: Exception) {
                 if (inflationRates.value.isNullOrEmpty()) {
@@ -51,5 +51,8 @@ class RpiInflationViewModel @Inject constructor(
     private fun Int.showToastMessage() {
         _toastText.value = Event(this)
     }
+
+
+
 
 }

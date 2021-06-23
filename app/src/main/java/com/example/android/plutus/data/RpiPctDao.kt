@@ -7,7 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
 @Dao
-interface RpiDao {
+interface RpiPctDao {
 
     @Query("SELECT * FROM DatabaseRpiPct")
     fun getRpiRates(): LiveData<List<DatabaseRpiPct>>
