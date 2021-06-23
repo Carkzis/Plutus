@@ -5,13 +5,11 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.android.plutus.inflation.RpiAdapter
-import com.example.android.plutus.inflation.CpiAdapter
-import com.example.android.plutus.inflation.ApiLoadingStatus
+import com.example.android.plutus.CpiItem
 import com.example.android.plutus.CpiPercentage
 import com.example.android.plutus.RpiItem
 import com.example.android.plutus.RpiPercentage
-import com.example.android.plutus.inflation.RpiItemsAdapter
+import com.example.android.plutus.inflation.*
 
 @BindingAdapter("cpiListData")
 fun bindCpiRecyclerView(recyclerView: RecyclerView, data: List<CpiPercentage>?) {
@@ -22,6 +20,12 @@ fun bindCpiRecyclerView(recyclerView: RecyclerView, data: List<CpiPercentage>?) 
 @BindingAdapter("rpiListData")
 fun bindRpiRecyclerView(recyclerView: RecyclerView, data: List<RpiPercentage>?) {
     val adapter = recyclerView.adapter as RpiAdapter
+    adapter.submitList(data)
+}
+
+@BindingAdapter("cpiItemListData")
+fun bindCpiItemsRecyclerView(recyclerView: RecyclerView, data: List<CpiItem>?) {
+    val adapter = recyclerView.adapter as CpiItemsAdapter
     adapter.submitList(data)
 }
 

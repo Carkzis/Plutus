@@ -25,6 +25,11 @@ object DatabaseModule {
     }
 
     @Provides
+    fun provideCpiItemDao(database: PlutusDatabase): CpiItemDao {
+        return database.cpiItemDao()
+    }
+
+    @Provides
     fun provideRpiItemDao(database: PlutusDatabase): RpiItemDao {
         return database.rpiItemDao()
     }

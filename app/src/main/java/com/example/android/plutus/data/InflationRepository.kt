@@ -25,6 +25,13 @@ class InflationRepository(private val database: PlutusDatabase) : Repository {
         }
     }
 
+    override suspend fun refreshCpiItems() {
+        withContext(Dispatchers.IO) {
+            val cpiItemList = InflationRateApi.retrofitService.getCpiItemInformation()
+            database.cpiItemDao().insertAll(cpiItemList.asCpiItemDatabaseModel())
+        }
+    }
+
     override suspend fun refreshRpiItems() {
         withContext(Dispatchers.IO) {
             val rpiItemList = InflationRateApi.retrofitService.getRpiItemInformation()
@@ -41,6 +48,12 @@ class InflationRepository(private val database: PlutusDatabase) : Repository {
     override fun getRpiPercentages(): LiveData<List<RpiPercentage>> {
         return Transformations.map(database.rpiDao().getRpiRates()) {
             it.asRpiPctDomainModel()
+        }
+    }
+
+    override fun getCpiItems(): LiveData<List<CpiItem>> {
+        return Transformations.map(database.cpiItemDao().getCpiItems()) {
+            it.asCpiItemDomainModel()
         }
     }
 

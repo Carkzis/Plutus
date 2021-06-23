@@ -50,6 +50,9 @@ class InflationMainFragment : Fragment() {
         viewDataBinding.gmpFixedButton.setOnClickListener {
             findNavController().navigate(InflationMainFragmentDirections.actionInflationMainFragmentToGmpFixedRevalFragment())
         }
+        viewDataBinding.cpiItemsButton.setOnClickListener {
+            findNavController().navigate(InflationMainFragmentDirections.actionInflationMainFragmentToCpiItemsFragment())
+        }
     }
 
 }

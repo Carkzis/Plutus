@@ -1,5 +1,6 @@
 package com.example.android.plutus
 
+import com.example.android.plutus.data.DatabaseCpiItem
 import com.example.android.plutus.data.DatabaseCpiPct
 import com.example.android.plutus.data.DatabaseRpiItem
 import com.example.android.plutus.data.DatabaseRpiPct
@@ -23,6 +24,23 @@ fun NetworkInflationItemContainer.asCpiPctDatabaseModel(): List<DatabaseCpiPct> 
 
     return months.map {
         DatabaseCpiPct(
+            date = it.date,
+            value = it.value,
+            label = it.label,
+            year = it.year,
+            month = it.month,
+            quarter = it.quarter,
+            sourceDataset = it.sourceDataset,
+            updateDate = it.updateDate,
+            pk = it.year + it.month
+        )
+    }
+}
+
+fun NetworkInflationItemContainer.asCpiItemDatabaseModel(): List<DatabaseCpiItem> {
+
+    return months.map {
+        DatabaseCpiItem(
             date = it.date,
             value = it.value,
             label = it.label,
