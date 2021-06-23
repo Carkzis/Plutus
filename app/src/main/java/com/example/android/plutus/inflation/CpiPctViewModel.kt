@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.example.android.plutus.data.Repository
 import com.example.android.plutus.inflation.ApiLoadingStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import javax.inject.Inject
@@ -39,6 +40,8 @@ class CpiPctViewModel @Inject constructor(
                 repository.refreshCpiPercentages()
                 _loadingStatus.value = ApiLoadingStatus.DONE
             } catch (e: Exception) {
+                // Delay to show loading attempted via further visible spin of progress bar).
+                delay(500)
                 if (inflationRates.value.isNullOrEmpty()) {
                     _loadingStatus.value = ApiLoadingStatus.ERROR
                 } else {
