@@ -23,7 +23,55 @@ class FakeRepository @Inject constructor() : Repository {
                 "Q1",
                 "N/A",
                 "N/A",
+                "N/A"
+            )
+        }
+    }
+
+    var cpiDatabaseItems = MutableLiveData<List<DatabaseCpiItem>>().apply {
+        value = MutableList(10) {
+            DatabaseCpiItem(
+                "01/01/1900",
+                "5.0",
+                "N/A",
+                "1900",
+                "January",
+                "Q1",
+                "N/A",
+                "N/A",
                 "1"
+            )
+        }
+    }
+
+    var rpiDatabaseRates = MutableLiveData<List<DatabaseRpiPct>>().apply {
+        value = MutableList(15) {
+            DatabaseRpiPct(
+                "01/01/1900",
+                "5.0",
+                "N/A",
+                "1900",
+                "January",
+                "Q1",
+                "N/A",
+                "N/A",
+                "N/A"
+            )
+        }
+    }
+
+    var rpiDatabaseItems = MutableLiveData<List<DatabaseRpiItem>>().apply {
+        value = MutableList(30) {
+            DatabaseRpiItem(
+                "01/01/1900",
+                "5.0",
+                "N/A",
+                "1900",
+                "January",
+                "Q1",
+                "N/A",
+                "N/A",
+                "N/A"
             )
         }
     }
@@ -32,6 +80,24 @@ class FakeRepository @Inject constructor() : Repository {
         // For now, we will just return the cpi rates.
         return Transformations.map(cpiDatabaseRates) {
             it.asCpiPctDomainModel()
+        }
+    }
+
+    override fun getCpiItems(): LiveData<List<CpiItem>> {
+        return Transformations.map(cpiDatabaseItems) {
+            it.asCpiItemDomainModel()
+        }
+    }
+
+    override fun getRpiPercentages(): LiveData<List<RpiPercentage>> {
+        return Transformations.map(rpiDatabaseRates) {
+            it.asRpiPctDomainModel()
+        }
+    }
+
+    override fun getRpiItems(): LiveData<List<RpiItem>> {
+        return Transformations.map(rpiDatabaseItems) {
+            it.asRpiItemDomainModel()
         }
     }
 
@@ -71,7 +137,7 @@ class FakeRepository @Inject constructor() : Repository {
                     "Q4",
                     "N/A",
                     "N/A",
-                    "1"
+                    "N/A"
                 )
             }
         } else if (returnNull) {
@@ -80,26 +146,76 @@ class FakeRepository @Inject constructor() : Repository {
     }
 
     override suspend fun refreshRpiPercentages() {
-        TODO("Not yet implemented")
-    }
-
-    override fun getRpiPercentages(): LiveData<List<RpiPercentage>> {
-        TODO("Not yet implemented")
+        // Test if there is an error.
+        if (returnError) {
+            return
+        } else if (!returnNull) {
+            // Return a new list of fake values, one size larger to imitate returning updated data.
+            rpiDatabaseRates.value = MutableList(16) {
+                DatabaseRpiPct(
+                    "12/12/2000",
+                    "1.0",
+                    "N/A",
+                    "2000",
+                    "December",
+                    "Q4",
+                    "N/A",
+                    "N/A",
+                    "N/A"
+                )
+            }
+        } else if (returnNull) {
+            throw Exception("NPE!!!")
+        }
     }
 
     override suspend fun refreshCpiItems() {
-        TODO("Not yet implemented")
+        // Test if there is an error.
+        if (returnError) {
+            return
+        } else if (!returnNull) {
+            // Return a new list of fake values, one size larger to imitate returning updated data.
+            cpiDatabaseItems.value = MutableList(11) {
+                DatabaseCpiItem(
+                    "12/12/2000",
+                    "1.0",
+                    "N/A",
+                    "2000",
+                    "December",
+                    "Q4",
+                    "N/A",
+                    "N/A",
+                    "N/A"
+                )
+            }
+        } else if (returnNull) {
+            throw Exception("NPE!!!")
+        }
     }
 
-    override fun getCpiItems(): LiveData<List<CpiItem>> {
-        TODO("Not yet implemented")
-    }
 
     override suspend fun refreshRpiItems() {
-        TODO("Not yet implemented")
+        // Test if there is an error.
+        if (returnError) {
+            return
+        } else if (!returnNull) {
+            // Return a new list of fake values, one size larger to imitate returning updated data.
+            rpiDatabaseItems.value = MutableList(31) {
+                DatabaseRpiItem(
+                    "12/12/2000",
+                    "1.0",
+                    "N/A",
+                    "2000",
+                    "December",
+                    "Q4",
+                    "N/A",
+                    "N/A",
+                    "N/A"
+                )
+            }
+        } else if (returnNull) {
+            throw Exception("NPE!!!")
+        }
     }
 
-    override fun getRpiItems(): LiveData<List<RpiItem>> {
-        TODO("Not yet implemented")
-    }
 }
