@@ -3,7 +3,9 @@ package com.example.android.plutus.data
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
+import com.example.android.plutus.CpiItem
 import com.example.android.plutus.CpiPercentage
+import com.example.android.plutus.RpiItem
 import com.example.android.plutus.RpiPercentage
 import javax.inject.Inject
 
@@ -31,14 +33,6 @@ class FakeRepository @Inject constructor() : Repository {
         return Transformations.map(cpiDatabaseRates) {
             it.asCpiPctDomainModel()
         }
-    }
-
-    override suspend fun refreshRpiPercentages() {
-        TODO("Not yet implemented")
-    }
-
-    override fun getRpiPercentages(): LiveData<List<RpiPercentage>> {
-        TODO("Not yet implemented")
     }
 
     // These appear very similar, but return error is just for the repository tests and it
@@ -83,5 +77,29 @@ class FakeRepository @Inject constructor() : Repository {
         } else if (returnNull) {
             throw Exception("NPE!!!")
         }
+    }
+
+    override suspend fun refreshRpiPercentages() {
+        TODO("Not yet implemented")
+    }
+
+    override fun getRpiPercentages(): LiveData<List<RpiPercentage>> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun refreshCpiItems() {
+        TODO("Not yet implemented")
+    }
+
+    override fun getCpiItems(): LiveData<List<CpiItem>> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun refreshRpiItems() {
+        TODO("Not yet implemented")
+    }
+
+    override fun getRpiItems(): LiveData<List<RpiItem>> {
+        TODO("Not yet implemented")
     }
 }

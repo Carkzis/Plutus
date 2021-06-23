@@ -59,7 +59,7 @@ class CpiPctViewModelTest() {
         inflationRepository.setNull(true)
         inflationRepository.setToEmpty()
         // This will set this to the value of the repository.
-        cpiPctViewModel.inflationRates = inflationRepository.getCpiPercentages("cpi")
+        cpiPctViewModel.inflationRates = inflationRepository.getCpiPercentages()
 
         cpiPctViewModel.inflationRates.observeForTesting {
 
@@ -79,7 +79,7 @@ class CpiPctViewModelTest() {
 
         inflationRepository.setNull(true)
         // This will set this to the value of the repository.
-        cpiPctViewModel.inflationRates = inflationRepository.getCpiPercentages("cpi")
+        cpiPctViewModel.inflationRates = inflationRepository.getCpiPercentages()
 
         cpiPctViewModel.inflationRates.observeForTesting {
 
