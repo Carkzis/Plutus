@@ -4,9 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.android.plutus.*
 import com.example.android.plutus.data.FakeRepository
 import kotlinx.coroutines.*
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.setMain
+import kotlinx.coroutines.test.*
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.not
 import org.hamcrest.MatcherAssert.assertThat
@@ -24,6 +22,7 @@ class CpiPctViewModelTest() {
 
     // This is from the kotlin docs, to allow access to Dispatcher.Main in testing.
     private val dispatcher = TestCoroutineDispatcher()
+    private val scope = TestCoroutineScope(dispatcher)
 
     // Executes each task synchronously using Architecture Components.
     @get:Rule
@@ -65,6 +64,8 @@ class CpiPctViewModelTest() {
 
             cpiPctViewModel.testRefresh()
 
+            dispatcher.advanceTimeBy(500)
+
             assertThat(cpiPctViewModel.loadingStatus.getOrAwaitValue().name, `is`("ERROR"))
 
             // This checks that a Toast was displayed
@@ -84,6 +85,8 @@ class CpiPctViewModelTest() {
         cpiPctViewModel.inflationRates.observeForTesting {
 
             cpiPctViewModel.testRefresh()
+
+            dispatcher.advanceTimeBy(500)
 
             assertThat(cpiPctViewModel.loadingStatus.getOrAwaitValue().name, `is`("DONE"))
 

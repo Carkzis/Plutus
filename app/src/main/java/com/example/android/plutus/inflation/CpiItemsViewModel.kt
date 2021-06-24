@@ -32,6 +32,10 @@ class CpiItemsViewModel @Inject constructor(
         refreshCpiItems()
     }
 
+    fun testRefresh() {
+        refreshCpiItems()
+    }
+
     private fun refreshCpiItems() {
         viewModelScope.launch {
             _loadingStatus.value = ApiLoadingStatus.LOADING

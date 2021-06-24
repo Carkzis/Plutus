@@ -32,6 +32,11 @@ class RpiPctViewModel @Inject constructor(
         refreshRpiInflationRates()
     }
 
+    // TODO: Remove when no further testing required.
+    fun testRefresh() {
+        refreshRpiInflationRates()
+    }
+
     private fun refreshRpiInflationRates() {
         viewModelScope.launch {
             _loadingStatus.value = ApiLoadingStatus.LOADING
