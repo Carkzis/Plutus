@@ -4,11 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.android.plutus.*
-import com.example.android.plutus.util.smallCmbPclsCalculation
+import com.example.android.plutus.Benefits
+import com.example.android.plutus.util.*
 import com.example.android.plutus.util.dbPclsCalculation
 import com.example.android.plutus.util.formatAsCurrency
+import com.example.android.plutus.util.largeCmbPclsCalculation
 import com.example.android.plutus.util.ltaCalculation
-import com.example.android.plutus.Benefits
+import com.example.android.plutus.util.smallCmbPclsCalculation
 import dagger.hilt.android.lifecycle.HiltViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -26,9 +28,13 @@ class PclsCalcViewModel @Inject constructor() : ViewModel() {
     val dbBenOutput: LiveData<Benefits>
         get() = _dbBenOutput
 
-    private val _cmbBenOutput = MutableLiveData<Benefits>()
-    val cmbBenOutput: LiveData<Benefits>
-        get() = _cmbBenOutput
+    private val _cmbBenOutput1 = MutableLiveData<Benefits>()
+    val cmbBenOutput1: LiveData<Benefits>
+        get() = _cmbBenOutput1
+
+    private val _cmbBenOutput2 = MutableLiveData<Benefits>()
+    val cmbBenOutput2: LiveData<Benefits>
+        get() = _cmbBenOutput2
 
     private val _noPclsBenOutput = MutableLiveData<Benefits>()
     val noPclsBenOutput: LiveData<Benefits>
@@ -80,22 +86,38 @@ class PclsCalcViewModel @Inject constructor() : ViewModel() {
             ltaCalculation(0.0, fp, dc),
             formatAsCurrency(dc.toBigDecimal())
         )
-        // Only enter arguments into the combined
+
+        // Only enters arguments into the combined
         // pcls function if there is any money purchase fund value, otherwise get the default
         // using £0.00 figures
-        cmbBenefits1 = if (dc > 0.0) smallCmbPclsCalculation(fp, cf, dc) else Benefits("£0.00",
+        cmbBenefits1 = if (dc > 0.0) {
+            if (dc >= ((fp * 20) / 3)) {
+                largeCmbPclsCalculation(fp, cf, true, dc)
+            } else {
+                smallCmbPclsCalculation(fp, cf, dc)
+            }
+        } else Benefits("£0.00",
             "£0.00", "£0.00", "£0.00")
 
-        updateWithResults(dbBenefits, cmbBenefits1, noPclsBenefits)
+        // These benefits are for where there is a large DC fund and the residual amount is
+        // taken as a UFPLS
+        cmbBenefits2 = if (dc >= ((fp * 20) / 3))
+            largeCmbPclsCalculation(fp, cf, false, dc) else Benefits("£0.00",
+        "£0.00", "£0.00", "£0.00")
+
+        updateWithResults(dbBenefits, cmbBenefits1, cmbBenefits2, noPclsBenefits)
     }
 
-    private fun updateWithResults(dbBenefits: Benefits, cmbBenefits: Benefits?,
-                                  noPclsBenefits: Benefits
+    private fun updateWithResults(dbBenefits: Benefits, cmbBenefits1: Benefits?,
+                                  cmbBenefits2: Benefits?, noPclsBenefits: Benefits
     ) {
         Timber.w("Checking that update with results works!")
         _dbBenOutput.value = dbBenefits
-        cmbBenefits?.let {
-            _cmbBenOutput.value = it
+        cmbBenefits1?.let {
+            _cmbBenOutput1.value = it
+        }
+        cmbBenefits2?.let {
+            _cmbBenOutput2.value = it
         }
         _noPclsBenOutput.value = noPclsBenefits
     }

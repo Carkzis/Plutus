@@ -48,7 +48,7 @@ class PclsCalcViewModelTest {
         assertThat(pclsCalcViewModel.noPclsBenOutput.getOrAwaitValue().lta, `is`("9.31%"))
 
         // We expect this to be null, but will test anyway
-        assertThat(pclsCalcViewModel.cmbBenOutput.getOrAwaitValue(), `is`(null))
+        assertThat(pclsCalcViewModel.cmbBenOutput1.getOrAwaitValue(), `is`(null))
     }
 
     @Test
@@ -68,10 +68,10 @@ class PclsCalcViewModelTest {
         assertThat(pclsCalcViewModel.dbBenOutput.getOrAwaitValue().lta, `is`("1.03%"))
 
         // Test combined db and dc values, which should no longer be null
-        assertThat(pclsCalcViewModel.cmbBenOutput.getOrAwaitValue().pcls, `is`("£2,923.08"))
-        assertThat(pclsCalcViewModel.cmbBenOutput.getOrAwaitValue().residualPension, `is`("£438.46"))
-        assertThat(pclsCalcViewModel.cmbBenOutput.getOrAwaitValue().dcFund, `is`("£0.00"))
-        assertThat(pclsCalcViewModel.cmbBenOutput.getOrAwaitValue().lta, `is`("1.08%"))
+        assertThat(pclsCalcViewModel.cmbBenOutput1.getOrAwaitValue().pcls, `is`("£2,923.08"))
+        assertThat(pclsCalcViewModel.cmbBenOutput1.getOrAwaitValue().residualPension, `is`("£438.46"))
+        assertThat(pclsCalcViewModel.cmbBenOutput1.getOrAwaitValue().dcFund, `is`("£0.00"))
+        assertThat(pclsCalcViewModel.cmbBenOutput1.getOrAwaitValue().lta, `is`("1.08%"))
 
         // Test full pension benefits without commutation
         assertThat(pclsCalcViewModel.noPclsBenOutput.getOrAwaitValue().pcls, `is`("£0.00"))

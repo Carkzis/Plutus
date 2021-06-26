@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import com.example.android.plutus.databinding.FragmentPclsCalcBinding
 import com.example.android.plutus.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class PclsCalcFragment : Fragment() {
@@ -41,12 +42,27 @@ class PclsCalcFragment : Fragment() {
 
     private fun setUpBenefitResultsListeners() {
         // Listener for the results of the combined benefits (if applicable)
-        viewModel.cmbBenOutput.observe(viewLifecycleOwner, {
+        viewModel.cmbBenOutput1.observe(viewLifecycleOwner, {
             it?.let {
                 if (it.pcls != "£0.00") {
                     viewDataBinding.opt1Table.visibility = View.VISIBLE
+                    if (it.dcFund != "£0.00") {
+                        viewDataBinding.opt1CmbDc.visibility = View.VISIBLE
+                    } else {
+                        viewDataBinding.opt1CmbDc.visibility = View.GONE
+                    }
                 } else {
                     viewDataBinding.opt1Table.visibility = View.GONE
+                }
+            }
+        })
+
+        viewModel.cmbBenOutput2.observe(viewLifecycleOwner, {
+            it?.let {
+                if (it.pcls != "£0.00" && it.dcFund != "£0.00") {
+                    viewDataBinding.opt1bTable.visibility = View.VISIBLE
+                } else {
+                    viewDataBinding.opt1bTable.visibility = View.GONE
                 }
             }
         })
