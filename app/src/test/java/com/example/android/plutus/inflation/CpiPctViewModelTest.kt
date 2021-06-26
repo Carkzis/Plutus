@@ -22,7 +22,6 @@ class CpiPctViewModelTest() {
 
     // This is from the kotlin docs, to allow access to Dispatcher.Main in testing.
     private val dispatcher = TestCoroutineDispatcher()
-    private val scope = TestCoroutineScope(dispatcher)
 
     // Executes each task synchronously using Architecture Components.
     @get:Rule

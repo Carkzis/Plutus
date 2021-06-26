@@ -119,6 +119,15 @@ class FakeRepository @Inject constructor() : Repository {
         cpiDatabaseRates = MutableLiveData<List<DatabaseCpiPct>>().apply {
             value = mutableListOf()
         }
+        rpiDatabaseRates = MutableLiveData<List<DatabaseRpiPct>>().apply {
+            value = mutableListOf()
+        }
+        cpiDatabaseItems = MutableLiveData<List<DatabaseCpiItem>>().apply {
+            value = mutableListOf()
+        }
+        rpiDatabaseItems = MutableLiveData<List<DatabaseRpiItem>>().apply {
+            value = mutableListOf()
+        }
     }
 
     override suspend fun refreshCpiPercentages() {
