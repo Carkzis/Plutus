@@ -282,15 +282,15 @@
       <TableRow
         android:id="@+id/opt2_db_dc"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
         <TextView
           android:id="@+id/db_dc_text"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:gravity="center_vertical"
-          android:text="@string/money_purchase_fund"
-          android:visibility="gone" />
+          android:text="@string/money_purchase_fund" />
 
         <TextView
           android:id="@+id/db_dc_result_text"
@@ -299,7 +299,6 @@
           android:layout_gravity="end"
           android:gravity="center_vertical"
           android:text="@{String.valueOf(pclsCalcViewModel.dbBenOutput.dcFund)}"
-          android:visibility="gone"
           tools:text="£15,000.00" />
 
       </TableRow>
@@ -366,15 +365,15 @@
       <TableRow
         android:id="@+id/opt3_np_dc"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
         <TextView
           android:id="@+id/np_dc_text"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:gravity="center_vertical"
-          android:text="@string/money_purchase_fund"
-          android:visibility="gone" />
+          android:text="@string/money_purchase_fund" />
 
         <TextView
           android:id="@+id/np_dc_result_text"
@@ -383,7 +382,6 @@
           android:layout_gravity="end"
           android:gravity="center_vertical"
           android:text="@{String.valueOf(pclsCalcViewModel.noPclsBenOutput.dcFund)}"
-          android:visibility="gone"
           tools:text="£15,000.00" />
 
       </TableRow>

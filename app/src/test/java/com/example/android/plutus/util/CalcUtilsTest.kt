@@ -2,7 +2,6 @@
 
 package com.example.android.plutus.util
 
-import com.example.android.plutus.util.*
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.number.OrderingComparison.lessThan
 import org.junit.Test
@@ -47,20 +46,98 @@ class CalcUtilsTest {
     }
 
     @Test
-    fun cmbPclsCalculation_inputPensioWithDcFund_returnsExpectedCombinedPclsResidualLta() {
+    fun cmbPclsCalculation_inputPensionWithDcFund_returnsExpectedCombinedPclsResidualLta() {
         // Create variables to enter into calculation
         val pension = 28420.71
         val cf = 27.83
         val dcFund = 52917.34
 
         // Call the function
-        val result = cmbPclsCalculation(pension, cf, dcFund)
+        val result = smallCmbPclsCalculation(pension, cf, dcFund)
 
         // Check the results
         assertThat(result.pcls, `is`("£163,081.59"))
         assertThat(result.residualPension, `is`("£24,462.24"))
         assertThat(result.dcFund, `is`("£0.00"))
         assertThat(result.lta, `is`("60.78%"))
+
+    }
+
+    @Test
+    fun largePclsCalculation_inputWithDcEqualToMaxAndDcForAnnuity_returnsZeroForDc() {
+        // Create variables to enter into calculation
+        val pension = 30000.00
+        val cf = 15.00
+        val dcFund = 200000.00
+        val residualDcForAnnuity = true
+
+        // Call the function
+        val result = largeCmbPclsCalculation(pension, cf, residualDcForAnnuity, dcFund)
+
+        // Check the results
+        assertThat(result.pcls, `is`("£200,000.00"))
+        assertThat(result.residualPension, `is`("£30,000.00"))
+        assertThat(result.dcFund, `is`("£0.00"))
+        assertThat(result.lta, `is`("74.54%"))
+
+    }
+
+    @Test
+    fun largeCmbPclsCalculation_inputWithDcEqualToMaxAndDcForUfpls_returnsZeroForDc() {
+        // Create variables to enter into calculation
+        val pension = 30000.00
+        val cf = 15.00
+        val dcFund = 200000.00
+        val residualDcForAnnuity = false
+
+        // Call the function
+        val result = largeCmbPclsCalculation(pension, cf, residualDcForAnnuity, dcFund)
+
+        // Check the results
+        assertThat(result.pcls, `is`("£200,000.00"))
+        assertThat(result.residualPension, `is`("£30,000.00"))
+        assertThat(result.dcFund, `is`("£0.00"))
+        assertThat(result.lta, `is`("74.54%"))
+
+    }
+
+    @Test
+    fun largeCmbPclsCalculation_inputLargeDcFundForAnnuity_returnsExpectedCmbPclsResidualDcLta() {
+
+        // Create variables to enter into calculation
+        val pension = 14234.01
+        val cf = 21.32
+        val dcFund = 425232.46
+        val residualDcForAnnuity = true
+
+        // Call the function
+        val result = largeCmbPclsCalculation(pension, cf, residualDcForAnnuity, dcFund)
+
+        // Check the results
+        assertThat(result.pcls, `is`("£177,478.17"))
+        assertThat(result.residualPension, `is`("£14,234.01"))
+        assertThat(result.dcFund, `is`("£247,754.29"))
+        assertThat(result.lta, `is`("66.13%"))
+
+    }
+
+    @Test
+    fun largeCmbPclsCalculation_inputLargeDcFundForUfpls_returnsExpectedCmbPclsResidualDcLta() {
+
+        // Create variables to enter into calculation
+        val pension = 14234.01
+        val cf = 21.32
+        val dcFund = 425232.46
+        val residualDcForAnnuity = false
+
+        // Call the function
+        val result = largeCmbPclsCalculation(pension, cf, residualDcForAnnuity, dcFund)
+
+        // Check the results
+        assertThat(result.pcls, `is`("£94,893.40"))
+        assertThat(result.residualPension, `is`("£14,234.01"))
+        assertThat(result.dcFund, `is`("£330,339.06"))
+        assertThat(result.lta, `is`("66.14%"))
 
     }
 

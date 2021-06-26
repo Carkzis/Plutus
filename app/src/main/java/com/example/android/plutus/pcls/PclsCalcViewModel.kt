@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.android.plutus.*
-import com.example.android.plutus.util.cmbPclsCalculation
+import com.example.android.plutus.util.smallCmbPclsCalculation
 import com.example.android.plutus.util.dbPclsCalculation
 import com.example.android.plutus.util.formatAsCurrency
 import com.example.android.plutus.util.ltaCalculation
@@ -41,7 +41,8 @@ class PclsCalcViewModel @Inject constructor() : ViewModel() {
 
     private lateinit var dbBenefits : Benefits
     private lateinit var noPclsBenefits : Benefits
-    private var cmbBenefits : Benefits? = null
+    private var cmbBenefits1 : Benefits? = null
+    private var cmbBenefits2 : Benefits? = null
 
     fun validateBeforeCalculation() {
         // Return if any of these values have not been entered.
@@ -82,10 +83,10 @@ class PclsCalcViewModel @Inject constructor() : ViewModel() {
         // Only enter arguments into the combined
         // pcls function if there is any money purchase fund value, otherwise get the default
         // using £0.00 figures
-        cmbBenefits = if (dc > 0.0) cmbPclsCalculation(fp, cf, dc) else Benefits("£0.00",
+        cmbBenefits1 = if (dc > 0.0) smallCmbPclsCalculation(fp, cf, dc) else Benefits("£0.00",
             "£0.00", "£0.00", "£0.00")
 
-        updateWithResults(dbBenefits, cmbBenefits, noPclsBenefits)
+        updateWithResults(dbBenefits, cmbBenefits1, noPclsBenefits)
     }
 
     private fun updateWithResults(dbBenefits: Benefits, cmbBenefits: Benefits?,

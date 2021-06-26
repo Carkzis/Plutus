@@ -30,7 +30,7 @@ internal fun dbPclsCalculation(
     return Benefits(formatAsCurrency(pcls), formatAsCurrency(residual), lta, formatAsCurrency(dc))
 }
 
-internal fun cmbPclsCalculation(
+internal fun smallCmbPclsCalculation(
     fullPension: Double, commutationFactor: Double, dcFund: Double = 0.0): Benefits {
 
     // Calculate the pcls and residual when combined with the dc fund
@@ -45,6 +45,30 @@ internal fun cmbPclsCalculation(
     return Benefits(
         formatAsCurrency(pcls), formatAsCurrency(residual), lta, formatAsCurrency(
         BigDecimal.ZERO)
+    )
+}
+
+internal fun largeCmbPclsCalculation(
+    fullPension: Double, commutationFactor: Double, residualDcForAnnuity: Boolean,
+    dcFund: Double = 0.0): Benefits {
+
+    // This is the largest amount of DC that can be combined with the DB benefits to make a PCLS.
+    val maxDcToCombine = BigDecimal((fullPension * 20) / 3)
+        .setScale(2, RoundingMode.HALF_EVEN)
+
+    // PCLS is calculated differently depending on if DC is used to buy an annuity
+    //  or taken as a UFPLS
+    val pcls = if (residualDcForAnnuity) BigDecimal(((fullPension * 20) + dcFund) / 4)
+        .setScale(2, RoundingMode.HALF_EVEN) else maxDcToCombine
+    // Residual will be the same as the full pension with a large lump sum.
+    val residual = BigDecimal(fullPension)
+        .setScale(2, RoundingMode.HALF_EVEN)
+    val dc = BigDecimal(dcFund - pcls.toDouble())
+        .setScale(2, RoundingMode.HALF_EVEN)
+    val lta = ltaCalculation(pcls.toDouble(), residual.toDouble(), dc.toDouble())
+
+    return Benefits(
+        formatAsCurrency(pcls), formatAsCurrency(residual), lta, formatAsCurrency(dc)
     )
 }
 
