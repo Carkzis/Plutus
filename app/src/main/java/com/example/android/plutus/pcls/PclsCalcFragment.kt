@@ -40,37 +40,33 @@ class PclsCalcFragment : Fragment() {
     }
 
     private fun setUpBenefitResultsListeners() {
-        // Listener for the results of the DB benefits
-        viewModel.dbBenOutput.observe(viewLifecycleOwner, {
-            viewDataBinding.dbOnlyLinearLayout.visibility = View.VISIBLE
-            if (it.dcFund != "£0.00") {
-                viewDataBinding.dbDcText.visibility = View.VISIBLE
-                viewDataBinding.dbDcResultText.visibility = View.VISIBLE
-            } else {
-                viewDataBinding.dbDcText.visibility = View.GONE
-                viewDataBinding.dbDcResultText.visibility = View.GONE
-            }
-        })
-
         // Listener for the results of the combined benefits (if applicable)
         viewModel.cmbBenOutput.observe(viewLifecycleOwner, {
             it?.let {
                 if (it.pcls != "£0.00") {
-                    viewDataBinding.combinedLinearLayout.visibility = View.VISIBLE
+                    viewDataBinding.opt1Table.visibility = View.VISIBLE
                 } else {
-                    viewDataBinding.combinedLinearLayout.visibility = View.GONE
+                    viewDataBinding.opt1Table.visibility = View.GONE
                 }
             }
         })
 
-        viewModel.noPclsBenOutput.observe(viewLifecycleOwner, {
-            viewDataBinding.noPclsLinearLayout.visibility = View.VISIBLE
+        // Listener for the results of the DB benefits
+        viewModel.dbBenOutput.observe(viewLifecycleOwner, {
+            viewDataBinding.opt2Table.visibility = View.VISIBLE
             if (it.dcFund != "£0.00") {
-                viewDataBinding.npDcText.visibility = View.VISIBLE
-                viewDataBinding.npDcResultText.visibility = View.VISIBLE
+                viewDataBinding.opt2DbDc.visibility = View.VISIBLE
             } else {
-                viewDataBinding.npDcText.visibility = View.GONE
-                viewDataBinding.npDcResultText.visibility = View.GONE
+                viewDataBinding.opt2DbDc.visibility = View.GONE
+            }
+        })
+
+        viewModel.noPclsBenOutput.observe(viewLifecycleOwner, {
+            viewDataBinding.opt3Table.visibility = View.VISIBLE
+            if (it.dcFund != "£0.00") {
+                viewDataBinding.opt3NpDc.visibility = View.VISIBLE
+            } else {
+                viewDataBinding.opt3NpDc.visibility = View.GONE
             }
         })
     }
