@@ -65,4 +65,5 @@
   <string name="cpi_12_month_percentages">CPI 12-Month Percentages</string>
   <string name="ufpls">UFPLS</string>
   <string name="annuity_purchased">Annuity Purchased:</string>
+  <string name="revaluation_calculator">Revaluation Calculator</string>
 </resources>
