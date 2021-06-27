@@ -25,7 +25,7 @@ class PclsCalcViewModelTest {
         pclsCalcViewModel = PclsCalcViewModel()
     }
 
-    @Test(expected = NullPointerException::class)
+    @Test
     fun testLiveData_pclsCalculationNoDcFund_postResultsToLiveData() {
         // Set values
         pclsCalcViewModel.fullPension.value = "5,000.00"
@@ -48,11 +48,19 @@ class PclsCalcViewModelTest {
         assertThat(pclsCalcViewModel.noPclsBenOutput.getOrAwaitValue().lta, `is`("9.31%"))
 
         // We expect this to be null, but will test anyway
-        assertThat(pclsCalcViewModel.cmbBenOutput1.getOrAwaitValue(), `is`(null))
+        assertThat(pclsCalcViewModel.cmbBenOutput1.getOrAwaitValue().pcls, `is`("£0.00"))
+        assertThat(pclsCalcViewModel.cmbBenOutput1.getOrAwaitValue().residualPension, `is`("£0.00"))
+        assertThat(pclsCalcViewModel.cmbBenOutput1.getOrAwaitValue().dcFund, `is`("£0.00"))
+        assertThat(pclsCalcViewModel.cmbBenOutput1.getOrAwaitValue().lta, `is`("0.00%"))
+
+        assertThat(pclsCalcViewModel.cmbBenOutput2.getOrAwaitValue().pcls, `is`("£0.00"))
+        assertThat(pclsCalcViewModel.cmbBenOutput2.getOrAwaitValue().residualPension, `is`("£0.00"))
+        assertThat(pclsCalcViewModel.cmbBenOutput2.getOrAwaitValue().dcFund, `is`("£0.00"))
+        assertThat(pclsCalcViewModel.cmbBenOutput2.getOrAwaitValue().lta, `is`("0.00%"))
     }
 
     @Test
-    fun testLiveData_pclsCalculationWithDcFund_postResultsToLiveData() {
+    fun testLiveData_pclsCalculationWithSmallDcFund_postResultsToLiveData() {
         // Set values, use a variety of entry styles
         pclsCalcViewModel.fullPension.value = "500"
         pclsCalcViewModel.commutationFactor.value = "15.0"
@@ -67,7 +75,7 @@ class PclsCalcViewModelTest {
         assertThat(pclsCalcViewModel.dbBenOutput.getOrAwaitValue().dcFund, `is`("£2,000.00"))
         assertThat(pclsCalcViewModel.dbBenOutput.getOrAwaitValue().lta, `is`("1.03%"))
 
-        // Test combined db and dc values, which should no longer be null
+        // Test combined db and dc values
         assertThat(pclsCalcViewModel.cmbBenOutput1.getOrAwaitValue().pcls, `is`("£2,923.08"))
         assertThat(pclsCalcViewModel.cmbBenOutput1.getOrAwaitValue().residualPension, `is`("£438.46"))
         assertThat(pclsCalcViewModel.cmbBenOutput1.getOrAwaitValue().dcFund, `is`("£0.00"))
@@ -78,6 +86,49 @@ class PclsCalcViewModelTest {
         assertThat(pclsCalcViewModel.noPclsBenOutput.getOrAwaitValue().residualPension, `is`("£500.00"))
         assertThat(pclsCalcViewModel.noPclsBenOutput.getOrAwaitValue().dcFund, `is`("£2,000.00"))
         assertThat(pclsCalcViewModel.noPclsBenOutput.getOrAwaitValue().lta, `is`("1.11%"))
+
+        // As this is a small dc fund, there isn't a second option combined option with residual dc
+        assertThat(pclsCalcViewModel.cmbBenOutput2.getOrAwaitValue().pcls, `is`("£0.00"))
+        assertThat(pclsCalcViewModel.cmbBenOutput2.getOrAwaitValue().residualPension, `is`("£0.00"))
+        assertThat(pclsCalcViewModel.cmbBenOutput2.getOrAwaitValue().dcFund, `is`("£0.00"))
+        assertThat(pclsCalcViewModel.cmbBenOutput2.getOrAwaitValue().lta, `is`("0.00%"))
+    }
+
+    @Test
+    fun testLiveData_pclsCalculationWithLargeDcFund_postResultsToLiveData() {
+        // Set values, use a variety of entry styles
+        pclsCalcViewModel.fullPension.value = "500"
+        pclsCalcViewModel.commutationFactor.value = "15.0"
+        pclsCalcViewModel.dcFund.value = "20,000.00"
+
+        // Call function
+        pclsCalcViewModel.validateBeforeCalculation()
+
+        // Test db output values
+        assertThat(pclsCalcViewModel.dbBenOutput.getOrAwaitValue().pcls, `is`("£2,307.69"))
+        assertThat(pclsCalcViewModel.dbBenOutput.getOrAwaitValue().residualPension, `is`("£346.15"))
+        assertThat(pclsCalcViewModel.dbBenOutput.getOrAwaitValue().dcFund, `is`("£20,000.00"))
+        assertThat(pclsCalcViewModel.dbBenOutput.getOrAwaitValue().lta, `is`("2.71%"))
+
+        // Test combined db and dc values, where the dc is large and therefore there is a residual
+        // dc fund, used to purchase an annuity
+        assertThat(pclsCalcViewModel.cmbBenOutput1.getOrAwaitValue().pcls, `is`("£7,500.00"))
+        assertThat(pclsCalcViewModel.cmbBenOutput1.getOrAwaitValue().residualPension, `is`("£500.00"))
+        assertThat(pclsCalcViewModel.cmbBenOutput1.getOrAwaitValue().dcFund, `is`("£12,500.00"))
+        assertThat(pclsCalcViewModel.cmbBenOutput1.getOrAwaitValue().lta, `is`("2.78%"))
+
+        // Test full pension benefits without commutation
+        assertThat(pclsCalcViewModel.noPclsBenOutput.getOrAwaitValue().pcls, `is`("£0.00"))
+        assertThat(pclsCalcViewModel.noPclsBenOutput.getOrAwaitValue().residualPension, `is`("£500.00"))
+        assertThat(pclsCalcViewModel.noPclsBenOutput.getOrAwaitValue().dcFund, `is`("£20,000.00"))
+        assertThat(pclsCalcViewModel.noPclsBenOutput.getOrAwaitValue().lta, `is`("2.79%"))
+
+        // Test combined db and dc values, where the dc is large and therefore there is a residual
+        // dc fund, used to get a UFPLS
+        assertThat(pclsCalcViewModel.cmbBenOutput2.getOrAwaitValue().pcls, `is`("£3,333.33"))
+        assertThat(pclsCalcViewModel.cmbBenOutput2.getOrAwaitValue().residualPension, `is`("£500.00"))
+        assertThat(pclsCalcViewModel.cmbBenOutput2.getOrAwaitValue().dcFund, `is`("£16,666.67"))
+        assertThat(pclsCalcViewModel.cmbBenOutput2.getOrAwaitValue().lta, `is`("2.79%"))
     }
 
     @Test

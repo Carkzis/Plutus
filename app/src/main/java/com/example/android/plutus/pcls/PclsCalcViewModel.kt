@@ -96,14 +96,17 @@ class PclsCalcViewModel @Inject constructor() : ViewModel() {
             } else {
                 smallCmbPclsCalculation(fp, cf, dc)
             }
-        } else Benefits("£0.00",
-            "£0.00", "£0.00", "£0.00")
+        } else {
+            Benefits("£0.00", "£0.00", "0.00%", "£0.00")
+        }
 
         // These benefits are for where there is a large DC fund and the residual amount is
         // taken as a UFPLS
         cmbBenefits2 = if (dc >= ((fp * 20) / 3))
             largeCmbPclsCalculation(fp, cf, false, dc) else Benefits("£0.00",
-        "£0.00", "£0.00", "£0.00")
+        "£0.00", "0.00%", "£0.00")
+
+
 
         updateWithResults(dbBenefits, cmbBenefits1, cmbBenefits2, noPclsBenefits)
     }
