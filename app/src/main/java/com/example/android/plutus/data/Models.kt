@@ -64,3 +64,11 @@ data class DateCalcResults (
     val yearsDays: Pair<Long, Long>,
     val taxYears: Long,
     val sixthAprils: Long)
+
+data class RevalResults (
+    val cpiHigh: String,
+    val cpiLow: String,
+    val rpiHigh: String,
+    val rpiLow: String,
+    val gmpTaxYears: String,
+    val gmpSixthAprils: String)

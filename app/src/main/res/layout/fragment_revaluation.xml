@@ -162,13 +162,14 @@
       android:layout_height="wrap_content"
       android:padding="12dp"
       android:stretchColumns="*"
-      tools:layout_editor_absoluteX="1dp"
-      tools:layout_editor_absoluteY="192dp">
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/button">
 
       <TableRow
         android:id="@+id/cpi_high_row"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
         <TextView
           android:id="@+id/cpi_high_label"
@@ -193,7 +194,7 @@
       <TableRow
         android:id="@+id/cpi_low_row"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <TextView
           android:id="@+id/cpi_low_label"
@@ -218,7 +219,7 @@
       <TableRow
         android:id="@+id/rpi_high_row"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <TextView
           android:id="@+id/rpi_high_label"
@@ -243,7 +244,7 @@
       <TableRow
         android:id="@+id/rpi_low_row"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <TextView
           android:id="@+id/rpi_low_label"
@@ -268,7 +269,7 @@
       <TableRow
         android:id="@+id/gmp_fixed_tax_years"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <TextView
           android:id="@+id/gmpf_tax_years_label"
@@ -293,7 +294,7 @@
       <TableRow
         android:id="@+id/gmp_fixed_sixth_aprils"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <TextView
           android:id="@+id/gmpf_sixth_aprils_label"

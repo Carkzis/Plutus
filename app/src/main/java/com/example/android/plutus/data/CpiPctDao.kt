@@ -15,6 +15,9 @@ interface CpiPctDao {
     @Query("SELECT * FROM DatabaseCpiPct")
     fun getCpiRateList(): List<DatabaseCpiPct>
 
+    @Query("SELECT * FROM DatabaseCpiPct WHERE month = 'September'")
+    fun getCpiRatesForReval(): LiveData<List<DatabaseCpiPct>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(cpiRates: List<DatabaseCpiPct>)
 

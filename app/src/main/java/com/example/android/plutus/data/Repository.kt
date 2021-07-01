@@ -10,9 +10,11 @@ interface Repository {
 
     suspend fun refreshCpiPercentages()
     fun getCpiPercentages(): LiveData<List<CpiPercentage>>
+    fun getSeptemberCpi(): LiveData<List<CpiPercentage>>
 
     suspend fun refreshRpiPercentages()
     fun getRpiPercentages(): LiveData<List<RpiPercentage>>
+    fun getSeptemberRpi(): LiveData<List<RpiPercentage>>
 
     suspend fun refreshCpiItems()
     fun getCpiItems(): LiveData<List<CpiItem>>
