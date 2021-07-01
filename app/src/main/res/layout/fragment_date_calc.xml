@@ -21,7 +21,7 @@
 
     <LinearLayout
       android:id="@+id/date_title_linear_layout"
-      android:layout_width="0dp"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:orientation="horizontal"
       app:layout_constraintEnd_toEndOf="parent"
@@ -32,9 +32,10 @@
 
       <ImageView
         android:id="@+id/icon_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:contentDescription="@string/plutus_icon"
+        android:scaleType="center"
         app:srcCompat="@drawable/ic_launcher_foreground"
         tools:ignore="VectorDrawableCompat"
         tools:layout_editor_absoluteX="152dp" />
@@ -375,7 +376,7 @@
       android:id="@+id/date_calc_button"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginTop="32dp"
+      android:layout_marginTop="8dp"
       android:text="@string/calculate_button"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"

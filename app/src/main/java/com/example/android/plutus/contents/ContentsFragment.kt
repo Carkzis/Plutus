@@ -47,6 +47,9 @@ class ContentsFragment : Fragment() {
         viewDataBinding.inflationButton.setOnClickListener {
             findNavController().navigate(ContentsFragmentDirections.actionContentsFragmentToInflationMainFragment())
         }
+        viewDataBinding.revaluationButton.setOnClickListener {
+            findNavController().navigate(ContentsFragmentDirections.actionContentsFragmentToRevaluationFragment())
+        }
     }
 
 }

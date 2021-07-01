@@ -24,7 +24,7 @@
       android:id="@+id/calculate_pcls_button"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="@string/calculate"
+      android:text="@string/calculate_button"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/pcls_input_linear_layout" />
@@ -226,9 +226,10 @@
 
       <ImageView
         android:id="@+id/icon_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:contentDescription="@string/plutus_icon"
+        android:scaleType="center"
         app:srcCompat="@drawable/ic_launcher_foreground"
         tools:ignore="VectorDrawableCompat"
         tools:layout_editor_absoluteX="152dp" />
