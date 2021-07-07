@@ -19,8 +19,8 @@ class RevaluationViewModel @Inject constructor(
 ) : ViewModel() {
 
     // TODO: Check these are what we expect.
-    var cpiPercentages = repository.getCpiPercentages()
-    var rpiPercentages = repository.getRpiPercentages()
+    var cpiPercentages = repository.getSeptemberCpi()
+    var rpiPercentages = repository.getSeptemberRpi()
 
     var startDateInfo = MutableLiveData("")
     var endDateInfo = MutableLiveData("")
@@ -28,10 +28,6 @@ class RevaluationViewModel @Inject constructor(
     private var _loadingStatus = MutableLiveData<ApiLoadingStatus>()
     val loadingStatus: LiveData<ApiLoadingStatus>
         get() = _loadingStatus
-
-    init {
-        showIt()
-    }
 
     fun showIt() {
         Timber.e(cpiPercentages.value.toString())
