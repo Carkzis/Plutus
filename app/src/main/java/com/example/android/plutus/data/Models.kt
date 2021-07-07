@@ -72,3 +72,9 @@ data class RevalResults (
     val rpiLow: String,
     val gmpTaxYears: String,
     val gmpSixthAprils: String)
+
+
+data class CalendarInfo(
+    val year: Int,
+    val month: Int,
+    val day: Int)

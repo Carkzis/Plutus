@@ -5,8 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.android.plutus.CpiPercentage
+import com.example.android.plutus.Event
+import com.example.android.plutus.R
 import com.example.android.plutus.data.Repository
 import com.example.android.plutus.inflation.ApiLoadingStatus
+import com.example.android.plutus.util.daysCalculation
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -18,7 +21,7 @@ class RevaluationViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 
-    // TODO: Check these are what we expect.
+    // TODO: Check that we have the most current data, else refresh.
     var cpiPercentages = repository.getSeptemberCpi()
     var rpiPercentages = repository.getSeptemberRpi()
 
@@ -29,7 +32,43 @@ class RevaluationViewModel @Inject constructor(
     val loadingStatus: LiveData<ApiLoadingStatus>
         get() = _loadingStatus
 
-    fun showIt() {
+    private var _toastText = MutableLiveData<Event<Int>>()
+    val toastText: LiveData<Event<Int>>
+        get() = _toastText
+
+    fun setStartDate(year: Int, month: Int, day: Int) {
+        val formattedMonth = if (month < 10) "0$month" else month
+        val formattedDay = if (day < 10) "0$day" else day
+        startDateInfo.value = "$formattedDay/$formattedMonth/$year"
+    }
+
+    fun setEndDate(year: Int, month: Int, day: Int) {
+        val formattedMonth = if (month < 10) "0$month" else month
+        val formattedDay = if (day < 10) "0$day" else day
+        endDateInfo.value = "$formattedDay/$formattedMonth/$year"
+    }
+
+    fun validateBeforeCalculation() {
+        // Return if these values have not been entered.
+        if (startDateInfo.value == "") return showToastMessage(R.string.no_start_date_entered)
+        if (endDateInfo.value == "") return showToastMessage(R.string.no_end_date_entered)
+
+        val periodDays = daysCalculation(startDateInfo.value!!, endDateInfo.value!!)
+
+        // If the difference is negative, return a toast message
+        if (periodDays < 1) return showToastMessage(R.string.end_date_after_start_date)
+
+        calculateRevaluationRates()
+    }
+
+    fun calculateRevaluationRates() {
+
         Timber.e(cpiPercentages.value.toString())
     }
+
+    private fun showToastMessage(message: Int) {
+        _toastText.value = Event(message)
+    }
+
+
 }

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import com.example.android.plutus.CalendarInfo
 import com.example.android.plutus.DateCalcResults
 import com.example.android.plutus.databinding.FragmentDateCalcBinding
 import com.example.android.plutus.util.showToast
@@ -68,8 +69,6 @@ class DateCalcFragment : Fragment() {
             }, calendar.year, calendar.month, calendar.day).show()
         }
     }
-
-    data class CalendarInfo(val year: Int, val month: Int, val day: Int)
 
     private fun setUpCalendar(startOrEndDate: String): CalendarInfo {
         return if (startOrEndDate == "") {
