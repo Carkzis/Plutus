@@ -69,6 +69,6 @@
   <string name="cpi_revaluation_max_2_5">CPI Revaluation (Max 2.5%):</string>
   <string name="rpi_revaluation_max_5">RPI Revaluation (Max 5%):</string>
   <string name="rpi_revaluation_max_2_5">RPI Revaluation (Max 2.5%):</string>
-  <string name="gmp_revaluation_complete_tax_years">GMP Revaluation (Complete Tax Years)</string>
+  <string name="gmp_revaluation_complete_tax_years">GMP Revaluation (Tax Years):</string>
   <string name="gmp_revaluation_sixth_aprils">GMP Revaluation (6th Aprils):</string>
 </resources>

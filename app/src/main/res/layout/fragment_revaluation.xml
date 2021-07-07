@@ -285,6 +285,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:textSize="@dimen/normal_text_size"
+          android:text="@{String.valueOf(revaluationViewModel.revalCalcResults.gmpTaxYears)}"
           tools:layout_editor_absoluteX="57dp"
           tools:layout_editor_absoluteY="383dp"
           tools:text="1.501" />
@@ -310,6 +311,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:textSize="@dimen/normal_text_size"
+          android:text="@{String.valueOf(revaluationViewModel.revalCalcResults.gmpSixthAprils)}"
           tools:layout_editor_absoluteX="57dp"
           tools:layout_editor_absoluteY="383dp"
           tools:text="1.606" />

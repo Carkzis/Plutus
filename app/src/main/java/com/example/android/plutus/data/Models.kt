@@ -66,12 +66,12 @@ data class DateCalcResults (
     val sixthAprils: Long)
 
 data class RevalResults (
-    val cpiHigh: String,
-    val cpiLow: String,
-    val rpiHigh: String,
-    val rpiLow: String,
-    val gmpTaxYears: String,
-    val gmpSixthAprils: String)
+    val cpiHigh: Double,
+    val cpiLow: Double,
+    val rpiHigh: Double,
+    val rpiLow: Double,
+    val gmpTaxYears: Double,
+    val gmpSixthAprils: Double)
 
 
 data class CalendarInfo(

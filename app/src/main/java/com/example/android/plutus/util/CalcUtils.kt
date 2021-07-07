@@ -8,6 +8,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 import java.util.*
+import kotlin.math.pow
 
 // Note: this is not actually a constant, but for initial purposes it is.
 // In the future it can be changed to match the current UK amount.
@@ -200,4 +201,49 @@ internal fun sixthAprilsPassCalculation(startDate: String, endDate: String) : Lo
     }
 
     return sixthAprils.toLong()
+}
+
+internal fun gmpRevaluationCalculation(startDate: String, endDate: String,
+                                       isFullTaxYears: Boolean) : Double {
+    // Get the number of years to revalue by depending on the isFullTaxYears toggle.
+    val years = if (isFullTaxYears) taxYearsCalculation(startDate, endDate)
+        else sixthAprilsPassCalculation(startDate, endDate)
+
+    val startDateObj = LocalDate.parse(startDate,
+        DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+
+    // Create LocalDate objects for all the tranches of GMP revaluation.
+    val gmpDate1988 = LocalDate.parse("06/04/1988",
+        DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+    val gmpDate1993 = LocalDate.parse("06/04/1993",
+        DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+    val gmpDate1997 = LocalDate.parse("06/04/1997",
+        DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+    val gmpDate2002 = LocalDate.parse("06/04/2002",
+        DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+    val gmpDate2007 = LocalDate.parse("06/04/2007",
+        DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+    val gmpDate2012 = LocalDate.parse("06/04/2012",
+        DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+    val gmpDate2017 = LocalDate.parse("06/04/2017",
+        DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+
+    // Get different revaluation rates depending on the start date for revaluation.
+    val fixedGmpRate = when {
+        startDateObj.isBefore(gmpDate1988) -> 1.085
+        startDateObj.isBefore(gmpDate1993) -> 1.075
+        startDateObj.isBefore(gmpDate1997) -> 1.070
+        startDateObj.isBefore(gmpDate2002) -> 1.0625
+        startDateObj.isBefore(gmpDate2007) -> 1.045
+        startDateObj.isBefore(gmpDate2012) -> 1.04
+        startDateObj.isBefore(gmpDate2017) -> 1.0475
+        else -> 1.035
+    }
+
+    // Need to get the figure to 3 decimal places.
+    val formattedResult = BigDecimal(fixedGmpRate.pow(years.toDouble()))
+        .setScale(3, RoundingMode.HALF_EVEN)
+
+    return formattedResult.toDouble()
+
 }
