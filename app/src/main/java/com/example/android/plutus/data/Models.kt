@@ -73,7 +73,6 @@ data class RevalResults (
     val gmpTaxYears: Double,
     val gmpSixthAprils: Double)
 
-
 data class CalendarInfo(
     val year: Int,
     val month: Int,

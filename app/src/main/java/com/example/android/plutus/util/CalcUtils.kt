@@ -1,6 +1,8 @@
 package com.example.android.plutus.util
 
 import com.example.android.plutus.Benefits
+import com.example.android.plutus.CpiPercentage
+import com.example.android.plutus.RpiPercentage
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.NumberFormat
@@ -8,6 +10,8 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 import java.util.*
+import kotlin.math.max
+import kotlin.math.min
 import kotlin.math.pow
 
 // Note: this is not actually a constant, but for initial purposes it is.
@@ -193,7 +197,7 @@ internal fun sixthAprilsPassCalculation(startDate: String, endDate: String) : Lo
     var currentDateObj = startDateObj
     var sixthAprils = 0
 
-    (0 until numberOfDays).forEach { day ->
+    (0 until numberOfDays).forEach { _ ->
         if (currentDateObj.monthValue == 4 && currentDateObj.dayOfMonth == 6) {
             sixthAprils += 1
         }
@@ -245,5 +249,62 @@ internal fun gmpRevaluationCalculation(startDate: String, endDate: String,
         .setScale(3, RoundingMode.HALF_EVEN)
 
     return formattedResult.toDouble()
+}
+
+internal fun rpiRevaluationCalculation(startDate: String, endDate: String,
+                                       revList: List<RpiPercentage>, cap: Double) : Double {
+
+    val rateList = revList.reversed()
+
+    // Need the amount of years to loop through the revaluation rates
+    val years = yearsCalculation(startDate, endDate).toInt()
+
+    val latestSeptYear = rateList[0].year.toInt()
+
+    val endDateObj = LocalDate.parse(endDate,
+        DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+
+    val endYear = endDateObj.year
+
+    val index = (latestSeptYear + 1) - endYear
+
+        // If we don't hold the September RPI for the year, we want to return
+    if (index < 0) return -1.0
+
+    var accumulatedRate = 1.0
+    // Get the maximum revaluation rate allowed.
+    val maxRevRate = (1 + (cap / 100)).pow(years)
+
+    for (currentIndex in index until (index + years)) {
+        // get the lower of the rate of the cap (2.5 or 5.0)
+        var rate = when (rateList[currentIndex].year) {
+            "1986" -> 3.1
+            "1987" -> 5.7
+            else -> rateList[currentIndex].value.replace("%","").toDouble()
+        }
+
+        // Turn this into something we can multiply by
+        rate = 1 + (rate / 100)
+
+        accumulatedRate *= rate
+    }
+
+    // Need to get the figure to 3 decimal places.
+    val formattedResult = BigDecimal(max(min(accumulatedRate, maxRevRate), 0.0))
+        .setScale(3, RoundingMode.HALF_EVEN)
+
+    return formattedResult.toDouble()
+
+
+    // 1 + (value / 100)
+    // get the end year
+    // deduct end year from latest sept year + 1, (check if < 0) start at that index in the list
+    // accumulate / loop the amount of years
+
+    // for a period of 12 months, if the amount is more than 5, make it 5
+    // for any other period, the amount must be less than 5 per cent compound
+    // if the result is less than 0, it is 0
+
+    // SO: Calc first, ask the above questions afterwards!
 
 }

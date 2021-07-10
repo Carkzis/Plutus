@@ -9,6 +9,7 @@ import com.example.android.plutus.data.Repository
 import com.example.android.plutus.inflation.ApiLoadingStatus
 import com.example.android.plutus.util.daysCalculation
 import com.example.android.plutus.util.gmpRevaluationCalculation
+import com.example.android.plutus.util.rpiRevaluationCalculation
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -70,7 +71,7 @@ class RevaluationViewModel @Inject constructor(
         results = RevalResults(
             1.0,
             1.0,
-            1.0,
+            rpiRevaluationCalculation(startDateInfo.value!!, endDateInfo.value!!, rpiPercentages.value!!, 5.0),
             1.0,
             gmpRevaluationCalculation(startDateInfo.value!!, endDateInfo.value!!, true),
             gmpRevaluationCalculation(startDateInfo.value!!, endDateInfo.value!!, false),
