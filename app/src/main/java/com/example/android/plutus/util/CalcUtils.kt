@@ -256,19 +256,22 @@ internal fun rpiRevaluationCalculation(startDate: String, endDate: String,
 
     val rateList = revList.reversed()
 
+    // If the cap is 2.5%, the startDate must be after 05/04/2009
+    val startDateObj = LocalDate.parse(startDate,
+        DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+    val post2009Date = LocalDate.parse("06/04/2009",
+        DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+    val newStartDate = if (startDateObj.isBefore(post2009Date) && cap == 2.5) "06/04/2009" else startDate
+
     // Need the amount of years to loop through the revaluation rates
-    val years = yearsCalculation(startDate, endDate).toInt()
-
+    val years = yearsCalculation(newStartDate, endDate).toInt()
     val latestSeptYear = rateList[0].year.toInt()
-
     val endDateObj = LocalDate.parse(endDate,
         DateTimeFormatter.ofPattern("dd/MM/yyyy"))
-
     val endYear = endDateObj.year
 
+    // If we don't hold the September RPI for the year, we want to return
     val index = (latestSeptYear + 1) - endYear
-
-        // If we don't hold the September RPI for the year, we want to return
     if (index < 0) return -1.0
 
     var accumulatedRate = 1.0
@@ -294,17 +297,5 @@ internal fun rpiRevaluationCalculation(startDate: String, endDate: String,
         .setScale(3, RoundingMode.HALF_EVEN)
 
     return formattedResult.toDouble()
-
-
-    // 1 + (value / 100)
-    // get the end year
-    // deduct end year from latest sept year + 1, (check if < 0) start at that index in the list
-    // accumulate / loop the amount of years
-
-    // for a period of 12 months, if the amount is more than 5, make it 5
-    // for any other period, the amount must be less than 5 per cent compound
-    // if the result is less than 0, it is 0
-
-    // SO: Calc first, ask the above questions afterwards!
 
 }

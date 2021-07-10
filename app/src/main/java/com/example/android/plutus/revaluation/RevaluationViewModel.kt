@@ -72,7 +72,7 @@ class RevaluationViewModel @Inject constructor(
             1.0,
             1.0,
             rpiRevaluationCalculation(startDateInfo.value!!, endDateInfo.value!!, rpiPercentages.value!!, 5.0),
-            1.0,
+            rpiRevaluationCalculation(startDateInfo.value!!, endDateInfo.value!!, rpiPercentages.value!!, 2.5),
             gmpRevaluationCalculation(startDateInfo.value!!, endDateInfo.value!!, true),
             gmpRevaluationCalculation(startDateInfo.value!!, endDateInfo.value!!, false),
         )
