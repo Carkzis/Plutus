@@ -321,7 +321,7 @@ internal fun rpiRevaluationCalculation(startDate: String, endDate: String,
         // get the lower of the rate of the cap (2.5 or 5.0)
         var rate = when (rateList[currentIndex].year) {
             "1986" -> 3.1 // these were errors with legislation in these years, so change manually
-            "1987" -> 5.7
+            "1988" -> 5.7
             else -> rateList[currentIndex].value.replace("%","").toDouble()
         }
 
