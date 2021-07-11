@@ -54,9 +54,9 @@
   <string name="rpi_contents_text">Retail Price Index (RPI)</string>
   <string name="cpi_contents_text">Consumer Price Index (CPI)</string>
   <string name="gmp_contents_text">GMP Fixed Revaluation Rates</string>
-  <string name="cpi_error">There was an error retrieving CPI data...</string>
-  <string name="rpi_error">There was an error retrieving RPI data...</string>
-  <string name="connection_error">Connection error...</string>
+  <string name="cpi_error">There was an error retrieving CPI data…</string>
+  <string name="rpi_error">There was an error retrieving RPI data…</string>
+  <string name="connection_error">Connection error…</string>
   <string name="start_date">Start Date</string>
   <string name="gmp_end_date">End Date</string>
   <string name="fixed_rate">Fixed Rate</string>
@@ -71,4 +71,7 @@
   <string name="rpi_revaluation_max_2_5">RPI Revaluation (Max 2.5%):</string>
   <string name="gmp_revaluation_complete_tax_years">GMP Revaluation (Tax Years):</string>
   <string name="gmp_revaluation_sixth_aprils">GMP Revaluation (6th Aprils):</string>
+  <string name="no_revaluation">No CPI or RPI revaluation applicable with these dates.</string>
+  <string name="no_future_reval">We do not hold CPI or RPI revaluation rates that far ahead.</string>
+  <string name="reval_error">Something has gone wrong, try clicking the refresh button.</string>
 </resources>

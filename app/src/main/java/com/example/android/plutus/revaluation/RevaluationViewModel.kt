@@ -72,17 +72,54 @@ class RevaluationViewModel @Inject constructor(
 
     fun calculateRevaluationRates() {
         results = RevalResults(
-            max(cpiRevaluationCalculation(startDateInfo.value!!, endDateInfo.value!!,
-                cpiPercentages.value!!, rpiPercentages.value!!, 5.0), 0.0),
-            max(cpiRevaluationCalculation(startDateInfo.value!!, endDateInfo.value!!,
-                cpiPercentages.value!!, rpiPercentages.value!!, 2.5), 0.0),
-            max(rpiRevaluationCalculation(startDateInfo.value!!, endDateInfo.value!!,
-                rpiPercentages.value!!, 5.0), 0.0),
-            max(rpiRevaluationCalculation(startDateInfo.value!!, endDateInfo.value!!,
-                rpiPercentages.value!!, 2.5), 0.0),
+            max(
+                cpiRevaluationCalculation(
+                    startDateInfo.value!!, endDateInfo.value!!,
+                    cpiPercentages.value!!, rpiPercentages.value!!, 5.0
+                ), 0.0
+            ),
+            max(
+                cpiRevaluationCalculation(
+                    startDateInfo.value!!, endDateInfo.value!!,
+                    cpiPercentages.value!!, rpiPercentages.value!!, 2.5
+                ), 0.0
+            ),
+            max(
+                rpiRevaluationCalculation(
+                    startDateInfo.value!!, endDateInfo.value!!,
+                    rpiPercentages.value!!, 5.0
+                ), 0.0
+            ),
+            max(
+                rpiRevaluationCalculation(
+                    startDateInfo.value!!, endDateInfo.value!!,
+                    rpiPercentages.value!!, 2.5
+                ), 0.0
+            ),
             gmpRevaluationCalculation(startDateInfo.value!!, endDateInfo.value!!, true),
             gmpRevaluationCalculation(startDateInfo.value!!, endDateInfo.value!!, false),
         )
+
+        // If they are both one, inform member there is no revaluation.
+        if (results.cpiHigh == 1.0 && results.rpiHigh == 1.0) {
+            showToastMessage(R.string.no_revaluation)
+        // If they are both zero, inform the member we do not have the available revaluation rates.
+        } else if (results.cpiHigh == 0.0 && results.rpiHigh == 0.0) {
+            showToastMessage(R.string.no_future_reval)
+        // If cpiHigh is 0.0 but rpiHigh isn't, something has gone wrong, as the CPI percentages
+        // will have been updated but the RPI percentages aren't. Set the RPI results to 0.0 so we
+        // are not giving any false information, and inform the member.
+        } else if (results.cpiHigh == 0.0 && results.rpiHigh != 0.0) {
+            results.rpiHigh = 0.0
+            results.rpiLow = 0.0
+            showToastMessage(R.string.reval_error)
+        // Same in the other direction.
+        } else if (results.cpiHigh != 0.0 && results.rpiHigh == 0.0) {
+            results.cpiHigh = 0.0
+            results.cpiLow = 0.0
+            showToastMessage(R.string.reval_error)
+        }
+
         _revalCalcResults.value = results
     }
 

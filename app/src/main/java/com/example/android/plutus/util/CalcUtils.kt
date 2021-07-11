@@ -286,7 +286,7 @@ internal fun checkRevalDates(startDate: String, cap: Double): String {
     // If the cap is 2.5%, the startDate must be after 05/04/2009, and no revaluation
     // is applied if the start date is before 01/01/1986
     return if (startDateObj.isBefore(noRevalDate)) {
-        return "1.0"
+        return "01/01/1900"
     } else if (startDateObj.isBefore(post2009Date) && cap == 2.5) {
         "06/04/2009"
     } else {
@@ -300,7 +300,6 @@ internal fun rpiRevaluationCalculation(startDate: String, endDate: String,
     val rateList = revList.reversed()
 
     val newStartDate = checkRevalDates(startDate, cap)
-    if (newStartDate.equals("1.0")) return 1.0
 
     // Need the amount of years to loop through the revaluation rates
     val years = yearsCalculation(newStartDate, endDate).toInt()
@@ -312,6 +311,7 @@ internal fun rpiRevaluationCalculation(startDate: String, endDate: String,
     // If we don't hold the September RPI for the year, we want to return
     val index = (latestSeptYear + 1) - endYear
     if (index < 0) return -1.0
+    if (newStartDate.equals("01/01/1900")) return 1.0
 
     var accumulatedRate = 1.0
     // Get the maximum revaluation rate allowed.
@@ -347,7 +347,6 @@ internal fun cpiRevaluationCalculation(startDate: String, endDate: String,
     val cpiRateList = cpiRevList.reversed()
 
     val newStartDate = checkRevalDates(startDate, cap)
-    if (newStartDate.equals("1.0")) return 1.0
 
     // Need the amount of years to loop through the revaluation rates
     val years = yearsCalculation(newStartDate, endDate).toInt()
@@ -359,6 +358,7 @@ internal fun cpiRevaluationCalculation(startDate: String, endDate: String,
     // If we don't hold the September RPI for the year, we want to return
     val index = (latestSeptYear + 1) - endYear
     if (index < 0) return -1.0
+    if (newStartDate.equals("01/01/1900")) return 1.0
 
     var accumulatedRate = 1.0
     // Get the maximum revaluation rate allowed.

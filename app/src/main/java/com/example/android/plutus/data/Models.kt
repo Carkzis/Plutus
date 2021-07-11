@@ -66,10 +66,10 @@ data class DateCalcResults (
     val sixthAprils: Long)
 
 data class RevalResults (
-    val cpiHigh: Double,
-    val cpiLow: Double,
-    val rpiHigh: Double,
-    val rpiLow: Double,
+    var cpiHigh: Double,
+    var cpiLow: Double,
+    var rpiHigh: Double,
+    var rpiLow: Double,
     val gmpTaxYears: Double,
     val gmpSixthAprils: Double)
 
