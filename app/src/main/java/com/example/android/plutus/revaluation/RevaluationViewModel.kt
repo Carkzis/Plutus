@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.android.plutus.*
 import com.example.android.plutus.data.Repository
 import com.example.android.plutus.inflation.ApiLoadingStatus
+import com.example.android.plutus.util.cpiRevaluationCalculation
 import com.example.android.plutus.util.daysCalculation
 import com.example.android.plutus.util.gmpRevaluationCalculation
 import com.example.android.plutus.util.rpiRevaluationCalculation
@@ -69,10 +70,14 @@ class RevaluationViewModel @Inject constructor(
 
     fun calculateRevaluationRates() {
         results = RevalResults(
-            1.0,
-            1.0,
-            rpiRevaluationCalculation(startDateInfo.value!!, endDateInfo.value!!, rpiPercentages.value!!, 5.0),
-            rpiRevaluationCalculation(startDateInfo.value!!, endDateInfo.value!!, rpiPercentages.value!!, 2.5),
+            cpiRevaluationCalculation(startDateInfo.value!!, endDateInfo.value!!,
+                cpiPercentages.value!!, rpiPercentages.value!!, 5.0),
+            cpiRevaluationCalculation(startDateInfo.value!!, endDateInfo.value!!,
+                cpiPercentages.value!!, rpiPercentages.value!!, 2.5),
+            rpiRevaluationCalculation(startDateInfo.value!!, endDateInfo.value!!,
+                rpiPercentages.value!!, 5.0),
+            rpiRevaluationCalculation(startDateInfo.value!!, endDateInfo.value!!,
+                rpiPercentages.value!!, 2.5),
             gmpRevaluationCalculation(startDateInfo.value!!, endDateInfo.value!!, true),
             gmpRevaluationCalculation(startDateInfo.value!!, endDateInfo.value!!, false),
         )
