@@ -209,12 +209,27 @@ internal fun sixthAprilsPassCalculation(startDate: String, endDate: String) : Lo
 
 internal fun gmpRevaluationCalculation(startDate: String, endDate: String,
                                        isFullTaxYears: Boolean) : Double {
-    // Get the number of years to revalue by depending on the isFullTaxYears toggle.
-    val years = if (isFullTaxYears) taxYearsCalculation(startDate, endDate)
-        else sixthAprilsPassCalculation(startDate, endDate)
+
+    val gmpStartDate = LocalDate.parse(
+        "06/04/1978",
+        DateTimeFormatter.ofPattern("dd/MM/yyyy")
+    )
 
     val startDateObj = LocalDate.parse(startDate,
         DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+
+    val validatedStartDate: String
+
+    // GMP started on 06/04/1978, so limited the start date to this
+    if (startDateObj.isBefore(gmpStartDate)) {
+        validatedStartDate = "06/04/1978"
+    } else {
+        validatedStartDate = startDate
+    }
+
+    // Get the number of years to revalue by depending on the isFullTaxYears toggle.
+    val years = if (isFullTaxYears) taxYearsCalculation(validatedStartDate, endDate)
+    else sixthAprilsPassCalculation(validatedStartDate, endDate)
 
     // Create LocalDate objects for all the tranches of GMP revaluation.
     val gmpDate1988 = LocalDate.parse("06/04/1988",
@@ -251,26 +266,41 @@ internal fun gmpRevaluationCalculation(startDate: String, endDate: String,
     return formattedResult.toDouble()
 }
 
-internal fun rpiRevaluationCalculation(startDate: String, endDate: String,
-                                       revList: List<RpiPercentage>, cap: Double) : Double {
-
-    val rateList = revList.reversed()
+internal fun checkRevalDates(startDate: String, cap: Double): String {
 
     // If the cap is 2.5%, the startDate must be after 05/04/2009, and no revaluation
     // is applied if the start date is before 01/01/1986
-    val startDateObj = LocalDate.parse(startDate,
-        DateTimeFormatter.ofPattern("dd/MM/yyyy"))
-    val post2009Date = LocalDate.parse("06/04/2009",
-        DateTimeFormatter.ofPattern("dd/MM/yyyy"))
-    val noRevalDate = LocalDate.parse("01/01/1986",
-        DateTimeFormatter.ofPattern("dd/MM/yyyy"))
-    val newStartDate = if (startDateObj.isBefore(noRevalDate)) {
-        return -1.0
+    val startDateObj = LocalDate.parse(
+        startDate,
+        DateTimeFormatter.ofPattern("dd/MM/yyyy")
+    )
+    val post2009Date = LocalDate.parse(
+        "06/04/2009",
+        DateTimeFormatter.ofPattern("dd/MM/yyyy")
+    )
+    val noRevalDate = LocalDate.parse(
+        "01/01/1986",
+        DateTimeFormatter.ofPattern("dd/MM/yyyy")
+    )
+
+    // If the cap is 2.5%, the startDate must be after 05/04/2009, and no revaluation
+    // is applied if the start date is before 01/01/1986
+    return if (startDateObj.isBefore(noRevalDate)) {
+        return "1.0"
     } else if (startDateObj.isBefore(post2009Date) && cap == 2.5) {
         "06/04/2009"
     } else {
         startDate
     }
+}
+
+internal fun rpiRevaluationCalculation(startDate: String, endDate: String,
+                                       revList: List<RpiPercentage>, cap: Double) : Double {
+
+    val rateList = revList.reversed()
+
+    val newStartDate = checkRevalDates(startDate, cap)
+    if (newStartDate.equals("1.0")) return 1.0
 
     // Need the amount of years to loop through the revaluation rates
     val years = yearsCalculation(newStartDate, endDate).toInt()
@@ -316,21 +346,8 @@ internal fun cpiRevaluationCalculation(startDate: String, endDate: String,
     val rpiRateList = rpiRevList.reversed()
     val cpiRateList = cpiRevList.reversed()
 
-    // If the cap is 2.5%, the startDate must be after 05/04/2009, and no revaluation
-    // is applied if the start date is before 01/01/1986
-    val startDateObj = LocalDate.parse(startDate,
-        DateTimeFormatter.ofPattern("dd/MM/yyyy"))
-    val post2009Date = LocalDate.parse("06/04/2009",
-        DateTimeFormatter.ofPattern("dd/MM/yyyy"))
-    val noRevalDate = LocalDate.parse("01/01/1986",
-        DateTimeFormatter.ofPattern("dd/MM/yyyy"))
-    val newStartDate = if (startDateObj.isBefore(noRevalDate)) {
-        return -1.0
-    } else if (startDateObj.isBefore(post2009Date) && cap == 2.5) {
-        "06/04/2009"
-    } else {
-        startDate
-    }
+    val newStartDate = checkRevalDates(startDate, cap)
+    if (newStartDate.equals("1.0")) return 1.0
 
     // Need the amount of years to loop through the revaluation rates
     val years = yearsCalculation(newStartDate, endDate).toInt()

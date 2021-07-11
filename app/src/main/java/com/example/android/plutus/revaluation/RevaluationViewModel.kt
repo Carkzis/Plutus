@@ -16,6 +16,8 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.lang.Exception
 import javax.inject.Inject
+import kotlin.math.max
+import kotlin.math.min
 
 @HiltViewModel
 class RevaluationViewModel @Inject constructor(
@@ -70,18 +72,17 @@ class RevaluationViewModel @Inject constructor(
 
     fun calculateRevaluationRates() {
         results = RevalResults(
-            cpiRevaluationCalculation(startDateInfo.value!!, endDateInfo.value!!,
-                cpiPercentages.value!!, rpiPercentages.value!!, 5.0),
-            cpiRevaluationCalculation(startDateInfo.value!!, endDateInfo.value!!,
-                cpiPercentages.value!!, rpiPercentages.value!!, 2.5),
-            rpiRevaluationCalculation(startDateInfo.value!!, endDateInfo.value!!,
-                rpiPercentages.value!!, 5.0),
-            rpiRevaluationCalculation(startDateInfo.value!!, endDateInfo.value!!,
-                rpiPercentages.value!!, 2.5),
+            max(cpiRevaluationCalculation(startDateInfo.value!!, endDateInfo.value!!,
+                cpiPercentages.value!!, rpiPercentages.value!!, 5.0), 0.0),
+            max(cpiRevaluationCalculation(startDateInfo.value!!, endDateInfo.value!!,
+                cpiPercentages.value!!, rpiPercentages.value!!, 2.5), 0.0),
+            max(rpiRevaluationCalculation(startDateInfo.value!!, endDateInfo.value!!,
+                rpiPercentages.value!!, 5.0), 0.0),
+            max(rpiRevaluationCalculation(startDateInfo.value!!, endDateInfo.value!!,
+                rpiPercentages.value!!, 2.5), 0.0),
             gmpRevaluationCalculation(startDateInfo.value!!, endDateInfo.value!!, true),
             gmpRevaluationCalculation(startDateInfo.value!!, endDateInfo.value!!, false),
         )
-        Timber.e(cpiPercentages.value.toString())
         _revalCalcResults.value = results
     }
 
