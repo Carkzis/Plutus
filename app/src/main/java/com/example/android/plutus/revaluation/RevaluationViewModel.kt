@@ -15,6 +15,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.lang.Exception
+import java.time.Year
 import javax.inject.Inject
 import kotlin.math.max
 import kotlin.math.min
@@ -67,11 +68,24 @@ class RevaluationViewModel @Inject constructor(
         // If the difference is negative, return a toast message
         if (periodDays < 1) return showToastMessage(R.string.end_date_after_start_date)
 
-        // TODO: Need to check if there is any data at all, and if it is current
-        // TODO: Need to provide option to refresh database. Will use a button and last refreshed.
+        val cpiPcts = cpiPercentages.value
+        val rpiPcts = rpiPercentages.value
 
+        // Check if there is no data held, or if it is otherwise out of date
+        if (cpiPercentages.value.isNullOrEmpty() || rpiPercentages.value.isNullOrEmpty()) {
+            // Stop attempting a calculation
+            return showToastMessage(R.string.update_inflation)
+            // TODO: Will then attempt an auto refresh
+            refreshCpiAndRpiCache()
+        } else if ((cpiPcts!!.last().year.toInt() < Year.now().value - 1) ||
+            (rpiPcts!!.last().year.toInt() < Year.now().value - 1)) {
+            // TODO: Will then attempt an auto refresh, but will attempt calc from cache anyway
+            refreshCpiAndRpiCache()
+        }
         calculateRevaluationRates()
     }
+
+    fun refreshCpiAndRpiCache() {}
 
     fun calculateRevaluationRates() {
         results = RevalResults(
