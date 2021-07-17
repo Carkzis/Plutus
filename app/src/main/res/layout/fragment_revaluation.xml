@@ -184,8 +184,8 @@
           android:id="@+id/cpi_high_text"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:textSize="@dimen/normal_text_size"
           android:text="@{String.valueOf(revaluationViewModel.revalCalcResults.cpiHigh)}"
+          android:textSize="@dimen/normal_text_size"
           tools:layout_editor_absoluteX="57dp"
           tools:layout_editor_absoluteY="383dp"
           tools:text="1.234" />
@@ -210,8 +210,8 @@
           android:id="@+id/cpi_low_text"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:textSize="@dimen/normal_text_size"
           android:text="@{String.valueOf(revaluationViewModel.revalCalcResults.cpiLow)}"
+          android:textSize="@dimen/normal_text_size"
           tools:layout_editor_absoluteX="57dp"
           tools:layout_editor_absoluteY="383dp"
           tools:text="1.210" />
@@ -236,8 +236,8 @@
           android:id="@+id/rpi_high_text"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:textSize="@dimen/normal_text_size"
           android:text="@{String.valueOf(revaluationViewModel.revalCalcResults.rpiHigh)}"
+          android:textSize="@dimen/normal_text_size"
           tools:layout_editor_absoluteX="57dp"
           tools:layout_editor_absoluteY="383dp"
           tools:text="1.432" />
@@ -262,8 +262,8 @@
           android:id="@+id/rpi_low_text"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:textSize="@dimen/normal_text_size"
           android:text="@{String.valueOf(revaluationViewModel.revalCalcResults.rpiLow)}"
+          android:textSize="@dimen/normal_text_size"
           tools:layout_editor_absoluteX="57dp"
           tools:layout_editor_absoluteY="383dp"
           tools:text="1.321" />
@@ -288,8 +288,8 @@
           android:id="@+id/gmpf_tax_years_text"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:textSize="@dimen/normal_text_size"
           android:text="@{String.valueOf(revaluationViewModel.revalCalcResults.gmpTaxYears)}"
+          android:textSize="@dimen/normal_text_size"
           tools:layout_editor_absoluteX="57dp"
           tools:layout_editor_absoluteY="383dp"
           tools:text="1.501" />
@@ -314,8 +314,8 @@
           android:id="@+id/gmpf_sixth_aprils_text"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:textSize="@dimen/normal_text_size"
           android:text="@{String.valueOf(revaluationViewModel.revalCalcResults.gmpSixthAprils)}"
+          android:textSize="@dimen/normal_text_size"
           tools:layout_editor_absoluteX="57dp"
           tools:layout_editor_absoluteY="383dp"
           tools:text="1.606" />
@@ -323,6 +323,16 @@
       </TableRow>
 
     </TableLayout>
+
+    <ProgressBar
+      android:id="@+id/reval_progress_bar"
+      style="?android:attr/progressBarStyle"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      app:layout_constraintStart_toEndOf="@+id/calculate_reval_button"
+      app:layout_constraintTop_toBottomOf="@+id/reval_input_linear_layout"
+      app:loadingStatus="@{revaluationViewModel.loadingStatus}" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

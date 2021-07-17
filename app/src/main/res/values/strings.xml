@@ -74,5 +74,7 @@
   <string name="no_revaluation">No CPI or RPI revaluation applicable with these dates.</string>
   <string name="no_future_reval">We do not hold CPI or RPI revaluation rates that far ahead.</string>
   <string name="reval_error">Something has gone wrong, try clicking the refresh button.</string>
-  <string name="update_inflation">The inflation data needs updated!</string>
+  <string name="update_inflation_first">We do not hold any revaluation data, refreshing!</string>
+  <string name="update_inflation">The inflation data needs updating, refreshing…</string>
+  <string name="inflation_data_refreshed">Inflation data refreshed!</string>
 </resources>

@@ -12,6 +12,8 @@ import com.example.android.plutus.util.daysCalculation
 import com.example.android.plutus.util.gmpRevaluationCalculation
 import com.example.android.plutus.util.rpiRevaluationCalculation
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.lang.Exception
@@ -25,7 +27,6 @@ class RevaluationViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 
-    // TODO: Check that we have the most current data, else refresh.
     var cpiPercentages = repository.getSeptemberCpi()
     var rpiPercentages = repository.getSeptemberRpi()
 
@@ -43,6 +44,10 @@ class RevaluationViewModel @Inject constructor(
     private var _toastText = MutableLiveData<Event<Int>>()
     val toastText: LiveData<Event<Int>>
         get() = _toastText
+
+    init {
+        _loadingStatus.value = ApiLoadingStatus.DONE
+    }
 
     private lateinit var results: RevalResults
 
@@ -73,19 +78,46 @@ class RevaluationViewModel @Inject constructor(
 
         // Check if there is no data held, or if it is otherwise out of date
         if (cpiPercentages.value.isNullOrEmpty() || rpiPercentages.value.isNullOrEmpty()) {
-            // Stop attempting a calculation
-            return showToastMessage(R.string.update_inflation)
-            // TODO: Will then attempt an auto refresh
+            // Stop attempting a calculation, but attempt refresh of cache
             refreshCpiAndRpiCache()
+            return showToastMessage(R.string.update_inflation_first)
+            // TODO: Will then attempt an auto refresh
+            // TODO: Make button unreclickable during this refresh period.
         } else if ((cpiPcts!!.last().year.toInt() < Year.now().value - 1) ||
             (rpiPcts!!.last().year.toInt() < Year.now().value - 1)) {
+            showToastMessage(R.string.update_inflation)
             // TODO: Will then attempt an auto refresh, but will attempt calc from cache anyway
             refreshCpiAndRpiCache()
         }
         calculateRevaluationRates()
     }
 
-    fun refreshCpiAndRpiCache() {}
+    fun refreshCpiAndRpiCache() {
+        viewModelScope.launch {
+            _loadingStatus.value = ApiLoadingStatus.LOADING
+            var isSuccess = false
+                awaitAll(async {
+                    try {
+                        repository.refreshCpiPercentages()
+                        isSuccess = true
+                    } catch (e: Exception) {
+                        _loadingStatus.value = ApiLoadingStatus.ERROR
+                        showToastMessage(R.string.connection_error)
+                    }
+                }, async {
+                    try {
+                        repository.refreshRpiPercentages()
+                        isSuccess = true
+                    } catch (e: Exception) {
+                        _loadingStatus.value = ApiLoadingStatus.ERROR
+                    }
+                })
+            if (isSuccess) {
+                _loadingStatus.value = ApiLoadingStatus.DONE
+                showToastMessage(R.string.inflation_data_refreshed)
+            }
+        }
+    }
 
     fun calculateRevaluationRates() {
         results = RevalResults(
@@ -143,6 +175,7 @@ class RevaluationViewModel @Inject constructor(
     private fun showToastMessage(message: Int) {
         _toastText.value = Event(message)
     }
+
 
 
 }
