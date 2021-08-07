@@ -199,7 +199,7 @@ class RevaluationViewModelTest {
     }
 
     @Test
-    fun textLiveData_revaluationTooFarAhead_resultsForCpiInflationAreZero() {
+    fun testLiveData_revaluationTooFarAhead_resultsForCpiInflationAreZero() {
         // Set values
         revaluationViewModel.startDateInfo.value = "31/05/2021"
         // Create a future date, that will always be in the future.
@@ -221,10 +221,14 @@ class RevaluationViewModelTest {
         // Test the actual Toast value.
         assertThat(revaluationViewModel.toastTest.getOrAwaitValue(), `is`("Too Far Ahead"))
 
+        // This should be 1.0
+        assertThat(revaluationViewModel.revalCalcResults.getOrAwaitValue().cpiHigh, `is`(0.0))
+        assertThat(revaluationViewModel.revalCalcResults.getOrAwaitValue().rpiHigh, `is`(0.0))
+
     }
 
     @Test
-    fun textLiveData_cpiNotUpToDate_resultsForCpiInflationAreZeroRpiAre1point0() {
+    fun testLiveData_cpiAndRpiMisAligned_returnToastMessage() {
         // Set values
         revaluationViewModel.startDateInfo.value = endDate
         revaluationViewModel.endDateInfo.value = endDate
@@ -251,16 +255,32 @@ class RevaluationViewModelTest {
         // Call function
         revaluationViewModel.validateBeforeCalculation()
 
-        // This should be 1.0
-        assertThat(revaluationViewModel.revalCalcResults.getOrAwaitValue().cpiHigh, `is`(1.0))
-        assertThat(revaluationViewModel.revalCalcResults.getOrAwaitValue().rpiHigh, `is`(0.0))
-
         // This checks that a Toast was displayed
         assertThat(revaluationViewModel.toastText.getOrAwaitValue(),
             `is`(not("null"))
         )
+
+        // Test the actual Toast value.
+        assertThat(revaluationViewModel.toastTest.getOrAwaitValue(), `is`("CPI and RPI Mismatch"))
+
     }
 
+    @Test
+    fun testLiveData_resultsCalculated_cpiRpiRevalOneGmpRevalCalculated() {
+        revaluationViewModel.startDateInfo.value = "01/01/2017"
+        revaluationViewModel.endDateInfo.value = "01/01/2020"
 
+        // Call function
+        revaluationViewModel.validateBeforeCalculation()
+
+        // This tests that the cpi and rpi revaluation is not 0.0 (a failure), and GMP calculates
+        assertThat(revaluationViewModel.revalCalcResults.getOrAwaitValue().cpiHigh, `is`(not(0.0)))
+        assertThat(revaluationViewModel.revalCalcResults.getOrAwaitValue().cpiLow, `is`(not(0.0)))
+        assertThat(revaluationViewModel.revalCalcResults.getOrAwaitValue().rpiHigh, `is`(not(0.0)))
+        assertThat(revaluationViewModel.revalCalcResults.getOrAwaitValue().rpiLow, `is`(not(0.0)))
+        assertThat(revaluationViewModel.revalCalcResults.getOrAwaitValue().gmpTaxYears, `is`(1.0973))
+        assertThat(revaluationViewModel.revalCalcResults.getOrAwaitValue().gmpSixthAprils, `is`(1.1494))
+
+    }
 
 }

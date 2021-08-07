@@ -306,14 +306,16 @@ internal fun revaluationCalculation(startDate: String, endDate: String,
 
     // Need the amount of years to loop through the revaluation rates
     val years = yearsCalculation(newStartDate, endDate).toInt()
-    val latestSeptYear = rpiRateList[0].year.toInt()
+    val latestSeptYearRpi = rpiRateList[0].year.toInt()
+    val latestSeptYearCpi = cpiRateList[0].year.toInt()
     val endDateObj = LocalDate.parse(endDate,
         DateTimeFormatter.ofPattern("dd/MM/yyyy"))
     val endYear = endDateObj.year
 
-    // If we don't hold the September RPI for the year, we want to return
-    val index = (latestSeptYear + 1) - endYear
-    if (index < 0) return -1.0
+    // If we don't hold the September RPI or CPI for the year, we want to return
+    val index = (latestSeptYearRpi + 1) - endYear
+    val indexCpi = (latestSeptYearCpi + 1) - endYear
+    if (index < 0 || indexCpi < 0) return -1.0
     if (newStartDate.equals("01/01/1900")) return 1.0
 
     var accumulatedRate = 1.0

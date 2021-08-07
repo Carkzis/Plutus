@@ -85,6 +85,10 @@ class RevaluationViewModel @Inject constructor(
             refreshCpiAndRpiCache()
             _toastTest.value = "Update Inflation First"
             return showToastMessage(R.string.update_inflation_first)
+        } else if (cpiPcts!!.last().year.toInt() != rpiPcts!!.last().year.toInt()) {
+            refreshCpiAndRpiCache()
+            _toastTest.value = "CPI and RPI Mismatch"
+            return showToastMessage(R.string.reval_error)
         } else if ((cpiPcts!!.last().year.toInt() < Year.now().value - 1) ||
             (rpiPcts!!.last().year.toInt() < Year.now().value - 1)) {
             showToastMessage(R.string.update_inflation)
@@ -154,8 +158,6 @@ class RevaluationViewModel @Inject constructor(
             gmpRevaluationCalculation(startDateInfo.value!!, endDateInfo.value!!, true),
             gmpRevaluationCalculation(startDateInfo.value!!, endDateInfo.value!!, false),
         )
-
-
 
         // If they are both one, inform member there is no revaluation.
         if (results.cpiHigh == 1.0 && results.rpiHigh == 1.0) {
