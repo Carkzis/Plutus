@@ -7,10 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.android.plutus.*
 import com.example.android.plutus.data.Repository
 import com.example.android.plutus.inflation.ApiLoadingStatus
-import com.example.android.plutus.util.cpiRevaluationCalculation
+import com.example.android.plutus.util.*
 import com.example.android.plutus.util.daysCalculation
 import com.example.android.plutus.util.gmpRevaluationCalculation
-import com.example.android.plutus.util.rpiRevaluationCalculation
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -122,27 +121,27 @@ class RevaluationViewModel @Inject constructor(
     fun calculateRevaluationRates() {
         results = RevalResults(
             max(
-                cpiRevaluationCalculation(
+                revaluationCalculation(
                     startDateInfo.value!!, endDateInfo.value!!,
-                    cpiPercentages.value!!, rpiPercentages.value!!, 5.0
+                    cpiPercentages.value!!, rpiPercentages.value!!, 5.0, false
                 ), 0.0
             ),
             max(
-                cpiRevaluationCalculation(
+                revaluationCalculation(
                     startDateInfo.value!!, endDateInfo.value!!,
-                    cpiPercentages.value!!, rpiPercentages.value!!, 2.5
+                    cpiPercentages.value!!, rpiPercentages.value!!, 2.5, false
                 ), 0.0
             ),
             max(
-                rpiRevaluationCalculation(
+                revaluationCalculation(
                     startDateInfo.value!!, endDateInfo.value!!,
-                    rpiPercentages.value!!, 5.0
+                    cpiPercentages.value!!, rpiPercentages.value!!, 5.0, true
                 ), 0.0
             ),
             max(
-                rpiRevaluationCalculation(
+                revaluationCalculation(
                     startDateInfo.value!!, endDateInfo.value!!,
-                    rpiPercentages.value!!, 2.5
+                    cpiPercentages.value!!, rpiPercentages.value!!, 2.5, true
                 ), 0.0
             ),
             gmpRevaluationCalculation(startDateInfo.value!!, endDateInfo.value!!, true),

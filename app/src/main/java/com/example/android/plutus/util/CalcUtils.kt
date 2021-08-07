@@ -294,54 +294,10 @@ internal fun checkRevalDates(startDate: String, cap: Double): String {
     }
 }
 
-internal fun rpiRevaluationCalculation(startDate: String, endDate: String,
-                                       revList: List<RpiPercentage>, cap: Double) : Double {
-
-    val rateList = revList.reversed()
-
-    val newStartDate = checkRevalDates(startDate, cap)
-
-    // Need the amount of years to loop through the revaluation rates
-    val years = yearsCalculation(newStartDate, endDate).toInt()
-    val latestSeptYear = rateList[0].year.toInt()
-    val endDateObj = LocalDate.parse(endDate,
-        DateTimeFormatter.ofPattern("dd/MM/yyyy"))
-    val endYear = endDateObj.year
-
-    // If we don't hold the September RPI for the year, we want to return
-    val index = (latestSeptYear + 1) - endYear
-    if (index < 0) return -1.0
-    if (newStartDate.equals("01/01/1900")) return 1.0
-
-    var accumulatedRate = 1.0
-    // Get the maximum revaluation rate allowed.
-    val maxRevRate = (1 + (cap / 100)).pow(years)
-
-    for (currentIndex in index until (index + years)) {
-        // get the lower of the rate of the cap (2.5 or 5.0)
-        var rate = when (rateList[currentIndex].year) {
-            "1986" -> 3.1 // these were errors with legislation in these years, so change manually
-            "1988" -> 5.7
-            else -> rateList[currentIndex].value.replace("%","").toDouble()
-        }
-
-        // Turn this into something we can multiply by
-        rate = 1 + (rate / 100)
-
-        accumulatedRate *= rate
-    }
-
-    // Need to get the figure to 3 decimal places.
-    val formattedResult = BigDecimal(max(min(accumulatedRate, maxRevRate), 0.0))
-        .setScale(3, RoundingMode.HALF_UP)
-
-    return formattedResult.toDouble()
-
-}
-
-internal fun cpiRevaluationCalculation(startDate: String, endDate: String,
+internal fun revaluationCalculation(startDate: String, endDate: String,
                                        cpiRevList: List<CpiPercentage>,
-                                       rpiRevList: List<RpiPercentage>, cap: Double) : Double {
+                                       rpiRevList: List<RpiPercentage>,
+                                       cap: Double, isRpiOnly: Boolean) : Double {
 
     val rpiRateList = rpiRevList.reversed()
     val cpiRateList = cpiRevList.reversed()
@@ -368,7 +324,7 @@ internal fun cpiRevaluationCalculation(startDate: String, endDate: String,
         // get the lower of the rate of the cap (2.5 or 5.0)
         var rate: Double
         // CPI is used after 2010, before that RPI is used, using RPI list to prevent out of bounds
-        if (rpiRateList[currentIndex].year.toInt() > 2009) {
+        if (rpiRateList[currentIndex].year.toInt() > 2009 && !isRpiOnly) {
             rate = cpiRateList[currentIndex].value.replace("%","").toDouble()
         } else {
             rate = when (rpiRateList[currentIndex].year) {
@@ -388,6 +344,7 @@ internal fun cpiRevaluationCalculation(startDate: String, endDate: String,
     val formattedResult = BigDecimal(max(min(accumulatedRate, maxRevRate), 0.0))
         .setScale(3, RoundingMode.HALF_UP)
 
-    return formattedResult.toDouble()
+    // Return the result of 1.0, whichever is higher.
+    return max(formattedResult.toDouble(), 1.0)
 
 }

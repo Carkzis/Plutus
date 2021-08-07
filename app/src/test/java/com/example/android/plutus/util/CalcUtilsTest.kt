@@ -2,6 +2,8 @@
 
 package com.example.android.plutus.util
 
+import com.example.android.plutus.CpiPercentage
+import com.example.android.plutus.RpiPercentage
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.number.OrderingComparison.lessThan
 import org.junit.Test
@@ -658,6 +660,54 @@ class CalcUtilsTest {
         val checkString = checkRevalDates(startDate, 2.5)
 
         assertThat(checkString, `is`("01/01/2015"))
+    }
+
+    val rpiRevList = mutableListOf<RpiPercentage> (
+        RpiPercentage("", "3.9%", "", "2007", "", "", "", ""),
+        RpiPercentage("", "5.0%", "", "2008", "", "", "", ""),
+        RpiPercentage("", "-1.4%", "", "2009", "", "", "", ""),
+        RpiPercentage("", "4.6%", "", "2010", "", "", "", ""),
+        RpiPercentage("", "5.6%", "", "2011", "", "", "", ""),
+        RpiPercentage("", "2.6%", "", "2012", "", "", "", ""),
+        RpiPercentage("", "3.2%", "", "2013", "", "", "", ""),
+    )
+
+    val cpiRevList = mutableListOf<CpiPercentage> (
+        CpiPercentage("", "1.8%", "", "2007", "", "", "", ""),
+        CpiPercentage("", "5.2%", "", "2008", "", "", "", ""),
+        CpiPercentage("", "1.1%", "", "2009", "", "", "", ""),
+        CpiPercentage("", "3.1%", "", "2010", "", "", "", ""),
+        CpiPercentage("", "5.2%", "", "2011", "", "", "", ""),
+        CpiPercentage("", "2.2%", "", "2012", "", "", "", ""),
+        CpiPercentage("", "2.7%", "", "2013", "", "", "", ""),
+    )
+
+    @Test
+    fun revaluationCalculation_noFutureRevaluation_returnMinusOne() {
+        // Note: the latest year we should have is for 2014.
+        val startDate = "06/04/2012"
+        val endDate = "06/04/2015"
+        val cap = 5.0
+
+        // Test the function in question
+        val calcResult = revaluationCalculation(startDate, endDate, cpiRevList,
+            rpiRevList, cap, true)
+
+        assertThat(calcResult, `is`(-1.0))
+    }
+//
+    @Test
+    fun revaluationCalculation_minusRpiForYear_returnOne() {
+        // Note: the latest year we should have is for 2014.
+        val startDate = "06/04/2009"
+        val endDate = "06/04/2010"
+        val cap = 5.0
+
+        // Test the function in question
+        val calcResult = revaluationCalculation(startDate, endDate, cpiRevList,
+            rpiRevList, cap, true)
+
+        assertThat(calcResult, `is`(1.0))
     }
 
 }
