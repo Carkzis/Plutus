@@ -617,4 +617,47 @@ class CalcUtilsTest {
         assertThat(gmpRevaluation, `is`(1.0475))
     }
 
+    @Test
+    fun checkRevalDates_startDateBeforeNoRevalDate_returnsDummyDate() {
+        // Note: any start date prior to 01/01/1986 should mean no revaluation is applied
+        val startDate = "31/12/1985"
+
+        val checkString = checkRevalDates(startDate, 2.5)
+
+        assertThat(checkString, `is`("01/01/1900"))
+    }
+
+    @Test
+    fun checkRevalDates_startDateBefore2009ButCap5_returnsStartDate() {
+        // Note: any start date prior to 01/01/1986 should mean no revaluation is applied
+        val startDate = "01/01/2005"
+        val cap = 5
+
+        val checkString = checkRevalDates(startDate, 5.0)
+
+        assertThat(checkString, `is`("01/01/2005"))
+    }
+
+    @Test
+    fun checkRevalDates_startDateBefore2009ButCap2point5_returns2009Date() {
+        // Note: any start date prior to 01/01/1986 should mean no revaluation is applied
+        val startDate = "01/01/2005"
+        val cap = 5
+
+        val checkString = checkRevalDates(startDate, 2.5)
+
+        assertThat(checkString, `is`("06/04/2009"))
+    }
+
+    @Test
+    fun checkRevalDates_startDateAfter2009ButCap2point5_returnsStartDate() {
+        // Note: any start date prior to 01/01/1986 should mean no revaluation is applied
+        val startDate = "01/01/2015"
+        val cap = 5
+
+        val checkString = checkRevalDates(startDate, 2.5)
+
+        assertThat(checkString, `is`("01/01/2015"))
+    }
+
 }
