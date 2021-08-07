@@ -695,7 +695,7 @@ class CalcUtilsTest {
 
         assertThat(calcResult, `is`(-1.0))
     }
-//
+
     @Test
     fun revaluationCalculation_minusRpiForYear_returnOne() {
         // Note: the latest year we should have is for 2014.
@@ -708,6 +708,129 @@ class CalcUtilsTest {
             rpiRevList, cap, true)
 
         assertThat(calcResult, `is`(1.0))
+    }
+
+    @Test
+    fun revaluationCalculation_rpiCap5RevaluationOverAvailablePeriod_returnCorrectRate() {
+        // Note: the latest year we should have is for 2014.
+        val startDate = "06/04/2008"
+        val endDate = "06/04/2014"
+        val cap = 5.0
+
+        // Test the function in question
+        val calcResult = revaluationCalculation(startDate, endDate, cpiRevList,
+            rpiRevList, cap, true)
+
+        assertThat(calcResult, `is`(1.211))
+    }
+
+    @Test
+    fun revaluationCalculation_rpiCap2point5RevaluationOverAvailablePeriod_returnCorrectRate() {
+        // Note: the latest year we should have is for 2014.
+        val startDate = "06/04/2008"
+        val endDate = "06/04/2014"
+        val cap = 2.5
+
+        // Test the function in question
+        val calcResult = revaluationCalculation(startDate, endDate, cpiRevList,
+            rpiRevList, cap, true)
+
+        assertThat(calcResult, `is`(1.131))
+    }
+
+    @Test
+    fun revaluationCalculation_cpiCap5RevaluationOverAvailablePeriod_returnCorrectRate() {
+        // Note: the latest year we should have is for 2014.
+        val startDate = "06/04/2008"
+        val endDate = "06/04/2014"
+        val cap = 5.0
+
+        // Test the function in question
+        val calcResult = revaluationCalculation(startDate, endDate, cpiRevList,
+            rpiRevList, cap, false)
+
+        assertThat(calcResult, `is`(1.179))
+    }
+
+    @Test
+    fun revaluationCalculation_cpiCap2point5RevaluationOverAvailablePeriod_returnCorrectRate() {
+        // Note: the latest year we should have is for 2014.
+        val startDate = "06/04/2008"
+        val endDate = "06/04/2014"
+        val cap = 2.5
+
+        // Test the function in question
+        val calcResult = revaluationCalculation(startDate, endDate, cpiRevList,
+            rpiRevList, cap, false)
+
+        assertThat(calcResult, `is`(1.122))
+    }
+
+    @Test
+    fun revaluationCalculation_pre1986StartDate_returnOne() {
+
+        // Need small lists with pre 1986 dates.
+        val rpiRevList = mutableListOf<RpiPercentage> (
+            RpiPercentage("", "", "", "1980", "", "", "", ""),
+            RpiPercentage("", "", "", "1981", "", "", "", ""),
+        )
+        val cpiRevList = mutableListOf<CpiPercentage> (
+            CpiPercentage("", "", "", "1980", "", "", "", ""),
+            CpiPercentage("", "", "", "1981", "", "", "", ""),
+        )
+        val startDate = "06/04/1981"
+        val endDate = "06/04/1982"
+        val cap = 5.0
+
+        // Test the function in question
+        val calcResult = revaluationCalculation(startDate, endDate, cpiRevList,
+            rpiRevList, cap, true)
+
+        assertThat(calcResult, `is`(1.0))
+    }
+
+    @Test
+    fun revaluationCalculation_rpi1986Year_returnConvertedFigure3point1() {
+        // Need small lists with pre 1986 dates.
+        val rpiRevList = mutableListOf<RpiPercentage> (
+            RpiPercentage("", "1.0", "", "1986", "", "", "", ""),
+            RpiPercentage("", "1.0", "", "1987", "", "", "", ""),
+        )
+        val cpiRevList = mutableListOf<CpiPercentage> (
+            CpiPercentage("", "1.0", "", "1986", "", "", "", ""),
+            CpiPercentage("", "1.0", "", "1987", "", "", "", ""),
+        )
+        val startDate = "06/04/1986"
+        val endDate = "06/04/1987"
+        val cap = 5.0
+
+        // Test the function in question
+        val calcResult = revaluationCalculation(startDate, endDate, cpiRevList,
+            rpiRevList, cap, true)
+
+        assertThat(calcResult, `is`(1.031))
+    }
+
+    @Test
+    fun revaluationCalculation_rpi1988Year_returnConvertedFigureCappedAt5() {
+        // Need small lists with pre 1986 dates.
+        val rpiRevList = mutableListOf<RpiPercentage> (
+            RpiPercentage("", "1.0", "", "1988", "", "", "", ""),
+            RpiPercentage("", "1.0", "", "1989", "", "", "", ""),
+        )
+        val cpiRevList = mutableListOf<CpiPercentage> (
+            CpiPercentage("", "1.0", "", "1988", "", "", "", ""),
+            CpiPercentage("", "1.0", "", "1989", "", "", "", ""),
+        )
+        val startDate = "06/04/1988"
+        val endDate = "06/04/1989"
+        val cap = 5.0
+
+        // Test the function in question
+        val calcResult = revaluationCalculation(startDate, endDate, cpiRevList,
+            rpiRevList, cap, true)
+
+        assertThat(calcResult, `is`(1.05))
     }
 
 }
