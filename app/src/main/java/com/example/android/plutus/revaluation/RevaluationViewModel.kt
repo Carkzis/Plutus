@@ -176,6 +176,4 @@ class RevaluationViewModel @Inject constructor(
         _toastText.value = Event(message)
     }
 
-
-
 }

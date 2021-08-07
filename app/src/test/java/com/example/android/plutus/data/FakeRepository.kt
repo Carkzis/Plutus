@@ -83,6 +83,10 @@ class FakeRepository @Inject constructor() : Repository {
         }
     }
 
+    override fun getSeptemberCpi(): LiveData<List<CpiPercentage>> {
+        TODO("Not yet implemented")
+    }
+
     override fun getCpiItems(): LiveData<List<CpiItem>> {
         return Transformations.map(cpiDatabaseItems) {
             it.asCpiItemDomainModel()
@@ -93,6 +97,10 @@ class FakeRepository @Inject constructor() : Repository {
         return Transformations.map(rpiDatabaseRates) {
             it.asRpiPctDomainModel()
         }
+    }
+
+    override fun getSeptemberRpi(): LiveData<List<RpiPercentage>> {
+        TODO("Not yet implemented")
     }
 
     override fun getRpiItems(): LiveData<List<RpiItem>> {

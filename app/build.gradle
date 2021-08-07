@@ -80,6 +80,7 @@ dependencies {
         // conflicts with mockito due to direct inclusion of byte buddy
         exclude group: "org.jetbrains.kotlinx", module: "kotlinx-coroutines-debug"
     }
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.7.1'
 
     // Dependencies for Android instrumented unit tests
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
