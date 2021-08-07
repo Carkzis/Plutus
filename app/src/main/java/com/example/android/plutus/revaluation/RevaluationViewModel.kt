@@ -44,6 +44,10 @@ class RevaluationViewModel @Inject constructor(
     val toastText: LiveData<Event<Int>>
         get() = _toastText
 
+    private var _toastTest = MutableLiveData<String>()
+    val toastTest: LiveData<String>
+        get() = _toastTest
+
     init {
         _loadingStatus.value = ApiLoadingStatus.DONE
     }
@@ -79,19 +83,22 @@ class RevaluationViewModel @Inject constructor(
         if (cpiPercentages.value.isNullOrEmpty() || rpiPercentages.value.isNullOrEmpty()) {
             // Stop attempting a calculation, but attempt refresh of cache
             refreshCpiAndRpiCache()
+            _toastTest.value = "Update Inflation First"
             return showToastMessage(R.string.update_inflation_first)
-            // TODO: Will then attempt an auto refresh
-            // TODO: Make button unreclickable during this refresh period.
         } else if ((cpiPcts!!.last().year.toInt() < Year.now().value - 1) ||
             (rpiPcts!!.last().year.toInt() < Year.now().value - 1)) {
             showToastMessage(R.string.update_inflation)
-            // TODO: Will then attempt an auto refresh, but will attempt calc from cache anyway
+            _toastTest.value = "Data Needs Updating"
             refreshCpiAndRpiCache()
         }
         calculateRevaluationRates()
     }
 
-    fun refreshCpiAndRpiCache() {
+    fun testRefresh() {
+        refreshCpiAndRpiCache()
+    }
+
+    private fun refreshCpiAndRpiCache() {
         viewModelScope.launch {
             _loadingStatus.value = ApiLoadingStatus.LOADING
             var isSuccess = false
@@ -118,7 +125,7 @@ class RevaluationViewModel @Inject constructor(
         }
     }
 
-    fun calculateRevaluationRates() {
+    private fun calculateRevaluationRates() {
         results = RevalResults(
             max(
                 revaluationCalculation(
@@ -148,24 +155,30 @@ class RevaluationViewModel @Inject constructor(
             gmpRevaluationCalculation(startDateInfo.value!!, endDateInfo.value!!, false),
         )
 
+
+
         // If they are both one, inform member there is no revaluation.
         if (results.cpiHigh == 1.0 && results.rpiHigh == 1.0) {
             showToastMessage(R.string.no_revaluation)
+            _toastTest.value = "No CPI or RPI"
         // If they are both zero, inform the member we do not have the available revaluation rates.
         } else if (results.cpiHigh == 0.0 && results.rpiHigh == 0.0) {
             showToastMessage(R.string.no_future_reval)
+            _toastTest.value = "Too Far Ahead"
         // If cpiHigh is 0.0 but rpiHigh isn't, something has gone wrong, as the CPI percentages
         // will have been updated but the RPI percentages aren't. Set the RPI results to 0.0 so we
-        // are not giving any false information, and inform the member.
+        // are not giving any false information, and inform the user.
         } else if (results.cpiHigh == 0.0 && results.rpiHigh != 0.0) {
             results.rpiHigh = 0.0
             results.rpiLow = 0.0
             showToastMessage(R.string.reval_error)
+            _toastTest.value = "Something Has Gone Wrong"
         // Same in the other direction.
         } else if (results.cpiHigh != 0.0 && results.rpiHigh == 0.0) {
             results.cpiHigh = 0.0
             results.cpiLow = 0.0
             showToastMessage(R.string.reval_error)
+            _toastTest.value = "Something Has Gone Wrong"
         }
 
         _revalCalcResults.value = results

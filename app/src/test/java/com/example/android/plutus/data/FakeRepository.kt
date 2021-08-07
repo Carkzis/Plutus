@@ -12,14 +12,15 @@ import javax.inject.Inject
 class FakeRepository @Inject constructor() : Repository {
 
     // This is so that the mapping is tested for.
+    // Additional note: for our purposes, all items will have a month of September.
     var cpiDatabaseRates = MutableLiveData<List<DatabaseCpiPct>>().apply {
         value = MutableList(5) {
             DatabaseCpiPct(
                 "01/01/1900",
                 "5.0",
                 "N/A",
-                "1900",
-                "January",
+                "2020",
+                "September",
                 "Q1",
                 "N/A",
                 "N/A",
@@ -34,8 +35,8 @@ class FakeRepository @Inject constructor() : Repository {
                 "01/01/1900",
                 "5.0",
                 "N/A",
-                "1900",
-                "January",
+                "2020",
+                "September",
                 "Q1",
                 "N/A",
                 "N/A",
@@ -50,8 +51,8 @@ class FakeRepository @Inject constructor() : Repository {
                 "01/01/1900",
                 "5.0",
                 "N/A",
-                "1900",
-                "January",
+                "2020",
+                "September",
                 "Q1",
                 "N/A",
                 "N/A",
@@ -66,8 +67,8 @@ class FakeRepository @Inject constructor() : Repository {
                 "01/01/1900",
                 "5.0",
                 "N/A",
-                "1900",
-                "January",
+                "2020",
+                "September",
                 "Q1",
                 "N/A",
                 "N/A",
@@ -84,7 +85,9 @@ class FakeRepository @Inject constructor() : Repository {
     }
 
     override fun getSeptemberCpi(): LiveData<List<CpiPercentage>> {
-        TODO("Not yet implemented")
+        return Transformations.map(cpiDatabaseRates) {
+            it.asCpiPctDomainModel()
+        }
     }
 
     override fun getCpiItems(): LiveData<List<CpiItem>> {
@@ -100,7 +103,9 @@ class FakeRepository @Inject constructor() : Repository {
     }
 
     override fun getSeptemberRpi(): LiveData<List<RpiPercentage>> {
-        TODO("Not yet implemented")
+        return Transformations.map(rpiDatabaseRates) {
+            it.asRpiPctDomainModel()
+        }
     }
 
     override fun getRpiItems(): LiveData<List<RpiItem>> {
