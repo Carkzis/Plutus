@@ -518,5 +518,103 @@ class CalcUtilsTest {
         assertThat(aprilsPassed, `is`(7))
     }
 
+    @Test
+    fun fixedGmpCalculation_passSixthAprilButTestFullTaxYears_returns1point0() {
+        val startDate = "05/03/2021"
+        val endDate = "07/08/2021"
+
+        // Call the function
+        val gmpRevaluation = gmpRevaluationCalculation(startDate, endDate, true)
+
+        assertThat(gmpRevaluation, `is`(1.0))
+    }
+
+    @Test
+    fun fixedGmpCalculation_passSixthAprilAndTestSixthAprils_returns1point035() {
+        val startDate = "05/03/2021"
+        val endDate = "07/08/2021"
+
+        // Call the function
+        val gmpRevaluation = gmpRevaluationCalculation(startDate, endDate, false)
+
+        assertThat(gmpRevaluation, `is`(1.035))
+    }
+
+    @Test
+    fun fixedGmpCalculation_5April1988to7August2021_returns1point035() {
+        val startDate = "05/04/1988"
+        val endDate = "07/08/2021"
+
+        // Call the function
+        val gmpRevaluation = gmpRevaluationCalculation(startDate, endDate, true)
+
+        assertThat(gmpRevaluation, `is`(14.7632))
+    }
+
+    @Test
+    fun fixedGmpCalculation_oneTaxYearBetween1988and1993_returns1point075() {
+        val startDate = "06/04/1988"
+        val endDate = "06/04/1989"
+
+        // Call the function
+        val gmpRevaluation = gmpRevaluationCalculation(startDate, endDate, true)
+
+        assertThat(gmpRevaluation, `is`(1.075))
+    }
+
+    @Test
+    fun fixedGmpCalculation_oneTaxYearBetween1993and1997_returns1point07() {
+        val startDate = "06/04/1995"
+        val endDate = "06/04/1996"
+
+        // Call the function
+        val gmpRevaluation = gmpRevaluationCalculation(startDate, endDate, true)
+
+        assertThat(gmpRevaluation, `is`(1.07))
+    }
+
+    @Test
+    fun fixedGmpCalculation_oneTaxYearBetween1997and2002_returns1point0625() {
+        val startDate = "06/04/2000"
+        val endDate = "06/04/2001"
+
+        // Call the function
+        val gmpRevaluation = gmpRevaluationCalculation(startDate, endDate, true)
+
+        assertThat(gmpRevaluation, `is`(1.0625))
+    }
+
+    @Test
+    fun fixedGmpCalculation_oneTaxYearBetween2002and2007_returns1point045() {
+        val startDate = "06/04/2004"
+        val endDate = "06/04/2005"
+
+        // Call the function
+        val gmpRevaluation = gmpRevaluationCalculation(startDate, endDate, true)
+
+        assertThat(gmpRevaluation, `is`(1.045))
+    }
+
+    @Test
+    fun fixedGmpCalculation_oneTaxYearBetween2007and2012_returns1point04() {
+        val startDate = "06/04/2007"
+        val endDate = "06/04/2008"
+
+        // Call the function
+        val gmpRevaluation = gmpRevaluationCalculation(startDate, endDate, true)
+
+        assertThat(gmpRevaluation, `is`(1.04))
+    }
+
+    @Test
+    fun fixedGmpCalculation_oneTaxYearBetween2012and2017_returns1point0475() {
+        val startDate = "06/04/2015"
+        val endDate = "06/04/2016"
+
+        // Call the function
+        val gmpRevaluation = gmpRevaluationCalculation(startDate, endDate, true)
+
+        assertThat(gmpRevaluation, `is`(1.0475))
+    }
 
 }

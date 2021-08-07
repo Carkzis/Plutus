@@ -23,13 +23,13 @@ internal fun dbPclsCalculation(
 
     // Calculate the pcls and the residual pension
     val pcls = BigDecimal((fullPension * commutationFactor * 20) / ((commutationFactor * 3) + 20))
-        .setScale(2, RoundingMode.HALF_EVEN)
+        .setScale(2, RoundingMode.HALF_UP)
     val commutedPension = BigDecimal(pcls.toDouble() / commutationFactor)
-        .setScale(2, RoundingMode.HALF_EVEN)
+        .setScale(2, RoundingMode.HALF_UP)
     val residual = BigDecimal(fullPension - commutedPension.toDouble())
-        .setScale(2, RoundingMode.HALF_EVEN)
+        .setScale(2, RoundingMode.HALF_UP)
     val dc = BigDecimal(dcFund)
-        .setScale(2, RoundingMode.HALF_EVEN)
+        .setScale(2, RoundingMode.HALF_UP)
     val lta = ltaCalculation(pcls.toDouble(), residual.toDouble(), dcFund)
 
     return Benefits(formatAsCurrency(pcls), formatAsCurrency(residual), lta, formatAsCurrency(dc))
@@ -40,11 +40,11 @@ internal fun smallCmbPclsCalculation(
 
     // Calculate the pcls and residual when combined with the dc fund
     val pcls = BigDecimal(dcFund + ((commutationFactor * ((fullPension * 20) - (dcFund * 3))) /
-            ((commutationFactor * 3) + 20))).setScale(2, RoundingMode.HALF_EVEN)
+            ((commutationFactor * 3) + 20))).setScale(2, RoundingMode.HALF_UP)
     val commutedPension = BigDecimal((pcls.toDouble() - dcFund) / commutationFactor)
-        .setScale(2, RoundingMode.HALF_EVEN)
+        .setScale(2, RoundingMode.HALF_UP)
     val residual = BigDecimal(fullPension - commutedPension.toDouble())
-        .setScale(2, RoundingMode.HALF_EVEN)
+        .setScale(2, RoundingMode.HALF_UP)
     val lta = ltaCalculation(pcls.toDouble(), residual.toDouble(), 0.0)
 
     return Benefits(
@@ -59,17 +59,17 @@ internal fun largeCmbPclsCalculation(
 
     // This is the largest amount of DC that can be combined with the DB benefits to make a PCLS.
     val maxDcToCombine = BigDecimal((fullPension * 20) / 3)
-        .setScale(2, RoundingMode.HALF_EVEN)
+        .setScale(2, RoundingMode.HALF_UP)
 
     // PCLS is calculated differently depending on if DC is used to buy an annuity
     //  or taken as a UFPLS
     val pcls = if (residualDcForAnnuity) BigDecimal(((fullPension * 20) + dcFund) / 4)
-        .setScale(2, RoundingMode.HALF_EVEN) else maxDcToCombine
+        .setScale(2, RoundingMode.HALF_UP) else maxDcToCombine
     // Residual will be the same as the full pension with a large lump sum.
     val residual = BigDecimal(fullPension)
-        .setScale(2, RoundingMode.HALF_EVEN)
+        .setScale(2, RoundingMode.HALF_UP)
     val dc = BigDecimal(dcFund - pcls.toDouble())
-        .setScale(2, RoundingMode.HALF_EVEN)
+        .setScale(2, RoundingMode.HALF_UP)
     val lta = ltaCalculation(pcls.toDouble(), residual.toDouble(), dc.toDouble())
 
     return Benefits(
@@ -261,7 +261,7 @@ internal fun gmpRevaluationCalculation(startDate: String, endDate: String,
 
     // Need to get the figure to 3 decimal places.
     val formattedResult = BigDecimal(fixedGmpRate.pow(years.toDouble()))
-        .setScale(3, RoundingMode.HALF_EVEN)
+        .setScale(4, RoundingMode.HALF_UP)
 
     return formattedResult.toDouble()
 }
@@ -333,7 +333,7 @@ internal fun rpiRevaluationCalculation(startDate: String, endDate: String,
 
     // Need to get the figure to 3 decimal places.
     val formattedResult = BigDecimal(max(min(accumulatedRate, maxRevRate), 0.0))
-        .setScale(3, RoundingMode.HALF_EVEN)
+        .setScale(3, RoundingMode.HALF_UP)
 
     return formattedResult.toDouble()
 
@@ -386,7 +386,7 @@ internal fun cpiRevaluationCalculation(startDate: String, endDate: String,
 
     // Need to get the figure to 3 decimal places.
     val formattedResult = BigDecimal(max(min(accumulatedRate, maxRevRate), 0.0))
-        .setScale(3, RoundingMode.HALF_EVEN)
+        .setScale(3, RoundingMode.HALF_UP)
 
     return formattedResult.toDouble()
 
