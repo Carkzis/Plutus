@@ -17,11 +17,11 @@ import com.example.android.plutus.inflation.*
 //    adapter.submitList(data)
 //}
 
-@BindingAdapter("rpiListData")
-fun bindRpiRecyclerView(recyclerView: RecyclerView, data: List<RpiPercentage>?) {
-    val adapter = recyclerView.adapter as RpiAdapter
-    adapter.submitList(data)
-}
+//@BindingAdapter("rpiListData")
+//fun bindRpiRecyclerView(recyclerView: RecyclerView, data: List<RpiPercentage>?) {
+//    val adapter = recyclerView.adapter as RpiAdapter
+//    adapter.submitList(data)
+//}
 
 //@BindingAdapter("cpiItemListData")
 //fun bindCpiItemsRecyclerView(recyclerView: RecyclerView, data: List<CpiItem>?) {

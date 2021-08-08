@@ -5,17 +5,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import com.example.android.plutus.CpiPercentage
+import com.example.android.plutus.RpiPercentage
 import com.example.android.plutus.databinding.FragmentRpiInflationBinding
 import com.example.android.plutus.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RpiPctFragment : Fragment() {
+class RpiPctFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private val viewModel by viewModels<RpiPctViewModel>()
 
     private lateinit var viewDataBinding: FragmentRpiInflationBinding
+
+    private lateinit var rpiPctAdapter: RpiPctAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,9 +33,11 @@ class RpiPctFragment : Fragment() {
                 rpiInflationViewModel = viewModel
             }
 
+        rpiPctAdapter = RpiPctAdapter()
+
         viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
 
-        viewDataBinding.rpiRecyclerview.adapter = RpiAdapter()
+        viewDataBinding.rpiRecyclerview.adapter = rpiPctAdapter
 
         return viewDataBinding.root
     }
@@ -37,6 +45,12 @@ class RpiPctFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpToast()
+        setUpSearchView()
+        setUpDataObserver()
+    }
+
+    private fun setUpSearchView() {
+        viewDataBinding.rpiPctSearchview.setOnQueryTextListener(this)
     }
 
     private fun setUpToast() {
@@ -45,6 +59,22 @@ class RpiPctFragment : Fragment() {
                 context?.showToast(requireContext().getString(message))
             }
         })
+    }
+
+    private fun setUpDataObserver() {
+        viewModel.inflationRates.observe(viewLifecycleOwner, Observer<List<RpiPercentage>> {
+            rpiPctAdapter.addItemsToAdapter(it)
+        })
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        rpiPctAdapter.filter.filter(query)
+        return false
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        rpiPctAdapter.filter.filter(newText)
+        return false
     }
 
 }
