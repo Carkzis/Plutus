@@ -15,6 +15,7 @@
         <item name="android:fontFamily">@font/coiny</item>
         <item name="android:datePickerDialogTheme">@style/plutusDatePickerTheme</item>
         <item name="android:textColor">#808080</item>
+        <item name="android:toolbarStyle">@style/Theme.AppCompat.DayNight.NoActionBar</item>
     </style>
 
     <style name="plutusDatePickerTheme" parent="Theme.AppCompat.Light.Dialog">

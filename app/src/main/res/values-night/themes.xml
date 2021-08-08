@@ -16,6 +16,8 @@
         <item name="android:datePickerDialogTheme">@style/plutusDatePickerThemeDark</item>
         <item name="toolbarStyle">@style/ToolbarStyle</item>
         <item name="android:fontFamily">@font/coiny</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="ToolbarStyle" parent="@style/Widget.AppCompat.Toolbar">
