@@ -126,6 +126,8 @@
       android:id="@+id/opt1_table"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:layout_marginBottom="8dp"
       android:visibility="gone"
       app:layout_constraintBottom_toTopOf="@+id/opt1b_table"
       app:layout_constraintEnd_toEndOf="parent"
@@ -133,6 +135,20 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/calculate_pcls_button"
       tools:visibility="visible">
+
+      <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+          android:id="@+id/opt1_title"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_span="2"
+          android:text="@string/opt1_description"
+          android:textAlignment="center" />
+
+      </TableRow>
 
       <TableRow
         android:id="@+id/opt1_cmb_pcls"
@@ -267,6 +283,8 @@
       android:id="@+id/opt2_table"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:layout_marginBottom="8dp"
       android:visibility="gone"
       app:layout_constraintBottom_toTopOf="@+id/opt3_table"
       app:layout_constraintEnd_toEndOf="parent"
@@ -274,6 +292,20 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/opt1b_table"
       tools:visibility="visible">
+
+      <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+          android:id="@+id/opt2_title"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_span="2"
+          android:text="@string/opt2_description"
+          android:textAlignment="center" />
+
+      </TableRow>
 
       <TableRow
         android:id="@+id/opt2_db_pcls"
@@ -374,6 +406,8 @@
       android:id="@+id/opt3_table"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:layout_marginBottom="24dp"
       android:visibility="gone"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
@@ -381,6 +415,20 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/opt2_table"
       tools:visibility="visible">
+
+      <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+          android:id="@+id/opt3_title"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_span="2"
+          android:text="@string/opt3_description"
+          android:textAlignment="center" />
+
+      </TableRow>
 
       <TableRow
         android:id="@+id/opt3_np_pension"
@@ -458,12 +506,27 @@
       android:id="@+id/opt1b_table"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:layout_marginBottom="8dp"
       android:visibility="gone"
       app:layout_constraintBottom_toTopOf="@+id/opt2_table"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/opt1_table"
       tools:visibility="visible">
+
+      <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_span="2"
+          android:text="@string/opt1b_description"
+          android:textAlignment="center" />
+
+      </TableRow>
 
       <TableRow
         android:id="@+id/opt1b_cmb_pcls"

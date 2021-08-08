@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import com.example.android.plutus.R
 import com.example.android.plutus.databinding.FragmentPclsCalcBinding
 import com.example.android.plutus.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,14 +46,22 @@ class PclsCalcFragment : Fragment() {
         viewModel.cmbBenOutput1.observe(viewLifecycleOwner, {
             it?.let {
                 if (it.pcls != "£0.00") {
+                    // Ensure the non-combined pcls table titles are not set to option 1 or 2
+                    viewDataBinding.opt2Title.text = getText(R.string.opt2_description)
+                    viewDataBinding.opt3Title.text = getText(R.string.opt3_description)
                     viewDataBinding.opt1Table.visibility = View.VISIBLE
                     if (it.dcFund != "£0.00") {
                         viewDataBinding.opt1CmbDc.visibility = View.VISIBLE
+                        viewDataBinding.opt1Title.text = getText(R.string.opt1a_description)
                     } else {
                         viewDataBinding.opt1CmbDc.visibility = View.GONE
+                        viewDataBinding.opt1Title.text = getText(R.string.opt1_description)
                     }
                 } else {
                     viewDataBinding.opt1Table.visibility = View.GONE
+                    // Need to set the remaining tables to Option 1 and 2 respectively.
+                    viewDataBinding.opt2Title.text = getText(R.string.opt1_description)
+                    viewDataBinding.opt3Title.text = getText(R.string.opt2_description)
                 }
             }
         })
