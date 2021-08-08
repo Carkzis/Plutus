@@ -77,4 +77,5 @@
   <string name="update_inflation_first">We do not hold any revaluation data, refreshing!</string>
   <string name="update_inflation">The inflation data needs updating, refreshing…</string>
   <string name="inflation_data_refreshed">Inflation data refreshed!</string>
+  <string name="plutus">Plutus</string>
 </resources>

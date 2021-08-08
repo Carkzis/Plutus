@@ -13,11 +13,26 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:datePickerDialogTheme">@style/plutusDatePickerThemeDark</item>
         <item name="toolbarStyle">@style/ToolbarStyle</item>
+        <item name="android:fontFamily">@font/coiny</item>
     </style>
 
     <style name="ToolbarStyle" parent="@style/Widget.AppCompat.Toolbar">
         <item name="titleTextColor">@color/primaryTextColor</item>
         <item name="android:background">@color/primaryColor</item>
+    </style>
+
+    <style name="plutusDatePickerThemeDark" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:colorAccent">@color/primaryDarkColor</item>
+        <item name="android:windowBackground">#121212</item>
+        <item name="android:textColorPrimaryInverse">@color/primaryTextColor</item>
+        <item name="android:textColorSecondaryInverse">@color/primaryTextColor</item>
+        <item name="android:textColorPrimary">@color/primaryTextColor</item>
+        <item name="android:textColorSecondary">@color/primaryTextColor</item>
+        <item name="android:colorControlActivated">@color/secondaryDarkColor</item>
+        <item name="android:colorControlHighlight">@color/secondaryDarkColor</item>
+        <item name="colorOnPrimary">@color/primaryTextColor</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
     </style>
 </resources>
