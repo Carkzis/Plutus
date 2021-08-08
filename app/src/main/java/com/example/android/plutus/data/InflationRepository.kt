@@ -53,7 +53,7 @@ class InflationRepository(private val database: PlutusDatabase) : Repository {
 
     override fun getCpiItems(): LiveData<List<CpiItem>> {
         return Transformations.map(database.cpiItemDao().getCpiItems()) {
-            it.asCpiItemDomainModel().asReversed()
+            it.asCpiItemDomainModel()
         }
     }
 

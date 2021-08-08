@@ -23,11 +23,11 @@ fun bindRpiRecyclerView(recyclerView: RecyclerView, data: List<RpiPercentage>?) 
     adapter.submitList(data)
 }
 
-@BindingAdapter("cpiItemListData")
-fun bindCpiItemsRecyclerView(recyclerView: RecyclerView, data: List<CpiItem>?) {
-    val adapter = recyclerView.adapter as CpiItemsAdapter
-    adapter.submitList(data)
-}
+//@BindingAdapter("cpiItemListData")
+//fun bindCpiItemsRecyclerView(recyclerView: RecyclerView, data: List<CpiItem>?) {
+//    val adapter = recyclerView.adapter as CpiItemsAdapter
+//    adapter.submitList(data)
+//}
 
 @BindingAdapter("rpiItemListData")
 fun bindRpiItemsRecyclerView(recyclerView: RecyclerView, data: List<RpiItem>?) {
