@@ -44,6 +44,7 @@ class RevaluationViewModel @Inject constructor(
     val toastText: LiveData<Event<Int>>
         get() = _toastText
 
+    // This LiveData is used for testing the different Toast messages only.
     private var _toastTest = MutableLiveData<String>()
     val toastTest: LiveData<String>
         get() = _toastTest
