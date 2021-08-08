@@ -15,15 +15,26 @@
       type="com.example.android.plutus.pcls.PclsCalcViewModel" />
   </data>
 
-  <androidx.constraintlayout.widget.ConstraintLayout
+
+  <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true">
+
+
+
+
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".pcls.PclsCalcFragment">
 
     <Button
       android:id="@+id/calculate_pcls_button"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
       android:text="@string/calculate_button"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
@@ -83,7 +94,8 @@
           android:hint="@string/pension_hint"
           android:importantForAutofill="no"
           android:inputType="numberDecimal"
-          android:text="@={pclsCalcViewModel.fullPension}" />
+          android:text="@={pclsCalcViewModel.fullPension}"
+          android:textSize="14sp" />
 
         <EditText
           android:id="@+id/commutation_factor_edittext"
@@ -92,7 +104,8 @@
           android:hint="@string/commutation_factor_hint"
           android:importantForAutofill="no"
           android:inputType="numberDecimal"
-          android:text="@={pclsCalcViewModel.commutationFactor}" />
+          android:text="@={pclsCalcViewModel.commutationFactor}"
+          android:textSize="14sp" />
 
         <com.cottacush.android.currencyedittext.CurrencyEditText
           android:id="@+id/dc_edittext"
@@ -101,7 +114,8 @@
           android:hint="@string/dc_fund_hint"
           android:importantForAutofill="no"
           android:inputType="numberDecimal"
-          android:text="@={pclsCalcViewModel.dcFund}" />
+          android:text="@={pclsCalcViewModel.dcFund}"
+          android:textSize="14sp" />
 
       </LinearLayout>
 
@@ -218,7 +232,8 @@
       android:id="@+id/pcls_title_linear_layout"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:orientation="horizontal"
+      android:layout_marginTop="8dp"
+      android:orientation="vertical"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
@@ -228,6 +243,7 @@
         android:id="@+id/icon_image"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_gravity="center"
         android:contentDescription="@string/plutus_icon"
         android:scaleType="center"
         app:srcCompat="@drawable/ic_launcher_foreground"
@@ -240,7 +256,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/standard_pcls_title"
-        android:textSize="24sp"
+        android:textAlignment="center"
+        android:textSize="34sp"
         tools:layout_editor_absoluteX="68dp"
         tools:layout_editor_absoluteY="147dp" />
 
@@ -541,7 +558,8 @@
 
     </TableLayout>
 
-
   </androidx.constraintlayout.widget.ConstraintLayout>
+
+  </ScrollView>
 
 </layout>

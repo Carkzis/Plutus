@@ -13,7 +13,7 @@
   <string name="db_pcls">Defined Benefit PCLS:</string>
   <string name="residual_pension">Residual Pension:</string>
   <string name="lta_used">Lifetime Allowance Used:</string>
-  <string name="standard_pcls_title">Standard PCLS Calculator</string>
+  <string name="standard_pcls_title">PCLS Calculator</string>
   <string name="plutus_icon">Plutus icon</string>
   <string name="or">OR</string>
   <string name="combined_pcls">Combined PCLS:</string>
