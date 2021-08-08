@@ -41,7 +41,25 @@ class InflationRepository(private val database: PlutusDatabase) : Repository {
 
     override fun getCpiPercentages(): LiveData<List<CpiPercentage>> {
         return Transformations.map(database.cpiDao().getCpiRates()) {
-            it.asCpiPctDomainModel()
+            it.asCpiPctDomainModel().asReversed()
+        }
+    }
+
+    override fun getRpiPercentages(): LiveData<List<RpiPercentage>> {
+        return Transformations.map(database.rpiDao().getRpiRates()) {
+            it.asRpiPctDomainModel().asReversed()
+        }
+    }
+
+    override fun getCpiItems(): LiveData<List<CpiItem>> {
+        return Transformations.map(database.cpiItemDao().getCpiItems()) {
+            it.asCpiItemDomainModel().asReversed()
+        }
+    }
+
+    override fun getRpiItems(): LiveData<List<RpiItem>> {
+        return Transformations.map(database.rpiItemDao().getRpiItems()) {
+            it.asRpiItemDomainModel().asReversed()
         }
     }
 
@@ -51,27 +69,9 @@ class InflationRepository(private val database: PlutusDatabase) : Repository {
         }
     }
 
-    override fun getRpiPercentages(): LiveData<List<RpiPercentage>> {
-        return Transformations.map(database.rpiDao().getRpiRates()) {
-            it.asRpiPctDomainModel()
-        }
-    }
-
     override fun getSeptemberRpi(): LiveData<List<RpiPercentage>> {
         return Transformations.map(database.rpiDao().getRpiRatesForReval()) {
             it.asRpiPctDomainModel()
-        }
-    }
-
-    override fun getCpiItems(): LiveData<List<CpiItem>> {
-        return Transformations.map(database.cpiItemDao().getCpiItems()) {
-            it.asCpiItemDomainModel()
-        }
-    }
-
-    override fun getRpiItems(): LiveData<List<RpiItem>> {
-        return Transformations.map(database.rpiItemDao().getRpiItems()) {
-            it.asRpiItemDomainModel()
         }
     }
 
