@@ -71,13 +71,11 @@ class CpiItemsFragment : Fragment(), SearchView.OnQueryTextListener {
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         cpiItemsAdapter.filter.filter(query)
-        Timber.e("SUBMITTED")
         return false
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
         cpiItemsAdapter.filter.filter(newText)
-        Timber.e("TEXTCHANGED")
         return false
     }
 

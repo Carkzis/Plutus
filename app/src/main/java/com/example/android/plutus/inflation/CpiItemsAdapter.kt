@@ -21,12 +21,12 @@ class CpiItemsAdapter : ListAdapter<CpiItem, CpiItemsAdapter.CpiItemsViewHolder>
     var cpiItemList : ArrayList<CpiItem> = ArrayList()
     var cpiItemListFiltered : ArrayList<CpiItem> = ArrayList()
 
-    override fun onBindViewHolder(holder: CpiItemsAdapter.CpiItemsViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CpiItemsViewHolder, position: Int) {
         holder.bind(cpiItemListFiltered[position])
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CpiItemsAdapter.CpiItemsViewHolder {
-        return CpiItemsAdapter.CpiItemsViewHolder.from(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CpiItemsViewHolder {
+        return CpiItemsViewHolder.from(parent)
     }
 
     override fun getItemCount(): Int = cpiItemListFiltered.size
@@ -52,7 +52,7 @@ class CpiItemsAdapter : ListAdapter<CpiItem, CpiItemsAdapter.CpiItemsViewHolder>
                 val binding = CpiItemBinding.inflate(
                     layoutInflater, parent, false
                 )
-                return CpiItemsAdapter.CpiItemsViewHolder(binding)
+                return CpiItemsViewHolder(binding)
             }
         }
     }
