@@ -29,11 +29,11 @@ fun bindRpiRecyclerView(recyclerView: RecyclerView, data: List<RpiPercentage>?) 
 //    adapter.submitList(data)
 //}
 
-@BindingAdapter("rpiItemListData")
-fun bindRpiItemsRecyclerView(recyclerView: RecyclerView, data: List<RpiItem>?) {
-    val adapter = recyclerView.adapter as RpiItemsAdapter
-    adapter.submitList(data)
-}
+//@BindingAdapter("rpiItemListData")
+//fun bindRpiItemsRecyclerView(recyclerView: RecyclerView, data: List<RpiItem>?) {
+//    val adapter = recyclerView.adapter as RpiItemsAdapter
+//    adapter.submitList(data)
+//}
 
 @BindingAdapter("loadingStatus")
 fun bindLoadingStatus(statusProgressBar: ProgressBar, loadingStatus: ApiLoadingStatus) {

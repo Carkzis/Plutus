@@ -42,8 +42,9 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:rpiItemListData="@{rpiItemsViewModel.inflationRates}" />
+      app:layout_constraintTop_toTopOf="parent" />
+
+<!--    app:rpiItemListData="@{rpiItemsViewModel.inflationRates}"-->
 
     <ProgressBar
       android:id="@+id/rpi_items_progress_bar"

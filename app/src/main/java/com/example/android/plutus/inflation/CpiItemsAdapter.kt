@@ -86,7 +86,6 @@ class CpiItemsAdapter : ListAdapter<CpiItem, CpiItemsAdapter.CpiItemsViewHolder>
                 } else {
                     results.values as ArrayList<CpiItem>
                 }
-                Timber.e(cpiItemListFiltered.toString())
                 notifyDataSetChanged()
             }
         }
