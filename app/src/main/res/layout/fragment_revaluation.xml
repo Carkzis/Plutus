@@ -23,7 +23,8 @@
       android:id="@+id/reval_title_linear_layout"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:orientation="horizontal"
+      android:layout_marginTop="8dp"
+      android:orientation="vertical"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
@@ -33,6 +34,7 @@
         android:id="@+id/icon_image"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_gravity="center"
         android:adjustViewBounds="true"
         android:contentDescription="@string/plutus_icon"
         android:cropToPadding="false"
@@ -48,7 +50,8 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:text="@string/revaluation_calculator"
-        android:textSize="24sp"
+        android:textAlignment="center"
+        android:textSize="34sp"
         tools:layout_editor_absoluteX="68dp"
         tools:layout_editor_absoluteY="147dp" />
 
@@ -116,6 +119,7 @@
           android:hint="@string/start_date_hint"
           android:importantForAutofill="no"
           android:inputType="date"
+          android:minHeight="48dp"
           android:text="@{String.valueOf(revaluationViewModel.startDateInfo)}"
           android:textSize="@dimen/normal_text_size"
           app:layout_constraintEnd_toEndOf="parent"
@@ -134,6 +138,7 @@
           android:hint="@string/end_date_hint"
           android:importantForAutofill="no"
           android:inputType="date"
+          android:minHeight="48dp"
           android:text="@{String.valueOf(revaluationViewModel.endDateInfo)}"
           android:textSize="@dimen/normal_text_size"
           app:layout_constraintBottom_toBottomOf="parent"
@@ -162,9 +167,11 @@
       android:layout_height="wrap_content"
       android:padding="12dp"
       android:stretchColumns="*"
+      app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/calculate_reval_button">
+      app:layout_constraintTop_toBottomOf="@+id/calculate_reval_button"
+      app:layout_constraintVertical_bias="0.25">
 
       <TableRow
         android:id="@+id/cpi_high_row"
