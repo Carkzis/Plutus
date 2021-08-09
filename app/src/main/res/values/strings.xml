@@ -88,7 +88,7 @@
   <string name="year">Year</string>
   <string name="month">Month</string>
   <string name="value">Value</string>
-  <string name="about_text"><u>Welcome to Plutus!</u>\n
+  <string name="about_text">
         There are a few tools here to help with pension administration related stuff, and I hope you
         find it useful in some form or another.  However, before you read further (or alternatively,
         click back and start playing with the tools) it must be emphasised that you should not use
@@ -108,7 +108,7 @@
         a single commutation factor, and does not account for any restrictions on the amount of tax
         free cash that can be taken.\n\n
         <u>Date Calculator</u>\n
-        Click on the text entry boxes to bring up the calendars dialog boxes, and choose the
+        Click on the text entry boxes to bring up the calendars dialogs, and choose the
         start and end dates, making sure the end date is after the start date (it won\'t count
         backwards!).  You will then be given the duration between the two dates in various units of
         time.  It should be noted that the end date is always included in the calculation.
@@ -119,27 +119,30 @@
         time, the app will attempt to download the CPI and RPI data from the ONS website.  You can then
         attempt the calculation again.\n\n
         The calculator will only calculate the revaluation rate where the relevant rate is held in
-        memory.  To calculate the revaluation rate end in a certain year, that year must be a maximum
+        memory.  Data is downloaded whenever you try to calculate a revaluation rate, or when you
+        access the relevant revaluation information pages in the app.
+        To calculate the revaluation rate ending in a certain year, that year must be a maximum
         of one year after the latest September CPI or RPI in memory (i.e. to calculate the CPI revaluation
         rate when the end date is on 1 May 2022, you will need the September 2021 CPI figure in memory,
         which would normally be available in November 2021).\n\n
-        If the start date is prior to 6 April 1978, there will be no calculation as there is no
-        revaluation prior to this date.
+        If the start date is prior to 6 April 1978, the start date for the fixed GMP revaluation
+        calculations will be treated as 6 April 1978, as this is when GMP was introduced.\n\n
         If the start date is prior to 1 January 1986, the CPI and RPI rates will be set to 1.0 as
         revaluation rates are not applied in these instances.\n\n
         If the start date is prior to 1 January 2009, the CPI and RPI max 2.5% rates will consider
         the start date to be 1 January 2009.\n\n
         <u>Inflation Information</u>\n
         There is various information here, with all the CPI, RPI, and their 12-month percentages
-        downloaded from ons.gov.uk. The information is received from the following links:\n
-        CPI:\n https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/d7bt/mm23/data\n
+        downloaded from ons.gov.uk. The information is received from the following links:\n\n
+        CPI:\n https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/d7bt/mm23/data\n\n
         CPI 12-Month Percentages:\n
-        https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/d7g7/mm23/data \n
-        RPI:\n https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/chaw/mm23/data \n
+        https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/d7g7/mm23/data \n\n
+        RPI:\n https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/chaw/mm23/data \n\n
         CPI 12-Month Percentages:\n
-        https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/czbh/mm23/data\n
+        https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/czbh/mm23/data \n\n
         There are also the fixed GMP rates, however these are added manually so many not be up to date.\n\n
         <u>Further Information</u>\n
         Please check out https://github.com/Carkzis for more information on any planned updates to
-        the app, or any other apps currently under development!</string>
+        the app, or any other apps currently under development!\n\n</string>
+  <string name="welcome_to_plutus">Welcome to Plutus!</string>
 </resources>
