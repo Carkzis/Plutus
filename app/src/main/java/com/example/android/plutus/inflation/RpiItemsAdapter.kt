@@ -59,7 +59,8 @@ class RpiItemsAdapter : ListAdapter<RpiItem, RpiItemsAdapter.RpiItemsViewHolder>
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val charString = constraint?.toString() ?: ""
                 if (charString.isEmpty()) {
-                    rpiItemListFiltered = ArrayList<RpiItem>()
+                    // If the search string is empty, we show all the items (the default).
+                    rpiItemListFiltered = rpiItemList
                 } else {
                     val filteredList = ArrayList<RpiItem>()
                     rpiItemList.filter {

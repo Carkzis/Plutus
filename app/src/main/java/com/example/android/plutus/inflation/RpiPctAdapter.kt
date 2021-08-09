@@ -59,7 +59,8 @@ class RpiPctAdapter : ListAdapter<RpiPercentage, RpiPctAdapter.RpiViewHolder>(Rp
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val charString = constraint?.toString() ?: ""
                 if (charString.isEmpty()) {
-                    rpiPercentageListFiltered = ArrayList<RpiPercentage>()
+                    // If the search string is empty, we show all the items (the default).
+                    rpiPercentageListFiltered = rpiPercentageList
                 } else {
                     val filteredList = ArrayList<RpiPercentage>()
                     rpiPercentageList.filter {

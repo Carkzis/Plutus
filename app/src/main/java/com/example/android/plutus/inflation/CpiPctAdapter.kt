@@ -60,7 +60,8 @@ class CpiPctAdapter : ListAdapter<CpiPercentage, CpiPctAdapter.CpiViewHolder>(Cp
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val charString = constraint?.toString() ?: ""
                 if (charString.isEmpty()) {
-                    cpiPercentageListFiltered = ArrayList<CpiPercentage>()
+                    // If the search string is empty, we show all the items (the default).
+                    cpiPercentageListFiltered = cpiPercentageList
                 } else {
                     val filteredList = ArrayList<CpiPercentage>()
                     cpiPercentageList.filter {

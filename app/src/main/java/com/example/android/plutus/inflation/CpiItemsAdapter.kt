@@ -62,7 +62,8 @@ class CpiItemsAdapter : ListAdapter<CpiItem, CpiItemsAdapter.CpiItemsViewHolder>
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val charString = constraint?.toString() ?: ""
                 if (charString.isEmpty()) {
-                    cpiItemListFiltered = ArrayList<CpiItem>()
+                    // If the search string is empty, we show all the items (the default).
+                    cpiItemListFiltered = cpiItemList
                 } else {
                     val filteredList = ArrayList<CpiItem>()
                     cpiItemList.filter {
