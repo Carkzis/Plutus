@@ -50,6 +50,9 @@ class ContentsFragment : Fragment() {
         viewDataBinding.revaluationButton.setOnClickListener {
             findNavController().navigate(ContentsFragmentDirections.actionContentsFragmentToRevaluationFragment())
         }
+        viewDataBinding.aboutText.setOnClickListener {
+            findNavController().navigate(ContentsFragmentDirections.actionContentsFragmentToAboutFragment())
+        }
     }
 
 }
