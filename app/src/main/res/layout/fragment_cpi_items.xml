@@ -16,9 +16,101 @@
 
   </data>
 
+
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <LinearLayout
+      android:id="@+id/cpi_items_title_linear_layout"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:orientation="vertical"
+      app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_chainStyle="packed"
+      tools:ignore="UseCompoundDrawables">
+
+      <ImageView
+        android:id="@+id/icon_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:contentDescription="@string/plutus_icon"
+        android:scaleType="center"
+        app:srcCompat="@drawable/ic_launcher_foreground"
+        tools:ignore="VectorDrawableCompat"
+        tools:layout_editor_absoluteX="152dp" />
+
+      <TextView
+        android:id="@+id/cpi_items_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="8dp"
+        android:text="@string/cpi_contents_text"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        tools:layout_editor_absoluteX="68dp"
+        tools:layout_editor_absoluteY="147dp" />
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/constraintLayout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/cpi_items_title_linear_layout">
+
+      <TextView
+        android:id="@+id/cpi_year_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:background="@drawable/button_border"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:text="@string/year"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+      <TextView
+        android:id="@+id/cpi_month_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:background="@drawable/button_border"
+        android:gravity="center"
+        android:text="@string/month"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/cpi_value_title"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/cpi_year_title"
+        app:layout_constraintTop_toTopOf="parent" />
+
+      <TextView
+        android:id="@+id/cpi_value_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_border"
+        android:layout_margin="4dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:text="@string/value"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <SearchView
       android:id="@+id/cpi_searchview"
@@ -30,6 +122,7 @@
       android:background="#55F5F5F5"
       android:elevation="1dp"
       android:queryHint="Search"
+      android:iconifiedByDefault="false"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent" />
@@ -37,13 +130,13 @@
     <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/cpi_items_recyclerview"
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
+      android:layout_height="0dp"
       app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintBottom_toTopOf="@+id/cpi_searchview"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      tools:listitem="@layout/cpi_item"/>
+      app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+      tools:listitem="@layout/cpi_item" />
 
     <!--      app:cpiItemListData="@{cpiItemsViewModel.inflationRates}"-->
 

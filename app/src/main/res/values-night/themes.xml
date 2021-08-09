@@ -14,15 +14,9 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="android:datePickerDialogTheme">@style/plutusDatePickerThemeDark</item>
-        <item name="toolbarStyle">@style/ToolbarStyle</item>
         <item name="android:fontFamily">@font/coiny</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="ToolbarStyle" parent="@style/Widget.AppCompat.Toolbar">
-        <item name="titleTextColor">@color/primaryTextColor</item>
-        <item name="android:background">@color/primaryColor</item>
     </style>
 
     <style name="plutusDatePickerThemeDark" parent="Theme.AppCompat.Light.Dialog">

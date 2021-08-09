@@ -84,4 +84,8 @@
   <string name="opt3_description">Option 3</string>
   <string name="opt1a_description">Option 1A</string>
   <string name="opt1b_description">Option 1B</string>
+  <string name="cpi">CPI</string>
+  <string name="year">Year</string>
+  <string name="month">Month</string>
+  <string name="value">Value</string>
 </resources>
