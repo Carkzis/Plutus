@@ -64,7 +64,7 @@ class RpiPctAdapter : ListAdapter<RpiPercentage, RpiPctAdapter.RpiViewHolder>(Rp
                 } else {
                     val filteredList = ArrayList<RpiPercentage>()
                     rpiPercentageList.filter {
-                        it.month.contains(constraint!!) || it.year.contains(constraint) ||
+                        it.month.lowercase().contains(constraint!!.toString().lowercase()) || it.year.contains(constraint) ||
                                 it.date.contains(constraint)
                     }.forEach {
                         filteredList.add(it)

@@ -104,6 +104,8 @@ class RevaluationViewModel @Inject constructor(
     }
 
     private fun refreshCpiAndRpiCache() {
+
+
         viewModelScope.launch {
             _loadingStatus.value = ApiLoadingStatus.LOADING
             var isSuccess = false

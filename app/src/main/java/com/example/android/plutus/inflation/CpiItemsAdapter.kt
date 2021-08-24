@@ -67,7 +67,7 @@ class CpiItemsAdapter : ListAdapter<CpiItem, CpiItemsAdapter.CpiItemsViewHolder>
                 } else {
                     val filteredList = ArrayList<CpiItem>()
                     cpiItemList.filter {
-                        it.month.contains(constraint!!) || it.year.contains(constraint) ||
+                        it.month.lowercase().contains(constraint!!.toString().lowercase()) || it.year.contains(constraint) ||
                                 it.date.contains(constraint)
                     }.forEach {
                         filteredList.add(it)
