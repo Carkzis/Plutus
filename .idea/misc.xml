@@ -6,6 +6,7 @@
         <entry key="..\:/Users/marcj/AndroidStudioProjects/Plutus/app/src/main/res/drawable/button_border.xml" value="0.1" />
         <entry key="..\:/Users/marcj/AndroidStudioProjects/Plutus/app/src/main/res/drawable/rippler.xml" value="0.1" />
         <entry key="..\:/Users/marcj/AndroidStudioProjects/Plutus/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/marcj/AndroidStudioProjects/Plutus/app/src/main/res/layout/cpi_inflation_rate_item.xml" value="0.22592592592592592" />
         <entry key="..\:/Users/marcj/AndroidStudioProjects/Plutus/app/src/main/res/layout/cpi_item.xml" value="0.1885245901639344" />
         <entry key="..\:/Users/marcj/AndroidStudioProjects/Plutus/app/src/main/res/layout/fragment_about.xml" value="0.182518115942029" />
         <entry key="..\:/Users/marcj/AndroidStudioProjects/Plutus/app/src/main/res/layout/fragment_contents.xml" value="0.264" />
@@ -18,6 +19,8 @@
         <entry key="..\:/Users/marcj/AndroidStudioProjects/Plutus/app/src/main/res/layout/fragment_revaluation.xml" value="0.22592592592592592" />
         <entry key="..\:/Users/marcj/AndroidStudioProjects/Plutus/app/src/main/res/layout/fragment_rpi_inflation.xml" value="0.22592592592592592" />
         <entry key="..\:/Users/marcj/AndroidStudioProjects/Plutus/app/src/main/res/layout/fragment_rpi_items.xml" value="0.22592592592592592" />
+        <entry key="..\:/Users/marcj/AndroidStudioProjects/Plutus/app/src/main/res/layout/rpi_inflation_rate_item.xml" value="0.1" />
+        <entry key="..\:/Users/marcj/AndroidStudioProjects/Plutus/app/src/main/res/layout/rpi_item.xml" value="0.22592592592592592" />
       </map>
     </option>
   </component>

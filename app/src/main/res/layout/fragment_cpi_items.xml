@@ -69,15 +69,19 @@
 
       <TextView
         android:id="@+id/cpi_year_title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:background="@drawable/button_border"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:text="@string/year"
-        android:textSize="24sp"
+        android:textAlignment="center"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/cpi_month_title"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -89,25 +93,31 @@
         android:background="@drawable/button_border"
         android:gravity="center"
         android:text="@string/month"
-        android:textSize="24sp"
+        android:textAlignment="center"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/cpi_value_title"
         app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="1.5"
         app:layout_constraintStart_toEndOf="@+id/cpi_year_title"
         app:layout_constraintTop_toTopOf="parent" />
 
       <TextView
         android:id="@+id/cpi_value_title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_border"
         android:layout_margin="4dp"
+        android:background="@drawable/button_border"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:text="@string/value"
-        android:textSize="24sp"
+        android:textAlignment="center"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/cpi_month_title"
         app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

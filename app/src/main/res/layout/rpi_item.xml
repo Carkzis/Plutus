@@ -19,12 +19,16 @@
 
     <TextView
       android:id="@+id/rpi_item_year"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:padding="16dp"
       android:text="@{rpiItem.year}"
-      android:textSize="24sp"
+      android:textAlignment="center"
+      android:textSize="20sp"
       app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toStartOf="@+id/rpi_item_month"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintHorizontal_weight="1"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       tools:text="2021" />
@@ -36,23 +40,29 @@
       android:gravity="center"
       android:padding="16dp"
       android:text="@{rpiItem.month}"
-      android:textSize="24sp"
+      android:textAlignment="center"
+      android:textSize="20sp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toStartOf="@+id/rpi_item_value"
       app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintHorizontal_weight="1.5"
       app:layout_constraintStart_toEndOf="@+id/rpi_item_year"
       app:layout_constraintTop_toTopOf="parent"
       tools:text="January" />
 
     <TextView
       android:id="@+id/rpi_item_value"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:padding="16dp"
       android:text="@{rpiItem.value}"
-      android:textSize="24sp"
+      android:textAlignment="center"
+      android:textSize="20sp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintHorizontal_weight="1"
+      app:layout_constraintStart_toEndOf="@+id/rpi_item_month"
       app:layout_constraintTop_toTopOf="parent"
       tools:text="100.0" />
 

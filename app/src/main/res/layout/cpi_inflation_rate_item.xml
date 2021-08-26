@@ -19,12 +19,16 @@
 
     <TextView
       android:id="@+id/cpi_year"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:padding="16dp"
       android:text="@{cpiRate.year}"
-      android:textSize="24sp"
+      android:textSize="20sp"
+      android:textAlignment="center"
+      app:layout_constraintHorizontal_weight="1"
       app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toStartOf="@+id/cpi_month"
+      app:layout_constraintHorizontal_bias="0.5"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       tools:text="2021" />
@@ -36,7 +40,9 @@
       android:gravity="center"
       android:padding="16dp"
       android:text="@{cpiRate.month}"
-      android:textSize="24sp"
+      android:textSize="20sp"
+      android:textAlignment="center"
+      app:layout_constraintHorizontal_weight="1.5"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toStartOf="@+id/cpi_value"
       app:layout_constraintHorizontal_bias="0.5"
@@ -46,13 +52,17 @@
 
     <TextView
       android:id="@+id/cpi_value"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:padding="16dp"
       android:text="@{cpiRate.value}"
-      android:textSize="24sp"
+      android:textSize="20sp"
+      android:textAlignment="center"
+      app:layout_constraintHorizontal_weight="1"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintStart_toEndOf="@+id/cpi_month"
       app:layout_constraintTop_toTopOf="parent"
       tools:text="2.5%" />
 
