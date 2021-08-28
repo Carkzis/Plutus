@@ -1,5 +1,6 @@
 package com.example.android.plutus.pcls
 
+import android.widget.AdapterView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -22,6 +23,25 @@ class PclsCalcViewModel @Inject constructor() : ViewModel() {
     var fullPension = MutableLiveData<String>()
     var commutationFactor = MutableLiveData<String>()
     var dcFund = MutableLiveData<String>()
+
+    var spinnerPosition = MutableLiveData<Int>()
+    var sLtaList = arrayListOf("1,073,100.00",
+    "1,055,000.00",
+    "1,030,000.00",
+    "1,000,000.00",
+    "1,250,000.00",
+    "1,500,000.00",
+    "1,800,000.00",
+    "1,750,000.00",
+    "1,650,000.00",
+    "1,600,000.00")
+    var _standardLta = MutableLiveData<String>()
+    val standardLta: LiveData<String>
+        get() = _standardLta
+
+    fun setStandardLta(position: Int) {
+        _standardLta.value = sLtaList[position]
+    }
 
     // LiveData variable outputs.
     private val _dbBenOutput = MutableLiveData<Benefits>()
@@ -68,22 +88,23 @@ class PclsCalcViewModel @Inject constructor() : ViewModel() {
         val dc = if (dcFund.value.equals("")) 0.0 else dcFund.value
             ?.replace(",", "")
             ?.toDouble() ?: 0.0
+        val sLta = standardLta.value?.replace(",", "")?.toDouble()!!
 
         if (fp <= 0 || cf <= 0) {
             return showToastMessage(R.string.pension_cf_zero_toast)
         }
 
-        calculationWrapper(fp, cf, dc)
+        calculationWrapper(fp, cf, dc, sLta)
     }
 
-    private fun calculationWrapper(fp: Double, cf: Double, dc: Double) {
+    private fun calculationWrapper(fp: Double, cf: Double, dc: Double, sLta: Double) {
         // Call function to calculate db benefits, and return a data object with the results
-        dbBenefits = dbPclsCalculation(fp, cf, dc)
+        dbBenefits = dbPclsCalculation(fp, cf, sLta, dc)
         // The benefits where no pcls is calculated only need access to the Lta calculation.
         noPclsBenefits = Benefits(
             "£0.00",
             formatAsCurrency(fp.toBigDecimal()),
-            ltaCalculation(0.0, fp, dc),
+            ltaCalculation(0.0, fp, dc, sLta),
             formatAsCurrency(dc.toBigDecimal())
         )
 
@@ -92,9 +113,9 @@ class PclsCalcViewModel @Inject constructor() : ViewModel() {
         // using £0.00 figures
         cmbBenefits1 = if (dc > 0.0) {
             if (dc >= ((fp * 20) / 3)) {
-                largeCmbPclsCalculation(fp, cf, true, dc)
+                largeCmbPclsCalculation(fp, cf, true, sLta, dc)
             } else {
-                smallCmbPclsCalculation(fp, cf, dc)
+                smallCmbPclsCalculation(fp, cf, sLta, dc)
             }
         } else {
             Benefits("£0.00", "£0.00", "0.00%", "£0.00")
@@ -103,7 +124,7 @@ class PclsCalcViewModel @Inject constructor() : ViewModel() {
         // These benefits are for where there is a large DC fund and the residual amount is
         // taken as a UFPLS
         cmbBenefits2 = if (dc >= ((fp * 20) / 3))
-            largeCmbPclsCalculation(fp, cf, false, dc) else Benefits("£0.00",
+            largeCmbPclsCalculation(fp, cf, false, sLta, dc) else Benefits("£0.00",
         "£0.00", "0.00%", "£0.00")
 
 

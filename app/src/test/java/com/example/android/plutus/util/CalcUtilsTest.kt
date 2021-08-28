@@ -17,9 +17,10 @@ class CalcUtilsTest {
         // Create variables to enter into calculation
         val pension = 1000.00
         val cf = 20.00
+        val sLta = 1073100.00
 
         // Call the function
-        val result = dbPclsCalculation(pension, cf)
+        val result = dbPclsCalculation(pension, cf, sLta)
 
         // Check the result
         assertThat(result.pcls, `is`("£5,000.00"))
@@ -35,9 +36,10 @@ class CalcUtilsTest {
         val pension = 15614.23
         val cf = 12.32
         val dcFund = 3244.92
+        val sLta = 1073100.00
 
         // Call the function
-        val result = dbPclsCalculation(pension, cf, dcFund)
+        val result = dbPclsCalculation(pension, cf, sLta, dcFund)
 
         // Check the results
         assertThat(result.pcls, `is`("£67,544.70"))
@@ -53,9 +55,10 @@ class CalcUtilsTest {
         val pension = 28420.71
         val cf = 27.83
         val dcFund = 52917.34
+        val sLta = 1073100.00
 
         // Call the function
-        val result = smallCmbPclsCalculation(pension, cf, dcFund)
+        val result = smallCmbPclsCalculation(pension, cf, sLta, dcFund)
 
         // Check the results
         assertThat(result.pcls, `is`("£163,081.59"))
@@ -72,9 +75,10 @@ class CalcUtilsTest {
         val cf = 15.00
         val dcFund = 200000.00
         val residualDcForAnnuity = true
+        val sLta = 1073100.00
 
         // Call the function
-        val result = largeCmbPclsCalculation(pension, cf, residualDcForAnnuity, dcFund)
+        val result = largeCmbPclsCalculation(pension, cf, residualDcForAnnuity, sLta, dcFund)
 
         // Check the results
         assertThat(result.pcls, `is`("£200,000.00"))
@@ -91,9 +95,10 @@ class CalcUtilsTest {
         val cf = 15.00
         val dcFund = 200000.00
         val residualDcForAnnuity = false
+        val sLta = 1073100.00
 
         // Call the function
-        val result = largeCmbPclsCalculation(pension, cf, residualDcForAnnuity, dcFund)
+        val result = largeCmbPclsCalculation(pension, cf, residualDcForAnnuity, sLta, dcFund)
 
         // Check the results
         assertThat(result.pcls, `is`("£200,000.00"))
@@ -111,9 +116,10 @@ class CalcUtilsTest {
         val cf = 21.32
         val dcFund = 425232.46
         val residualDcForAnnuity = true
+        val sLta = 1073100.00
 
         // Call the function
-        val result = largeCmbPclsCalculation(pension, cf, residualDcForAnnuity, dcFund)
+        val result = largeCmbPclsCalculation(pension, cf, residualDcForAnnuity, sLta, dcFund)
 
         // Check the results
         assertThat(result.pcls, `is`("£177,478.17"))
@@ -131,9 +137,10 @@ class CalcUtilsTest {
         val cf = 21.32
         val dcFund = 425232.46
         val residualDcForAnnuity = false
+        val sLta = 1073100.00
 
         // Call the function
-        val result = largeCmbPclsCalculation(pension, cf, residualDcForAnnuity, dcFund)
+        val result = largeCmbPclsCalculation(pension, cf, residualDcForAnnuity, sLta, dcFund)
 
         // Check the results
         assertThat(result.pcls, `is`("£94,893.40"))
@@ -148,9 +155,10 @@ class CalcUtilsTest {
         // Create variables to enter into calculation
         val pcls = 5000.00
         val residual = 750.00
+        val sLta = 1073100.00
 
         // Call the function
-        val result = ltaCalculation(pcls, residual, 0.00)
+        val result = ltaCalculation(pcls, residual, 0.00, sLta)
 
         assertThat(result, `is`("1.85%"))
     }
@@ -159,9 +167,10 @@ class CalcUtilsTest {
     fun ltaCalculation_noPcls_returnsExpectedLta() {
         // Create variables to enter into calculation
         val fullPension = 1000.00
+        val sLta = 1073100.00
 
         // Call the function
-        val result = ltaCalculation(0.0, fullPension, 0.00)
+        val result = ltaCalculation(0.0, fullPension, 0.00, sLta)
 
         assertThat(result, `is`("1.86%"))
     }

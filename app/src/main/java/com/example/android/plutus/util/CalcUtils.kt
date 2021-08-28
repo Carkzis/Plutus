@@ -14,12 +14,8 @@ import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.pow
 
-// Note: this is not actually a constant, but for initial purposes it is.
-// In the future it can be changed to match the current UK amount.
-private const val STANDARD_LTA = 1073100
-
 internal fun dbPclsCalculation(
-    fullPension: Double, commutationFactor: Double, dcFund: Double = 0.0): Benefits {
+    fullPension: Double, commutationFactor: Double, sLta: Double, dcFund: Double = 0.0): Benefits {
 
     // Calculate the pcls and the residual pension
     val pcls = BigDecimal((fullPension * commutationFactor * 20) / ((commutationFactor * 3) + 20))
@@ -30,13 +26,13 @@ internal fun dbPclsCalculation(
         .setScale(2, RoundingMode.HALF_UP)
     val dc = BigDecimal(dcFund)
         .setScale(2, RoundingMode.HALF_UP)
-    val lta = ltaCalculation(pcls.toDouble(), residual.toDouble(), dcFund)
+    val lta = ltaCalculation(pcls.toDouble(), residual.toDouble(), dcFund, sLta)
 
     return Benefits(formatAsCurrency(pcls), formatAsCurrency(residual), lta, formatAsCurrency(dc))
 }
 
 internal fun smallCmbPclsCalculation(
-    fullPension: Double, commutationFactor: Double, dcFund: Double = 0.0): Benefits {
+    fullPension: Double, commutationFactor: Double, sLta: Double, dcFund: Double = 0.0): Benefits {
 
     // Calculate the pcls and residual when combined with the dc fund
     val pcls = BigDecimal(dcFund + ((commutationFactor * ((fullPension * 20) - (dcFund * 3))) /
@@ -45,7 +41,7 @@ internal fun smallCmbPclsCalculation(
         .setScale(2, RoundingMode.HALF_UP)
     val residual = BigDecimal(fullPension - commutedPension.toDouble())
         .setScale(2, RoundingMode.HALF_UP)
-    val lta = ltaCalculation(pcls.toDouble(), residual.toDouble(), 0.0)
+    val lta = ltaCalculation(pcls.toDouble(), residual.toDouble(), 0.0, sLta)
 
     return Benefits(
         formatAsCurrency(pcls), formatAsCurrency(residual), lta, formatAsCurrency(
@@ -54,7 +50,7 @@ internal fun smallCmbPclsCalculation(
 }
 
 internal fun largeCmbPclsCalculation(
-    fullPension: Double, commutationFactor: Double, residualDcForAnnuity: Boolean,
+    fullPension: Double, commutationFactor: Double, residualDcForAnnuity: Boolean, sLta: Double,
     dcFund: Double = 0.0): Benefits {
 
     // This is the largest amount of DC that can be combined with the DB benefits to make a PCLS.
@@ -70,22 +66,22 @@ internal fun largeCmbPclsCalculation(
         .setScale(2, RoundingMode.HALF_UP)
     val dc = BigDecimal(dcFund - pcls.toDouble())
         .setScale(2, RoundingMode.HALF_UP)
-    val lta = ltaCalculation(pcls.toDouble(), residual.toDouble(), dc.toDouble())
+    val lta = ltaCalculation(pcls.toDouble(), residual.toDouble(), dc.toDouble(), sLta)
 
     return Benefits(
         formatAsCurrency(pcls), formatAsCurrency(residual), lta, formatAsCurrency(dc)
     )
 }
 
-internal fun ltaCalculation(pcls: Double, pension: Double, dcFund: Double = 0.0) : String {
+internal fun ltaCalculation(pcls: Double, pension: Double, dcFund: Double = 0.0, sLta: Double) : String {
 
     // Calculate the individual LTAs, rounding them (down) to 2 dp
     val pclsLta =
-        BigDecimal((pcls / STANDARD_LTA) * 100).setScale(2, RoundingMode.DOWN)
+        BigDecimal((pcls / sLta) * 100).setScale(2, RoundingMode.DOWN)
     val pensionLta =
-        BigDecimal((pension * 20) / STANDARD_LTA * 100).setScale(2, RoundingMode.DOWN)
+        BigDecimal((pension * 20) / sLta * 100).setScale(2, RoundingMode.DOWN)
     val dcFundLta =
-        BigDecimal((dcFund / STANDARD_LTA) * 100).setScale(2, RoundingMode.DOWN)
+        BigDecimal((dcFund / sLta) * 100).setScale(2, RoundingMode.DOWN)
 
     // Then add them together to give the total LTA (and convert back to a string).
     return "${(pclsLta + pensionLta + dcFundLta)}%"

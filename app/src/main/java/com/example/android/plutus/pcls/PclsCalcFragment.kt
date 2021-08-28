@@ -11,6 +11,7 @@ import com.example.android.plutus.databinding.FragmentPclsCalcBinding
 import com.example.android.plutus.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import java.util.*
 
 @AndroidEntryPoint
 class PclsCalcFragment : Fragment() {
@@ -37,6 +38,7 @@ class PclsCalcFragment : Fragment() {
 
         setUpButton()
         setUpToast()
+        setUpLtaSpinner()
         setUpBenefitResultsListeners()
 
     }
@@ -107,6 +109,12 @@ class PclsCalcFragment : Fragment() {
             it.getContextIfNotHandled()?.let { message ->
                 context?.showToast(requireContext().getString(message))
             }
+        })
+    }
+
+    private fun setUpLtaSpinner() {
+        viewModel.spinnerPosition.observe(viewLifecycleOwner, {
+            viewModel.setStandardLta(it)
         })
     }
 
