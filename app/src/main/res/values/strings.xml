@@ -144,4 +144,17 @@
         Please check out https://github.com/Carkzis for more information on any planned updates to
         the app, or any other apps currently under development!\n\n</string>
   <string name="welcome_to_plutus">Welcome to Plutus!</string>
+  <string name="lifetime_allowance">Lifetime Allowance:</string>
+  <string-array name="lta_spinner_text">
+    <item>1,073,100.00</item>
+    <item>1,055,000.00</item>
+    <item>1,030,000.00</item>
+    <item>1,000,000.00</item>
+    <item>1,250,000.00</item>
+    <item>1,500,000.00</item>
+    <item>1,800,000.00</item>
+    <item>1,750,000.00</item>
+    <item>1,650,000.00</item>
+    <item>1,600,000.00</item>
+  </string-array>
 </resources>

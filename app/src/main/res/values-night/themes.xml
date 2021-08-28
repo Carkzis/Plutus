@@ -17,6 +17,8 @@
         <item name="android:fontFamily">@font/coiny</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:spinnerItemStyle">@style/plutusSpinnerItemStyle</item>
+        <item name="spinnerDropDownItemStyle">@style/plutusSpinnerDropDownItemStyle</item>
     </style>
 
     <style name="plutusDatePickerThemeDark" parent="Theme.AppCompat.Light.Dialog">
@@ -31,4 +33,16 @@
         <item name="colorOnPrimary">@color/primaryTextColor</item>
         <item name="android:textColor">@color/primaryTextColor</item>
     </style>
+
+    <style name="plutusSpinnerItemStyle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:paddingLeft">4dp</item>
+    </style>
+
+    <style name="plutusSpinnerDropDownItemStyle">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
 </resources>

@@ -75,6 +75,14 @@
           android:gravity="center_vertical"
           android:text="@string/money_purchase_fund" />
 
+        <TextView
+          android:id="@+id/lta_text"
+          android:layout_width="wrap_content"
+          android:layout_height="0dp"
+          android:layout_weight="1"
+          android:gravity="center_vertical"
+          android:text="@string/lifetime_allowance" />
+
       </LinearLayout>
 
       <LinearLayout
@@ -114,6 +122,15 @@
           android:inputType="numberDecimal"
           android:minHeight="48dp"
           android:text="@={pclsCalcViewModel.dcFund}"
+          android:textSize="14sp" />
+
+        <Spinner
+          android:id="@+id/lta_spinner"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:entries="@array/lta_spinner_text"
+          android:importantForAutofill="no"
+          android:minHeight="48dp"
           android:textSize="14sp" />
 
       </LinearLayout>
