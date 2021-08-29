@@ -2,12 +2,12 @@
   <string name="app_name">Plutus</string>
   <string name="hello_blank_fragment">Hello blank fragment</string>
   <string name="pcls_residual">PCLS Calculator</string>
-  <string name="pension">Pension:</string>
+  <string name="pension">Pension (£):</string>
   <string name="commutation_factor">Commutation Factor:</string>
-  <string name="money_purchase_fund">Money Purchase Fund:</string>
+  <string name="money_purchase_fund">Pension Pot (£):</string>
   <string name="pension_hint">e.g. £1,000</string>
   <string name="commutation_factor_hint">e.g. 20</string>
-  <string name="dc_fund_hint">e.g. £5,000 or leave blank</string>
+  <string name="dc_fund_hint">e.g. £5,000</string>
   <string name="calculate">Calculate</string>
   <string name="db_pcls">Defined Benefit PCLS:</string>
   <string name="residual_pension">Residual Pension:</string>
@@ -144,7 +144,7 @@
         Please check out https://github.com/Carkzis for more information on any planned updates to
         the app, or any other apps currently under development!\n\n</string>
   <string name="welcome_to_plutus">Welcome to Plutus!</string>
-  <string name="lifetime_allowance">Lifetime Allowance:</string>
+  <string name="lifetime_allowance">Lifetime Allowance (£):</string>
   <string name="pcls_warning">Remember!\n This is a <b>rough guide</b> only!\n <b>Always</b> check the scheme rules!</string>
   <string-array name="lta_spinner_text">
     <item>1,073,100.00</item>
