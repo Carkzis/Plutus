@@ -11,7 +11,7 @@
 
     <variable
       name="dateCalcViewModel"
-      type="com.example.android.plutus.dates.DateCalcViewModel" />
+      type="com.carkzis.android.plutus.dates.DateCalcViewModel" />
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout

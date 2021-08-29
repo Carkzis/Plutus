@@ -12,7 +12,7 @@
 
     <variable
       name="viewmodel"
-      type="com.example.android.plutus.contents.ContentsViewModel" />
+      type="com.carkzis.android.plutus.contents.ContentsViewModel" />
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout

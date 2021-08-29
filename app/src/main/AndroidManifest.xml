@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
-  package="com.example.android.plutus">
+  package="com.carkzis.android.plutus">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".PlutusApplication"
+        android:name="com.carkzis.android.plutus.PlutusApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Plutus"
         android:fullBackupContent="true">
-        <activity android:name=".MainActivity"
+        <activity android:name="com.carkzis.android.plutus.MainActivity"
           android:screenOrientation="portrait"
           android:exported="true"
           tools:ignore="LockedOrientationActivity">
@@ -26,7 +26,7 @@
         </activity>
 
         <activity
-          android:name=".di.HiltTestActivity"
+          android:name="com.carkzis.android.plutus.di.HiltTestActivity"
           android:exported="false"  />
 
       <meta-data

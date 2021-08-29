@@ -16,14 +16,14 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.example.android.plutus"
+        applicationId "com.carkzis.android.plutus"
         minSdkVersion 26
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        testInstrumentationRunner "com.example.android.plutus.CustomTestRunner"
+        testInstrumentationRunner "com.carkzis.android.plutus.CustomTestRunner"
     }
 
     testOptions {

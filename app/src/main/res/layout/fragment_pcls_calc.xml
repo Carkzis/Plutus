@@ -12,7 +12,7 @@
 
     <variable
       name="pclsCalcViewModel"
-      type="com.example.android.plutus.pcls.PclsCalcViewModel" />
+      type="com.carkzis.android.plutus.pcls.PclsCalcViewModel" />
   </data>
 
 

@@ -9,7 +9,7 @@
     <import type="androidx.core.content.ContextCompat" />
     <variable
       name="gmpFixedRevalViewModel"
-      type="com.example.android.plutus.inflation.GmpFixedRevalViewModel" />
+      type="com.carkzis.android.plutus.inflation.GmpFixedRevalViewModel" />
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout

@@ -10,7 +10,7 @@
   <import type="androidx.core.content.ContextCompat" />
   <variable
     name="cpiRate"
-    type="com.example.android.plutus.CpiPercentage" />
+    type="com.carkzis.android.plutus.CpiPercentage" />
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout

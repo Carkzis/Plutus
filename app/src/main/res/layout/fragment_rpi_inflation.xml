@@ -12,7 +12,7 @@
 
     <variable
       name="rpiInflationViewModel"
-      type="com.example.android.plutus.inflation.RpiPctViewModel" />
+      type="com.carkzis.android.plutus.inflation.RpiPctViewModel" />
 
   </data>
 

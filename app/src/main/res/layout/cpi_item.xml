@@ -10,7 +10,7 @@
     <import type="androidx.core.content.ContextCompat" />
     <variable
       name="cpiItem"
-      type="com.example.android.plutus.CpiItem" />
+      type="com.carkzis.android.plutus.CpiItem" />
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/contentsFragment"
-        android:name="com.example.android.plutus.contents.ContentsFragment"
+        android:name="com.carkzis.android.plutus.contents.ContentsFragment"
         android:label="ContentsFragment"
         tools:layout="@layout/fragment_contents">
         <action
@@ -29,17 +29,17 @@
     </fragment>
     <fragment
         android:id="@+id/pclsFragment"
-        android:name="com.example.android.plutus.pcls.PclsCalcFragment"
+        android:name="com.carkzis.android.plutus.pcls.PclsCalcFragment"
         android:label="PclsFragment"
         tools:layout="@layout/fragment_pcls_calc"/>
     <fragment
         android:id="@+id/dateCalcFragment"
-        android:name="com.example.android.plutus.dates.DateCalcFragment"
+        android:name="com.carkzis.android.plutus.dates.DateCalcFragment"
         android:label="fragment_date_calc"
         tools:layout="@layout/fragment_date_calc" />
     <fragment
       android:id="@+id/inflationMainFragment"
-      android:name="com.example.android.plutus.inflation.InflationMainFragment"
+      android:name="com.carkzis.android.plutus.inflation.InflationMainFragment"
       android:label="fragment_inflation_main"
       tools:layout="@layout/fragment_inflation_main" >
         <action
@@ -60,37 +60,37 @@
     </fragment>
     <fragment
       android:id="@+id/cpiInflationFragment"
-      android:name="com.example.android.plutus.inflation.CpiPctFragment"
+      android:name="com.carkzis.android.plutus.inflation.CpiPctFragment"
       android:label="fragment_cpi_inflation"
       tools:layout="@layout/fragment_cpi_inflation" />
     <fragment
       android:id="@+id/rpiInflationFragment"
-      android:name="com.example.android.plutus.inflation.RpiPctFragment"
+      android:name="com.carkzis.android.plutus.inflation.RpiPctFragment"
       android:label="fragment_rpi_inflation"
       tools:layout="@layout/fragment_rpi_inflation" />
     <fragment
       android:id="@+id/gmpFixedRevalFragment"
-      android:name="com.example.android.plutus.inflation.GmpFixedRevalFragment"
+      android:name="com.carkzis.android.plutus.inflation.GmpFixedRevalFragment"
       android:label="fragment_gmp_fixed_reval"
       tools:layout="@layout/fragment_gmp_fixed_reval" />
     <fragment
       android:id="@+id/rpiItemsFragment"
-      android:name="com.example.android.plutus.inflation.RpiItemsFragment"
+      android:name="com.carkzis.android.plutus.inflation.RpiItemsFragment"
       android:label="fragment_rpi_items"
       tools:layout="@layout/fragment_rpi_items" />
     <fragment
       android:id="@+id/cpiItemsFragment"
-      android:name="com.example.android.plutus.inflation.CpiItemsFragment"
+      android:name="com.carkzis.android.plutus.inflation.CpiItemsFragment"
       android:label="fragment_cpi_items"
       tools:layout="@layout/fragment_cpi_items" />
     <fragment
       android:id="@+id/revaluationFragment"
-      android:name="com.example.android.plutus.revaluation.RevaluationFragment"
+      android:name="com.carkzis.android.plutus.revaluation.RevaluationFragment"
       android:label="fragment_revaluation"
       tools:layout="@layout/fragment_revaluation" />
     <fragment
       android:id="@+id/aboutFragment"
-      android:name="com.example.android.plutus.AboutFragment"
+      android:name="com.carkzis.android.plutus.AboutFragment"
       android:label="fragment_about"
       tools:layout="@layout/fragment_about" />
 </navigation>

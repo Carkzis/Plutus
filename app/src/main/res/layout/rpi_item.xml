@@ -10,7 +10,7 @@
     <import type="androidx.core.content.ContextCompat" />
     <variable
       name="rpiItem"
-      type="com.example.android.plutus.RpiItem" />
+      type="com.carkzis.android.plutus.RpiItem" />
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout
