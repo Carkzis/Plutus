@@ -145,6 +145,7 @@
         the app, or any other apps currently under development!\n\n</string>
   <string name="welcome_to_plutus">Welcome to Plutus!</string>
   <string name="lifetime_allowance">Lifetime Allowance:</string>
+  <string name="pcls_warning">Remember!\n This is a <b>rough guide</b> only!\n <b>Always</b> check the scheme rules!</string>
   <string-array name="lta_spinner_text">
     <item>1,073,100.00</item>
     <item>1,055,000.00</item>

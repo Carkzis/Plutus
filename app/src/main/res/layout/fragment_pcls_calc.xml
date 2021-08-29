@@ -21,624 +21,639 @@
     android:layout_height="match_parent"
     android:fillViewport="true">
 
-  <androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context=".pcls.PclsCalcFragment">
-
-    <Button
-      android:id="@+id/calculate_pcls_button"
-      android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="8dp"
-      android:text="@string/calculate_button"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/pcls_input_linear_layout" />
+      tools:context=".pcls.PclsCalcFragment">
 
-    <LinearLayout
-      android:id="@+id/pcls_input_linear_layout"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:orientation="horizontal"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/pcls_title_linear_layout">
+      <Button
+        android:id="@+id/calculate_pcls_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/calculate_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pcls_input_linear_layout" />
+
+      <TableLayout
+        android:id="@+id/pcls_input_linear_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pcls_title_linear_layout">
+
+        <TableRow
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
+
+          <TextView
+            android:id="@+id/pension_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="@string/pension" />
+
+          <com.cottacush.android.currencyedittext.CurrencyEditText
+            android:id="@+id/pension_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/pension_hint"
+            android:importantForAutofill="no"
+            android:inputType="numberDecimal"
+            android:minHeight="48dp"
+            android:text="@={pclsCalcViewModel.fullPension}"
+            android:textSize="14sp" />
+
+        </TableRow>
+
+
+        <TableRow
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
+
+          <TextView
+            android:id="@+id/commutation_factor_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="@string/commutation_factor" />
+
+          <EditText
+            android:id="@+id/commutation_factor_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/commutation_factor_hint"
+            android:importantForAutofill="no"
+            android:inputType="numberDecimal"
+            android:minHeight="48dp"
+            android:text="@={pclsCalcViewModel.commutationFactor}"
+            android:textSize="14sp" />
+
+        </TableRow>
+
+        <TableRow
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
+
+          <TextView
+            android:id="@+id/dc_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="@string/money_purchase_fund" />
+
+          <com.cottacush.android.currencyedittext.CurrencyEditText
+            android:id="@+id/dc_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/dc_fund_hint"
+            android:importantForAutofill="no"
+            android:inputType="numberDecimal"
+            android:minHeight="48dp"
+            android:text="@={pclsCalcViewModel.dcFund}"
+            android:textSize="14sp" />
+
+        </TableRow>
+
+        <TableRow
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
+
+          <TextView
+            android:id="@+id/lta_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="@string/lifetime_allowance" />
+
+          <Spinner
+            android:id="@+id/lta_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@{pclsCalcViewModel.sLtaList}"
+            android:importantForAutofill="no"
+            android:minHeight="48dp"
+            android:selectedItemPosition="@={pclsCalcViewModel.spinnerPosition}"
+            android:textSize="14sp"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        </TableRow>
+
+      </TableLayout>
+
+      <TableLayout
+        android:id="@+id/opt1_table"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/opt1b_table"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/warning"
+        tools:visibility="visible">
+
+        <TableRow
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content">
+
+          <TextView
+            android:id="@+id/opt1_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_span="2"
+            android:text="@string/opt1_description"
+            android:textAlignment="center" />
+
+        </TableRow>
+
+        <TableRow
+          android:id="@+id/opt1_cmb_pcls"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content">
+
+          <TextView
+            android:id="@+id/combined_pcls_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/combined_pcls" />
+
+          <TextView
+            android:id="@+id/combined_pcls_result_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:gravity="center_vertical"
+            android:text="@{String.valueOf(pclsCalcViewModel.cmbBenOutput1.pcls)}"
+            tools:text="£10,000.00" />
+
+        </TableRow>
+
+        <TableRow
+          android:id="@+id/opt1_cmb_residual"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
+
+          <TextView
+            android:id="@+id/combined_residual_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/residual_pension" />
+
+          <TextView
+            android:id="@+id/combined_residual_result_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:gravity="center_vertical"
+            android:text="@{String.valueOf(pclsCalcViewModel.cmbBenOutput1.residualPension)}"
+            tools:text="£2,000.00" />
+
+        </TableRow>
+
+        <TableRow
+          android:id="@+id/opt1_cmb_dc"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:visibility="gone">
+
+          <TextView
+            android:id="@+id/combined_dc_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/annuity_purchased" />
+
+          <TextView
+            android:id="@+id/combined_dc_result_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:gravity="center_vertical"
+            android:text="@{String.valueOf(pclsCalcViewModel.cmbBenOutput1.dcFund)}" />
+
+        </TableRow>
+
+        <TableRow
+          android:id="@+id/opt1_cmb_lta"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
+
+          <TextView
+            android:id="@+id/combined_lta_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/lta_used" />
+
+          <TextView
+            android:id="@+id/combined_lta_result_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:gravity="center_vertical"
+            android:text="@{String.valueOf(pclsCalcViewModel.cmbBenOutput1.lta)}"
+            tools:text="10.00%" />
+
+        </TableRow>
+
+      </TableLayout>
 
       <LinearLayout
-        android:id="@+id/pcls_input_ll_column_1"
+        android:id="@+id/pcls_title_linear_layout"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+          android:id="@+id/icon_image"
+          android:layout_width="50dp"
+          android:layout_height="50dp"
+          android:layout_gravity="center"
+          android:contentDescription="@string/plutus_icon"
+          android:scaleType="center"
+          app:srcCompat="@drawable/ic_launcher_foreground"
+          tools:ignore="VectorDrawableCompat"
+          tools:layout_editor_absoluteX="152dp" />
 
         <TextView
-          android:id="@+id/pension_text"
+          android:id="@+id/pcls_calc_text"
           android:layout_width="wrap_content"
-          android:layout_height="0dp"
-          android:layout_weight="1"
-          android:gravity="center_vertical"
-          android:text="@string/pension" />
-
-        <TextView
-          android:id="@+id/commutation_factor_text"
-          android:layout_width="wrap_content"
-          android:layout_height="0dp"
-          android:layout_weight="1"
-          android:gravity="center_vertical"
-          android:text="@string/commutation_factor" />
-
-        <TextView
-          android:id="@+id/dc_text"
-          android:layout_width="wrap_content"
-          android:layout_height="0dp"
-          android:layout_weight="1"
-          android:gravity="center_vertical"
-          android:text="@string/money_purchase_fund" />
-
-        <TextView
-          android:id="@+id/lta_text"
-          android:layout_width="wrap_content"
-          android:layout_height="0dp"
-          android:layout_weight="1"
-          android:gravity="center_vertical"
-          android:text="@string/lifetime_allowance" />
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:text="@string/standard_pcls_title"
+          android:textAlignment="center"
+          android:textSize="34sp"
+          tools:layout_editor_absoluteX="68dp"
+          tools:layout_editor_absoluteY="147dp" />
 
       </LinearLayout>
 
-      <LinearLayout
-        android:id="@+id/pcls_input_ll_column_2"
+      <TableLayout
+        android:id="@+id/opt2_table"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/opt3_table"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/opt1b_table"
+        tools:visibility="visible">
 
-        <com.cottacush.android.currencyedittext.CurrencyEditText
-          android:id="@+id/pension_edittext"
+        <TableRow
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content">
+
+          <TextView
+            android:id="@+id/opt2_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_span="2"
+            android:text="@string/opt2_description"
+            android:textAlignment="center" />
+
+        </TableRow>
+
+        <TableRow
+          android:id="@+id/opt2_db_pcls"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:hint="@string/pension_hint"
-          android:importantForAutofill="no"
-          android:inputType="numberDecimal"
-          android:minHeight="48dp"
-          android:text="@={pclsCalcViewModel.fullPension}"
-          android:textSize="14sp" />
+          android:layout_height="match_parent">
 
-        <EditText
-          android:id="@+id/commutation_factor_edittext"
+          <TextView
+            android:id="@+id/db_pcls_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/db_pcls" />
+
+          <TextView
+            android:id="@+id/db_pcls_result_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:gravity="center_vertical"
+            android:text="@{String.valueOf(pclsCalcViewModel.dbBenOutput.pcls)}"
+            tools:text="£10,000.00" />
+
+        </TableRow>
+
+        <TableRow
+          android:id="@+id/opt2_db_residual"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:hint="@string/commutation_factor_hint"
-          android:importantForAutofill="no"
-          android:inputType="numberDecimal"
-          android:minHeight="48dp"
-          android:text="@={pclsCalcViewModel.commutationFactor}"
-          android:textSize="14sp" />
+          android:layout_height="match_parent">
 
-        <com.cottacush.android.currencyedittext.CurrencyEditText
-          android:id="@+id/dc_edittext"
+          <TextView
+            android:id="@+id/db_residual_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/residual_pension" />
+
+          <TextView
+            android:id="@+id/db_residual_result_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:gravity="center_vertical"
+            android:text="@{String.valueOf(pclsCalcViewModel.dbBenOutput.residualPension)}"
+            tools:text="£2,000.00" />
+
+        </TableRow>
+
+        <TableRow
+          android:id="@+id/opt2_db_dc"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:hint="@string/dc_fund_hint"
-          android:importantForAutofill="no"
-          android:inputType="numberDecimal"
-          android:minHeight="48dp"
-          android:text="@={pclsCalcViewModel.dcFund}"
-          android:textSize="14sp" />
+          android:layout_height="match_parent"
+          android:visibility="gone">
 
-        <Spinner
-          android:id="@+id/lta_spinner"
+          <TextView
+            android:id="@+id/db_dc_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/money_purchase_fund" />
+
+          <TextView
+            android:id="@+id/db_dc_result_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:gravity="center_vertical"
+            android:text="@{String.valueOf(pclsCalcViewModel.dbBenOutput.dcFund)}"
+            tools:text="£15,000.00" />
+
+        </TableRow>
+
+        <TableRow
+          android:id="@+id/opt2_db_lta"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:entries="@{pclsCalcViewModel.sLtaList}"
-          android:importantForAutofill="no"
-          android:minHeight="48dp"
-          android:selectedItemPosition="@={pclsCalcViewModel.spinnerPosition}"
-          android:textSize="14sp" />
+          android:layout_height="match_parent">
 
-      </LinearLayout>
+          <TextView
+            android:id="@+id/db_lta_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/lta_used" />
 
+          <TextView
+            android:id="@+id/db_lta_result_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:gravity="center_vertical"
+            android:text="@{String.valueOf(pclsCalcViewModel.dbBenOutput.lta)}"
+            tools:text="10.00%" />
 
-    </LinearLayout>
+        </TableRow>
 
-    <TableLayout
-      android:id="@+id/opt1_table"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="8dp"
-      android:layout_marginBottom="8dp"
-      android:visibility="gone"
-      app:layout_constraintBottom_toTopOf="@+id/opt1b_table"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.5"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/calculate_pcls_button"
-      tools:visibility="visible">
+      </TableLayout>
 
-      <TableRow
+      <TableLayout
+        android:id="@+id/opt3_table"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <TextView
-          android:id="@+id/opt1_title"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_span="2"
-          android:text="@string/opt1_description"
-          android:textAlignment="center" />
-
-      </TableRow>
-
-      <TableRow
-        android:id="@+id/opt1_cmb_pcls"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <TextView
-          android:id="@+id/combined_pcls_text"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:gravity="center_vertical"
-          android:text="@string/combined_pcls" />
-
-        <TextView
-          android:id="@+id/combined_pcls_result_text"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="end"
-          android:gravity="center_vertical"
-          android:text="@{String.valueOf(pclsCalcViewModel.cmbBenOutput1.pcls)}"
-          tools:text="£10,000.00" />
-
-      </TableRow>
-
-      <TableRow
-        android:id="@+id/opt1_cmb_residual"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-          android:id="@+id/combined_residual_text"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:gravity="center_vertical"
-          android:text="@string/residual_pension" />
-
-        <TextView
-          android:id="@+id/combined_residual_result_text"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="end"
-          android:gravity="center_vertical"
-          android:text="@{String.valueOf(pclsCalcViewModel.cmbBenOutput1.residualPension)}"
-          tools:text="£2,000.00" />
-
-      </TableRow>
-
-      <TableRow
-        android:id="@+id/opt1_cmb_dc"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone">
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="24dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/opt2_table"
+        tools:visibility="visible">
 
-        <TextView
-          android:id="@+id/combined_dc_text"
+        <TableRow
           android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:gravity="center_vertical"
-          android:text="@string/annuity_purchased" />
+          android:layout_height="wrap_content">
 
-        <TextView
-          android:id="@+id/combined_dc_result_text"
+          <TextView
+            android:id="@+id/opt3_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_span="2"
+            android:text="@string/opt3_description"
+            android:textAlignment="center" />
+
+        </TableRow>
+
+        <TableRow
+          android:id="@+id/opt3_np_pension"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
+
+          <TextView
+            android:id="@+id/np_full_pension_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/full_pension" />
+
+          <TextView
+            android:id="@+id/np_full_pension_result_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:gravity="center_vertical"
+            android:text="@{String.valueOf(pclsCalcViewModel.noPclsBenOutput.residualPension)}"
+            tools:text="£2,000.00" />
+
+        </TableRow>
+
+        <TableRow
+          android:id="@+id/opt3_np_dc"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:visibility="gone">
+
+          <TextView
+            android:id="@+id/np_dc_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/money_purchase_fund" />
+
+          <TextView
+            android:id="@+id/np_dc_result_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:gravity="center_vertical"
+            android:text="@{String.valueOf(pclsCalcViewModel.noPclsBenOutput.dcFund)}"
+            tools:text="£15,000.00" />
+
+        </TableRow>
+
+        <TableRow
+          android:id="@+id/opt3_np_lta"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
+
+          <TextView
+            android:id="@+id/np_lta_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/lta_used" />
+
+          <TextView
+            android:id="@+id/np_lta_result_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:gravity="center_vertical"
+            android:text="@{String.valueOf(pclsCalcViewModel.noPclsBenOutput.lta)}"
+            tools:text="10.00%" />
+
+        </TableRow>
+
+      </TableLayout>
+
+      <TableLayout
+        android:id="@+id/opt1b_table"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/opt2_table"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/opt1_table"
+        tools:visibility="visible">
+
+        <TableRow
           android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="end"
-          android:gravity="center_vertical"
-          android:text="@{String.valueOf(pclsCalcViewModel.cmbBenOutput1.dcFund)}" />
+          android:layout_height="wrap_content">
 
-      </TableRow>
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_span="2"
+            android:text="@string/opt1b_description"
+            android:textAlignment="center" />
 
-      <TableRow
-        android:id="@+id/opt1_cmb_lta"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        </TableRow>
 
-        <TextView
-          android:id="@+id/combined_lta_text"
+        <TableRow
+          android:id="@+id/opt1b_cmb_pcls"
           android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:gravity="center_vertical"
-          android:text="@string/lta_used" />
+          android:layout_height="wrap_content">
 
-        <TextView
-          android:id="@+id/combined_lta_result_text"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="end"
-          android:gravity="center_vertical"
-          android:text="@{String.valueOf(pclsCalcViewModel.cmbBenOutput1.lta)}"
-          tools:text="10.00%" />
+          <TextView
+            android:id="@+id/combined_pcls_text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/combined_pcls" />
 
-      </TableRow>
+          <TextView
+            android:id="@+id/combined_pcls_result_text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:gravity="center_vertical"
+            android:text="@{String.valueOf(pclsCalcViewModel.cmbBenOutput2.pcls)}"
+            tools:text="£10,000.00" />
 
-    </TableLayout>
+        </TableRow>
 
-    <LinearLayout
-      android:id="@+id/pcls_title_linear_layout"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="8dp"
-      android:orientation="vertical"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      tools:ignore="UseCompoundDrawables">
+        <TableRow
+          android:id="@+id/opt1b_cmb_residual2"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
 
-      <ImageView
-        android:id="@+id/icon_image"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:contentDescription="@string/plutus_icon"
-        android:scaleType="center"
-        app:srcCompat="@drawable/ic_launcher_foreground"
-        tools:ignore="VectorDrawableCompat"
-        tools:layout_editor_absoluteX="152dp" />
+          <TextView
+            android:id="@+id/combined_residual_text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/residual_pension" />
+
+          <TextView
+            android:id="@+id/combined_residual_result_text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:gravity="center_vertical"
+            android:text="@{String.valueOf(pclsCalcViewModel.cmbBenOutput2.residualPension)}"
+            tools:text="£2,000.00" />
+
+        </TableRow>
+
+        <TableRow
+          android:id="@+id/opt1b_cmb_dc"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
+
+          <TextView
+            android:id="@+id/combined_dc_text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/ufpls" />
+
+          <TextView
+            android:id="@+id/combined_dc_result_text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:gravity="center_vertical"
+            android:text="@{String.valueOf(pclsCalcViewModel.cmbBenOutput2.dcFund)}" />
+
+        </TableRow>
+
+        <TableRow
+          android:id="@+id/opt1b_cmb_lta"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
+
+          <TextView
+            android:id="@+id/combined_lta_text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/lta_used" />
+
+          <TextView
+            android:id="@+id/combined_lta_result_text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:gravity="center_vertical"
+            android:text="@{String.valueOf(pclsCalcViewModel.cmbBenOutput2.lta)}"
+            tools:text="10.00%" />
+
+        </TableRow>
+
+      </TableLayout>
 
       <TextView
-        android:id="@+id/pcls_calc_text"
+        android:id="@+id/warning"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/standard_pcls_title"
+        android:text="@string/pcls_warning"
         android:textAlignment="center"
-        android:textSize="34sp"
-        tools:layout_editor_absoluteX="68dp"
-        tools:layout_editor_absoluteY="147dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calculate_pcls_button" />
 
-    </LinearLayout>
-
-    <TableLayout
-      android:id="@+id/opt2_table"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="8dp"
-      android:layout_marginBottom="8dp"
-      android:visibility="gone"
-      app:layout_constraintBottom_toTopOf="@+id/opt3_table"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.5"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/opt1b_table"
-      tools:visibility="visible">
-
-      <TableRow
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <TextView
-          android:id="@+id/opt2_title"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_span="2"
-          android:text="@string/opt2_description"
-          android:textAlignment="center" />
-
-      </TableRow>
-
-      <TableRow
-        android:id="@+id/opt2_db_pcls"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-          android:id="@+id/db_pcls_text"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:gravity="center_vertical"
-          android:text="@string/db_pcls" />
-
-        <TextView
-          android:id="@+id/db_pcls_result_text"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="end"
-          android:gravity="center_vertical"
-          android:text="@{String.valueOf(pclsCalcViewModel.dbBenOutput.pcls)}"
-          tools:text="£10,000.00" />
-
-      </TableRow>
-
-      <TableRow
-        android:id="@+id/opt2_db_residual"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-          android:id="@+id/db_residual_text"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:gravity="center_vertical"
-          android:text="@string/residual_pension" />
-
-        <TextView
-          android:id="@+id/db_residual_result_text"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="end"
-          android:gravity="center_vertical"
-          android:text="@{String.valueOf(pclsCalcViewModel.dbBenOutput.residualPension)}"
-          tools:text="£2,000.00" />
-
-      </TableRow>
-
-      <TableRow
-        android:id="@+id/opt2_db_dc"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
-
-        <TextView
-          android:id="@+id/db_dc_text"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:gravity="center_vertical"
-          android:text="@string/money_purchase_fund" />
-
-        <TextView
-          android:id="@+id/db_dc_result_text"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="end"
-          android:gravity="center_vertical"
-          android:text="@{String.valueOf(pclsCalcViewModel.dbBenOutput.dcFund)}"
-          tools:text="£15,000.00" />
-
-      </TableRow>
-
-      <TableRow
-        android:id="@+id/opt2_db_lta"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-          android:id="@+id/db_lta_text"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:gravity="center_vertical"
-          android:text="@string/lta_used" />
-
-        <TextView
-          android:id="@+id/db_lta_result_text"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="end"
-          android:gravity="center_vertical"
-          android:text="@{String.valueOf(pclsCalcViewModel.dbBenOutput.lta)}"
-          tools:text="10.00%" />
-
-      </TableRow>
-
-    </TableLayout>
-
-    <TableLayout
-      android:id="@+id/opt3_table"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="8dp"
-      android:layout_marginBottom="24dp"
-      android:visibility="gone"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.5"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/opt2_table"
-      tools:visibility="visible">
-
-      <TableRow
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <TextView
-          android:id="@+id/opt3_title"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_span="2"
-          android:text="@string/opt3_description"
-          android:textAlignment="center" />
-
-      </TableRow>
-
-      <TableRow
-        android:id="@+id/opt3_np_pension"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-          android:id="@+id/np_full_pension_text"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:gravity="center_vertical"
-          android:text="@string/full_pension" />
-
-        <TextView
-          android:id="@+id/np_full_pension_result_text"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="end"
-          android:gravity="center_vertical"
-          android:text="@{String.valueOf(pclsCalcViewModel.noPclsBenOutput.residualPension)}"
-          tools:text="£2,000.00" />
-
-      </TableRow>
-
-      <TableRow
-        android:id="@+id/opt3_np_dc"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
-
-        <TextView
-          android:id="@+id/np_dc_text"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:gravity="center_vertical"
-          android:text="@string/money_purchase_fund" />
-
-        <TextView
-          android:id="@+id/np_dc_result_text"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="end"
-          android:gravity="center_vertical"
-          android:text="@{String.valueOf(pclsCalcViewModel.noPclsBenOutput.dcFund)}"
-          tools:text="£15,000.00" />
-
-      </TableRow>
-
-      <TableRow
-        android:id="@+id/opt3_np_lta"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-          android:id="@+id/np_lta_text"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:gravity="center_vertical"
-          android:text="@string/lta_used" />
-
-        <TextView
-          android:id="@+id/np_lta_result_text"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="end"
-          android:gravity="center_vertical"
-          android:text="@{String.valueOf(pclsCalcViewModel.noPclsBenOutput.lta)}"
-          tools:text="10.00%" />
-
-      </TableRow>
-
-    </TableLayout>
-
-    <TableLayout
-      android:id="@+id/opt1b_table"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="8dp"
-      android:layout_marginBottom="8dp"
-      android:visibility="gone"
-      app:layout_constraintBottom_toTopOf="@+id/opt2_table"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/opt1_table"
-      tools:visibility="visible">
-
-      <TableRow
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_span="2"
-          android:text="@string/opt1b_description"
-          android:textAlignment="center" />
-
-      </TableRow>
-
-      <TableRow
-        android:id="@+id/opt1b_cmb_pcls"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <TextView
-          android:id="@+id/combined_pcls_text2"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:gravity="center_vertical"
-          android:text="@string/combined_pcls" />
-
-        <TextView
-          android:id="@+id/combined_pcls_result_text2"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="end"
-          android:gravity="center_vertical"
-          android:text="@{String.valueOf(pclsCalcViewModel.cmbBenOutput2.pcls)}"
-          tools:text="£10,000.00" />
-
-      </TableRow>
-
-      <TableRow
-        android:id="@+id/opt1b_cmb_residual2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-          android:id="@+id/combined_residual_text2"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:gravity="center_vertical"
-          android:text="@string/residual_pension" />
-
-        <TextView
-          android:id="@+id/combined_residual_result_text2"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="end"
-          android:gravity="center_vertical"
-          android:text="@{String.valueOf(pclsCalcViewModel.cmbBenOutput2.residualPension)}"
-          tools:text="£2,000.00" />
-
-      </TableRow>
-
-      <TableRow
-        android:id="@+id/opt1b_cmb_dc"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-          android:id="@+id/combined_dc_text2"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:gravity="center_vertical"
-          android:text="@string/ufpls" />
-
-        <TextView
-          android:id="@+id/combined_dc_result_text2"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="end"
-          android:gravity="center_vertical"
-          android:text="@{String.valueOf(pclsCalcViewModel.cmbBenOutput2.dcFund)}" />
-
-      </TableRow>
-
-      <TableRow
-        android:id="@+id/opt1b_cmb_lta"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-          android:id="@+id/combined_lta_text2"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:gravity="center_vertical"
-          android:text="@string/lta_used" />
-
-        <TextView
-          android:id="@+id/combined_lta_result_text2"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="end"
-          android:gravity="center_vertical"
-          android:text="@{String.valueOf(pclsCalcViewModel.cmbBenOutput2.lta)}"
-          tools:text="10.00%" />
-
-      </TableRow>
-
-    </TableLayout>
-
-  </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
   </ScrollView>
 

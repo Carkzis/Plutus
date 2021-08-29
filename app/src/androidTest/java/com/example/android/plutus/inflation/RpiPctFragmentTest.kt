@@ -31,6 +31,8 @@ import javax.inject.Inject
 @HiltAndroidTest
 class RpiPctFragmentTest {
 
+    // TODO: Test searching capability.
+
     @get:Rule
     var hiltRule = HiltAndroidRule(this)
 

@@ -31,6 +31,8 @@ import javax.inject.Inject
 @HiltAndroidTest
 class CpiItemsFragmentTest {
 
+    // TODO: Test searching capability.
+
     @get:Rule
     var hiltRule = HiltAndroidRule(this)
 

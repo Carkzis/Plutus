@@ -30,6 +30,8 @@ import org.junit.runner.RunWith
 @HiltAndroidTest
 class PclsCalcFragmentTest {
 
+    // TODO: Test changing spinner.
+
     @get:Rule
     var hiltRule = HiltAndroidRule(this)
 

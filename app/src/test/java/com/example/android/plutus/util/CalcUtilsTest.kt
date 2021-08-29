@@ -12,6 +12,8 @@ import org.junit.Assert.*
 
 class CalcUtilsTest {
 
+    // TODO: Test different standard Lta entries.
+
     @Test
     fun dbPclsCalculation_inputPensionNoDcFund_returnsExpectedPclsResidualLta() {
         // Create variables to enter into calculation

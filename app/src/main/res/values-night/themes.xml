@@ -18,7 +18,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:spinnerItemStyle">@style/plutusSpinnerItemStyle</item>
-        <item name="spinnerDropDownItemStyle">@style/plutusSpinnerDropDownItemStyle</item>
+        <item name="android:spinnerDropDownItemStyle">@style/plutusSpinnerDropDownItemStyle</item>
     </style>
 
     <style name="plutusDatePickerThemeDark" parent="Theme.AppCompat.Light.Dialog">

@@ -13,6 +13,8 @@ import java.lang.NullPointerException
 @Suppress("DEPRECATION")
 class PclsCalcViewModelTest {
 
+    // TODO: Add variables for standard lta, however just use £1,073,100.00.
+
     // Executes each task synchronously using Architecture Components.
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
