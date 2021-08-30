@@ -62,7 +62,7 @@
   <string name="gmp_fixed_revaluation_rates">GMP Fixed Revaluation Rates</string>
   <string name="rpi_12_month_percentages">RPI 12-Month Percentages</string>
   <string name="cpi_12_month_percentages">CPI 12-Month Percentages</string>
-  <string name="ufpls">UFPLS</string>
+  <string name="ufpls">UFPLS:</string>
   <string name="annuity_purchased">Annuity Purchased:</string>
   <string name="cpi_revaluation_max_5">CPI Revaluation (Max 5%):</string>
   <string name="cpi_revaluation_max_2_5">CPI Revaluation (Max 2.5%):</string>
