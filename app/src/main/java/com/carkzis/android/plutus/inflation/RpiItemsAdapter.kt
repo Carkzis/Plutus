@@ -30,7 +30,6 @@ class RpiItemsAdapter : ListAdapter<RpiItem, RpiItemsAdapter.RpiItemsViewHolder>
     @SuppressLint("NotifyDataSetChanged")
     fun addItemsToAdapter(items: List<RpiItem>) {
         rpiItemList = items as ArrayList<RpiItem>
-        rpiItemList.reverse()
         rpiItemListFiltered = rpiItemList
         notifyDataSetChanged()
     }

@@ -30,7 +30,6 @@ class RpiPctAdapter : ListAdapter<RpiPercentage, RpiPctAdapter.RpiViewHolder>(Rp
     @SuppressLint("NotifyDataSetChanged")
     fun addItemsToAdapter(items: List<RpiPercentage>) {
         rpiPercentageList = items as ArrayList<RpiPercentage>
-        rpiPercentageList.reverse()
         rpiPercentageListFiltered = rpiPercentageList
         notifyDataSetChanged()
     }

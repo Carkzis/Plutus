@@ -12,6 +12,7 @@ import com.carkzis.android.plutus.CpiItem
 import com.carkzis.android.plutus.databinding.FragmentCpiItemsBinding
 import com.carkzis.android.plutus.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class CpiItemsFragment : Fragment(), SearchView.OnQueryTextListener {

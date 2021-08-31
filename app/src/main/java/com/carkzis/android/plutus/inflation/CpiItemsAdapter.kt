@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.carkzis.android.plutus.CpiItem
 import com.carkzis.android.plutus.databinding.CpiItemBinding
+import timber.log.Timber
 
 class CpiItemsAdapter : ListAdapter<CpiItem, CpiItemsAdapter.CpiItemsViewHolder>(CpiItemsDiffCallBack()), Filterable {
 
@@ -29,7 +30,6 @@ class CpiItemsAdapter : ListAdapter<CpiItem, CpiItemsAdapter.CpiItemsViewHolder>
     @SuppressLint("NotifyDataSetChanged")
     fun addItemsToAdapter(items: List<CpiItem>) {
         cpiItemList = items as ArrayList<CpiItem>
-        cpiItemList.reverse()
         cpiItemListFiltered = cpiItemList
         notifyDataSetChanged()
     }

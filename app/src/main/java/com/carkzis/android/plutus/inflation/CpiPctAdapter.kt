@@ -31,7 +31,6 @@ class CpiPctAdapter : ListAdapter<CpiPercentage, CpiPctAdapter.CpiViewHolder>(Cp
     @SuppressLint("NotifyDataSetChanged")
     fun addItemsToAdapter(items: List<CpiPercentage>) {
         cpiPercentageList = items as ArrayList<CpiPercentage>
-        cpiPercentageList.reverse()
         cpiPercentageListFiltered = cpiPercentageList
         notifyDataSetChanged()
     }

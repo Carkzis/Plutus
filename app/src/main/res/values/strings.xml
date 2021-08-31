@@ -49,7 +49,7 @@
   <string name="revaluation_calculator">Revaluation Calculator</string>
   <string name="inflation_information">Inflation Information</string>
   <string name="ok">OK</string>
-  <string name="full_pension">Full Pension</string>
+  <string name="full_pension">Full Pension:</string>
   <string name="rpi_contents_text">Retail Price Index (RPI)</string>
   <string name="cpi_contents_text">Consumer Price Index (CPI)</string>
   <string name="gmp_contents_text">GMP Fixed Revaluation Rates</string>
