@@ -63,6 +63,7 @@ class RpiItemsFragment : Fragment(), SearchView.OnQueryTextListener {
     private fun setUpDataObserver() {
         viewModel.inflationRates.observe(viewLifecycleOwner, Observer<List<RpiItem>> {
             rpiItemsAdapter.addItemsToAdapter(it)
+            onQueryTextSubmit("")
         })
     }
 

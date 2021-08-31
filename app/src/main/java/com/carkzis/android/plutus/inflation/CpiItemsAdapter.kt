@@ -55,10 +55,12 @@ class CpiItemsAdapter : ListAdapter<CpiItem, CpiItemsAdapter.CpiItemsViewHolder>
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
+                // TODO: When the screen alters (e.g. light to dark), this shows an empty list as it get called first.
                 val charString = constraint?.toString() ?: ""
                 if (charString.isEmpty()) {
                     // If the search string is empty, we show all the items (the default).
                     cpiItemListFiltered = cpiItemList
+                    Timber.e(cpiItemList[0].toString())
                 } else {
                     val filteredList = ArrayList<CpiItem>()
                     cpiItemList.filter {

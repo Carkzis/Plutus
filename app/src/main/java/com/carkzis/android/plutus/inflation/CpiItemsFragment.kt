@@ -12,6 +12,7 @@ import com.carkzis.android.plutus.CpiItem
 import com.carkzis.android.plutus.databinding.FragmentCpiItemsBinding
 import com.carkzis.android.plutus.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -65,6 +66,8 @@ class CpiItemsFragment : Fragment(), SearchView.OnQueryTextListener {
     private fun setUpDataObserver() {
         viewModel.inflationRates.observe(viewLifecycleOwner, Observer<List<CpiItem>> {
             cpiItemsAdapter.addItemsToAdapter(it)
+            // TODO: Can change this to use a viewModel that stores the query, as is shows all the data currently.
+            onQueryTextSubmit("")
         })
     }
 
