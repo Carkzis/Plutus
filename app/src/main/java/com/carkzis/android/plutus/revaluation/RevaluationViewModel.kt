@@ -32,6 +32,9 @@ class RevaluationViewModel @Inject constructor(
     var startDateInfo = MutableLiveData("")
     var endDateInfo = MutableLiveData("")
 
+    /**
+     * This holds the calculation results.
+     */
     private var _revalCalcResults = MutableLiveData<RevalResults>()
     val revalCalcResults: LiveData<RevalResults>
         get() = _revalCalcResults
@@ -44,29 +47,46 @@ class RevaluationViewModel @Inject constructor(
     val toastText: LiveData<Event<Int>>
         get() = _toastText
 
-    // This LiveData is used for testing the different Toast messages only.
+    /**
+     This LiveData is used for testing the different Toast messages only.
+     */
     private var _toastTest = MutableLiveData<String>()
     val toastTest: LiveData<String>
         get() = _toastTest
 
+    /**
+     * Initialise the loading status to DONE as default.
+     */
     init {
         _loadingStatus.value = ApiLoadingStatus.DONE
     }
 
     private lateinit var results: RevalResults
 
+    /**
+     * This sets the start date edittext with the data provided in the correct format.
+     */
     fun setStartDate(year: Int, month: Int, day: Int) {
+        // Ensure single digits have a preceding 0.
         val formattedMonth = if (month < 10) "0$month" else month
         val formattedDay = if (day < 10) "0$day" else day
         startDateInfo.value = "$formattedDay/$formattedMonth/$year"
     }
 
+    /**
+     * This sets the end date edittext with the data provided in the correct format.
+     */
     fun setEndDate(year: Int, month: Int, day: Int) {
+        // Ensure single digits have a preceding 0.
         val formattedMonth = if (month < 10) "0$month" else month
         val formattedDay = if (day < 10) "0$day" else day
         endDateInfo.value = "$formattedDay/$formattedMonth/$year"
     }
 
+    /**
+     * Validates the entered data, and returns an error message if there is something missing
+     * or incorrect.
+     */
     fun validateBeforeCalculation() {
         // Return if these values have not been entered.
         if (startDateInfo.value == "") return showToastMessage(R.string.no_start_date_entered)
@@ -99,13 +119,19 @@ class RevaluationViewModel @Inject constructor(
         calculateRevaluationRates()
     }
 
+    /**
+     * This is used for testing the refresh functionality.
+     */
     fun testRefresh() {
         refreshCpiAndRpiCache()
     }
 
+    /**
+     * This will refresh both the CPI and RPI cache. It will await all results, and inform
+     * the user if the network call was successful. We need these result in order to calculate the
+     * benefits.
+     */
     private fun refreshCpiAndRpiCache() {
-
-
         viewModelScope.launch {
             _loadingStatus.value = ApiLoadingStatus.LOADING
             var isSuccess = false
@@ -123,6 +149,7 @@ class RevaluationViewModel @Inject constructor(
                         isSuccess = true
                     } catch (e: Exception) {
                         _loadingStatus.value = ApiLoadingStatus.ERROR
+                        showToastMessage(R.string.connection_error)
                     }
                 })
             if (isSuccess) {
@@ -132,6 +159,10 @@ class RevaluationViewModel @Inject constructor(
         }
     }
 
+    /**
+     * This will calculate all the revaluation rates, and add the results to the LiveData
+     * to display to the user via the UI.
+     */
     private fun calculateRevaluationRates() {
         results = RevalResults(
             max(
@@ -189,6 +220,9 @@ class RevaluationViewModel @Inject constructor(
         _revalCalcResults.value = results
     }
 
+    /**
+     * Add the toast string id, in an Event class, to the LiveData.
+     */
     private fun showToastMessage(message: Int) {
         _toastText.value = Event(message)
     }

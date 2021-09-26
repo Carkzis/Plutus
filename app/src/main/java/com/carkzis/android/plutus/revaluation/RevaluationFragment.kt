@@ -19,7 +19,6 @@ import java.util.*
 class RevaluationFragment : Fragment() {
 
     private val viewModel by viewModels<RevaluationViewModel>()
-
     private lateinit var viewDataBinding: FragmentRevaluationBinding
 
     override fun onCreateView(
@@ -27,6 +26,10 @@ class RevaluationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
+        /*
+         Set up data binding between the fragment and the layout. The lifecycleOwner observes
+         the changes in LiveData in this databinding.
+         */
         viewDataBinding = FragmentRevaluationBinding.inflate(inflater, container, false).apply {
             revaluationViewModel = viewModel
             lifecycleOwner = viewLifecycleOwner
@@ -35,6 +38,9 @@ class RevaluationFragment : Fragment() {
         return viewDataBinding.root
     }
 
+    /**
+     * Used here to set up various observers/listeners.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -46,20 +52,31 @@ class RevaluationFragment : Fragment() {
 
     }
 
+    /**
+     * This sets up opening the DatePickerDialog when the edittext view for the start date
+     * is clicked on.  This restricts the user to only providing valid dates.
+     */
     private fun setUpStartDateDialog() {
         viewDataBinding.revalStartEdittext.setOnClickListener {
             val calendar = setUpCalendar(viewModel.startDateInfo.value!!)
             DatePickerDialog(requireContext(), {
                     _, y, m, d ->
-                // need to add 1 to month as it is indexed at 0 for some bizarre reason
-                // (as years and days are not?)
+                /*
+                  Need to add 1 to month as it is indexed at 0 for some bizarre reason
+                  (would be fine but years and days are not?)
+                  */
                 viewModel.setStartDate(y, m + 1, d)
             }, calendar.year, calendar.month, calendar.day).show()
         }
     }
 
+    /**
+     * This sets up opening the DatePickerDialog when the edittext view for the end date
+     * is clicked on.  This restricts the user to only providing valid dates.
+     */
     private fun setUpEndDateDialog() {
         viewDataBinding.revalEndEdittext.setOnClickListener {
+            // Set up the initial date shown in the dialog.
             val calendar = setUpCalendar(viewModel.endDateInfo.value!!)
             DatePickerDialog(requireContext(), {
                     _, y, m, d ->
@@ -68,6 +85,12 @@ class RevaluationFragment : Fragment() {
         }
     }
 
+    /**
+     * This sets up the initial date shown when opening the calendar.  It will either be the
+     * current date if no start or end date has been previously selected, or the previous start
+     * or end date selected (for example, if the user opens the calendar again after having
+     * previously selected a date).
+     */
     private fun setUpCalendar(startOrEndDate: String): CalendarInfo {
         return if (startOrEndDate == "") {
             val calendar: Calendar = Calendar.getInstance()
@@ -86,17 +109,26 @@ class RevaluationFragment : Fragment() {
         }
     }
 
+    /**
+     * Sets a click listener to the calculation button.
+     */
     private fun setUpButton() {
         viewDataBinding.calculateRevalButton.setOnClickListener {
             viewModel.validateBeforeCalculation()
         }
     }
 
+    /**
+     * Sets up the observers for the CPI and RPI percentages.
+     */
     private fun setUpLiveDataObservers() {
         viewModel.cpiPercentages.observe(viewLifecycleOwner, {})
         viewModel.rpiPercentages.observe(viewLifecycleOwner, {})
     }
 
+    /**
+     * Sets up the ability to show a toast once by observing the LiveData in the ViewModel.
+     */
     private fun setUpToast() {
         viewModel.toastText.observe(viewLifecycleOwner, {
             it.getContextIfNotHandled()?.let { message ->
