@@ -16,7 +16,6 @@ import java.util.*
 class PclsCalcFragment : Fragment() {
 
     private val viewModel by viewModels<PclsCalcViewModel>()
-
     private lateinit var viewDataBinding: FragmentPclsCalcBinding
 
     override fun onCreateView(
@@ -24,6 +23,10 @@ class PclsCalcFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
+        /*
+         Set up data binding between the fragment and the layout. The lifecycleOwner observes
+         the changes in LiveData in this databinding.
+         */
         viewDataBinding = FragmentPclsCalcBinding.inflate(inflater, container, false).apply {
             pclsCalcViewModel = viewModel
             lifecycleOwner = viewLifecycleOwner
@@ -32,6 +35,9 @@ class PclsCalcFragment : Fragment() {
         return viewDataBinding.root
     }
 
+    /**
+     * Used here to set up various observers/listeners.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -42,12 +48,26 @@ class PclsCalcFragment : Fragment() {
 
     }
 
+    /**
+     * Wrapper to set up listeners for the results of the benefits.  Ensures that the titles for
+     * each option is appropriately titled and displayed to the UI, and that only the options
+     * available when considering the calculation are visible in the UI.
+     */
     private fun setUpBenefitResultsListeners() {
-        // Listener for the results of the combined benefits (if applicable)
+        setUpCombinedAndAnnuityListener()
+        setUpCombinedAndUfplsListener()
+        setUpDbPclsListener()
+        setUpNoPclsListener()
+    }
+
+    /**
+     * Listener for the results of the combined benefits where annuity is taken (if applicable).
+     */
+    private fun setUpCombinedAndAnnuityListener() {
         viewModel.cmbBenOutput1.observe(viewLifecycleOwner, {
             it?.let {
                 if (it.pcls != "£0.00") {
-                    // Ensure the non-combined pcls table titles are not set to option 1 or 2
+                    // Ensure the non-combined pcls table titles are not set to option 1 or 2.
                     viewDataBinding.opt2Title.text = getText(R.string.opt2_description)
                     viewDataBinding.opt3Title.text = getText(R.string.opt3_description)
                     viewDataBinding.opt1Table.visibility = View.VISIBLE
@@ -66,7 +86,12 @@ class PclsCalcFragment : Fragment() {
                 }
             }
         })
+    }
 
+    /**
+     * Listener for the results of the combined benefits where UFPLS is taken (if applicable).
+     */
+    private fun setUpCombinedAndUfplsListener() {
         viewModel.cmbBenOutput2.observe(viewLifecycleOwner, {
             it?.let {
                 if (it.pcls != "£0.00" && it.dcFund != "£0.00") {
@@ -76,8 +101,12 @@ class PclsCalcFragment : Fragment() {
                 }
             }
         })
+    }
 
-        // Listener for the results of the DB benefits
+    /**
+     * Listener for results of the benefits where a DB PCLS is taken but not combined with DC.
+     */
+    private fun setUpDbPclsListener() {
         viewModel.dbBenOutput.observe(viewLifecycleOwner, {
             viewDataBinding.opt2Table.visibility = View.VISIBLE
             if (it.dcFund != "£0.00") {
@@ -86,7 +115,12 @@ class PclsCalcFragment : Fragment() {
                 viewDataBinding.opt2DbDc.visibility = View.GONE
             }
         })
+    }
 
+    /**
+     * Listener for the results of the option where no PCLS is taken.
+     */
+    private fun setUpNoPclsListener() {
         viewModel.noPclsBenOutput.observe(viewLifecycleOwner, {
             viewDataBinding.opt3Table.visibility = View.VISIBLE
             if (it.dcFund != "£0.00") {
@@ -97,12 +131,18 @@ class PclsCalcFragment : Fragment() {
         })
     }
 
+    /**
+     * Sets up a click listener for the PCLS button.
+     */
     private fun setUpButton() {
         viewDataBinding.calculatePclsButton.setOnClickListener {
             viewModel.validateBeforeCalculation()
         }
     }
 
+    /**
+     * Sets up the ability to show a toast once by observing the LiveData in the ViewModel.
+     */
     private fun setUpToast() {
         viewModel.toastText.observe(viewLifecycleOwner, {
             it.getContextIfNotHandled()?.let { message ->
@@ -111,6 +151,9 @@ class PclsCalcFragment : Fragment() {
         })
     }
 
+    /**
+     * Sets up the LTA spinner that allows the user to choose a standard LTA.
+     */
     private fun setUpLtaSpinner() {
         viewModel.spinnerPosition.observe(viewLifecycleOwner, {
             viewModel.setStandardLta(it)

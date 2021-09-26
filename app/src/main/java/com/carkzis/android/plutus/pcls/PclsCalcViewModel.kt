@@ -24,6 +24,11 @@ class PclsCalcViewModel @Inject constructor() : ViewModel() {
     var dcFund = MutableLiveData<String>()
 
     var spinnerPosition = MutableLiveData<Int>()
+
+    /**
+     * The standard LTA list for the spinner has been hardcoded, it contains only a list
+     * of current and previous standard LTAs, current no customisation available.
+     */
     var sLtaList = arrayListOf("1,073,100.00",
     "1,055,000.00",
     "1,030,000.00",
@@ -38,6 +43,9 @@ class PclsCalcViewModel @Inject constructor() : ViewModel() {
     val standardLta: LiveData<String>
         get() = _standardLta
 
+    /**
+     * Sets the standard LTA to the LTA at the current position of the spinner.
+     */
     fun setStandardLta(position: Int) {
         _standardLta.value = sLtaList[position]
     }
@@ -69,6 +77,10 @@ class PclsCalcViewModel @Inject constructor() : ViewModel() {
     private var cmbBenefits1 : Benefits? = null
     private var cmbBenefits2 : Benefits? = null
 
+    /**
+     * Validates that the data entered is correct.  If not, it returns toast messages informing
+     * the user via the UI.
+     */
     fun validateBeforeCalculation() {
         // Return if any of these values have not been entered.
         fullPension.value ?: return showToastMessage(R.string.no_pension_toast)
@@ -96,8 +108,11 @@ class PclsCalcViewModel @Inject constructor() : ViewModel() {
         calculationWrapper(fp, cf, dc, sLta)
     }
 
+    /**
+     * Wrapper to calculate the benefits according to the inputs.
+     */
     private fun calculationWrapper(fp: Double, cf: Double, dc: Double, sLta: Double) {
-        // Call function to calculate db benefits, and return a data object with the results
+        // Call function to calculate db benefits, and return a data object with the results.
         dbBenefits = dbPclsCalculation(fp, cf, sLta, dc)
         // The benefits where no pcls is calculated only need access to the Lta calculation.
         noPclsBenefits = Benefits(
@@ -107,9 +122,10 @@ class PclsCalcViewModel @Inject constructor() : ViewModel() {
             formatAsCurrency(dc.toBigDecimal())
         )
 
-        // Only enters arguments into the combined
-        // pcls function if there is any money purchase fund value, otherwise get the default
-        // using £0.00 figures
+        /* Only enters arguments into the combined
+        pcls function if there is any money purchase fund value, otherwise get the default
+        using £0.00 figures.
+        */
         cmbBenefits1 = if (dc > 0.0) {
             if (dc >= ((fp * 20) / 3)) {
                 largeCmbPclsCalculation(fp, cf, true, sLta, dc)
@@ -120,17 +136,19 @@ class PclsCalcViewModel @Inject constructor() : ViewModel() {
             Benefits("£0.00", "£0.00", "0.00%", "£0.00")
         }
 
-        // These benefits are for where there is a large DC fund and the residual amount is
-        // taken as a UFPLS
+        /*These benefits are for where there is a large DC fund and the residual amount is
+        taken as a UFPLS
+         */
         cmbBenefits2 = if (dc >= ((fp * 20) / 3))
             largeCmbPclsCalculation(fp, cf, false, sLta, dc) else Benefits("£0.00",
         "£0.00", "0.00%", "£0.00")
 
-
-
         updateWithResults(dbBenefits, cmbBenefits1, cmbBenefits2, noPclsBenefits)
     }
 
+    /**
+     * Adds the results to the LiveData, so they can be displayed to the user via the UI.
+     */
     private fun updateWithResults(dbBenefits: Benefits, cmbBenefits1: Benefits?,
                                   cmbBenefits2: Benefits?, noPclsBenefits: Benefits
     ) {
@@ -145,6 +163,9 @@ class PclsCalcViewModel @Inject constructor() : ViewModel() {
         _noPclsBenOutput.value = noPclsBenefits
     }
 
+    /**
+     * Add the toast string id, in an Event class, to the LiveData.
+     */
     fun showToastMessage(message: Int) {
         _toastText.value = Event(message)
     }
