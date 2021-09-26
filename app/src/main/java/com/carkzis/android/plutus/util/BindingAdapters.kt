@@ -4,33 +4,18 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.carkzis.android.plutus.CpiItem
+import com.carkzis.android.plutus.CpiPercentage
+import com.carkzis.android.plutus.RpiItem
+import com.carkzis.android.plutus.RpiPercentage
 import com.carkzis.android.plutus.inflation.ApiLoadingStatus
 import com.carkzis.android.plutus.inflation.*
 
-//@BindingAdapter("cpiListData")
-//fun bindCpiRecyclerView(recyclerView: RecyclerView, data: List<CpiPercentage>?) {
-//    val adapter = recyclerView.adapter as CpiAdapter
-//    adapter.submitList(data)
-//}
-
-//@BindingAdapter("rpiListData")
-//fun bindRpiRecyclerView(recyclerView: RecyclerView, data: List<RpiPercentage>?) {
-//    val adapter = recyclerView.adapter as RpiAdapter
-//    adapter.submitList(data)
-//}
-
-//@BindingAdapter("cpiItemListData")
-//fun bindCpiItemsRecyclerView(recyclerView: RecyclerView, data: List<CpiItem>?) {
-//    val adapter = recyclerView.adapter as CpiItemsAdapter
-//    adapter.submitList(data)
-//}
-
-//@BindingAdapter("rpiItemListData")
-//fun bindRpiItemsRecyclerView(recyclerView: RecyclerView, data: List<RpiItem>?) {
-//    val adapter = recyclerView.adapter as RpiItemsAdapter
-//    adapter.submitList(data)
-//}
-
+/**
+ * Binding adapter which alters the visibility of the progress bar depending on the status
+ * of the network call.
+ */
 @BindingAdapter("loadingStatus")
 fun bindLoadingStatus(statusProgressBar: ProgressBar, loadingStatus: ApiLoadingStatus) {
     when (loadingStatus) {
@@ -41,6 +26,10 @@ fun bindLoadingStatus(statusProgressBar: ProgressBar, loadingStatus: ApiLoadingS
     }
 }
 
+/**
+ * Binding adapter which alters the visibility of an error message depending on the status
+ * of the network call.
+ */
 @BindingAdapter("errorMessage")
 fun bindErrorMessage(errorMessage: TextView, loadingStatus: ApiLoadingStatus) {
     when (loadingStatus) {
