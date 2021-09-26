@@ -13,13 +13,14 @@ import com.carkzis.android.plutus.databinding.FragmentRpiInflationBinding
 import com.carkzis.android.plutus.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * This displays CPI 12-month percentage data to the user.
+ */
 @AndroidEntryPoint
 class RpiPctFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private val viewModel by viewModels<RpiPctViewModel>()
-
     private lateinit var viewDataBinding: FragmentRpiInflationBinding
-
     private lateinit var rpiPctAdapter: RpiPctAdapter
 
     override fun onCreateView(
@@ -27,20 +28,24 @@ class RpiPctFragment : Fragment(), SearchView.OnQueryTextListener {
         savedInstanceState: Bundle?
     ): View {
 
+        /*
+        Set up data binding between the fragment and the layout.
+        */
         viewDataBinding =
             FragmentRpiInflationBinding.inflate(inflater, container, false).apply {
                 rpiInflationViewModel = viewModel
             }
 
         rpiPctAdapter = RpiPctAdapter()
-
         viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
-
         viewDataBinding.rpiRecyclerview.adapter = rpiPctAdapter
 
         return viewDataBinding.root
     }
 
+    /**
+     * Used here to set up various observers/listeners.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpToast()
@@ -48,10 +53,17 @@ class RpiPctFragment : Fragment(), SearchView.OnQueryTextListener {
         setUpDataObserver()
     }
 
+    /**
+     * Set up the search view, allowing the user to search the inflation data by month,
+     * year and date.
+     */
     private fun setUpSearchView() {
         viewDataBinding.rpiPctSearchview.setOnQueryTextListener(this)
     }
 
+    /**
+     * Sets up the ability to show a toast once by observing the LiveData in the ViewModel.
+     */
     private fun setUpToast() {
         viewModel.toastText.observe(viewLifecycleOwner, {
             it.getContextIfNotHandled()?.let { message ->
@@ -60,6 +72,10 @@ class RpiPctFragment : Fragment(), SearchView.OnQueryTextListener {
         })
     }
 
+    /**
+     * Sets up the initial observation of the data, and adds it to the RecyclerView adapter.
+     * It submits a "" query, which will return everything.
+     */
     private fun setUpDataObserver() {
         viewModel.inflationRates.observe(viewLifecycleOwner, Observer<List<RpiPercentage>> {
             rpiPctAdapter.addItemsToAdapter(it)

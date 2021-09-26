@@ -14,7 +14,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class InflationMainFragment : Fragment() {
 
     private val viewModel by viewModels<InflationMainViewModel>()
-
     private lateinit var viewDataBinding: FragmentInflationMainBinding
 
     override fun onCreateView(
@@ -22,6 +21,7 @@ class InflationMainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
+        // Set up data binding between the fragment and the layout.
         viewDataBinding =
             FragmentInflationMainBinding.inflate(inflater, container, false).apply{
                 viewmodel = viewModel
@@ -30,6 +30,9 @@ class InflationMainFragment : Fragment() {
         return viewDataBinding.root
     }
 
+    /**
+     * Used here to set up various observers/listeners.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -37,6 +40,10 @@ class InflationMainFragment : Fragment() {
 
     }
 
+    /**
+     * Sets up the click listeners to navigate the user to different fragments from the main
+     * contents.
+     */
     private fun setupNavigation() {
         viewDataBinding.cpiButton.setOnClickListener {
             findNavController().navigate(InflationMainFragmentDirections.actionInflationMainFragmentToCpiInflationFragment())

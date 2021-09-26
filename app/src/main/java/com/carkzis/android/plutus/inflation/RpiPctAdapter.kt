@@ -12,6 +12,9 @@ import com.carkzis.android.plutus.RpiPercentage
 import com.carkzis.android.plutus.databinding.RpiInflationRateItemBinding
 import timber.log.Timber
 
+/**
+ * This is a RecyclerView adapter for binding RPI percentage data, and allowing the data to be searched.
+ */
 class RpiPctAdapter : ListAdapter<RpiPercentage, RpiPctAdapter.RpiViewHolder>(RpiDiffCallBack()), Filterable {
 
     var rpiPercentageList : ArrayList<RpiPercentage> = ArrayList()
@@ -27,6 +30,9 @@ class RpiPctAdapter : ListAdapter<RpiPercentage, RpiPctAdapter.RpiViewHolder>(Rp
 
     override fun getItemCount(): Int = rpiPercentageListFiltered.size
 
+    /**
+     * This adds the data to the two lists, which will initially be the same.
+     */
     @SuppressLint("NotifyDataSetChanged")
     fun addItemsToAdapter(items: List<RpiPercentage>) {
         rpiPercentageList = items as ArrayList<RpiPercentage>
@@ -60,10 +66,11 @@ class RpiPctAdapter : ListAdapter<RpiPercentage, RpiPctAdapter.RpiViewHolder>(Rp
                     // If the search string is empty, we show all the items (the default).
                     rpiPercentageListFiltered = rpiPercentageList
                 } else {
+                    // We get a new empty list, and add all the filtered data to this list.
                     val filteredList = ArrayList<RpiPercentage>()
                     rpiPercentageList.filter {
-                        it.month.lowercase().contains(constraint!!.toString().lowercase()) || it.year.contains(constraint) ||
-                                it.date.contains(constraint)
+                        it.month.lowercase().contains(constraint!!.toString().lowercase())
+                                || it.year.contains(constraint) || it.date.contains(constraint)
                     }.forEach {
                         filteredList.add(it)
                     }

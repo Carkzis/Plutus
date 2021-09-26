@@ -12,8 +12,12 @@ import com.carkzis.android.plutus.CpiItem
 import com.carkzis.android.plutus.databinding.CpiItemBinding
 import timber.log.Timber
 
+/**
+ * This is a RecyclerView adapter for binding CPI data, and allowing the data to be searched.
+ */
 class CpiItemsAdapter : ListAdapter<CpiItem, CpiItemsAdapter.CpiItemsViewHolder>(CpiItemsDiffCallBack()), Filterable {
 
+    // Set up empty lists to store the original list of data, and the filtered list.
     var cpiItemList : ArrayList<CpiItem> = ArrayList()
     var cpiItemListFiltered : ArrayList<CpiItem> = ArrayList()
 
@@ -27,6 +31,9 @@ class CpiItemsAdapter : ListAdapter<CpiItem, CpiItemsAdapter.CpiItemsViewHolder>
 
     override fun getItemCount(): Int = cpiItemListFiltered.size
 
+    /**
+     * This adds the data to the two lists, which will initially be the same.
+     */
     @SuppressLint("NotifyDataSetChanged")
     fun addItemsToAdapter(items: List<CpiItem>) {
         cpiItemList = items as ArrayList<CpiItem>
@@ -34,6 +41,9 @@ class CpiItemsAdapter : ListAdapter<CpiItem, CpiItemsAdapter.CpiItemsViewHolder>
         notifyDataSetChanged()
     }
 
+    /**
+     * This is the ViewHolder class itself, which uses data binding.
+     */
     class CpiItemsViewHolder constructor(private var binding: CpiItemBinding):
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: CpiItem) {
@@ -55,25 +65,22 @@ class CpiItemsAdapter : ListAdapter<CpiItem, CpiItemsAdapter.CpiItemsViewHolder>
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
-                // TODO: When the screen alters (e.g. light to dark), this shows an empty list as it get called first.
                 val charString = constraint?.toString() ?: ""
                 if (charString.isEmpty()) {
                     // If the search string is empty, we show all the items (the default).
                     cpiItemListFiltered = cpiItemList
-                    Timber.e(cpiItemList[0].toString())
                 } else {
+                    // We get a new empty list, and add all the filtered data to this list.
                     val filteredList = ArrayList<CpiItem>()
                     cpiItemList.filter {
-                        it.month.lowercase().contains(constraint!!.toString().lowercase()) || it.year.contains(constraint) ||
-                                it.date.contains(constraint)
+                        it.month.lowercase().contains(constraint!!.toString().lowercase())
+                                || it.year.contains(constraint) || it.date.contains(constraint)
                     }.forEach {
                         filteredList.add(it)
                     }
                     cpiItemListFiltered = filteredList
                 }
-
                 return FilterResults().apply { values = cpiItemListFiltered }
-
             }
 
             @SuppressLint("NotifyDataSetChanged")
@@ -95,7 +102,6 @@ class CpiItemsDiffCallBack : DiffUtil.ItemCallback<CpiItem>() {
     override fun areItemsTheSame(oldItem: CpiItem, newItem: CpiItem): Boolean {
         return oldItem.updateDate == newItem.updateDate
     }
-
     override fun areContentsTheSame(oldItem: CpiItem, newItem: CpiItem): Boolean {
         return oldItem == newItem
     }

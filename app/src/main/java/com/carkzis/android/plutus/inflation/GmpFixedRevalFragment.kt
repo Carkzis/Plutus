@@ -21,6 +21,7 @@ class GmpFixedRevalFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
+        // Set up data binding between the fragment and the layout.
         viewDataBinding =
             FragmentGmpFixedRevalBinding.inflate(inflater, container, false).apply {
                 gmpFixedRevalViewModel = viewModel

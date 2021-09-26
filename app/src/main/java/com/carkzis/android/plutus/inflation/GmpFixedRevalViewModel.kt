@@ -9,8 +9,10 @@ import javax.inject.Inject
 @HiltViewModel
 class GmpFixedRevalViewModel @Inject constructor() : ViewModel() {
 
-    // Due to the size of the data for GMP Fixed Revaluation, I will hardcode these (and couldn't
-    // find it on the ONS API anyway).
+    /**
+     * Due to the size of the data for GMP Fixed Revaluation, I will hardcode these (and couldn't
+     * find it on the ONS API anyway). This displays the revaluation rate for different dates.
+     */
     val gmpRevaluationRates = MutableLiveData<List<GmpFixedRevaluation>>().apply {
         value = mutableListOf(
             GmpFixedRevaluation("01/01/1900", "05/04/1988", "8.50%"),

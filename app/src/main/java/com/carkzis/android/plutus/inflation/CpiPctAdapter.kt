@@ -12,6 +12,9 @@ import com.carkzis.android.plutus.CpiPercentage
 import com.carkzis.android.plutus.databinding.CpiInflationRateItemBinding
 import timber.log.Timber
 
+/**
+ * This is a RecyclerView adapter for binding CPI percentage data, and allowing the data to be searched.
+ */
 class CpiPctAdapter : ListAdapter<CpiPercentage, CpiPctAdapter.CpiViewHolder>(CpiDiffCallBack()),
     Filterable {
 
@@ -28,6 +31,9 @@ class CpiPctAdapter : ListAdapter<CpiPercentage, CpiPctAdapter.CpiViewHolder>(Cp
 
     override fun getItemCount(): Int = cpiPercentageListFiltered.size
 
+    /**
+     * This adds the data to the two lists, which will initially be the same.
+     */
     @SuppressLint("NotifyDataSetChanged")
     fun addItemsToAdapter(items: List<CpiPercentage>) {
         cpiPercentageList = items as ArrayList<CpiPercentage>
@@ -61,18 +67,17 @@ class CpiPctAdapter : ListAdapter<CpiPercentage, CpiPctAdapter.CpiViewHolder>(Cp
                     // If the search string is empty, we show all the items (the default).
                     cpiPercentageListFiltered = cpiPercentageList
                 } else {
+                    // We get a new empty list, and add all the filtered data to this list.
                     val filteredList = ArrayList<CpiPercentage>()
                     cpiPercentageList.filter {
-                        it.month.lowercase().contains(constraint!!.toString().lowercase()) || it.year.contains(constraint) ||
-                                it.date.contains(constraint)
+                        it.month.lowercase().contains(constraint!!.toString().lowercase())
+                                || it.year.contains(constraint) || it.date.contains(constraint)
                     }.forEach {
                         filteredList.add(it)
                     }
                     cpiPercentageListFiltered = filteredList
                 }
-
                 return FilterResults().apply { values = cpiPercentageListFiltered }
-
             }
 
             @SuppressLint("NotifyDataSetChanged")

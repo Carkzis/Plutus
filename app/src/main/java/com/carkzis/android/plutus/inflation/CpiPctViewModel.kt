@@ -10,6 +10,9 @@ import java.lang.Exception
 import java.util.*
 import javax.inject.Inject
 
+/**
+ * ViewModel for the CpiPctFragment.
+ */
 @HiltViewModel
 class CpiPctViewModel @Inject constructor(
     private val repository: Repository
@@ -29,11 +32,16 @@ class CpiPctViewModel @Inject constructor(
         refreshCpiInflationRates()
     }
 
-    // TODO: Remove when no further testing required.
+    /**
+     * This is used for testing the refresh functionality.
+     */
     fun testRefresh() {
         refreshCpiInflationRates()
     }
 
+    /**
+     * Refreshes the items in the database via the repository.
+     */
     private fun refreshCpiInflationRates() {
         viewModelScope.launch {
             _loadingStatus.value = ApiLoadingStatus.LOADING
@@ -53,6 +61,9 @@ class CpiPctViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Shows a toast message using a string id.
+     */
     private fun Int.showToastMessage() {
         _toastText.value = Event(this)
     }

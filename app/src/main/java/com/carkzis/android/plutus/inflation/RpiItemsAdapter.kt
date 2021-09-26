@@ -11,6 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.carkzis.android.plutus.RpiItem
 import com.carkzis.android.plutus.databinding.RpiItemBinding
 
+/**
+ * This is a RecyclerView adapter for binding RPI data, and allowing the data to be searched.
+ */
 class RpiItemsAdapter : ListAdapter<RpiItem, RpiItemsAdapter.RpiItemsViewHolder>(RpiItemsDiffCallBack()),
     Filterable {
 
@@ -27,6 +30,9 @@ class RpiItemsAdapter : ListAdapter<RpiItem, RpiItemsAdapter.RpiItemsViewHolder>
 
     override fun getItemCount(): Int = rpiItemListFiltered.size
 
+    /**
+     * This adds the data to the two lists, which will initially be the same.
+     */
     @SuppressLint("NotifyDataSetChanged")
     fun addItemsToAdapter(items: List<RpiItem>) {
         rpiItemList = items as ArrayList<RpiItem>
@@ -60,10 +66,11 @@ class RpiItemsAdapter : ListAdapter<RpiItem, RpiItemsAdapter.RpiItemsViewHolder>
                     // If the search string is empty, we show all the items (the default).
                     rpiItemListFiltered = rpiItemList
                 } else {
+                    // We get a new empty list, and add all the filtered data to this list.
                     val filteredList = ArrayList<RpiItem>()
                     rpiItemList.filter {
-                        it.month.lowercase().contains(constraint!!.toString().lowercase()) || it.year.contains(constraint) ||
-                                it.date.contains(constraint)
+                        it.month.lowercase().contains(constraint!!.toString().lowercase())
+                                || it.year.contains(constraint) || it.date.contains(constraint)
                     }.forEach {
                         filteredList.add(it)
                     }

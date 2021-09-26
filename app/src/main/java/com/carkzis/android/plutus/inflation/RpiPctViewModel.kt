@@ -13,6 +13,9 @@ import kotlinx.coroutines.launch
 import java.lang.Exception
 import javax.inject.Inject
 
+/**
+ * ViewModel for the RpiPctFragment.
+ */
 @HiltViewModel
 class RpiPctViewModel @Inject constructor(
     private val repository: Repository
@@ -32,11 +35,16 @@ class RpiPctViewModel @Inject constructor(
         refreshRpiInflationRates()
     }
 
-    // TODO: Remove when no further testing required.
+    /**
+     * This is used for testing the refresh functionality.
+     */
     fun testRefresh() {
         refreshRpiInflationRates()
     }
 
+    /**
+     * Refreshes the items in the database via the repository.
+     */
     private fun refreshRpiInflationRates() {
         viewModelScope.launch {
             _loadingStatus.value = ApiLoadingStatus.LOADING
@@ -56,6 +64,9 @@ class RpiPctViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Shows a toast message using a string id.
+     */
     private fun Int.showToastMessage() {
         _toastText.value = Event(this)
     }

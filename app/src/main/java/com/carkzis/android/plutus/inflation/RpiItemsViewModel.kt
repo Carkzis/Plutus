@@ -13,6 +13,9 @@ import kotlinx.coroutines.launch
 import java.lang.Exception
 import javax.inject.Inject
 
+/**
+ * ViewModel for the RpiItemsFragment.
+ */
 @HiltViewModel
 class RpiItemsViewModel @Inject constructor(
     private val repository: Repository
@@ -32,10 +35,16 @@ class RpiItemsViewModel @Inject constructor(
         refreshRpiItems()
     }
 
+    /**
+     * This is used for testing the refresh functionality.
+     */
     fun testRefresh() {
         refreshRpiItems()
     }
 
+    /**
+     * Refreshes the items in the database via the repository.
+     */
     private fun refreshRpiItems() {
         viewModelScope.launch {
             _loadingStatus.value = ApiLoadingStatus.LOADING
@@ -55,11 +64,11 @@ class RpiItemsViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Shows a toast message using a string id.
+     */
     private fun Int.showToastMessage() {
         _toastText.value = Event(this)
     }
-
-
-
 
 }

@@ -15,13 +15,14 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import timber.log.Timber
 
+/**
+ * This displays CPI inflation data to the user.
+ */
 @AndroidEntryPoint
 class CpiItemsFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private val viewModel by viewModels<CpiItemsViewModel>()
-
     private lateinit var viewDataBinding: FragmentCpiItemsBinding
-
     private lateinit var cpiItemsAdapter: CpiItemsAdapter
 
     override fun onCreateView(
@@ -29,20 +30,24 @@ class CpiItemsFragment : Fragment(), SearchView.OnQueryTextListener {
         savedInstanceState: Bundle?
     ): View {
 
+        /*
+        Set up data binding between the fragment and the layout.
+        */
         viewDataBinding =
             FragmentCpiItemsBinding.inflate(inflater, container, false).apply {
                 cpiItemsViewModel = viewModel
             }
 
         cpiItemsAdapter = CpiItemsAdapter()
-
         viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
-
         viewDataBinding.cpiItemsRecyclerview.adapter = cpiItemsAdapter
 
         return viewDataBinding.root
     }
 
+    /**
+     * Used here to set up various observers/listeners.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpToast()
@@ -50,11 +55,17 @@ class CpiItemsFragment : Fragment(), SearchView.OnQueryTextListener {
         setUpDataObserver()
     }
 
+    /**
+     * Set up the search view, allowing the user to search the inflation data by month,
+     * year and date.
+     */
     private fun setUpSearchView() {
         viewDataBinding.cpiSearchview.setOnQueryTextListener(this)
     }
 
-
+    /**
+     * Sets up the ability to show a toast once by observing the LiveData in the ViewModel.
+     */
     private fun setUpToast() {
         viewModel.toastText.observe(viewLifecycleOwner, {
             it.getContextIfNotHandled()?.let { message ->
@@ -63,10 +74,13 @@ class CpiItemsFragment : Fragment(), SearchView.OnQueryTextListener {
         })
     }
 
+    /**
+     * Sets up the initial observation of the data, and adds it to the RecyclerView adapter.
+     * It submits a "" query, which will return everything.
+     */
     private fun setUpDataObserver() {
-        viewModel.inflationRates.observe(viewLifecycleOwner, Observer<List<CpiItem>> {
+        viewModel.inflationRates.observe(viewLifecycleOwner, {
             cpiItemsAdapter.addItemsToAdapter(it)
-            // TODO: Can change this to use a viewModel that stores the query, as is shows all the data currently.
             onQueryTextSubmit("")
         })
     }
