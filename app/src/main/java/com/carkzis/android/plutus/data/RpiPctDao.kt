@@ -6,6 +6,10 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
+/**
+ * Dao for performing queries on the Retail Price Index (RPI) 12-month percentage changes
+ * in the Room database.
+ */
 @Dao
 interface RpiPctDao {
 

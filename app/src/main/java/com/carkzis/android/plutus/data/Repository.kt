@@ -6,6 +6,10 @@ import com.carkzis.android.plutus.CpiPercentage
 import com.carkzis.android.plutus.RpiItem
 import com.carkzis.android.plutus.RpiPercentage
 
+/**
+ * Interface for the Repository, which is used to abstract access between the data sources
+ * (the remote Office for National Statistics API, and the local Room Data), and the UI.
+ */
 interface Repository {
 
     suspend fun refreshCpiPercentages()

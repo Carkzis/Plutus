@@ -10,11 +10,13 @@ import androidx.navigation.fragment.findNavController
 import com.carkzis.android.plutus.databinding.FragmentContentsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * Fragment for displaying the contents.
+ */
 @AndroidEntryPoint
 class ContentsFragment : Fragment() {
 
     private val viewModel by viewModels<ContentsViewModel>()
-
     lateinit var viewDataBinding: FragmentContentsBinding
 
     override fun onCreateView(
@@ -22,6 +24,7 @@ class ContentsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
+        // Set up data binding between the fragment and the layout.
         viewDataBinding =
             FragmentContentsBinding.inflate(inflater, container, false).apply {
             viewmodel = viewModel
@@ -30,6 +33,9 @@ class ContentsFragment : Fragment() {
         return viewDataBinding.root
     }
 
+    /**
+     * Used here to set up various observers/listeners.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -37,6 +43,10 @@ class ContentsFragment : Fragment() {
 
     }
 
+    /**
+     * Sets up the click listeners to navigate the user to different fragments from the main
+     * contents.
+     */
     private fun setupNavigation() {
         viewDataBinding.pclsButton.setOnClickListener {
             findNavController().navigate(ContentsFragmentDirections.actionContentsFragmentToPclsCalcFragment())

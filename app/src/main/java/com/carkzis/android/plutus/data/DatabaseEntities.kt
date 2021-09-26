@@ -7,7 +7,9 @@ import com.carkzis.android.plutus.CpiPercentage
 import com.carkzis.android.plutus.RpiItem
 import com.carkzis.android.plutus.RpiPercentage
 
-
+/**
+ * Table to hold Consumer Price Index (CPI) 12-month percentages.
+ */
 @Entity
 data class DatabaseCpiPct(
     val date: String,
@@ -21,6 +23,9 @@ data class DatabaseCpiPct(
     @PrimaryKey
     val pk: String)
 
+/**
+ * Table to hold Consumer Price Index (CPI) items.
+ */
 @Entity
 data class DatabaseCpiItem(
     val date: String,
@@ -34,6 +39,9 @@ data class DatabaseCpiItem(
     @PrimaryKey
     val pk: String)
 
+/**
+ * Table to hold Retail Price Index (RPI) 12-month percentages.
+ */
 @Entity
 data class DatabaseRpiPct(
     val date: String,
@@ -47,6 +55,9 @@ data class DatabaseRpiPct(
     @PrimaryKey
     val pk: String)
 
+/**
+ * Table to hold Retail Price Index (RPI) items.
+ */
 @Entity
 data class DatabaseRpiItem(
     val date: String,
@@ -60,6 +71,10 @@ data class DatabaseRpiItem(
     @PrimaryKey
     val pk: String)
 
+/**
+ * Extension function to map a list of CPI 12-month percentages from the Room database into
+ * the domain model presented to the UI.
+ */
 fun List<DatabaseCpiPct>.asCpiPctDomainModel(): List<CpiPercentage> {
     return map {
         CpiPercentage(
@@ -75,6 +90,10 @@ fun List<DatabaseCpiPct>.asCpiPctDomainModel(): List<CpiPercentage> {
     }
 }
 
+/**
+ * Extension function to map a list of CPI items from the Room database into
+ * the domain model presented to the UI.
+ */
 fun List<DatabaseCpiItem>.asCpiItemDomainModel(): List<CpiItem> {
     return map {
         CpiItem(
@@ -90,6 +109,10 @@ fun List<DatabaseCpiItem>.asCpiItemDomainModel(): List<CpiItem> {
     }
 }
 
+/**
+ * Extension function to map a list of RPI 12-month percentages from the Room database into
+ * the domain model presented to the UI.
+ */
 fun List<DatabaseRpiPct>.asRpiPctDomainModel(): List<RpiPercentage> {
     return map {
         RpiPercentage(
@@ -105,6 +128,10 @@ fun List<DatabaseRpiPct>.asRpiPctDomainModel(): List<RpiPercentage> {
     }
 }
 
+/**
+ * Extension function to map a list of RPI items from the Room database into
+ * the domain model presented to the UI.
+ */
 fun List<DatabaseRpiItem>.asRpiItemDomainModel(): List<RpiItem> {
     return map {
         RpiItem(
