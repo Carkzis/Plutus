@@ -391,7 +391,8 @@ internal fun revaluationCalculation(startDate: String, endDate: String,
 
     /*
      We want to iterate through the lists backwards, from the end date to the start date.
-     I do not remember why...
+     This is to line up the two lists. Both lists end at the same date (or should do), however
+     rpi rates go back further in time.
      */
     val rpiRateList = rpiRevList.reversed()
     val cpiRateList = cpiRevList.reversed()
