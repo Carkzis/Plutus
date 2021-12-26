@@ -12,7 +12,7 @@ This is an app that provides utilities to help pensions administrators carry out
 * You can install it from the Google Play Store! Search Plutus Carkzis, it is a yellow dollar sign on a blue border.  Yes, the app relates to UK pensions, so it should be a pound?  New logo is in the pipeline...
 * You can also see it on https://play.google.com/store/apps/details?id=com.carkzis.android.plutus
 * Alternatively:
-  * You can download the code from the Arkyris repository by clicking "Code", then "Download ZIP".
+  * You can download the code from the Plutus repository by clicking "Code", then "Download ZIP".
   * You can then install this from within Android Studio onto an emulator or a mobile device with a minimum SDK of 26 via the "Run 'app'" command (Shift+F10 by default).
 
 ## Executing the program
