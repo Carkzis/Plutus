@@ -54,7 +54,7 @@ This is an app that provides utilities to help pensions administrators carry out
 Marc Jowett (carkzis.apps@gmail.com)
 
 ## Version History
-* 0.1
+* 1.0
   * Initial Release. See on [Google Play Store](https://play.google.com/store/apps/details?id=com.carkzis.android.plutus) or in [commits](https://github.com/Carkzis/Plutus/commits/master).
 
 ## License
