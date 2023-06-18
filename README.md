@@ -1,19 +1,16 @@
-# Plutus - Now on the Google Play Store!
+# Plutus
 Utilities to help calculate pensions!
 
 ## Description
-This is an app that provides utilities to help pensions administrators carry out their role! You can calculate pension commencement lump sums, calculate the duration between two dates giving you multiple units of time, and calculate the revaluation rates between two dates as well!  You can also search through inflation data, using information obtained for the Office of National Statistics (ONS) API, which will keep up to date.  It is also on the Google Play Store, where you should search Plutus Carkzis, as Plutus is apparently a common name.
+This is an app that provides utilities to help pensions administrators carry out their role! You can calculate pension commencement lump sums, calculate the duration between two dates giving you multiple units of time, and calculate the revaluation rates between two dates as well!  You can also search through inflation data, using information obtained for the Office of National Statistics (ONS) API, which will keep up to date.
 
 ## Dependencies
 * Android Studio. See also [app level](https://github.com/Carkzis/Plutus/blob/master/app/build.gradle) and [project level](https://github.com/Carkzis/Plutus/blob/master/build.gradle) gradle builds.
 * Android SDK 26 for running the app.
 
 ## Installing
-* You can install it from the Google Play Store! Search Plutus Carkzis, it is a yellow dollar sign on a blue border.  Yes, the app relates to UK pensions, so it should be a pound?  New logo is in the pipeline...
-* You can also see it on https://play.google.com/store/apps/details?id=com.carkzis.android.plutus
-* Alternatively:
-  * You can download the code from the Plutus repository by clicking "Code", then "Download ZIP".
-  * You can then install this from within Android Studio onto an emulator or a mobile device with a minimum SDK of 26 via the "Run 'app'" command (Shift+F10 by default).
+* You can download the code from the Plutus repository by clicking "Code", then "Download ZIP".
+* You can then install this from within Android Studio onto an emulator or a mobile device with a minimum SDK of 26 via the "Run 'app'" command (Shift+F10 by default).
 
 ## Executing the program
 * You can run the app off a suitable emulator/mobile device.
@@ -55,7 +52,7 @@ Marc Jowett (carkzis.apps@gmail.com)
 
 ## Version History
 * 1.0
-  * Initial Release. See on [Google Play Store](https://play.google.com/store/apps/details?id=com.carkzis.android.plutus) or in [commits](https://github.com/Carkzis/Plutus/commits/master).
+  * Initial Release. See [commits](https://github.com/Carkzis/Plutus/commits/master).
 
 ## License
 This is licensed under the BSD-3-Clause License.  You can see the LICENSE.md for further details.
